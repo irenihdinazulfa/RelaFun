@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12 November 2026 (satu sesi, tujuh belas permintaan) |
+| Tanggal | 12 November 2026 (satu sesi, delapan belas permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -343,3 +343,26 @@ Memberikan tiga pilihan deskripsi untuk kolom *About*, daftar *topics* (educatio
   - Jendela tidak muncul bila aplikasi sudah terpasang, dan tidak muncul lagi selama sesi setelah “Nanti saja”.
 - **Pengujian:** 5 skenario perangkat (Android, Android tanpa tawaran, “Nanti saja”, iPhone, WhatsApp) lolos di versi lokal dan di link online; 25 skenario E2E dan 264 tes Python tetap lolos. Dua cacat tampilan yang terlihat di tangkapan layar (jendela bergeser, tulisan “null”) sudah diperbaiki.
 - Versi baru diterbitkan ke https://irenihdinazulfa.github.io/RelaFun/.
+
+---
+
+## Permintaan 18 — Masih tidak ada tulisan “unduh” di HP
+
+### 👤 Pengguna
+
+> masi gak ada tulisan unduh nya ketika saya buka di handphone
+
+### 🤖 Asisten
+
+- **Penyebab yang ditemukan:**
+  1. GitHub Pages menyuruh peramban menyimpan file selama 10 menit (`Cache-Control: max-age=600`). Service worker lama juga memakai simpanan itu, sehingga HP pengguna kemungkinan masih menjalankan versi sebelumnya.
+  2. Jendela sebelumnya memakai kata “Pasang”, bukan “Unduh”, dan baru muncul setelah beberapa detik.
+- **Perbaikan (versi 1.3):**
+  - Tombol besar **⬇ Unduh Aplikasi RelaFun** yang selalu terlihat di halaman masuk, tombol **Unduh** di bilah atas setelah masuk, dan tombol di Pengaturan.
+  - Jendela **“Unduh aplikasi RelaFun?”** (Unduh sekarang / Nanti saja) langsung muncul di HP. Bila Chrome belum menawarkan instal, jendela berisi langkah-langkahnya.
+  - Service worker selalu memeriksa versi terbaru ke server dan memuat ulang otomatis saat ada pembaruan.
+  - Nomor versi ditampilkan di halaman masuk dan Pengaturan.
+- **Pengujian:**
+  - 6 skenario unduh/pasang lolos di versi lokal dan di link online.
+  - Simulasi “HP lama”: versi lama terbuka sekali, lalu versi baru muncul saat dibuka berikutnya.
+  - 25 skenario E2E, uji luring, dan 264 tes Python tetap lolos.

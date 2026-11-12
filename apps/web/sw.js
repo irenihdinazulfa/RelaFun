@@ -1,7 +1,7 @@
 // Service worker RelaFun: tampilan aplikasi tersimpan agar cepat dibuka & tetap
 // tampil saat sinyal lemah. Data API selalu diambil dari jaringan (network-first).
 
-const VERSION = "relafun-v3";
+const VERSION = "relafun-v4";
 const SHELL = [
   "./", "index.html", "config.js", "manifest.webmanifest", "css/app.css",
   "icons/icon.svg", "icons/icon-192.png", "icons/icon-512.png",
@@ -46,9 +46,10 @@ self.addEventListener("fetch", (e) => {
     return;
   }
 
-  // Tampilan aplikasi: ambil versi terbaru bila online, cadangan dari cache bila luring.
+  // Tampilan aplikasi: selalu periksa versi terbaru ke server (abaikan cache HTTP),
+  // dan pakai cadangan dari cache hanya bila luring.
   e.respondWith(
-    fetch(e.request).then((res) => {
+    fetch(e.request.url, { cache: "no-cache", credentials: "same-origin" }).then((res) => {
       if (res.ok) {
         const copy = res.clone();
         caches.open(VERSION).then((c) => c.put(e.request, copy));

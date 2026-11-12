@@ -16,7 +16,9 @@ import { leaderboardView } from "./views/leaderboard.js";
 import { settingsView } from "./views/settings.js";
 import { teacherView } from "./views/teacher.js";
 import { menuView } from "./views/menu.js";
-import { startInstallBanner } from "./components/installBanner.js";
+import { startInstallBanner, installButton } from "./components/installBanner.js";
+
+export const APP_VERSION = "1.3";
 
 settings.apply();
 
@@ -74,7 +76,9 @@ function layout(user, active) {
     mobileItems.map((it) => h("a", { href: it.href, class: it.key === active || (it.key === "menu" && ["glosarium", "peringkat", "pengaturan"].includes(active)) ? "active" : "" },
       icon(it.ic), it.key === "kalkulator" ? "Kalkulator" : it.key === "pemodel" ? "Pemodel" : it.key === "home" && user.role === "teacher" ? "Guru" : it.label)));
   const topbar = h("header", { class: "topbar" }, brand(),
-    h("a", { class: "btn ghost icon-btn", href: "#/pengaturan", "aria-label": "Pengaturan" }, icon("settings")));
+    h("div", { class: "row", style: { gap: "4px", flexWrap: "nowrap" } },
+      installButton({ label: "Unduh", cls: "btn small", compact: true }),
+      h("a", { class: "btn ghost icon-btn", href: "#/pengaturan", "aria-label": "Pengaturan" }, icon("settings"))));
   const main = h("main", { class: "main", id: "main", tabindex: "-1" });
   const shell = h("div", { class: "layout" }, sidebar, h("div", { style: { minWidth: 0 } }, topbar, main), bottom);
   return { shell, main };
@@ -133,6 +137,14 @@ render();
 
 // --- PWA: service worker & tombol pasang ---
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
-  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+  // Bila versi baru terpasang di latar belakang, muat ulang sekali agar langsung terpakai.
+  const hadController = !!navigator.serviceWorker.controller;
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (hadController && !reloaded) { reloaded = true; location.reload(); }
+  });
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then((reg) => reg.update()).catch(() => {});
+  });
 }
 startInstallBanner();
