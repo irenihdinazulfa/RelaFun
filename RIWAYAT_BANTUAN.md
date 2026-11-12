@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12 November 2026 (satu sesi, sembilan permintaan) |
+| Tanggal | 12 November 2026 (satu sesi, tiga belas permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -218,3 +218,57 @@ Memberikan urutan pekerjaan:
   - Spasi di awal/akhir nama pengguna dan kata sandi diabaikan.
   - Pesan galat kini mengingatkan soal huruf besar/kecil.
 - Menambah tes otomatis (total 263 lolos) dan menguji halaman masuk di Chrome (desktop & HP), termasuk masuk dengan “ Siswa” dan “siswa123 ”.
+
+---
+
+## Permintaan 10 — Mengunggah ke GitHub
+
+### 👤 Pengguna
+
+> kan dosen minta up di github ya, terus langkah selanjut nya apa
+
+### 🤖 Asisten
+
+- Memeriksa laptop: Git sudah terpasang. Identitas Git global di laptop memakai nama orang lain, sehingga identitas untuk proyek ini perlu diatur tersendiri.
+- Mengingatkan bahwa folder `referensi/` berisi nama dan foto narasumber (anak di bawah umur). Saran: repositori Private, atau `referensi/` tidak diunggah bila repositori Public.
+- Menjelaskan langkah: membuat akun dan repositori kosong di GitHub, mengunggah (dikerjakan asisten), membagikan link ke dosen, dan opsional *deploy* ke Render.
+
+---
+
+## Permintaan 11 — Menampilkan kode
+
+### 👤 Pengguna
+
+> codingannya munculkan lagi
+
+### 🤖 Asisten
+
+Memastikan ke-68 file kode masih lengkap, membuka folder proyek di VS Code, dan memberikan daftar file kode utama.
+
+---
+
+## Permintaan 12 — Deskripsi repositori
+
+### 👤 Pengguna
+
+> rekomendasi deskripsi di githubnya
+
+### 🤖 Asisten
+
+Memberikan tiga pilihan deskripsi untuk kolom *About*, daftar *topics* (education, mathematics, pwa, fastapi, python, javascript, sympy, cognitive-load-theory, addie, relasi-dan-fungsi, indonesia), dan saran pengisian kolom *Website*.
+
+---
+
+## Permintaan 13 — Link repositori
+
+### 👤 Pengguna
+
+> https://github.com/irenihdinazulfa/RelaFun.git ini link github aku
+
+### 🤖 Asisten
+
+- Memeriksa repositori: Public dan masih kosong; akun `irenihdinazulfa` sudah tersimpan di laptop.
+- Mengatur identitas Git khusus proyek: **Iren Ihdina Zulfa** dengan e-mail *noreply* GitHub, sehingga e-mail asli tidak tampil di publik.
+- Karena repositori Public, folder `referensi/` dikecualikan (`.gitignore`) untuk melindungi data narasumber. Folder `.venv`, database, `.env`, dan kunci rahasia juga tidak diunggah.
+- Menambahkan `.gitattributes` agar format baris `start.sh` tetap benar di Mac/Linux.
+- Membuat *commit* pertama (98 file) lalu mengunggahnya ke https://github.com/irenihdinazulfa/RelaFun. Hasil unggahan diverifikasi.
