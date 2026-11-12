@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12 November 2026 (satu sesi, delapan belas permintaan) |
+| Tanggal | 12 November 2026 (satu sesi, sembilan belas permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -366,3 +366,18 @@ Memberikan tiga pilihan deskripsi untuk kolom *About*, daftar *topics* (educatio
   - 6 skenario unduh/pasang lolos di versi lokal dan di link online.
   - Simulasi “HP lama”: versi lama terbuka sekali, lalu versi baru muncul saat dibuka berikutnya.
   - 25 skenario E2E, uji luring, dan 264 tes Python tetap lolos.
+
+---
+
+## Permintaan 19 — Ganti nama maskot
+
+### 👤 Pengguna
+
+> aku gamau namanya kiko ganti namanya jadi kuro
+
+### 🤖 Asisten
+
+- Mengganti nama maskot burung hantu dari **Kiko** menjadi **Kuro** di seluruh aplikasi: kalimat sambutan halaman masuk (“Belajar bersama Kuro”), kotak **“Tips dari Kuro”** di materi, label maskot untuk pembaca layar, serta dokumen UI/UX dan spesifikasi konten. Gambar maskot tidak berubah.
+- Menaikkan versi aplikasi menjadi **1.4** agar mudah dicek di HP.
+- Pengujian: 264 tes Python dan 25 skenario E2E tetap lolos; tidak ada lagi tulisan “Kiko” di aplikasi.
+- Versi baru diterbitkan ke https://irenihdinazulfa.github.io/RelaFun/ dan disimpan di GitHub.

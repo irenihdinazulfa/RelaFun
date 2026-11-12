@@ -27,7 +27,7 @@ content/
 | type | Kolom | Tampilan |
 |---|---|---|
 | `text` | title, body | Teks; `**tebal**` dan baris baru didukung |
-| `tip` | body | Kotak tips bersama maskot Kiko |
+| `tip` | body | Kotak tips bersama maskot Kuro |
 | `example` | title, problem, steps[], answer | Contoh bertahap (langkah dimunculkan satu per satu) |
 | `diagram` | title, body, diagram{left_label, right_label, domain[], codomain[], pairs[][]}, mode | Diagram panah; mode `animate` / `check` / `sets` / `static` |
 | `graph` | title, body, points[][], lines[{a,b,label}], x_min, x_max | Diagram Kartesius / grafik garis |

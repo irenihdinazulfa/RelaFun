@@ -8,7 +8,7 @@
 Beranda siswa:
 ```
 ┌──────────────────────────────────────────────┬──────────────────┐
-│ HERO: sapaan + maskot Kiko + [Lanjut belajar]│ Sasaran harian   │
+│ HERO: sapaan + maskot Kuro + [Lanjut belajar]│ Sasaran harian   │
 ├──────────────────────────────────────────────┤ (cincin x/5)     │
 │ Lanjutkan materi (kartu + progres)           │ streak · poin    │
 ├──────────────────────────────────────────────┼──────────────────┤
@@ -36,7 +36,7 @@ Beranda siswa:
 
 ## 3. Maskot
 
-**Kiko**, burung hantu bertopi wisuda (orisinal). Ekspresi: `happy` (beranda), `cheer` (berhasil), `calm` (tips), `think`. Maskot hanya muncul di hero, tips, dan layar hasil, bukan di setiap layar (menghindari beban ekstrinsik).
+**Kuro**, burung hantu bertopi wisuda (orisinal). Ekspresi: `happy` (beranda), `cheer` (berhasil), `calm` (tips), `think`. Maskot hanya muncul di hero, tips, dan layar hasil, bukan di setiap layar (menghindari beban ekstrinsik).
 
 ## 4. Komponen kunci
 

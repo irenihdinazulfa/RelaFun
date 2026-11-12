@@ -1,4 +1,4 @@
-// Kiko — maskot burung hantu orisinal RelaFun. mood: "happy" | "think" | "cheer" | "calm"
+// Kuro — maskot burung hantu orisinal RelaFun. mood: "happy" | "think" | "cheer" | "calm"
 
 export function mascot(mood = "happy", cls = "mascot") {
   const eyes = {
@@ -15,7 +15,7 @@ export function mascot(mood = "happy", cls = "mascot") {
   const wrap = document.createElement("span");
   wrap.style.display = "contents";
   wrap.innerHTML = `
-<svg class="${cls}" viewBox="0 0 200 200" role="img" aria-label="Kiko si burung hantu">
+<svg class="${cls}" viewBox="0 0 200 200" role="img" aria-label="Kuro si burung hantu">
   ${extra}
   <ellipse cx="100" cy="186" rx="52" ry="8" fill="rgba(0,0,0,.12)"/>
   <path d="M52 66 L40 30 L78 52 Z" fill="#7a5c45"/>
