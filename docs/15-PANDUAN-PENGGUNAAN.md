@@ -12,14 +12,14 @@
 
 Di halaman masuk ada tombol besar **⬇ Unduh Aplikasi RelaFun** (dan tombol **Unduh** di bilah atas setelah masuk). Saat link dibuka di HP juga muncul jendela **“Unduh aplikasi RelaFun?”** dengan pilihan **Unduh sekarang** atau **Nanti saja**. Di iPhone dan bila link dibuka dari dalam WhatsApp, jendela itu berisi petunjuk langkah yang sesuai.
 
-Di halaman masuk, klik **Masuk sebagai Siswa Demo** / **Masuk sebagai Guru Demo**.
+Di halaman masuk, klik **Masuk Akun Demo** / **Masuk sebagai Guru Demo**.
 
 Catatan versi online (GitHub Pages):
 - Berjalan sepenuhnya di peramban, sehingga tetap bisa dipakai tanpa internet setelah dibuka sekali.
 - Data akun & latihan tersimpan **di masing-masing perangkat**. Dashboard guru hanya menampilkan akun di perangkat yang sama.
 - Mode AI tidak tersedia (perlu versi server).
 
-Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di bawah halaman masuk (saat ini **versi 1.4**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
+Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di bawah halaman masuk (saat ini **versi 1.6**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
 
 ## A. Menjalankan versi server (komputer Windows)
 

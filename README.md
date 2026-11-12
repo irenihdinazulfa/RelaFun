@@ -15,7 +15,7 @@ Aplikasi belajar matematika untuk siswa SMP kelas 8 materi **Relasi dan Fungsi**
 - **Android:** buka di Chrome → menu ⋮ → **Instal aplikasi**.
 - **iPhone/iPad:** buka di Safari → tombol Bagikan → **Tambahkan ke Layar Utama**.
 - **Laptop:** buka di Chrome/Edge → ikon instal di bilah alamat.
-- Di halaman masuk, klik **Masuk sebagai Siswa Demo** atau **Masuk sebagai Guru Demo**.
+- Di halaman masuk, klik **Masuk Akun Demo** atau **Masuk sebagai Guru Demo**.
 
 Versi online ini berjalan sepenuhnya di peramban: setelah dibuka sekali, aplikasi tetap bisa dipakai tanpa internet, dan data latihan tersimpan di masing-masing perangkat. Fitur AI dan dashboard guru untuk satu kelas sungguhan tersedia di versi server.
 

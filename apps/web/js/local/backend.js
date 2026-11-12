@@ -71,7 +71,7 @@ async function loadDb() {
     const cls = { id: nextId(), name: "8A (Demo)", code: "RF8A26", teacher_id: guru.id, leaderboard_enabled: true, ai_enabled: false };
     db.classes.push(cls);
     guru.class_id = cls.id;
-    await newUser("siswa", "siswa123", "student", "Siswa Demo", cls.id);
+    await newUser("siswa", "siswa123", "student", "Sobat", cls.id);
     const mates = [["Bintang", 120], ["Cahya", 90], ["Damar", 60], ["Elok", 30]];
     for (let i = 0; i < mates.length; i++) {
       const u = await newUser(`demo${i + 1}`, `demo${i + 1}pass`, "student", mates[i][0], cls.id);
@@ -79,6 +79,9 @@ async function loadDb() {
     }
     saveDb();
   }
+  // Migrasi: nama panggilan demo lama "Siswa Demo" → "Sobat"
+  const demo = db.users.find((u) => u.username === "siswa" && u.nickname === "Siswa Demo");
+  if (demo) { demo.nickname = "Sobat"; saveDb(); }
   return db;
 }
 

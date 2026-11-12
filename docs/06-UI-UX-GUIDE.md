@@ -8,7 +8,7 @@
 Beranda siswa:
 ```
 ┌──────────────────────────────────────────────┬──────────────────┐
-│ HERO: sapaan + maskot Kuro + [Lanjut belajar]│ Sasaran harian   │
+│ HERO: sapaan + maskot Wen + [Lanjut belajar]│ Sasaran harian   │
 ├──────────────────────────────────────────────┤ (cincin x/5)     │
 │ Lanjutkan materi (kartu + progres)           │ streak · poin    │
 ├──────────────────────────────────────────────┼──────────────────┤
@@ -40,7 +40,7 @@ Warna dasar **soft pink**. Hero dan halaman masuk memakai gradasi pink muda (#ff
 
 ## 3. Maskot
 
-**Kuro**, kelinci abu-abu gelap (“kuro” = hitam) bertelinga dalam pink, pipi merona, dan topi wisuda pink (orisinal). Ekspresi: `happy` (beranda), `cheer` (berhasil), `calm` (tips), `think`. Maskot hanya muncul di hero, tips, dan layar hasil, bukan di setiap layar (menghindari beban ekstrinsik).
+**Wen**, kelinci **putih** bergaya chibi (orisinal): kepala besar, badan mungil, mata bulat berkilau, pipi merona, mulut “ω”, satu telinga sedikit terkulai, dan pita pink. Garis tepi pink lembut (#ecc7d6) membuatnya tetap terlihat di latar putih maupun pink. Ekspresi: `happy` (beranda), `cheer` (berhasil), `calm` (tips), `think`. Maskot hanya muncul di hero, tips, dan layar hasil, bukan di setiap layar (menghindari beban ekstrinsik).
 
 ## 4. Komponen kunci
 

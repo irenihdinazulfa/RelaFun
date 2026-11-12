@@ -236,9 +236,10 @@ table.value-table tr td:first-child, table.value-table tr th:first-child { font-
 .hero .mascot { width: 150px; height: 150px; }
 .hero::after {
   content: ""; position: absolute; right: -60px; top: -60px; width: 220px; height: 220px; border-radius: 50%;
-  background: rgba(255, 255, 255, .35);
+  background: rgba(255, 255, 255, .35); z-index: 0; pointer-events: none;
 }
-@media (max-width: 600px) { .hero { grid-template-columns: 1fr; padding: 20px; } .hero .mascot { display: none; } }
+.hero > * { position: relative; z-index: 1; }
+@media (max-width: 600px) { .hero { grid-template-columns: minmax(0, 1fr) 92px; padding: 20px; gap: 8px; } .hero .mascot { width: 92px; height: 92px; align-self: start; } }
 .section-title { display: flex; align-items: center; justify-content: space-between; margin: 26px 0 12px; }
 .section-title h2 { margin: 0; }
 .continue-card { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 16px; align-items: center; }

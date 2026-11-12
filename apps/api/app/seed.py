@@ -10,8 +10,16 @@ from .models import Classroom, User
 DEMO_CLASS_CODE = "RF8A26"
 
 
+DEMO_NICKNAME = "Sobat"
+
+
 def seed_demo(db: Session) -> None:
     if db.scalar(select(User).where(User.username == "guru")):
+        # Migrasi: nama panggilan demo lama "Siswa Demo" → "Sobat"
+        old = db.scalar(select(User).where(User.username == "siswa", User.nickname == "Siswa Demo"))
+        if old:
+            old.nickname = DEMO_NICKNAME
+            db.commit()
         return
     teacher = User(username="guru", password_hash=hash_password("guru123"), role="teacher",
                    nickname="Bu Guru Demo")
@@ -24,7 +32,7 @@ def seed_demo(db: Session) -> None:
     teacher.class_id = classroom.id
 
     db.add(User(username="siswa", password_hash=hash_password("siswa123"), role="student",
-                nickname="Siswa Demo", class_id=classroom.id))
+                nickname=DEMO_NICKNAME, class_id=classroom.id))
     # Teman sekelas fiktif agar papan peringkat tidak kosong (nama panggilan rekaan).
     for i, (nick, pts) in enumerate([("Bintang", 120), ("Cahya", 90), ("Damar", 60), ("Elok", 30)]):
         db.add(User(username=f"demo{i + 1}", password_hash=hash_password(f"demo{i + 1}pass"),

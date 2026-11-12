@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12 November 2026 (satu sesi, dua puluh permintaan) |
+| Tanggal | 12 November 2026 (satu sesi, dua puluh dua permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -402,6 +402,41 @@ Memberikan tiga pilihan deskripsi untuk kolom *About*, daftar *topics* (educatio
   - Warna grafik/diagram (biru–oranye) dipertahankan karena sudah divalidasi aman untuk buta warna.
 - Versi aplikasi menjadi **1.5**.
 - **Pengujian:** 264 tes Python dan 25 skenario E2E lolos; tangkapan layar (halaman masuk HP & laptop, beranda, tips, mode gelap) diperiksa.
+- **Link:**
+  - GitHub: https://github.com/irenihdinazulfa/RelaFun
+  - Aplikasi web: https://irenihdinazulfa.github.io/RelaFun/
+
+---
+
+## Permintaan 21 — Kelinci yang lebih lucu, warna putih
+
+### 👤 Pengguna
+
+> kelincinya jelek coba buat lebih lucu warna nya putih kelincinya
+
+### 🤖 Asisten
+
+- **Desain ulang maskot:** kelinci **putih** bergaya chibi, orisinal:
+  - kepala besar dan badan mungil;
+  - mata bulat berkilau, pipi merona, mulut “ω”;
+  - satu telinga sedikit terkulai, dengan pita pink;
+  - garis tepi pink lembut agar tetap terlihat di latar putih maupun pink.
+- **Pratinjau** keempat ekspresi dan tiga ukuran diperiksa lewat tangkapan layar. Tangan pada pose bersorak yang semula tertutup kepala sudah diperbaiki.
+- **Perbaikan tampilan beranda di HP:** lingkaran hiasan yang membuat tulisan sapaan tampak pudar diletakkan di belakang teks, dan maskot kini tetap tampil (ukuran kecil) di layar HP.
+
+---
+
+## Permintaan 22 — Tanpa kata “siswa” & nama maskot Wen
+
+### 👤 Pengguna
+
+> terus siswa demo itu apa gausa ada kata siswa, terus nama icon nya itu wen yang tadinya itu namanya kiko jadi wen yaaaa
+
+### 🤖 Asisten
+
+- **Nama akun demo:** nama panggilan “Siswa Demo” diganti menjadi **“Sobat”**, sehingga sapaannya menjadi “Selamat …, Sobat!”. Tombol di halaman masuk menjadi **“Masuk Akun Demo”**. Data lama di server maupun di perangkat yang masih bernama “Siswa Demo” otomatis diubah menjadi “Sobat” (diuji).
+- **Nama maskot:** Kuro diganti menjadi **Wen** di kalimat sambutan (“Belajar bersama Wen”), kotak “Tips dari Wen”, label maskot, dan dokumen.
+- **Versi 1.6:** 264 tes Python, 25 skenario E2E, uji unduh/pasang, dan uji luring lolos.
 - **Link:**
   - GitHub: https://github.com/irenihdinazulfa/RelaFun
   - Aplikasi web: https://irenihdinazulfa.github.io/RelaFun/
