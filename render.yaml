@@ -1,0 +1,19 @@
+# Konfigurasi deploy ke Render (https://render.com) — agar RelaFun punya link HTTPS publik.
+# Langkah: unggah folder ini ke GitHub → Render → New → Blueprint → pilih repo ini.
+services:
+  - type: web
+    name: relafun
+    runtime: python
+    rootDir: apps/api
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SEED_DEMO
+        value: "1"
+      - key: ANTHROPIC_API_KEY
+        sync: false

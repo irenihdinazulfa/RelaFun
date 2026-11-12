@@ -1,0 +1,25 @@
+{
+  "id": "l3-menafsirkan",
+  "order": 13,
+  "group": "literasi",
+  "title": "Menghitung dan Menafsirkan Hasil",
+  "subtitle": "Literasi: Employ & Interpret",
+  "icon": "bulb",
+  "minutes": 15,
+  "interview_codes": ["IL02", "EL01", "GL02", "GL03"],
+  "pisa_process": "Employ, Interpret",
+  "objectives": ["Menghitung nilai fungsi dalam konteks", "Menjelaskan arti hasil, termasuk hasil negatif"],
+  "steps": [
+    {"type": "text", "title": "Angka perlu ditafsirkan", "body": "Setelah menghitung, tanyakan: **apa arti angka ini dalam cerita?** Hasil negatif, desimal, atau sangat besar perlu dicek maknanya."},
+    {"type": "example", "title": "Contoh 1: suhu", "problem": "Suhu f(x) = −2x + 30, dengan x = jam setelah pukul 12.00. Berapa suhu pada pukul 15.30?", "steps": ["Pukul 12.00 ke 15.30 = 3 jam 30 menit", "30 menit = 0,5 jam, jadi x = 3,5 (bukan 3,30)", "f(3,5) = −2 × (3,5) + 30", "= −7 + 30 = 23"], "answer": "Suhunya 23 °C."},
+    {"type": "example", "title": "Contoh 2: keuntungan negatif", "problem": "Keuntungan h(x) = 50.000x − 150.000. Seorang siswa mendapat h(2) = −50.000 dan berkata rumusnya salah.", "steps": ["Hitungannya benar: 100.000 − 150.000 = −50.000", "Keuntungan negatif artinya **rugi** Rp50.000, karena modal Rp150.000 belum kembali", "Mulai untung jika h(x) > 0: 50.000x > 150.000, jadi x > 3", "x adalah banyak tas, jadi paling sedikit 4 tas"], "answer": "Rumusnya tidak salah. Pedagang mulai untung jika menjual paling sedikit 4 tas."},
+    {"type": "tip", "body": "Nilai negatif tidak selalu salah. Dalam cerita, negatif bisa berarti **rugi, utang, suhu di bawah nol, atau berkurang**."}
+  ],
+  "items": [
+    {"id": "l3-1", "type": "numeric", "prompt": "Suhu f(x) = −2x + 30, dengan x = jam setelah pukul 12.00. Berapa derajat Celcius suhu pada pukul 15.30?", "unit": "°C", "answer": "23", "linear": {"a": -2, "b": 30, "x": "3.5"}, "common_errors": [{"value": "23,4", "type": "konversi_waktu", "message": "30 menit = 0,5 jam, bukan 0,3 jam. Jadi x = 3,5."}, {"value": "-1", "type": "konversi_waktu", "message": "x dihitung sejak pukul 12.00, bukan sejak pukul 00.00. Jadi x = 3,5."}, {"value": "24", "type": "konversi_waktu", "message": "Sepertinya kamu memakai x = 3. Dari 12.00 ke 15.30 ada 3 jam 30 menit, yaitu 3,5 jam."}], "hint": "Ubah dulu waktunya: berapa jam dari 12.00 ke 15.30?", "explain": ["x = 3,5 jam", "f(3,5) = −2 × (3,5) + 30", "= −7 + 30 = 23 °C"]},
+    {"id": "l3-2", "type": "numeric", "prompt": "Dengan rumus suhu yang sama, berapa jam setelah pukul 12.00 suhu menjadi 20 °C?", "unit": "jam", "answer": "5", "hint": "Selesaikan −2x + 30 = 20.", "explain": ["−2x + 30 = 20", "−2x = −10", "x = 5, yaitu pukul 17.00"]},
+    {"id": "l3-3", "type": "mcq", "prompt": "Pada fungsi keuntungan h(x) = 50.000x − 150.000, hasil h(2) = −50.000 artinya …", "options": ["Rumusnya salah", "Pedagang rugi Rp50.000 jika menjual 2 tas", "Pedagang untung Rp50.000", "Pedagang menjual −50.000 tas"], "answer": 1, "option_feedback": {"0": "Hitungannya benar. Hasil negatif punya arti dalam cerita.", "2": "Tanda negatif berarti kebalikan dari untung.", "3": "x adalah banyak tas (2), sedangkan −50.000 adalah keuntungannya."}, "error_type": "salah_tafsir", "hint": "Keuntungan negatif itu apa namanya?", "explain": ["Keuntungan −50.000 berarti rugi Rp50.000."]},
+    {"id": "l3-4", "type": "numeric", "prompt": "Berapa tas paling sedikit yang harus terjual agar pedagang mulai untung (h(x) > 0)?", "unit": "tas", "answer": "4", "common_errors": [{"value": "3", "type": "salah_tafsir", "message": "h(3) = 0 artinya impas (tidak untung, tidak rugi). Untung berarti h(x) lebih dari 0."}], "hint": "Selesaikan 50.000x − 150.000 > 0.", "explain": ["50.000x > 150.000", "x > 3", "Bilangan bulat terkecil yang lebih dari 3 adalah 4.", "Cek: h(4) = 50.000 > 0 ✓"]},
+    {"id": "l3-5", "type": "multi", "prompt": "Pilih semua arti yang masuk akal dari hasil negatif dalam soal cerita.", "options": ["Rugi", "Suhu di bawah 0 °C", "Banyak barang negatif", "Utang atau saldo berkurang"], "answer": [0, 1, 3], "error_type": "salah_tafsir", "hint": "Mana yang tidak mungkin terjadi di dunia nyata?", "explain": ["Rugi, suhu di bawah nol, dan utang bisa bernilai negatif.", "Banyak barang tidak mungkin negatif."]}
+  ]
+}

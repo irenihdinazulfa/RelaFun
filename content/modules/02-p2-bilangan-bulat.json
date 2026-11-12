@@ -1,0 +1,25 @@
+{
+  "id": "p2-bilangan-bulat",
+  "order": 2,
+  "group": "prasyarat",
+  "title": "Operasi Bilangan Bulat & Desimal",
+  "subtitle": "Tanda negatif, urutan operasi, desimal waktu",
+  "icon": "calc",
+  "minutes": 10,
+  "interview_codes": ["IL02", "IL03"],
+  "objectives": ["Menghitung perkalian bilangan negatif", "Memakai urutan operasi", "Mengubah menit menjadi jam desimal"],
+  "steps": [
+    {"type": "text", "title": "Aturan tanda perkalian", "body": "Saat mengalikan, perhatikan tandanya:\n**sama tanda → hasil positif**\n**beda tanda → hasil negatif**"},
+    {"type": "table", "title": "Contoh aturan tanda", "headers": ["Perkalian", "Hasil"], "rows": [["3 × 4", "12"], ["(−3) × (−4)", "12"], ["3 × (−4)", "−12"], ["(−3) × 4", "−12"]]},
+    {"type": "tip", "body": "Urutan operasi: **kurung → pangkat → kali/bagi → tambah/kurang**."},
+    {"type": "example", "title": "Contoh bertahap", "problem": "Hitung −2 × 3,5 + 30", "steps": ["Kerjakan perkalian dulu: −2 × 3,5 = −7", "Lalu jumlahkan: −7 + 30 = 23"], "answer": "Hasilnya 23."},
+    {"type": "text", "title": "Desimal pada waktu", "body": "1 jam = 60 menit. Jadi 30 menit = **0,5 jam** dan 15 menit = **0,25 jam**.\n3 jam 30 menit = 3,5 jam, **bukan** 3,30 jam."}
+  ],
+  "items": [
+    {"id": "p2-1", "type": "numeric", "prompt": "Hitung: (−5) × 4", "answer": "-20", "common_errors": [{"value": "20", "type": "salah_tanda", "message": "Beda tanda (negatif × positif) hasilnya negatif."}], "hint": "Beda tanda → hasil negatif.", "explain": ["5 × 4 = 20", "Tandanya beda, jadi hasilnya −20."]},
+    {"id": "p2-2", "type": "numeric", "prompt": "Hitung: (−3) × (−6)", "answer": "18", "common_errors": [{"value": "-18", "type": "salah_tanda", "message": "Sama tanda (negatif × negatif) hasilnya positif."}], "hint": "Sama tanda → hasil positif.", "explain": ["3 × 6 = 18", "Tandanya sama, jadi hasilnya 18."]},
+    {"id": "p2-3", "type": "numeric", "prompt": "Hitung: 4 × 3 − 15", "answer": "-3", "common_errors": [{"value": "3", "type": "salah_tanda", "message": "12 − 15 hasilnya negatif karena 15 lebih besar dari 12."}, {"value": "-48", "type": "salah_hitung", "message": "Kerjakan perkalian dulu (4 × 3), baru pengurangan."}], "hint": "Kalikan dulu, baru kurangkan.", "explain": ["4 × 3 = 12", "12 − 15 = −3"]},
+    {"id": "p2-4", "type": "numeric", "prompt": "Hitung: −2 × 4,5 + 20", "answer": "11", "common_errors": [{"value": "29", "type": "salah_tanda", "message": "−2 × 4,5 hasilnya negatif (−9), jadi −9 + 20."}, {"value": "-29", "type": "salah_tanda", "message": "Hanya perkaliannya yang negatif (−9). Setelah itu −9 + 20."}], "hint": "Kerjakan −2 × 4,5 dulu.", "explain": ["−2 × 4,5 = −9", "−9 + 20 = 11"]},
+    {"id": "p2-5", "type": "numeric", "prompt": "Ubah 2 jam 15 menit menjadi jam dalam bentuk desimal.", "answer": "2,25", "common_errors": [{"value": "2,15", "type": "konversi_waktu", "message": "15 menit bukan 0,15 jam. 15 menit = 15 : 60 jam = 0,25 jam."}], "hint": "Bagi menitnya dengan 60.", "explain": ["15 menit = 15 : 60 = 0,25 jam", "2 jam 15 menit = 2,25 jam"]}
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "r1-relasi",
+  "order": 4,
+  "group": "inti",
+  "title": "Mengenal Relasi",
+  "subtitle": "Hubungan antara dua himpunan",
+  "icon": "link",
+  "minutes": 10,
+  "interview_codes": ["K01", "K02", "GL01", "DS01", "EL02"],
+  "objectives": ["Menjelaskan arti relasi dengan contoh sehari-hari", "Membuat diagram panah sesuai nama relasi"],
+  "steps": [
+    {"type": "text", "title": "Relasi = hubungan", "body": "Relasi adalah aturan yang **menghubungkan anggota himpunan A dengan anggota himpunan B**. Contoh sehari-hari: siswa dan pelajaran kesukaannya."},
+    {"type": "diagram", "mode": "animate", "title": "Diagram panah", "body": "Tekan **Berikutnya** untuk memunculkan panah satu per satu. Panah pertama dibaca: “Ani menyukai Matematika”.", "diagram": {"left_label": "Siswa", "right_label": "Pelajaran kesukaan", "domain": ["Ani", "Budi", "Citra", "Dodi"], "codomain": ["IPA", "Matematika", "Olahraga"], "pairs": [["Ani", "Matematika"], ["Budi", "Olahraga"], ["Citra", "Matematika"], ["Dodi", "IPA"]]}},
+    {"type": "text", "title": "Nama relasi", "body": "Kalimat yang menjelaskan hubungannya disebut **nama relasi**. Pada contoh tadi, nama relasinya adalah “menyukai pelajaran”."},
+    {"type": "example", "title": "Contoh bertahap", "problem": "Buat relasi “faktor dari” dari A = {2, 3} ke B = {4, 6, 9}.", "steps": ["Ambil 2: 2 adalah faktor dari 4 dan 6 → dua panah", "Ambil 3: 3 adalah faktor dari 6 dan 9 → dua panah", "Pasangannya: (2, 4), (2, 6), (3, 6), (3, 9)"], "answer": "Ada 4 panah."},
+    {"type": "diagram", "mode": "animate", "title": "Diagram “faktor dari”", "body": "Perhatikan: satu anggota boleh punya lebih dari satu panah pada relasi.", "diagram": {"left_label": "A", "right_label": "B", "domain": ["2", "3"], "codomain": ["4", "6", "9"], "pairs": [["2", "4"], ["2", "6"], ["3", "6"], ["3", "9"]]}}
+  ],
+  "items": [
+    {"id": "r1-1", "type": "mcq", "prompt": "Relasi “ibu kota dari” menghubungkan Jakarta dengan …", "options": ["Indonesia", "Jawa Barat", "Bandung", "Asia"], "answer": 0, "option_feedback": {"1": "Ibu kota Jawa Barat adalah Bandung, bukan Jakarta.", "2": "Bandung adalah kota, bukan negara atau provinsi yang beribu kota Jakarta.", "3": "Asia adalah benua dan tidak punya ibu kota."}, "hint": "Jakarta adalah ibu kota dari negara apa?", "explain": ["Jakarta adalah ibu kota dari Indonesia, jadi panahnya Jakarta → Indonesia."]},
+    {"id": "r1-2", "type": "arrows", "prompt": "Buat panah untuk relasi “setengah dari” dari A ke B. (Contoh: 1 adalah setengah dari 2.)", "diagram": {"left_label": "A", "right_label": "B", "domain": ["1", "2", "3"], "codomain": ["2", "4", "5", "6"]}, "answer_pairs": [["1", "2"], ["2", "4"], ["3", "6"]], "hint": "Untuk setiap anggota A, cari bilangan di B yang besarnya dua kali lipat.", "explain": ["1 setengah dari 2", "2 setengah dari 4", "3 setengah dari 6", "5 tidak punya pasangan, dan itu boleh."]},
+    {"id": "r1-3", "type": "arrows", "prompt": "Buat panah untuk relasi “kurang dari” dari A ke B.", "diagram": {"left_label": "A", "right_label": "B", "domain": ["2", "4"], "codomain": ["3", "5"]}, "answer_pairs": [["2", "3"], ["2", "5"], ["4", "5"]], "hint": "Cek setiap pasangan: apakah angka kiri lebih kecil dari angka kanan?", "explain": ["2 < 3 ✓, 2 < 5 ✓", "4 < 3 ✗, 4 < 5 ✓", "Jadi ada 3 panah: 2 → 3, 2 → 5, 4 → 5."]},
+    {"id": "r1-4", "type": "mcq", "prompt": "Pada relasi “hobi” dari {Rina, Tono} ke {Membaca, Renang}, panah dari Rina ke Membaca artinya …", "options": ["Hobi Rina adalah membaca", "Membaca adalah hobi Tono", "Rina tidak suka membaca", "Rina dan Tono sama-sama suka membaca"], "answer": 0, "hint": "Panah selalu dibaca dari kiri ke kanan dengan nama relasinya.", "explain": ["Rina → Membaca dibaca: hobi Rina adalah membaca."]}
+  ]
+}

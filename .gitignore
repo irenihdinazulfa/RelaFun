@@ -1,0 +1,14 @@
+.env
+apps/api/.venv/
+apps/api/data/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Data penelitian berisi nama & foto narasumber (anak di bawah umur) — tidak diunggah ke repo publik
+referensi/
+
+# Lain-lain
+*.db
+*.log
+.vscode/
