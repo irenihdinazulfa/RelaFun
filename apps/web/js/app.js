@@ -16,6 +16,7 @@ import { leaderboardView } from "./views/leaderboard.js";
 import { settingsView } from "./views/settings.js";
 import { teacherView } from "./views/teacher.js";
 import { menuView } from "./views/menu.js";
+import { startInstallBanner } from "./components/installBanner.js";
 
 settings.apply();
 
@@ -134,8 +135,4 @@ render();
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
   window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 }
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  window.__installPrompt = e;
-  document.dispatchEvent(new CustomEvent("installable"));
-});
+startInstallBanner();

@@ -459,3 +459,19 @@ table.value-table tr td:first-child, table.value-table tr th:first-child { font-
 .diagram .head.dim { opacity: .15; }
 .diagram .head.bad { fill: var(--bad); }
 .reveal-list li .plain { font-size: 1.04rem; font-weight: 600; overflow-wrap: anywhere; }
+
+/* ---------- Jendela pilihan pasang aplikasi ---------- */
+.install-banner {
+  position: fixed; left: 0; right: 0; margin: 0 auto; bottom: 20px; z-index: 90; width: min(520px, calc(100vw - 24px));
+  background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 16px; box-shadow: 0 10px 40px rgba(20, 24, 50, .25);
+  animation: slide-up .3s ease;
+}
+@keyframes slide-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.install-banner[hidden] { display: none; }
+.install-head { display: flex; gap: 12px; align-items: center; }
+.install-head img { border-radius: 12px; flex: none; }
+.install-head b { display: block; font-size: 1.05rem; }
+.install-steps { margin: 12px 0 0; padding-left: 22px; font-size: .95rem; }
+.install-steps li { margin-bottom: 4px; }
+.install-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 14px; flex-wrap: wrap; }
+@media (max-width: 860px) { .install-banner { bottom: calc(76px + env(safe-area-inset-bottom)); } }

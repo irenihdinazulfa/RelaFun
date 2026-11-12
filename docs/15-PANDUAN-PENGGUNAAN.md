@@ -10,6 +10,8 @@
 | iPhone/iPad (Safari) | tombol **Bagikan** → **Tambahkan ke Layar Utama** |
 | Windows/Mac (Chrome/Edge) | ikon instal di ujung kanan bilah alamat |
 
+Saat link dibuka, muncul jendela **“Pasang RelaFun di perangkatmu?”** dengan pilihan **Pasang sekarang** atau **Nanti saja**. Di iPhone dan bila link dibuka dari dalam WhatsApp, jendela itu berisi petunjuk langkah yang sesuai.
+
 Di halaman masuk, klik **Masuk sebagai Siswa Demo** / **Masuk sebagai Guru Demo**.
 
 Catatan versi online (GitHub Pages):

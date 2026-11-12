@@ -20,6 +20,12 @@
       if (s.bigText) document.documentElement.classList.add("big-text");
       if (s.reduceMotion) document.documentElement.classList.add("reduce-motion");
     } catch (e) {}
+    // Simpan tawaran instal Chrome agar bisa ditampilkan sebagai tombol "Pasang sekarang".
+    window.addEventListener("beforeinstallprompt", function (e) {
+      e.preventDefault();
+      window.__installPrompt = e;
+      document.dispatchEvent(new CustomEvent("installable"));
+    });
   </script>
 </head>
 <body>

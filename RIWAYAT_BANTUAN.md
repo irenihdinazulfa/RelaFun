@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12 November 2026 (satu sesi, enam belas permintaan) |
+| Tanggal | 12 November 2026 (satu sesi, tujuh belas permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -323,3 +323,23 @@ Memberikan tiga pilihan deskripsi untuk kolom *About*, daftar *topics* (educatio
   - Syarat instal PWA terpenuhi tanpa galat, dan aplikasi tetap berfungsi tanpa internet.
 - **Diterbitkan:** cabang `gh-pages`, link **https://irenihdinazulfa.github.io/RelaFun/** (aktif dan terverifikasi).
 - **Keterbatasan versi online:** data per perangkat (dashboard guru hanya menampilkan akun di perangkat yang sama) dan mode AI tidak tersedia.
+
+---
+
+## Permintaan 17 — Tidak muncul pilihan untuk memasang aplikasi
+
+### 👤 Pengguna
+
+> kok pas dibuka ga ada pilihannya mau di download atau ngga tolong kasih pilihan itu
+
+### 🤖 Asisten
+
+- **Penyebab:** aplikasi menahan tawaran instal otomatis dari Chrome (`preventDefault`), sedangkan tombol pasangnya hanya tersedia di menu Pengaturan. Akibatnya tidak ada pilihan yang muncul saat link dibuka.
+- **Perbaikan:** jendela pilihan **“Pasang RelaFun di perangkatmu?”** kini muncul setiap kali aplikasi dibuka di peramban.
+  - Android/laptop (Chrome/Edge): tombol **Pasang sekarang** membuka dialog instal Chrome, dan ada tombol **Nanti saja**.
+  - Android tanpa tawaran Chrome: petunjuk menu ⋮ → Instal aplikasi.
+  - iPhone/iPad: petunjuk Bagikan → Tambahkan ke Layar Utama.
+  - Dibuka dari WhatsApp/Instagram: petunjuk membuka di Chrome terlebih dahulu.
+  - Jendela tidak muncul bila aplikasi sudah terpasang, dan tidak muncul lagi selama sesi setelah “Nanti saja”.
+- **Pengujian:** 5 skenario perangkat (Android, Android tanpa tawaran, “Nanti saja”, iPhone, WhatsApp) lolos di versi lokal dan di link online; 25 skenario E2E dan 264 tes Python tetap lolos. Dua cacat tampilan yang terlihat di tangkapan layar (jendela bergeser, tulisan “null”) sudah diperbaiki.
+- Versi baru diterbitkan ke https://irenihdinazulfa.github.io/RelaFun/.
