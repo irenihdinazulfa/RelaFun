@@ -12,3 +12,6 @@ referensi/
 *.db
 *.log
 .vscode/
+
+# Hasil build GitHub Pages
+dist/

@@ -1,6 +1,25 @@
 # 15 — Panduan Penggunaan
 
-## A. Menjalankan aplikasi (komputer Windows)
+## 0. Cara tercepat: link online
+
+**https://irenihdinazulfa.github.io/RelaFun/**
+
+| Perangkat | Cara memasang |
+|---|---|
+| Android (Chrome) | menu ⋮ → **Instal aplikasi** / **Tambahkan ke layar utama** |
+| iPhone/iPad (Safari) | tombol **Bagikan** → **Tambahkan ke Layar Utama** |
+| Windows/Mac (Chrome/Edge) | ikon instal di ujung kanan bilah alamat |
+
+Di halaman masuk, klik **Masuk sebagai Siswa Demo** / **Masuk sebagai Guru Demo**.
+
+Catatan versi online (GitHub Pages):
+- Berjalan sepenuhnya di peramban, sehingga tetap bisa dipakai tanpa internet setelah dibuka sekali.
+- Data akun & latihan tersimpan **di masing-masing perangkat**. Dashboard guru hanya menampilkan akun di perangkat yang sama.
+- Mode AI tidak tersedia (perlu versi server).
+
+Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`
+
+## A. Menjalankan versi server (komputer Windows)
 
 1. Pastikan **Python 3.10 atau lebih baru** terpasang (komputer ini sudah punya Python 3.14).
 2. Buka folder `iren_ihdina_zulfa`, lalu **klik dua kali `start.bat`**.

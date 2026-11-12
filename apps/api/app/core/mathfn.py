@@ -137,6 +137,8 @@ def parse_function(text: str) -> sp.Expr:
         raise MathInputError("Pangkat yang didukung hanya 0 sampai 3.")
     if s.count("(") != s.count(")"):
         raise MathInputError("Jumlah kurung buka dan kurung tutup belum sama.")
+    # "2x" → "2*x" (juga mencegah "0x…" dibaca Python sebagai bilangan heksadesimal)
+    s = re.sub(r"(\d)\s*x", r"\1*x", s)
     try:
         expr = parse_expr(s, local_dict={"x": X}, transformations=_TRANSFORMS, evaluate=True)
     except Exception as exc:  # noqa: BLE001 - pesan ramah untuk siswa

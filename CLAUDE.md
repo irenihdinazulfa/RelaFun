@@ -22,6 +22,8 @@ Bahasa antarmuka & konten: **Bahasa Indonesia** sederhana untuk siswa usia 13–
 9. Format angka Indonesia: koma desimal, titik ribuan (`fmt()` di Python, `fmt()` di `dom.js`).
 10. Status benar/salah tidak boleh hanya warna, selalu disertai ikon + teks.
 
+11. **Dua mesin harus identik**: setiap perubahan di `apps/api/app/core/{mathfn,checker,modeler}.py` wajib diterapkan juga di `apps/web/js/local/{mathfn,checker,modeler}.js` (versi GitHub Pages), lalu uji silang. Terbitkan ulang versi online dengan `python scripts/deploy_pages.py`.
+
 ## Peta kode
 - `apps/api/app/core/mathfn.py`: baca angka/rumus, kalkulator bertahap, analisis relasi, diagnosis kesalahan
 - `apps/api/app/core/checker.py`: 7 jenis soal (mcq, multi, numeric, is_function, dnd, arrows, expression)

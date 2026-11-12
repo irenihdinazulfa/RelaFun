@@ -24,6 +24,15 @@
 
 Satu proses `uvicorn` menyajikan API (`/api/*`) **dan** aplikasi web (`/`). Cukup Python 3.10+.
 
+## 1b. Dua mode jalan
+
+| Mode | Cara | Penilaian & data | Untuk |
+|---|---|---|---|
+| **Server** | `start.bat` / Render | FastAPI + SymPy + SQLite di server | Satu kelas sungguhan, dashboard guru bersama, mode AI |
+| **Tanpa server (GitHub Pages)** | `python scripts/deploy_pages.py` → https://irenihdinazulfa.github.io/RelaFun/ | `js/local/*` di peramban; data di `localStorage` perangkat | Demo, siswa mandiri, luring |
+
+Frontend sama persis. `config.js` menentukan mode (`window.RELAFUN_STATIC`). Pada mode tanpa server, `api.js` meneruskan setiap panggilan `/api/*` ke `js/local/backend.js`, yang meniru endpoint FastAPI. Mesin hitung JavaScript (`js/local/mathfn.js`, `checker.js`, `modeler.js`, `rational.js` dengan pecahan BigInt) adalah padanan 1:1 dari versi Python. Keduanya diuji silang dengan 1.209 kasus dan hasilnya identik (`docs/10-TEST-PLAN.md`).
+
 ## 2. Keputusan arsitektur
 
 | Keputusan | Alasan |

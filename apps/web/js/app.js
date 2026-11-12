@@ -50,7 +50,7 @@ function navItems(user) {
 }
 
 function brand() {
-  return h("a", { class: "brand", href: "#/" }, h("img", { src: "/icons/icon.svg", alt: "" }),
+  return h("a", { class: "brand", href: "#/" }, h("img", { src: "icons/icon.svg", alt: "" }),
     h("span", null, h("b", null, "RelaFun"), h("small", null, "Relasi & Fungsi")));
 }
 
@@ -132,7 +132,7 @@ render();
 
 // --- PWA: service worker & tombol pasang ---
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
-  window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 }
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();

@@ -283,7 +283,9 @@ export async function modelerView(main, _p, ctx) {
     const card = h("section", { class: "card" });
     body.append(card);
     if (!status.available) {
-      const why = !status.configured
+      const why = status.static
+        ? "Mode AI hanya tersedia pada versi server (start.bat atau Render) karena membutuhkan kunci API. Di versi ini, gunakan mode terpandu atau soal sendiri."
+        : !status.configured
         ? "Fitur AI belum aktif di server ini (ANTHROPIC_API_KEY belum diisi). Gunakan mode terpandu."
         : ctx.user.role === "teacher" ? "Aktifkan fitur AI untuk kelas di Dashboard Guru." : "Fitur AI belum diaktifkan oleh gurumu. Gunakan mode terpandu.";
       card.append(h("div", { class: "alert info" }, icon("info"), h("div", null, h("div", { class: "alert-title" }, "Mode AI belum tersedia"), h("p", null, why))));

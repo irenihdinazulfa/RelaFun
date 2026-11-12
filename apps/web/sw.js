@@ -1,16 +1,17 @@
 // Service worker RelaFun: tampilan aplikasi tersimpan agar cepat dibuka & tetap
 // tampil saat sinyal lemah. Data API selalu diambil dari jaringan (network-first).
 
-const VERSION = "relafun-v1";
+const VERSION = "relafun-v2";
 const SHELL = [
-  "/", "/index.html", "/manifest.webmanifest", "/css/app.css",
-  "/icons/icon.svg", "/icons/icon-192.png", "/icons/icon-512.png",
-  "/js/app.js", "/js/api.js", "/js/dom.js", "/js/icons.js", "/js/mascot.js", "/js/store.js",
-  "/js/components/arrowDiagram.js", "/js/components/calculator.js", "/js/components/dnd.js",
-  "/js/components/graph.js", "/js/components/reveal.js", "/js/components/terms.js",
-  "/js/views/calculatorPage.js", "/js/views/glossary.js", "/js/views/home.js", "/js/views/leaderboard.js",
-  "/js/views/lesson.js", "/js/views/login.js", "/js/views/menu.js", "/js/views/modeler.js",
-  "/js/views/modules.js", "/js/views/practice.js", "/js/views/settings.js", "/js/views/teacher.js",
+  "./", "index.html", "config.js", "manifest.webmanifest", "css/app.css",
+  "icons/icon.svg", "icons/icon-192.png", "icons/icon-512.png",
+  "js/app.js", "js/api.js", "js/errors.js", "js/dom.js", "js/icons.js", "js/mascot.js", "js/store.js",
+  "js/components/arrowDiagram.js", "js/components/calculator.js", "js/components/dnd.js",
+  "js/components/graph.js", "js/components/reveal.js", "js/components/terms.js",
+  "js/views/calculatorPage.js", "js/views/glossary.js", "js/views/home.js", "js/views/leaderboard.js",
+  "js/views/lesson.js", "js/views/login.js", "js/views/menu.js", "js/views/modeler.js",
+  "js/views/modules.js", "js/views/practice.js", "js/views/settings.js", "js/views/teacher.js",
+  "js/local/backend.js", "js/local/checker.js", "js/local/mathfn.js", "js/local/modeler.js", "js/local/rational.js",
 ];
 
 self.addEventListener("install", (e) => {
@@ -28,9 +29,9 @@ self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== "GET" || url.origin !== location.origin) return;
 
-  if (url.pathname.startsWith("/api/")) {
+  if (url.pathname.includes("/api/")) {
     // Materi & glosarium disimpan cadangannya agar bisa dibaca ulang saat luring.
-    const cacheable = /^\/api\/(modules|glossary|tools\/modeler\/presets)/.test(url.pathname);
+    const cacheable = /\/api\/(modules|glossary|tools\/modeler\/presets)/.test(url.pathname);
     e.respondWith(
       fetch(e.request).then((res) => {
         if (cacheable && res.ok) {
@@ -53,6 +54,6 @@ self.addEventListener("fetch", (e) => {
         caches.open(VERSION).then((c) => c.put(e.request, copy));
       }
       return res;
-    }).catch(() => caches.match(e.request).then((r) => r || caches.match("/index.html"))),
+    }).catch(() => caches.match(e.request).then((r) => r || caches.match("index.html"))),
   );
 });

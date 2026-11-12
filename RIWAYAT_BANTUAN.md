@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12 November 2026 (satu sesi, lima belas permintaan) |
+| Tanggal | 12 November 2026 (satu sesi, enam belas permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -299,3 +299,27 @@ Memberikan tiga pilihan deskripsi untuk kolom *About*, daftar *topics* (educatio
 
 - Memeriksa ulang `render.yaml`, lalu menambahkan `plan: free` agar Render tidak memilih paket berbayar. Isian `ANTHROPIC_API_KEY` dihapus agar tidak ditanyakan saat *deploy*.
 - Mengunggah perbaikan ke GitHub dan memberikan panduan langkah demi langkah (cara Blueprint dan cara manual).
+
+---
+
+## Permintaan 16 — Minta dibuatkan link yang langsung siap dipakai
+
+### 👤 Pengguna
+
+> bisa ga kamu aja yang ngerender aku mau langsung jadi 100% dan langsung kirimkan link nya ke aku yang udah siap di download
+
+### 🤖 Asisten
+
+- Menjelaskan bahwa asisten tidak dapat mendaftar atau login ke Render atas nama pengguna. Sebagai gantinya, asisten memakai **GitHub Pages**, karena akses unggah ke repositori pengguna sudah tersedia.
+- Agar dapat berjalan di GitHub Pages (tanpa server Python), asisten membuat **mode tanpa server**:
+  - Mesin hitung, pemeriksa jawaban, dan pemodel disalin 1:1 ke JavaScript (`apps/web/js/local/`, memakai pecahan eksak BigInt).
+  - “Server mini” di peramban (`js/local/backend.js`) meniru semua endpoint. Data disimpan di perangkat.
+  - Semua jalur file dibuat relatif, `config.js` menentukan mode, serta ditambahkan skrip `scripts/build_static.py` dan `scripts/deploy_pages.py`.
+  - Versi server (`start.bat`) tetap utuh.
+- **Pengujian:**
+  - Uji silang Python ↔ JavaScript pada 1.209 kasus: semuanya identik. Uji ini juga menemukan bug kecil di versi Python (`0x + 165`), yang sudah diperbaiki dan diberi tes.
+  - 264 tes Python lolos.
+  - 25 skenario uji Chrome lolos di versi server, versi statis lokal, dan link online.
+  - Syarat instal PWA terpenuhi tanpa galat, dan aplikasi tetap berfungsi tanpa internet.
+- **Diterbitkan:** cabang `gh-pages`, link **https://irenihdinazulfa.github.io/RelaFun/** (aktif dan terverifikasi).
+- **Keterbatasan versi online:** data per perangkat (dashboard guru hanya menampilkan akun di perangkat yang sama) dan mode AI tidak tersedia.

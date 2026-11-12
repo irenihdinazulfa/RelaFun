@@ -50,6 +50,11 @@ def test_parse_function_equivalent_forms(text):
     assert expressions_equal("2x + 3", text)
 
 
+def test_parse_function_zero_coefficient():
+    assert parse_function("0x + 165") == 165
+    assert evaluate_steps("0x + (165)", "12")["result"] == "165"
+
+
 def test_parse_function_indonesian_numbers():
     assert parse_function("50.000x - 150.000") == 50000 * sp.Symbol("x") - 150000
     assert parse_function("h(x) = 4.500x + 8.000") == 4500 * sp.Symbol("x") + 8000

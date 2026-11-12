@@ -57,6 +57,11 @@ export async function teacherView(main, _p, ctx) {
     if (!current) { clear(body).append(h("p", null, "Belum ada kelas.")); return; }
     const ov = await api.get(`/api/teacher/classes/${current.id}/overview`);
     clear(body);
+    if (health.static) {
+      body.append(h("div", { class: "alert info", style: { marginBottom: "16px" } }, icon("info"),
+        h("div", null, h("div", { class: "alert-title" }, "Versi online tanpa server"),
+          h("p", null, "Data latihan tersimpan di masing-masing perangkat, jadi dashboard ini hanya menampilkan akun yang ada di perangkat ini. Untuk memantau satu kelas sungguhan, gunakan versi server (start.bat atau Render)."))));
+    }
     const c = ov.class;
     const students = ov.students;
     const active = students.filter((s) => s.attempts > 0);

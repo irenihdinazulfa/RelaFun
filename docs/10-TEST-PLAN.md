@@ -15,7 +15,22 @@ cd apps\api
 | `test_content.py` | aturan CLT, keterlacakan 14 kode, **setiap kunci jawaban dinilai benar**, setiap `common_errors` dinilai salah dengan pesan yang tepat, kunci tidak bocor | ± 180 |
 | `test_api.py` | web & SPA, login/daftar, poin sekali per soal, format salah tidak dihitung, ringkasan, progres, papan peringkat, dashboard guru, CSV, isolasi guru, alat, AI (tanpa kunci, dengan respons tiruan, kuota) | ± 20 |
 
-**Hasil terakhir (12 November 2026): 263 lolos, 0 gagal.**
+**Hasil terakhir (12 November 2026): 264 lolos, 0 gagal.**
+
+## 1b. Uji silang Python ↔ JavaScript (versi online)
+
+Mesin JavaScript untuk versi GitHub Pages dibandingkan dengan versi Python pada **1.209 kasus**:
+
+| Kategori | Kasus |
+|---|---|
+| Kalkulator bertahap (termasuk 250 fungsi acak & 11 masukan salah) | 365 |
+| Membaca angka format Indonesia | 22 |
+| Format angka | 14 |
+| Pemeriksa: setiap soal × jawaban benar, `common_errors`, jawaban salah & aneh | 668 |
+| Pemodel soal cerita (6 preset + 14 variasi) | 20 |
+| Relasi acak (fungsi/bukan) | 120 |
+
+**Hasil: 1.209 / 1.209 identik.** Uji ini sekaligus menemukan satu bug di versi Python (`0x + 165` gagal dibaca), yang sudah diperbaiki dan diberi tes.
 
 ## 2. Pengujian ujung-ke-ujung (Chrome, Playwright)
 
@@ -43,12 +58,14 @@ Skenario yang dijalankan dengan Chrome sungguhan (desktop 1366 px dan HP 390 px)
 20. Tampilan HP tidak melebar (beranda, latihan, pemodel)
 21. Service worker terdaftar (syarat PWA)
 
-**Hasil terakhir: 25 langkah lolos, 0 galat konsol.**
+**Hasil terakhir: 25 langkah lolos, 0 galat konsol**, pada tiga lingkungan: versi server, versi statis lokal, dan link online https://irenihdinazulfa.github.io/RelaFun/.
+
+Tambahan untuk versi online: syarat instal PWA Chrome terpenuhi (tanpa galat), dan aplikasi tetap terbuka serta menilai latihan saat internet diputus.
 
 ## 3. Belum diuji
 
 - Panggilan **Claude API sungguhan** (diuji dengan respons tiruan; butuh kunci API).
-- Pemasangan PWA di perangkat iOS/Android fisik (butuh alamat HTTPS).
+- Pemasangan PWA di perangkat iOS/Android fisik (syarat instal sudah lolos di Chrome; belum dicoba di HP sungguhan).
 - Pembaca layar (NVDA/TalkBack) secara manual.
 
 ## 4. Rencana uji coba dengan siswa (tahap Implementation & Evaluation)
