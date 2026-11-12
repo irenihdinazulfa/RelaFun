@@ -17,9 +17,9 @@ Di halaman masuk, klik **Masuk Akun Demo** / **Masuk sebagai Guru Demo**.
 Catatan versi online (GitHub Pages):
 - Berjalan sepenuhnya di peramban, sehingga tetap bisa dipakai tanpa internet setelah dibuka sekali.
 - Data akun & latihan tersimpan **di masing-masing perangkat**. Dashboard guru hanya menampilkan akun di perangkat yang sama.
-- Mode AI tidak tersedia (perlu versi server).
+- **Mode AI**: buka *Pengaturan → Fitur AI*, tempel kunci API Claude (dari console.anthropic.com, berbayar ± Rp400/analisis), ketuk **Simpan & aktifkan**. Kunci hanya disimpan di perangkat itu. Setelah itu buka *Pemodel Soal Cerita → Mode AI*.
 
-Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di bawah halaman masuk (saat ini **versi 1.7**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
+Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di bawah halaman masuk (saat ini **versi 1.8**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
 
 ## A. Menjalankan versi server (komputer Windows)
 
@@ -75,6 +75,10 @@ macOS/Linux: `bash scripts/start.sh`
 4. Sakelar **Papan peringkat** dan **Pemodel AI** per kelas.
 
 ## E. Mengaktifkan fitur AI (opsional, berbayar)
+
+**Versi online:** Pengaturan → Fitur AI → tempel kunci → Simpan & aktifkan.
+
+**Versi server:**
 
 1. Buat kunci API di https://console.anthropic.com.
 2. Buka file `.env` di folder proyek, isi `ANTHROPIC_API_KEY=...`, lalu jalankan ulang `start.bat`.

@@ -283,7 +283,7 @@ def verify_spec(story: str, spec: ModelSpec) -> dict:
 
     try:
         solve(spec)
-        add("V6", True, "Model dapat diselesaikan oleh SymPy.")
+        add("V6", True, "Model dapat diselesaikan oleh mesin hitung.")
     except MathInputError as exc:
         add("V6", False, f"Model belum bisa diselesaikan: {exc}")
 

@@ -284,11 +284,12 @@ export async function modelerView(main, _p, ctx) {
     body.append(card);
     if (!status.available) {
       const why = status.static
-        ? "Mode AI hanya tersedia pada versi server (start.bat atau Render) karena membutuhkan kunci API. Di versi ini, gunakan mode terpandu atau soal sendiri."
+        ? "Mode AI butuh kunci API Claude. Masukkan kuncinya sekali di Pengaturan → Fitur AI, lalu mode ini langsung aktif."
         : !status.configured
         ? "Fitur AI belum aktif di server ini (ANTHROPIC_API_KEY belum diisi). Gunakan mode terpandu."
         : ctx.user.role === "teacher" ? "Aktifkan fitur AI untuk kelas di Dashboard Guru." : "Fitur AI belum diaktifkan oleh gurumu. Gunakan mode terpandu.";
-      card.append(h("div", { class: "alert info" }, icon("info"), h("div", null, h("div", { class: "alert-title" }, "Mode AI belum tersedia"), h("p", null, why))));
+      card.append(h("div", { class: "alert info" }, icon("info"), h("div", null, h("div", { class: "alert-title" }, "Mode AI belum tersedia"), h("p", null, why),
+        status.static ? h("a", { class: "btn small", href: "#/pengaturan" }, icon("settings"), "Buka Pengaturan → Fitur AI") : null)));
     }
     const ta = h("textarea", { class: "input", maxlength: 1500, placeholder: "Tempel atau tulis soal cerita di sini…", "aria-label": "Soal cerita" }, preset.story);
     const out = h("div", { "aria-live": "polite" });

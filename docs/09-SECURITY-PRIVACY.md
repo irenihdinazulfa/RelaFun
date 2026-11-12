@@ -24,7 +24,8 @@ Pengguna utama adalah **anak usia 13–14 tahun**. Prinsip yang dipakai: data se
 
 ## 3. Fitur AI
 
-- **Nonaktif bawaan.** Aktif hanya bila server punya `ANTHROPIC_API_KEY` **dan** guru menyalakannya untuk kelas.
+- **Nonaktif bawaan.** Versi server: aktif hanya bila server punya `ANTHROPIC_API_KEY` **dan** guru menyalakannya untuk kelas. Versi online: aktif hanya bila pemilik perangkat memasukkan kunci API sendiri di Pengaturan.
+- **Kunci tidak pernah ditanam di kode.** Pada versi online, kunci disimpan di `localStorage` perangkat pemiliknya saja dan dikirim langsung ke Anthropic. Aplikasi memperingatkan agar kunci tidak dimasukkan di perangkat orang lain; tombol *Hapus kunci* tersedia.
 - Yang dikirim ke Claude **hanya teks soal cerita** (maks. 1.500 karakter), tanpa identitas siswa.
 - Kuota 10 analisis/siswa/hari untuk membatasi biaya.
 - Hasil AI tidak pernah langsung dianggap benar: diverifikasi V1–V6 dan dihitung SymPy.

@@ -17,7 +17,7 @@ Bahasa antarmuka & konten: **Bahasa Indonesia** sederhana untuk siswa usia 13–
 4. **Aturan CLT konten** (divalidasi `tests/test_content.py`): ≤ 70 kata per layar, ≤ 6 anggota per himpunan diagram, ≤ 6 langkah per contoh, setiap soal punya `hint` + `explain`, kunci jawaban harus diterima pemeriksa.
 5. Setiap modul mencantumkan `interview_codes`; ke-14 kode wawancara (K01–K03, IL01–IL03, EL01–EL03, GL01–GL03, DS01–DS02) harus tetap tercakup.
 6. **Privasi anak**: jangan menambah data pribadi (e-mail, HP, tanggal lahir, nama lengkap). Papan peringkat hanya nama panggilan.
-7. **Pemodel AI** (`app/core/ai.py`): model `claude-opus-5-5`, *structured output*, `fallbacks: "default"`; AI hanya menerjemahkan cerita → `ModelSpec`; hasil wajib lewat `verify_spec()` (V1–V6) lalu `solve()`. Hanya teks soal yang dikirim. Nonaktif bila `ANTHROPIC_API_KEY` kosong atau kelas belum mengizinkan; kuota harian `AI_DAILY_QUOTA`.
+7. **Pemodel AI** (`app/core/ai.py`): model `claude-opus-5-5`, *structured output*, `fallbacks: "default"`; AI hanya menerjemahkan cerita → `ModelSpec`; hasil wajib lewat `verify_spec()` (V1–V6) lalu `solve()`. Hanya teks soal yang dikirim. Nonaktif bila `ANTHROPIC_API_KEY` kosong atau kelas belum mengizinkan; kuota harian `AI_DAILY_QUOTA`. Versi online (`js/local/ai.js`) memakai kunci yang dimasukkan pengguna di Pengaturan (localStorage perangkat) — jangan pernah menanam kunci API di kode.
 8. Umpan balik: bahasa sehari-hari, kalimat pendek, menyebut letak kesalahan, tidak menyalahkan.
 9. Format angka Indonesia: koma desimal, titik ribuan (`fmt()` di Python, `fmt()` di `dom.js`).
 10. Status benar/salah tidak boleh hanya warna, selalu disertai ikon + teks.

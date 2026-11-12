@@ -6,7 +6,7 @@
 |---|---|---|
 | **Terpandu** | Siswa, langkah demi langkah, dicek tiap langkah | Tidak butuh AI |
 | **Soal sendiri** | Siswa mengisi model bebas, mesin menghitung | Tidak butuh AI |
-| **AI** | Claude menerjemahkan cerita → model; mesin memverifikasi & menghitung | `ANTHROPIC_API_KEY` + izin guru |
+| **AI** | Claude menerjemahkan cerita → model; mesin memverifikasi & menghitung | Versi server: `ANTHROPIC_API_KEY` + izin guru. Versi online: kunci API dimasukkan di Pengaturan → Fitur AI (disimpan di perangkat) |
 
 ## 2. Model yang didukung
 
@@ -36,6 +36,13 @@ Fungsi linear **f(x) = ax + b** (1 atau 2 fungsi) dengan tugas:
 
 4. Hanya teks soal yang dikirim (tanpa identitas); kuota 10/siswa/hari.
 5. Penolakan/galat → pesan ramah + saran mode terpandu.
+
+## 3b. Mode AI di versi online (GitHub Pages)
+
+- `apps/web/js/local/ai.js` memanggil Claude langsung dari peramban memakai SDK resmi `@anthropic-ai/sdk@1.8.0` (`dangerouslyAllowBrowser: true`), dengan model, prompt sistem, skema *structured output*, `effort: medium`, dan `fallbacks: "default"` yang sama dengan versi server.
+- Kunci dicek dulu lewat Models API (tanpa biaya token) sebelum disimpan di `localStorage` perangkat.
+- Hasil AI diverifikasi `verifySpec()` (V1–V6, identik dengan versi Python pada 19 kasus uji) lalu dihitung `solve()`.
+- Kuota 10 analisis/hari per akun di perangkat itu.
 
 ## 4. Biaya (perkiraan)
 

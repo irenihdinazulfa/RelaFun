@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12 November 2026 (satu sesi, dua puluh tiga permintaan) |
+| Tanggal | 12 November 2026 (satu sesi, dua puluh empat permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -454,3 +454,28 @@ Memberikan tiga pilihan deskripsi untuk kolom *About*, daftar *topics* (educatio
 - Ikon kartu **Literasi** dan **Pemodel Soal Cerita** yang semula berlatar hijau muda dengan ikon hijau diganti menjadi latar **putih** dengan lingkar dan ikon **pink**. Kotak kesimpulan/jawaban (di contoh bertahap, kalkulator, dan pemodel) yang semula hijau kini **pink muda dengan garis pink**.
 - Warna hijau hanya dipertahankan untuk penanda **jawaban benar** (selalu disertai ikon ✓ dan teks), sesuai kebiasaan umum.
 - Versi aplikasi menjadi **1.7**; 25 skenario E2E lolos; warna diperiksa langsung di peramban.
+
+---
+
+## Permintaan 24 — Mengaktifkan mode AI
+
+### 👤 Pengguna
+
+> buatkan metode ai nya tersedia kenapa belum tersedia
+
+### 🤖 Asisten
+
+- **Penyebab:** mode AI memanggil Claude API yang membutuhkan **kunci API berbayar**. Versi online (GitHub Pages) tidak punya server untuk menyimpan kunci, dan kunci tidak boleh ditanam di kode publik karena bisa dicuri.
+- **Solusi (versi 1.8):** menu baru *Pengaturan → Fitur AI*.
+  - Pengguna menempel kunci API Claude-nya sendiri. Kunci dicek dulu lewat Models API (tanpa biaya token), lalu disimpan **hanya di perangkat itu**. Ada tombol *Uji kunci* dan *Hapus kunci*, serta peringatan agar tidak dipakai di perangkat orang lain.
+  - Mode AI versi online (`js/local/ai.js`) memakai SDK resmi `@anthropic-ai/sdk@1.8.0` dan pengaturan yang sama dengan versi server: model `claude-opus-5-5`, *structured output*, effort `medium`, `fallbacks: "default"`, dan hanya teks soal yang dikirim.
+  - Hasil AI diverifikasi V1–V6 (`verifySpec`, 19/19 identik dengan Python) lalu dihitung mesin hitung. Kuota 10 analisis/hari.
+  - Tab Mode AI menampilkan tombol langsung ke *Pengaturan → Fitur AI* bila kunci belum ada.
+- **Pengujian (dengan layanan Anthropic tiruan, karena kunci asli belum tersedia):** 5 skenario lolos di lokal dan di link online:
+  - tanpa kunci;
+  - kunci salah ditolak;
+  - kunci benar aktif;
+  - analisis soal taksi menghasilkan Rp53.000 dengan V1–V6, dan header/isi permintaan sudah sesuai;
+  - kuota harian.
+  - Selain itu, 264 tes Python dan 25 skenario E2E lolos.
+- **Belum diuji:** panggilan ke Claude API sungguhan, yang memerlukan kunci API milik pengguna.

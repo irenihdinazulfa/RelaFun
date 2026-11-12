@@ -177,3 +177,58 @@ export function solve(rawSpec) {
 }
 
 export { ZERO };
+
+// ---------------------------------------------------------------------------
+// Verifikasi model buatan AI (V1–V6) — padanan verify_spec() di modeler.py
+// ---------------------------------------------------------------------------
+export function numbersInText(text) {
+  const found = [];
+  const add = (v) => { try { const q = Q.parseDecimal(v); if (!found.some((f) => f.eq(q))) found.push(q); } catch { /* lewati */ } };
+  for (const tok of String(text || "").match(/\d+(?:[.,]\d+)*/g) || []) {
+    const variants = new Set([tok]);
+    if (/^\d{1,3}(?:\.\d{3})+(?:,\d+)?$/.test(tok)) variants.add(tok.replace(/\./g, "").replace(",", "."));
+    variants.add(tok.replace(/,/g, "."));
+    for (const v of variants) add(v);
+  }
+  return found;
+}
+
+export function verifySpec(story, rawSpec) {
+  const spec = normalizeSpec(rawSpec);
+  const checks = [];
+  const nums = numbersInText(story);
+  const has = (q) => nums.some((n) => n.eq(q));
+  const add = (code, ok, message, level = "error") => checks.push({ code, ok, level: ok ? "ok" : level, message });
+  add("V1", true, "Format model lengkap dan bisa dibaca.");
+  const t = spec.task;
+  const needTwo = t.type === "compare";
+  add("V2", needTwo ? spec.models.length === 2 : true,
+    !needTwo || spec.models.length === 2 ? "Jumlah model sesuai jenis pertanyaan." : "Untuk membandingkan diperlukan dua fungsi.");
+  for (const m of spec.models) {
+    const disp = m.label || m.name;
+    for (const [label, val] of [["a", Q.of(m.a)], ["b", Q.of(m.b)]]) {
+      const present = val.isZero() || has(val.abs());
+      add("V3", present, `${disp}: ${label} = ${fmt(val)} ` + (present ? "ditemukan di soal." : "tidak tertulis langsung di soal — periksa lagi."), "warning");
+    }
+  }
+  if (t.type === "evaluate" || t.type === "compare") {
+    const ok = t.x !== null;
+    add("V4", ok, ok ? "Nilai x yang ditanyakan sudah ada." : "Nilai x yang ditanyakan belum ditemukan.");
+    if (ok && !has(Q.of(t.x))) {
+      add("V5", false, `x = ${fmt(Q.of(t.x))} merupakan hasil olahan (misalnya konversi waktu). Pastikan perhitungannya benar.`, "warning");
+    }
+  }
+  if (t.type === "threshold" || t.type === "solve_for_x") {
+    const ok = t.target !== null;
+    add("V4", ok, ok ? "Batas/target sudah ada." : "Batas/target belum ditemukan.");
+    if (t.type === "threshold") add("V4", t.op !== null, t.op !== null ? "Tanda pertidaksamaan sudah ada." : "Tanda pertidaksamaan belum ada.");
+  }
+  try {
+    solve(spec);
+    add("V6", true, "Model dapat diselesaikan oleh mesin hitung.");
+  } catch (e) {
+    if (!(e instanceof MathInputError)) throw e;
+    add("V6", false, `Model belum bisa diselesaikan: ${e.message}`);
+  }
+  return { ok: !checks.some((c) => c.level === "error"), checks };
+}

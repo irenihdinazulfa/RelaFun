@@ -17,7 +17,7 @@ Aplikasi belajar matematika untuk siswa SMP kelas 8 materi **Relasi dan Fungsi**
 - **Laptop:** buka di Chrome/Edge → ikon instal di bilah alamat.
 - Di halaman masuk, klik **Masuk Akun Demo** atau **Masuk sebagai Guru Demo**.
 
-Versi online ini berjalan sepenuhnya di peramban: setelah dibuka sekali, aplikasi tetap bisa dipakai tanpa internet, dan data latihan tersimpan di masing-masing perangkat. Fitur AI dan dashboard guru untuk satu kelas sungguhan tersedia di versi server.
+Versi online ini berjalan sepenuhnya di peramban: setelah dibuka sekali, aplikasi tetap bisa dipakai tanpa internet, dan data latihan tersimpan di masing-masing perangkat. **Mode AI** aktif setelah kunci API Claude dimasukkan di *Pengaturan → Fitur AI* (kunci hanya disimpan di perangkat itu). Dashboard guru untuk satu kelas sungguhan tersedia di versi server.
 
 ## Menjalankan versi server (Windows)
 

@@ -4,7 +4,8 @@
 import { ApiError } from "../errors.js";
 import { check, correctAnswerText, ERROR_LABELS } from "./checker.js";
 import { MathInputError, analyzeRelation, evaluateSteps } from "./mathfn.js";
-import { solve, SpecError } from "./modeler.js";
+import { normalizeSpec, solve, SpecError, verifySpec } from "./modeler.js";
+import { AIUnavailable, extractModel, getKey, toSpec } from "./ai.js";
 
 const DB_KEY = "rf_db_v1";
 const POINTS_FIRST_TRY = 10;
@@ -372,13 +373,49 @@ export async function handle(method, rawPath, body = {}, token = null) {
     if (method === "GET" && path === "/api/tools/modeler/presets") { currentUser(token); return (await loadContent()).presets; }
     if (method === "POST" && path === "/api/tools/modeler/solve") { currentUser(token); return solve(body); }
     if (method === "GET" && path === "/api/tools/modeler/ai-status") {
-      const u = currentUser(token);
-      const cls = classOf(u);
-      return { configured: false, class_enabled: !!(cls && cls.ai_enabled) || u.role === "teacher", available: false,
-        daily_quota: AI_DAILY_QUOTA, static: true };
+      currentUser(token);
+      const configured = !!getKey();
+      return { configured, class_enabled: true, available: configured, daily_quota: AI_DAILY_QUOTA, static: true };
     }
     if (method === "POST" && path === "/api/tools/modeler/ai") {
-      throw new ApiError("Mode AI hanya tersedia pada versi server (start.bat dengan ANTHROPIC_API_KEY). Gunakan mode terpandu.", 503);
+      const u = currentUser(token);
+      if (!getKey()) {
+        throw new ApiError("Fitur AI belum aktif di perangkat ini. Masukkan kunci API Claude di Pengaturan → Fitur AI.", 503);
+      }
+      const text = String(body.text || "");
+      if (text.trim().length < 20 || text.length > 1500) throw new ApiError("Soal cerita minimal 20 dan maksimal 1.500 karakter.", 422);
+      const st = daily(u);
+      if (st.ai_calls >= AI_DAILY_QUOTA) {
+        throw new ApiError(`Kuota analisis AI hari ini sudah habis (${AI_DAILY_QUOTA} kali). Coba mode terpandu, ya.`, 429);
+      }
+      st.ai_calls += 1;
+      saveDb();
+      const remaining = AI_DAILY_QUOTA - st.ai_calls;
+      let data;
+      try {
+        data = await extractModel(text);
+      } catch (e) {
+        if (e instanceof AIUnavailable) throw new ApiError(e.message, 502);
+        throw e;
+      }
+      if (data.supported === false) return { supported: false, reason: data.reason || "Soal ini belum didukung.", remaining };
+      let spec;
+      try {
+        spec = normalizeSpec(toSpec(data));
+      } catch {
+        throw new ApiError("Model dari AI tidak lengkap. Coba lagi atau pakai mode terpandu.", 502);
+      }
+      const verification = verifySpec(text, spec);
+      const out = {
+        supported: true, spec,
+        explanations: {
+          models: (data.models || []).map((mm) => ({ name: mm.name, meaning_a: mm.meaning_a || "", meaning_b: mm.meaning_b || "" })),
+          x: data.task?.x_explanation || "", question: data.question_restated || "",
+        },
+        verification, remaining,
+      };
+      if (verification.ok) out.solution = solve(spec);
+      return out;
     }
 
     // --- guru ---
