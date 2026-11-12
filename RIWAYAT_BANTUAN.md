@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12 November 2026 (satu sesi, tiga belas permintaan) |
+| Tanggal | 12 November 2026 (satu sesi, lima belas permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -272,3 +272,30 @@ Memberikan tiga pilihan deskripsi untuk kolom *About*, daftar *topics* (educatio
 - Karena repositori Public, folder `referensi/` dikecualikan (`.gitignore`) untuk melindungi data narasumber. Folder `.venv`, database, `.env`, dan kunci rahasia juga tidak diunggah.
 - Menambahkan `.gitattributes` agar format baris `start.sh` tetap benar di Mac/Linux.
 - Membuat *commit* pertama (98 file) lalu mengunggahnya ke https://github.com/irenihdinazulfa/RelaFun. Hasil unggahan diverifikasi.
+
+---
+
+## Permintaan 14 — Link untuk Android
+
+### 👤 Pengguna
+
+> jadi nanti yang bisa di download dia android linknya yang mana
+
+### 🤖 Asisten
+
+- Menjelaskan bahwa belum ada link yang bisa dipasang di Android. Link GitHub berisi kode, sedangkan link `localhost` dan link IP lokal hanya berfungsi di jaringan/laptop pengguna.
+- RelaFun adalah PWA, jadi tidak ada file APK. Agar bisa dipasang, aplikasi perlu di-*deploy* ke alamat HTTPS (Render). Setelah itu pengguna memasangnya lewat Chrome Android dengan menu “Instal aplikasi”.
+- Bila dosen meminta file APK, APK dapat dibuat dari link Render melalui PWABuilder.
+
+---
+
+## Permintaan 15 — Cara deploy ke Render
+
+### 👤 Pengguna
+
+> gimana cara rendere
+
+### 🤖 Asisten
+
+- Memeriksa ulang `render.yaml`, lalu menambahkan `plan: free` agar Render tidak memilih paket berbayar. Isian `ANTHROPIC_API_KEY` dihapus agar tidak ditanyakan saat *deploy*.
+- Mengunggah perbaikan ke GitHub dan memberikan panduan langkah demi langkah (cara Blueprint dan cara manual).
