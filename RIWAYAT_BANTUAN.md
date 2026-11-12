@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12 November 2026 (satu sesi, dua puluh dua permintaan) |
+| Tanggal | 12 November 2026 (satu sesi, dua puluh tiga permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -440,3 +440,17 @@ Memberikan tiga pilihan deskripsi untuk kolom *About*, daftar *topics* (educatio
 - **Link:**
   - GitHub: https://github.com/irenihdinazulfa/RelaFun
   - Aplikasi web: https://irenihdinazulfa.github.io/RelaFun/
+
+---
+
+## Permintaan 23 — Hilangkan warna hijau di bagian literasi & alat bantu
+
+### 👤 Pengguna
+
+> yang bagian literasi dan bantu masi ada yang warna hijau ganti jadi pink putih based warnanyaa
+
+### 🤖 Asisten
+
+- Ikon kartu **Literasi** dan **Pemodel Soal Cerita** yang semula berlatar hijau muda dengan ikon hijau diganti menjadi latar **putih** dengan lingkar dan ikon **pink**. Kotak kesimpulan/jawaban (di contoh bertahap, kalkulator, dan pemodel) yang semula hijau kini **pink muda dengan garis pink**.
+- Warna hijau hanya dipertahankan untuk penanda **jawaban benar** (selalu disertai ikon ✓ dan teks), sesuai kebiasaan umum.
+- Versi aplikasi menjadi **1.7**; 25 skenario E2E lolos; warna diperiksa langsung di peramban.

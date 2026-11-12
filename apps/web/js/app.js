@@ -18,7 +18,7 @@ import { teacherView } from "./views/teacher.js";
 import { menuView } from "./views/menu.js";
 import { startInstallBanner, installButton } from "./components/installBanner.js";
 
-export const APP_VERSION = "1.6";
+export const APP_VERSION = "1.7";
 
 settings.apply();
 

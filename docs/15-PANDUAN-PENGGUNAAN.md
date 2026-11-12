@@ -19,7 +19,7 @@ Catatan versi online (GitHub Pages):
 - Data akun & latihan tersimpan **di masing-masing perangkat**. Dashboard guru hanya menampilkan akun di perangkat yang sama.
 - Mode AI tidak tersedia (perlu versi server).
 
-Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di bawah halaman masuk (saat ini **versi 1.6**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
+Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di bawah halaman masuk (saat ini **versi 1.7**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
 
 ## A. Menjalankan versi server (komputer Windows)
 

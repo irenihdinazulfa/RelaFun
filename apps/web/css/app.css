@@ -249,7 +249,7 @@ table.value-table tr td:first-child, table.value-table tr th:first-child { font-
 }
 .module-icon svg { width: 30px; height: 30px; }
 .module-icon.prasyarat { background: var(--accent-soft); color: var(--warn); }
-.module-icon.literasi { background: var(--good-soft); color: var(--good); }
+.module-icon.literasi { background: var(--surface); color: var(--primary); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--primary) 35%, transparent); }
 .skill-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
 .skill-card { text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 10px; transition: transform .12s ease; }
 .skill-card:hover { transform: translateY(-2px); }
@@ -303,7 +303,7 @@ table.value-table tr td:first-child, table.value-table tr th:first-child { font-
 }
 .reveal-list li .math { font-family: "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace; font-size: 1.05rem; font-weight: 600; overflow-wrap: anywhere; }
 .reveal-list li .note { color: var(--muted); font-size: .85rem; }
-.answer-box { border-left: 4px solid var(--good); background: var(--good-soft); padding: 10px 14px; border-radius: 0 12px 12px 0; font-weight: 650; animation: pop .25s ease; }
+.answer-box { border-left: 4px solid var(--primary); background: var(--primary-soft); padding: 10px 14px; border-radius: 0 12px 12px 0; font-weight: 650; animation: pop .25s ease; }
 @keyframes pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .term { border: 0; background: none; padding: 0; color: inherit; font: inherit; text-decoration: underline dotted var(--primary) 2px; text-underline-offset: 3px; cursor: help; }
 .term-pop {
