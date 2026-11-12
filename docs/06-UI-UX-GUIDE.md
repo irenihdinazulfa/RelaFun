@@ -20,9 +20,13 @@ Beranda siswa:
 
 ## 2. Identitas visual
 
+Warna dasar **soft pink**. Hero dan halaman masuk memakai gradasi pink muda (#ffc9da → #ffe9f0) dengan teks gelap (#4a1d33). Pink tua (#d6336c) dipakai untuk tombol supaya tulisan putih tetap terbaca.
+
 | Token | Terang | Gelap | Pemakaian |
 |---|---|---|---|
-| `--primary` | #4f46e5 | #8b85ff | tombol utama, menu aktif |
+| `--bg` | #fff6f9 (soft pink) | #1a1216 | latar halaman |
+| `--primary` | #d6336c (pink tua, kontras 4,6:1 dengan teks putih) | #ff8fb5 | tombol utama, menu aktif |
+| `--primary-soft` | #ffe3ee | #4a2534 | latar menu aktif, chip |
 | `--accent` | #f59e0b | #fbbf24 | panah baru, sasaran harian, tips |
 | `--good` | #0a7d0a | #4cc94c | benar (selalu dengan ikon ✓ + teks) |
 | `--bad` | #c62f2f | #f07272 | salah (selalu dengan ikon + teks) |
@@ -36,7 +40,7 @@ Beranda siswa:
 
 ## 3. Maskot
 
-**Kuro**, burung hantu bertopi wisuda (orisinal). Ekspresi: `happy` (beranda), `cheer` (berhasil), `calm` (tips), `think`. Maskot hanya muncul di hero, tips, dan layar hasil, bukan di setiap layar (menghindari beban ekstrinsik).
+**Kuro**, kelinci abu-abu gelap (“kuro” = hitam) bertelinga dalam pink, pipi merona, dan topi wisuda pink (orisinal). Ekspresi: `happy` (beranda), `cheer` (berhasil), `calm` (tips), `think`. Maskot hanya muncul di hero, tips, dan layar hasil, bukan di setiap layar (menghindari beban ekstrinsik).
 
 ## 4. Komponen kunci
 

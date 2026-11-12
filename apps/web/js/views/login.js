@@ -11,7 +11,7 @@ export function loginView(root) {
 
   const page = h("div", { class: "auth-wrap" },
     h("section", { class: "auth-side" }, mascot("cheer"),
-      h("h1", { style: { color: "#fff" } }, "RelaFun"),
+      h("h1", { style: { color: "#4a1d33" } }, "RelaFun"),
       h("p", null, "Relasi & Fungsi jadi seru! Belajar bersama Kuro: satu panah, satu pasangan, pelan-pelan sampai paham."),
       installButton({ label: "Unduh Aplikasi RelaFun", cls: "btn install-hero" })),
     h("main", { class: "auth-main" }, card),
@@ -112,7 +112,7 @@ export function loginView(root) {
         h("div", { class: "muted small" },
           "Atau ketik manual (semua huruf kecil): siswa → ", h("code", null, "siswa"), " / ", h("code", null, "siswa123"),
           " · guru → ", h("code", null, "guru"), " / ", h("code", null, "guru123"), " · kode kelas ", h("code", null, "RF8A26"))) : null,
-      h("p", { class: "muted small", style: { textAlign: "center", margin: "12px 0 0" } }, "RelaFun versi 1.4"));
+      h("p", { class: "muted small", style: { textAlign: "center", margin: "12px 0 0" } }, "RelaFun versi 1.5"));
   }
   render();
 }

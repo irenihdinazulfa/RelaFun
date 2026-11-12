@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12 November 2026 (satu sesi, sembilan belas permintaan) |
+| Tanggal | 12 November 2026 (satu sesi, dua puluh permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -381,3 +381,27 @@ Memberikan tiga pilihan deskripsi untuk kolom *About*, daftar *topics* (educatio
 - Menaikkan versi aplikasi menjadi **1.4** agar mudah dicek di HP.
 - Pengujian: 264 tes Python dan 25 skenario E2E tetap lolos; tidak ada lagi tulisan “Kiko” di aplikasi.
 - Versi baru diterbitkan ke https://irenihdinazulfa.github.io/RelaFun/ dan disimpan di GitHub.
+
+---
+
+## Permintaan 20 — Maskot kelinci & warna soft pink
+
+### 👤 Pengguna
+
+> terus maskotnya jangan burung hantu tapi kelinci aja dan based warna nya soft pink jangan ungu dan kirimkan link nya yang baru link github dan link app webnya
+
+### 🤖 Asisten
+
+- **Maskot:** Kuro digambar ulang menjadi **kelinci** orisinal: bulu abu-abu gelap (“kuro” = hitam), telinga dalam pink, pipi merona, gigi kelinci, dan topi wisuda pink. Empat ekspresinya (senang, bersorak, tenang, berpikir) tetap ada.
+- **Warna:** seluruh tema diganti dari ungu ke **soft pink**:
+  - latar #fff6f9;
+  - hero dan halaman masuk bergradasi pink muda dengan teks gelap;
+  - tombol pink tua #d6336c (kontras 4,6:1 dengan teks putih);
+  - mode gelap bernuansa pink;
+  - ikon aplikasi, warna bilah browser, dan manifest juga pink.
+  - Warna grafik/diagram (biru–oranye) dipertahankan karena sudah divalidasi aman untuk buta warna.
+- Versi aplikasi menjadi **1.5**.
+- **Pengujian:** 264 tes Python dan 25 skenario E2E lolos; tangkapan layar (halaman masuk HP & laptop, beranda, tips, mode gelap) diperiksa.
+- **Link:**
+  - GitHub: https://github.com/irenihdinazulfa/RelaFun
+  - Aplikasi web: https://irenihdinazulfa.github.io/RelaFun/
