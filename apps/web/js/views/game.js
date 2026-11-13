@@ -125,7 +125,8 @@ export function gameView(main, _p, ctx) {
       path.append(h("div", { class: `stone${k === st.i ? " now" : ""}${r === true ? " ok" : r === false ? " miss" : ""}` },
         r === true ? "🥕" : r === false ? "💧" : k === STEPS - 1 ? "🏁" : ""));
     }
-    const wen = h("div", { class: "game-wen" }, mascot("happy", "mascot"));
+    const wen = h("div", { class: "game-wen" }, mascot(st.combo >= 3 ? "wink" : "happy", "mascot"));
+    const setMood = (m) => wen.replaceChildren(mascot(m, "mascot"));
     wen.style.left = `calc(${(st.i + 0.5) * (100 / STEPS)}% - 22px)`;
     const track = h("div", { class: "game-track" }, wen, path);
 
@@ -184,6 +185,7 @@ export function gameView(main, _p, ctx) {
         st.score += gain;
         play("right");
         clear(fb).append(h("div", { class: "game-pop" }, `Benar! +${gain} 🥕`, st.combo >= 3 ? `  Combo ×${st.combo}!` : ""));
+        setMood(st.combo >= 3 ? "love" : "cheer");
         wen.classList.add("hop");
         if (st.i < STEPS - 1) wen.style.left = `calc(${(st.i + 1.5) * (100 / STEPS)}% - 22px)`;
         setTimeout(next, reduceMotion() ? 500 : 950);
@@ -193,6 +195,7 @@ export function gameView(main, _p, ctx) {
         play("wrong");
         navigator.vibrate?.(40);
         card.classList.add("shake");
+        setMood(k < 0 ? "surprised" : "sad");
         clear(fb).append(h("div", { class: "alert bad feedback" }, icon("alert"),
           h("div", null, h("div", { class: "alert-title" }, k < 0 ? "Waktu habis!" : "Belum tepat"), h("p", null, q.explain))),
           h("div", { class: "row", style: { justifyContent: "flex-end", marginTop: "10px" } },
@@ -227,7 +230,7 @@ export function gameView(main, _p, ctx) {
     if (nStars >= 2) { play("win"); if (!reduceMotion()) confetti(); }
 
     clear(root).append(h("section", { class: "card game-result" },
-      mascot(nStars >= 2 ? "cheer" : done ? "happy" : "think"),
+      mascot(!done ? "sad" : nStars === 3 ? "love" : nStars === 2 ? "cheer" : "happy"),
       h("h2", null, !done ? "Yah, nyawa Wen habis!" : nStars === 3 ? "Luar biasa! 🎉" : nStars === 2 ? "Hebat! 🎉" : "Berhasil sampai finis!"),
       h("div", { class: "game-stars big", "aria-label": `${nStars} dari 3 bintang` }, stars(nStars)),
       h("p", null, `Benar ${st.correct} dari ${st.results.length} soal · Skor `, h("b", null, `${st.score} 🥕`)),
@@ -241,7 +244,7 @@ export function gameView(main, _p, ctx) {
 
   function confetti() {
     const box = h("div", { class: "confetti", "aria-hidden": "true" });
-    const colors = ["#ff6b9d", "#ffc94d", "#d6336c", "#ffd6e5", "#7cc6fe"];
+    const colors = ["#ffa8c8", "#ffe27a", "#a9d6ff", "#ffd1b8", "#ff8fb5"];
     for (let k = 0; k < 36; k++) {
       const p = h("i");
       p.style.left = `${Math.random() * 100}%`;

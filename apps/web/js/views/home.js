@@ -62,7 +62,7 @@ export async function homeView(main, _p, ctx) {
         h("div", null, h("b", null, m.title), h("div", { class: "muted small" }, m.subtitle)))),
     h("a", { class: "card topic-card", href: "#/pemodel" }, h("div", { class: "module-icon literasi" }, icon("model")),
       h("div", null, h("b", null, "Pemodel Soal Cerita"), h("div", { class: "muted small" }, "Ubah cerita jadi rumus fungsi"))),
-    h("a", { class: "card topic-card", href: "#/kalkulator" }, h("div", { class: "module-icon" }, icon("calc")),
+    h("a", { class: "card topic-card", href: "#/kalkulator" }, h("div", { class: "module-icon sky" }, icon("calc")),
       h("div", null, h("b", null, "Kalkulator f(x)"), h("div", { class: "muted small" }, "Cek hitungan langkah demi langkah"))));
 
   const side = h("aside", { class: "stack" },

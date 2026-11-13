@@ -19,7 +19,7 @@ import { menuView } from "./views/menu.js";
 import { gameView } from "./views/game.js";
 import { startInstallBanner, installButton } from "./components/installBanner.js";
 
-export const APP_VERSION = "1.9";
+export const APP_VERSION = "2.0";
 
 settings.apply();
 

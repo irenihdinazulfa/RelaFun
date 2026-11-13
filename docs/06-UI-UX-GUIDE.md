@@ -20,13 +20,16 @@ Beranda siswa:
 
 ## 2. Identitas visual
 
-Warna dasar **soft pink**. Hero dan halaman masuk memakai gradasi pink muda (#ffc9da → #ffe9f0) dengan teks gelap (#4a1d33). Pink tua (#d6336c) dipakai untuk tombol supaya tulisan putih tetap terbaca.
+Warna dasar **pink pastel** dengan aksen **biru muda, kuning mentega, dan peach** (versi 2.0). Hero dan halaman masuk memakai gradasi pastel (#ffd3e2 → #fff0d6 → #dcefff) dengan teks gelap (#4a1d33). Tombol berwarna pastel dengan **tulisan gelap** supaya tetap terbaca; pink tua hanya dipakai untuk teks tautan dan ikon.
 
 | Token | Terang | Gelap | Pemakaian |
 |---|---|---|---|
-| `--bg` | #fff6f9 (soft pink) | #1a1216 | latar halaman |
-| `--primary` | #d6336c (pink tua, kontras 4,6:1 dengan teks putih) | #ff8fb5 | tombol utama, menu aktif |
+| `--bg` | #fff7fa (pink sangat muda) | #1a1216 | latar halaman |
+| `--fill` / `--on-fill` | #ffa8c8 / #4a1d33 (kontras ±7:1) | #ff9ec1 / #1a1216 | tombol utama, avatar, langkah aktif |
+| `--fill-strong` | #e85d93 | #ff8fb5 | bilah kemajuan, titik langkah, sakelar, pengatur waktu game |
+| `--primary` | #d6336c (kontras 4,6:1 di latar putih) | #ff8fb5 | teks tautan, menu aktif, ikon |
 | `--primary-soft` | #ffe3ee | #4a2534 | latar menu aktif, chip |
+| `--sky` / `--butter` / `--peach` | #ddefff / #fff3c4 / #ffe4d4 | versi gelap redup | aksen pastel: ikon menu, kotak statistik, modul prasyarat |
 | `--accent` | #f59e0b | #fbbf24 | panah baru, sasaran harian, tips |
 | `--good` | #0a7d0a | #4cc94c | benar (selalu dengan ikon ✓ + teks) |
 | `--bad` | #c62f2f | #f07272 | salah (selalu dengan ikon + teks) |
@@ -40,7 +43,20 @@ Warna dasar **soft pink**. Hero dan halaman masuk memakai gradasi pink muda (#ff
 
 ## 3. Maskot
 
-**Wen**, kelinci **putih** bergaya chibi (orisinal): kepala besar, badan mungil, mata bulat berkilau, pipi merona, mulut “ω”, satu telinga sedikit terkulai, dan pita pink. Garis tepi pink lembut (#ecc7d6) membuatnya tetap terlihat di latar putih maupun pink. Ekspresi: `happy` (beranda), `cheer` (berhasil), `calm` (tips), `think`. Maskot hanya muncul di hero, tips, dan layar hasil, bukan di setiap layar (menghindari beban ekstrinsik).
+**Wen** (orisinal), kelinci **putih** bergaya chibi yang memakai **tudung (hoodie) pink pastel bertelinga kelinci panjang**, dengan lencana **bintang kuning** di dahi, **pita biru muda** di sisi kepala, pipi merona, dan ekor bulat. Desainnya buatan sendiri, bukan tiruan karakter mana pun.
+
+| Ekspresi | Tampilan | Dipakai di |
+|---|---|---|
+| `happy` | mata melengkung, mulut “ω” | beranda, akhir game 1 bintang |
+| `cheer` | tangan terangkat, mulut terbuka, kilau | menjawab benar di game, 2 bintang, selesai materi/pemodel |
+| `calm` | mata bulat berkilau | kotak “Tips dari Wen” |
+| `think` | mata melirik, gelembung pikiran | cadangan (petunjuk) |
+| `wink` | kedip nakal + lidah | halaman masuk, combo ≥ 3, hasil latihan |
+| `surprised` | mata bulat besar + tanda seru | waktu habis di Mode Kilat |
+| `sad` | mata sayu, satu telinga terkulai, tetes air | jawaban salah di game, nyawa habis |
+| `love` | mata hati, tangan terangkat | combo ≥ 3 benar, 3 bintang, latihan sempurna |
+
+Maskot hanya muncul di hero, tips, game, dan layar hasil, bukan di setiap layar (menghindari beban ekstrinsik). Ekspresi sedih selalu disertai kalimat penyemangat, bukan menyalahkan.
 
 ## 4. Komponen kunci
 

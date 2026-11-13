@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–13 November 2026 (dua puluh tujuh permintaan) |
+| Tanggal | 12–13 November 2026 (dua puluh sembilan permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -555,3 +555,44 @@ Asisten menyarankan memulai dari instrumen penelitian (nomor 2 dan 3).
   - Tampilan dokumen diperiksa sebagai PDF hasil ekspor Microsoft Word; dua perbaikan tata letak dilakukan (lebar kolom dikunci, soal uraian tidak terpisah dari kotak jawabannya).
   - Rumus Excel dihitung ulang dengan Microsoft Excel memakai data contoh dan cocok dengan hitungan manual (0 sel galat).
 - Dokumen baru `docs/17-INSTRUMEN-PENELITIAN.md`; README dan roadmap diperbarui.
+
+---
+
+## Permintaan 28 — Meminta link GitHub dan link aplikasi
+
+### 👤 Pengguna
+
+> mana link github dan link app nya
+
+### 🤖 Asisten
+
+Memberikan kedua link yang sudah diperiksa aktif:
+- **Aplikasi:** https://irenihdinazulfa.github.io/RelaFun/
+- **Repositori GitHub:** https://github.com/irenihdinazulfa/RelaFun (instrumen penelitian ada di folder `instrumen/`)
+
+---
+
+## Permintaan 29 — Mengganti maskot menjadi seperti gambar karakter, berbagai ekspresi, warna pastel
+
+### 👤 Pengguna
+
+> (melampirkan gambar karakter **Kuromi**) ubah kelinci nya jadi itu dengan berbagai ekspresi dan based warna nya jadi pastel
+
+### 🤖 Asisten
+
+- **Tidak menyalin karakter pada gambar.** Asisten menjelaskan bahwa gambar itu adalah Kuromi, karakter milik Sanrio yang dilindungi hak cipta dan merek dagang. RelaFun diunggah ke publik dan dipakai untuk tugas kuliah, jadi meniru karakter itu bisa bermasalah.
+- **Sebagai gantinya, membuat versi orisinal dengan nuansa yang mirip** (imut dan sedikit "nakal"): **Wen** tetap kelinci putih, sekarang memakai **tudung pink pastel bertelinga kelinci panjang**, lencana **bintang kuning**, dan **pita biru muda**. Tidak ada unsur khas karakter tersebut (tengkorak, tanduk badut, ekor iblis, warna hitam).
+- **8 ekspresi:** senang, bersorak, tenang, berpikir, kedip nakal, kaget, sedih, dan jatuh cinta (mata hati). Ekspresi dipasang di aplikasi:
+  - halaman masuk: kedip nakal;
+  - game: bersorak saat benar, mata hati saat combo ≥ 3, sedih saat salah, kaget saat waktu habis;
+  - hasil game: mata hati (3 bintang), bersorak (2), senang (1), sedih (nyawa habis);
+  - hasil latihan: mata hati (sempurna), bersorak (≥ 80%), kedip (lainnya).
+- **Tema pastel:** tombol pink pastel dengan tulisan gelap (kontras ±7:1); aksen biru muda, kuning mentega, dan peach di ikon menu, kotak statistik, dan kartu materi; gradasi pastel di beranda, halaman masuk, dan game. Bagian literasi tetap pink-putih sesuai permintaan sebelumnya.
+- Versi aplikasi dinaikkan ke **2.0**; `docs/06-UI-UX-GUIDE.md` (warna dan tabel ekspresi maskot) dan panduan penggunaan diperbarui.
+- **Pemeriksaan:**
+  - 264 tes pytest lolos;
+  - uji peramban 25 langkah lolos tanpa galat;
+  - game: 5.400 soal acak benar semua;
+  - uji pasang aplikasi, luring, dan mode AI lolos;
+  - tangkapan layar HP dan laptop (mode terang dan gelap) diperiksa.
+- Diterbitkan ulang ke https://irenihdinazulfa.github.io/RelaFun/
