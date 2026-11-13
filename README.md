@@ -59,7 +59,8 @@ scripts/                  start.ps1 · start.sh
 apps/api/                 backend Python + tes (pytest)
 apps/web/                 aplikasi web PWA (JavaScript)
 content/                  13 modul, glosarium, soal cerita (JSON)
-docs/                     dokumen perencanaan 01–15 + kunci jawaban
+docs/                     dokumen perencanaan 01–17 + kunci jawaban
+instrumen/                lembar validasi, angket, soal pretest–posttest (.docx) + analisis (.xlsx)
 referensi/                transkrip wawancara & lembar soal (.docx) — tidak diunggah ke GitHub (data pribadi narasumber)
 RIWAYAT_BANTUAN.md        riwayat bantuan AI
 ```
@@ -84,6 +85,7 @@ RIWAYAT_BANTUAN.md        riwayat bantuan AI
 | 14 | [Templat analisis jawaban siswa](docs/14-ANALISIS-JAWABAN-SISWA.md) |
 | 15 | [Panduan penggunaan](docs/15-PANDUAN-PENGGUNAAN.md) |
 | 16 | [Game “Lompat Wen”](docs/16-GAME-LOMPAT-WEN.md) |
+| 17 | [Instrumen penelitian (validasi ahli & uji coba)](docs/17-INSTRUMEN-PENELITIAN.md) — file siap cetak di [`instrumen/`](instrumen/) |
 | — | [Kunci jawaban acuan lembar soal](docs/JAWABAN_ACUAN_SOAL_RELASI_FUNGSI.md) |
 
 ## Pengujian

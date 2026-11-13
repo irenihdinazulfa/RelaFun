@@ -5,7 +5,7 @@
 | **Analysis** | Wawancara siswa S01 (8 Nov 2026), pemetaan 14 kode beban kognitif, lembar soal literasi | ✅ Selesai (`01-RESEARCH-INSIGHTS.md`) |
 | **Design** | PRD, user stories, desain pembelajaran CLT, spesifikasi konten, UI/UX, arsitektur, API, privasi | ✅ Selesai (`02`–`09`) |
 | **Development** | Aplikasi PWA versi 1: 13 modul, 68 soal, kalkulator, pemodel, dashboard guru; tes otomatis & E2E | ✅ Selesai (12 Nov 2026) |
-| **Implementation** | Deploy HTTPS, validasi ahli, uji perorangan & kelompok kecil | ⏳ Berikutnya |
+| **Implementation** | Deploy HTTPS ✅ (GitHub Pages), instrumen validasi & uji coba ✅ (`17-INSTRUMEN-PENELITIAN.md`); pelaksanaan validasi ahli, uji perorangan & kelompok kecil | ⏳ Berikutnya |
 | **Evaluation** | Angket beban kognitif & kepraktisan, analisis jawaban lembar soal, revisi | ⏳ Berikutnya |
 
 ## Rencana berikutnya

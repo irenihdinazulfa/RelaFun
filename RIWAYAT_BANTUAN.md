@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–13 November 2026 (dua puluh lima permintaan) |
+| Tanggal | 12–13 November 2026 (dua puluh tujuh permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -508,3 +508,50 @@ Memberikan tiga pilihan deskripsi untuk kolom *About*, daftar *topics* (educatio
   - Dua cacat dari tangkapan layar diperbaiki: tulisan “null” dan tata letak kartu level di HP.
   - 25 skenario E2E (kedua versi) dan 264 tes Python tetap lolos.
 - Dokumen baru `docs/16-GAME-LOMPAT-WEN.md`; README, dokumen 04, 10, dan 15 diperbarui.
+
+---
+
+## Permintaan 26 — Apa lagi yang perlu dibuat
+
+### 👤 Pengguna
+
+> terus supaya lebih sempurna saya harus membuat apa lagi
+
+### 🤖 Asisten
+
+Memberikan daftar prioritas:
+1. **Wajib (tahap Implementation & Evaluation ADDIE):**
+   - analisis jawaban narasumber;
+   - validasi ahli materi & media;
+   - uji coba ke siswa (angket beban kognitif, angket kepraktisan, pretest–posttest);
+   - surat izin/persetujuan;
+   - revisi.
+2. **Untuk pengumpulan:** slide presentasi, video demo, buku panduan, uji di HP sungguhan.
+3. **Opsional:** tes diagnostik, dashboard kelas (versi server), bank soal guru.
+
+Asisten menyarankan memulai dari instrumen penelitian (nomor 2 dan 3).
+
+---
+
+## Permintaan 27 — Membuat instrumen validasi ahli dan uji coba
+
+### 👤 Pengguna
+
+> langsung 2 san 3 bisa gak
+
+### 🤖 Asisten
+
+- Membuat folder **`instrumen/`** berisi 7 dokumen Word siap cetak dan 1 file Excel:
+  1. lembar validasi ahli materi (20 butir);
+  2. lembar validasi ahli media (20 butir);
+  3. angket beban kognitif siswa (Paas + adaptasi Leppink dkk.);
+  4. angket kepraktisan (SUS + respons fitur);
+  5. soal pretest (Paket A) dan posttest (Paket B) yang setara;
+  6. kisi-kisi, kunci, dan rubrik;
+  7. protokol uji coba, lembar observasi, dan surat persetujuan orang tua;
+  8. Excel analisis dengan rumus otomatis (persentase kelayakan, IL/EL/GL, SUS, nilai, N-gain).
+- **Pemeriksaan:**
+  - Kunci 24 soal dihitung ulang dengan mesin hitung (semua benar).
+  - Tampilan dokumen diperiksa sebagai PDF hasil ekspor Microsoft Word; dua perbaikan tata letak dilakukan (lebar kolom dikunci, soal uraian tidak terpisah dari kotak jawabannya).
+  - Rumus Excel dihitung ulang dengan Microsoft Excel memakai data contoh dan cocok dengan hitungan manual (0 sel galat).
+- Dokumen baru `docs/17-INSTRUMEN-PENELITIAN.md`; README dan roadmap diperbarui.
