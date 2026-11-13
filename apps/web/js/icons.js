@@ -38,6 +38,7 @@ const P = {
   eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
   wand: '<path d="M4 20L16 8"/><path d="M15 4v2M19 8h2M18 5l1.5-1.5M14 4l1 1"/>',
   install: '<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 7v7"/><path d="M9 11l3 3 3-3"/>',
+  game: '<rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 10.5v3.5M5.25 12.25h3.5"/><circle cx="15.5" cy="11" r="1"/><circle cx="18" cy="13.5" r="1"/>',
   users: '<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0112 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.2A5 5 0 0121 19"/>',
 };
 

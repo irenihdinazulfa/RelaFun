@@ -67,4 +67,5 @@ Penjelasan (2–6 layar)          Latihan (4–7 soal)                 Hasil
 - Poin hanya sekali per soal (10 poin percobaan pertama, 5 poin setelahnya) → tidak mendorong menebak berulang.
 - Sasaran harian kecil (5 soal benar) dan streak → kebiasaan rutin, bukan kecepatan.
 - Papan peringkat per kelas memakai nama panggilan dan dapat dimatikan guru.
-- Tidak ada pengatur waktu (*timer*) agar tidak menambah kecemasan.
+- Tidak ada pengatur waktu (*timer*) di latihan agar tidak menambah kecemasan.
+- **Game “Lompat Wen”** (`16-GAME-LOMPAT-WEN.md`): soal acak dengan nyawa, combo, dan bintang; tanpa batas waktu secara bawaan (Mode Kilat opsional); penjelasan singkat setiap kali salah.

@@ -47,6 +47,7 @@ Panduan lengkap (HP, guru, AI, deploy): [docs/15-PANDUAN-PENGGUNAAN.md](docs/15-
 | Modul prasyarat (himpunan, bilangan bulat, substitusi) | IL03 |
 | 3 modul literasi dari 4 soal lembar PISA | Literasi matematika |
 | Dashboard guru: kesalahan terbanyak, akurasi per materi, peta penguasaan, CSV | Pemantauan kelas |
+| 🎮 **Game “Lompat Wen”**: 10 soal acak per ronde, 3 nyawa, combo, bintang, 3 level, Mode Kilat opsional | Latihan yang seru (DS01) |
 | Poin, streak, sasaran harian, papan peringkat per kelas (bisa dimatikan) | Motivasi |
 | Mode gelap, teks besar, kurangi animasi | Aksesibilitas |
 
@@ -82,6 +83,7 @@ RIWAYAT_BANTUAN.md        riwayat bantuan AI
 | 13 | [Pemodel soal cerita](docs/13-WORD-PROBLEM-MODELER.md) |
 | 14 | [Templat analisis jawaban siswa](docs/14-ANALISIS-JAWABAN-SISWA.md) |
 | 15 | [Panduan penggunaan](docs/15-PANDUAN-PENGGUNAAN.md) |
+| 16 | [Game “Lompat Wen”](docs/16-GAME-LOMPAT-WEN.md) |
 | — | [Kunci jawaban acuan lembar soal](docs/JAWABAN_ACUAN_SOAL_RELASI_FUNGSI.md) |
 
 ## Pengujian

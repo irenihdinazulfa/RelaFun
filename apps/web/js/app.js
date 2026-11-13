@@ -16,9 +16,10 @@ import { leaderboardView } from "./views/leaderboard.js";
 import { settingsView } from "./views/settings.js";
 import { teacherView } from "./views/teacher.js";
 import { menuView } from "./views/menu.js";
+import { gameView } from "./views/game.js";
 import { startInstallBanner, installButton } from "./components/installBanner.js";
 
-export const APP_VERSION = "1.8";
+export const APP_VERSION = "1.9";
 
 settings.apply();
 
@@ -29,6 +30,7 @@ const ROUTES = [
   { re: /^\/materi\/([\w-]+)$/, view: lessonView, nav: "materi" },
   { re: /^\/materi\/([\w-]+)\/latihan$/, view: practiceView, nav: "materi" },
   { re: /^\/kalkulator$/, view: calculatorView, nav: "kalkulator" },
+  { re: /^\/game$/, view: gameView, nav: "game" },
   { re: /^\/pemodel$/, view: modelerView, nav: "pemodel" },
   { re: /^\/glosarium$/, view: glossaryView, nav: "glosarium" },
   { re: /^\/peringkat$/, view: leaderboardView, nav: "peringkat" },
@@ -44,6 +46,7 @@ function navItems(user) {
   return [
     home,
     { key: "materi", href: "#/materi", label: "Materi", ic: "book" },
+    { key: "game", href: "#/game", label: "Game Lompat Wen", ic: "game" },
     { key: "kalkulator", href: "#/kalkulator", label: "Kalkulator f(x)", ic: "calc" },
     { key: "pemodel", href: "#/pemodel", label: "Pemodel Soal Cerita", ic: "model" },
     { key: "glosarium", href: "#/glosarium", label: "Glosarium", ic: "glossary" },
@@ -71,10 +74,10 @@ function layout(user, active) {
         h("div", { class: "muted small" }, user.role === "teacher" ? "Guru" : (user.class?.name || "Belum ada kelas"))),
       h("button", { class: "btn ghost icon-btn", type: "button", title: "Keluar", "aria-label": "Keluar", onclick: logout }, icon("logout"))),
   );
-  const mobileItems = [items[0], items[1], items[2], items[3], { key: "menu", href: "#/menu", label: "Lainnya", ic: "menu" }];
+  const mobileItems = [items[0], items[1], items[2], items[4], { key: "menu", href: "#/menu", label: "Lainnya", ic: "menu" }];
   const bottom = h("nav", { class: "bottom-nav", "aria-label": "Menu bawah" },
-    mobileItems.map((it) => h("a", { href: it.href, class: it.key === active || (it.key === "menu" && ["glosarium", "peringkat", "pengaturan"].includes(active)) ? "active" : "" },
-      icon(it.ic), it.key === "kalkulator" ? "Kalkulator" : it.key === "pemodel" ? "Pemodel" : it.key === "home" && user.role === "teacher" ? "Guru" : it.label)));
+    mobileItems.map((it) => h("a", { href: it.href, class: it.key === active || (it.key === "menu" && ["glosarium", "peringkat", "pengaturan", "kalkulator"].includes(active)) ? "active" : "" },
+      icon(it.ic), it.key === "game" ? "Game" : it.key === "pemodel" ? "Pemodel" : it.key === "home" && user.role === "teacher" ? "Guru" : it.label)));
   const topbar = h("header", { class: "topbar" }, brand(),
     h("div", { class: "row", style: { gap: "4px", flexWrap: "nowrap" } },
       installButton({ label: "Unduh", cls: "btn small", compact: true }),

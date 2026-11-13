@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12 November 2026 (satu sesi, dua puluh empat permintaan) |
+| Tanggal | 12–13 November 2026 (dua puluh lima permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -479,3 +479,32 @@ Memberikan tiga pilihan deskripsi untuk kolom *About*, daftar *topics* (educatio
   - kuota harian.
   - Selain itu, 264 tes Python dan 25 skenario E2E lolos.
 - **Belum diuji:** panggilan ke Claude API sungguhan, yang memerlukan kunci API milik pengguna.
+
+---
+
+## Permintaan 25 — Fitur game berbasis soal (13 November 2026)
+
+### 👤 Pengguna
+
+> buatkan fitur tambahan game di app tersebut game yang mudah dimainkan dan seru jadi sistemnya main game tapi soal gitu
+
+*(Disusul pesan: “internet sudah nyambung lagi”.)*
+
+### 🤖 Asisten
+
+- Membuat game orisinal **“Lompat Wen” 🐰🥕** (versi 1.9):
+  - Wen melompati 10 batu, dengan satu soal per batu.
+  - Jawaban benar: Wen melompat dan mendapat wortel. Jawaban salah: nyawa berkurang (total 3), lalu muncul penjelasan singkat.
+  - Ada combo, bintang 1–3, rekor, dan confetti.
+  - Tiga level: Padang Wortel (mudah), Hutan Panah (sedang), Gunung Fungsi (sulit). Level berikutnya terbuka dengan ≥ 1 bintang.
+  - Mode Kilat (15 detik) opsional, suara bisa dimatikan, dan bisa dimainkan dengan tombol 1–4.
+- **Soal dibuat acak** dari 9 jenis: fungsi/bukan (diagram & pasangan berurutan), nilai fungsi, pasangan sesuai nama relasi, istilah, domain/range, rumus dari tabel, mencari x, dan soal cerita. Pengecohnya disusun dari kesalahan khas siswa.
+- **Navigasi:**
+  - menu *Game* di sidebar dan navigasi bawah HP (Kalkulator dipindah ke menu *Lainnya*);
+  - kartu “Main Lompat Wen” di beranda.
+- **Pengujian:**
+  - 5.400 soal acak diverifikasi mandiri, dengan 0 gagal.
+  - Alur bermain lolos di versi online, versi server, dan link online.
+  - Dua cacat dari tangkapan layar diperbaiki: tulisan “null” dan tata letak kartu level di HP.
+  - 25 skenario E2E (kedua versi) dan 264 tes Python tetap lolos.
+- Dokumen baru `docs/16-GAME-LOMPAT-WEN.md`; README, dokumen 04, 10, dan 15 diperbarui.

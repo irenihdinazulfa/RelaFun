@@ -62,6 +62,10 @@ Skenario yang dijalankan dengan Chrome sungguhan (desktop 1366 px dan HP 390 px)
 
 Tambahan untuk versi online: syarat instal PWA Chrome terpenuhi (tanpa galat), dan aplikasi tetap terbuka serta menilai latihan saat internet diputus.
 
+## 2b. Game “Lompat Wen”
+
+5.400 soal acak diverifikasi mandiri (0 gagal) dan alur bermain lolos di versi online maupun server. Rincian: `16-GAME-LOMPAT-WEN.md` bagian 4.
+
 ## 3. Belum diuji
 
 - Panggilan **Claude API sungguhan** (diuji dengan respons tiruan; butuh kunci API).

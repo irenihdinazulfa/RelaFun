@@ -6,6 +6,7 @@ export function menuView(main, _p, ctx) {
   const link = (href, ic, label, desc) => h("a", { class: "card topic-card", href },
     h("div", { class: "module-icon" }, icon(ic)), h("div", null, h("b", null, label), h("div", { class: "muted small" }, desc)));
   main.append(h("h1", null, "Lainnya"), h("div", { class: "stack" },
+    link("#/kalkulator", "calc", "Kalkulator f(x)", "Cek hitungan langkah demi langkah"),
     link("#/glosarium", "glossary", "Glosarium", "Arti istilah dengan bahasa sederhana"),
     ctx.user.role === "student" ? link("#/peringkat", "trophy", "Peringkat Kelas", "Poin teman sekelas") : null,
     link("#/pengaturan", "settings", "Pengaturan", "Tema, ukuran teks, kode kelas, pasang aplikasi"),

@@ -125,6 +125,6 @@ export function settingsView(main, _p, ctx) {
           h("button", { class: "btn secondary", type: "button", style: { marginTop: "12px" }, onclick: () => { session.clear(); location.hash = "#/masuk"; } }, icon("logout"), "Keluar")),
         h("section", { class: "card" }, h("h2", null, "Unduh aplikasi"),
           h("p", { class: "muted small" }, "RelaFun bisa diunduh tanpa Play Store/App Store dan dibuka seperti aplikasi biasa."), installSlot,
-          h("p", { class: "muted small", style: { marginTop: "12px", marginBottom: 0 } }, "RelaFun versi 1.8")),
+          h("p", { class: "muted small", style: { marginTop: "12px", marginBottom: 0 } }, "RelaFun versi 1.9")),
         h("section", { class: "card", id: "fitur-ai" }, h("h2", null, "Fitur AI (opsional)"), aiBox))));
 }

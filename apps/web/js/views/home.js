@@ -83,6 +83,11 @@ export async function homeView(main, _p, ctx) {
 
   main.append(h("div", { class: "home-grid" },
     h("div", null, hero,
+      h("a", { class: "card game-cta", href: "#/game" },
+        h("div", { class: "game-cta-emoji", "aria-hidden": "true" }, "🎮"),
+        h("div", { style: { minWidth: 0, flex: 1 } }, h("b", null, "Main Lompat Wen 🥕"),
+          h("div", { class: "muted small" }, "Jawab soal, bantu Wen melompat, kumpulkan wortel!")),
+        h("span", { class: "btn small" }, icon("play"), "Main")),
       h("div", { class: "section-title" }, h("h2", null, "Lanjutkan materi")), cont,
       h("div", { class: "section-title" }, h("h2", null, "Bangun keahlian"), h("a", { href: "#/materi" }, "Semua materi")), skills,
       h("div", { class: "section-title" }, h("h2", null, "Literasi & alat bantu")), topics),

@@ -112,7 +112,7 @@ export function loginView(root) {
         h("div", { class: "muted small" },
           "Atau ketik manual (semua huruf kecil): siswa → ", h("code", null, "siswa"), " / ", h("code", null, "siswa123"),
           " · guru → ", h("code", null, "guru"), " / ", h("code", null, "guru123"), " · kode kelas ", h("code", null, "RF8A26"))) : null,
-      h("p", { class: "muted small", style: { textAlign: "center", margin: "12px 0 0" } }, "RelaFun versi 1.8"));
+      h("p", { class: "muted small", style: { textAlign: "center", margin: "12px 0 0" } }, "RelaFun versi 1.9"));
   }
   render();
 }
