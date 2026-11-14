@@ -1,0 +1,26 @@
+{
+  "id": "r4-domain-kodomain-range",
+  "order": 7,
+  "group": "inti",
+  "title": "Domain, Kodomain, dan Range",
+  "subtitle": "Daerah asal, daerah kawan, daerah hasil",
+  "icon": "target",
+  "minutes": 12,
+  "interview_codes": ["IL01", "EL03", "DS02", "DS01"],
+  "objectives": ["Menentukan domain, kodomain, dan range", "Memahami istilah bayangan"],
+  "steps": [
+    {"type": "text", "title": "Tiga nama himpunan", "body": "Pada fungsi dari A ke B:\n**Domain (daerah asal)** = semua anggota kiri.\n**Kodomain (daerah kawan)** = semua anggota kanan.\n**Range (daerah hasil)** = anggota kanan yang **kena panah** saja."},
+    {"type": "diagram", "mode": "sets", "title": "Coba sorot", "body": "Tekan tombol **Domain**, **Kodomain**, dan **Range** bergantian. Perhatikan bahwa 6 tidak termasuk range.", "diagram": {"left_label": "A", "right_label": "B", "domain": ["1", "2", "3", "4"], "codomain": ["2", "3", "4", "5", "6"], "pairs": [["1", "2"], ["2", "3"], ["3", "4"], ["4", "5"]]}},
+    {"type": "example", "title": "Contoh bertahap", "problem": "Tentukan domain, kodomain, dan range dari diagram tadi.", "steps": ["Domain = semua anggota kiri = {1, 2, 3, 4}", "Kodomain = semua anggota kanan = {2, 3, 4, 5, 6}", "Range = anggota kanan yang kena panah = {2, 3, 4, 5}"], "answer": "6 tidak masuk range karena tidak kena panah."},
+    {"type": "tip", "body": "Cara mengingat: **range selalu ada di dalam kodomain**. Range bisa sama dengan kodomain atau lebih sedikit."},
+    {"type": "text", "title": "Istilah bayangan", "body": "Pasangan dari x disebut **bayangan x**. Jika 3 → 4, maka 4 adalah bayangan dari 3, ditulis f(3) = 4."}
+  ],
+  "items": [
+    {"id": "r4-1", "type": "dnd", "prompt": "Perhatikan diagram. Seret setiap himpunan ke namanya yang tepat.", "diagram": {"left_label": "A", "right_label": "B", "domain": ["a", "b", "c"], "codomain": ["1", "2", "3", "4"], "pairs": [["a", "1"], ["b", "3"], ["c", "3"]]}, "chips": [{"id": "c1", "label": "{a, b, c}"}, {"id": "c2", "label": "{1, 2, 3, 4}"}, {"id": "c3", "label": "{1, 3}"}], "bins": [{"id": "domain", "label": "Domain"}, {"id": "kodomain", "label": "Kodomain"}, {"id": "range", "label": "Range"}], "answer": {"c1": "domain", "c2": "kodomain", "c3": "range"}, "error_type": "domain_kodomain_range", "hint": "Range hanya berisi anggota kanan yang kena panah.", "explain": ["Domain = semua anggota kiri = {a, b, c}", "Kodomain = semua anggota kanan = {1, 2, 3, 4}", "Range = yang kena panah = {1, 3}"]},
+    {"id": "r4-2", "type": "multi", "prompt": "Pilih semua anggota range dari diagram ini.", "diagram": {"left_label": "A", "right_label": "B", "domain": ["1", "2", "3"], "codomain": ["2", "4", "6", "8"], "pairs": [["1", "2"], ["2", "4"], ["3", "6"]]}, "options": ["2", "4", "6", "8"], "answer": [0, 1, 2], "error_type": "domain_kodomain_range", "hint": "Pilih anggota kanan yang kena panah saja.", "explain": ["Yang kena panah: 2, 4, 6.", "8 termasuk kodomain, tetapi bukan range."]},
+    {"id": "r4-3", "type": "mcq", "prompt": "Pada fungsi f dari A ke B, himpunan A disebut …", "options": ["Kodomain", "Range", "Domain", "Bayangan"], "answer": 2, "error_type": "domain_kodomain_range", "hint": "A adalah himpunan asal.", "explain": ["Himpunan asal disebut domain (daerah asal)."]},
+    {"id": "r4-4", "type": "numeric", "prompt": "Berapa banyak anggota range dari diagram ini?", "diagram": {"left_label": "A", "right_label": "B", "domain": ["−1", "0", "1", "2"], "codomain": ["1", "2", "3", "4", "5"], "pairs": [["−1", "1"], ["0", "1"], ["1", "3"], ["2", "5"]]}, "answer": "3", "common_errors": [{"value": "5", "type": "domain_kodomain_range", "message": "Itu banyak anggota kodomain. Range hanya anggota kanan yang kena panah."}, {"value": "4", "type": "domain_kodomain_range", "message": "Angka 1 kena dua panah, tetapi dihitung satu kali saja. Itu juga sama dengan banyak anggota domain."}], "hint": "Tulis dulu anggota range, lalu hitung. Anggota yang kena dua panah dihitung sekali.", "explain": ["Yang kena panah: 1, 3, 5.", "Range = {1, 3, 5}, banyaknya 3."]},
+    {"id": "r4-5", "type": "mcq", "prompt": "Jika f(3) = 7, maka 7 disebut …", "options": ["Domain dari 3", "Bayangan dari 3", "Kodomain dari 3", "Daerah asal"], "answer": 1, "error_type": "domain_kodomain_range", "hint": "Hasil pasangan dari x disebut apa?", "explain": ["f(3) = 7 berarti 3 dipasangkan dengan 7.", "7 adalah bayangan dari 3."]},
+    {"id": "r4-6", "type": "dnd", "prompt": "Pasangkan istilah Indonesia dengan istilah lainnya.", "chips": [{"id": "c1", "label": "Daerah asal"}, {"id": "c2", "label": "Daerah kawan"}, {"id": "c3", "label": "Daerah hasil"}], "bins": [{"id": "domain", "label": "Domain"}, {"id": "kodomain", "label": "Kodomain"}, {"id": "range", "label": "Range"}], "answer": {"c1": "domain", "c2": "kodomain", "c3": "range"}, "error_type": "domain_kodomain_range", "hint": "Asal = kiri, kawan = kanan, hasil = yang kena panah.", "explain": ["Daerah asal = domain", "Daerah kawan = kodomain", "Daerah hasil = range"]}
+  ]
+}

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>RelaFun — Relasi dan Fungsi</title>
+  <meta name="description" content="Belajar Relasi dan Fungsi kelas 8 SMP langkah demi langkah.">
+  <meta name="theme-color" content="#ffe9d6">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="RelaFun">
+  <link rel="stylesheet" href="css/app.css">
+  <script>
+    // Terapkan tema & ukuran teks sebelum halaman tampil (mencegah kedip).
+    try {
+      var s = JSON.parse(localStorage.getItem("lk_settings") || "{}");
+      if (s.theme === "dark" || s.theme === "light") document.documentElement.dataset.theme = s.theme;
+      if (s.bigText) document.documentElement.classList.add("big-text");
+      if (s.reduceMotion) document.documentElement.classList.add("reduce-motion");
+    } catch (e) {}
+    // Simpan tawaran instal Chrome agar bisa ditampilkan sebagai tombol "Pasang sekarang".
+    window.addEventListener("beforeinstallprompt", function (e) {
+      e.preventDefault();
+      window.__installPrompt = e;
+      document.dispatchEvent(new CustomEvent("installable"));
+    });
+  </script>
+</head>
+<body>
+  <div id="app" aria-live="polite">
+    <div class="boot">
+      <img src="icons/icon.svg" alt="" width="72" height="72">
+      <p>Memuat RelaFun…</p>
+    </div>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <noscript>RelaFun membutuhkan JavaScript. Aktifkan JavaScript di peramban Anda.</noscript>
+  <script src="config.js"></script>
+  <script>
+    // Penjaga pemuatan (sengaja ditulis dengan JavaScript lama agar jalan di semua peramban):
+    // bila aplikasi gagal mulai (sinyal putus, peramban terlalu lama, atau cache lama),
+    // tampilkan pesan + tombol, bukan layar kosong.
+    (function () {
+      var lastError = "";
+      window.addEventListener("error", function (e) { if (e && e.message) lastError = e.message; }, true);
+      // Hapus cache & service worker lama, lalu muat ulang (data belajar di perangkat tetap aman).
+      window.rfReset = function () {
+        var reload = function () { location.reload(); };
+        try {
+          var jobs = [];
+          if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
+            jobs.push(navigator.serviceWorker.getRegistrations().then(function (rs) {
+              return Promise.all(rs.map(function (r) { return r.unregister(); }));
+            }));
+          }
+          if (window.caches && caches.keys) {
+            jobs.push(caches.keys().then(function (ks) {
+              return Promise.all(ks.map(function (k) { return caches.delete(k); }));
+            }));
+          }
+          Promise.all(jobs).then(reload, reload);
+        } catch (err) { reload(); }
+      };
+      window.rfLoadFailed = function (why) {
+        var app = document.getElementById("app");
+        if (window.__rfStarted || !app || document.getElementById("rf-fail")) return;
+        var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+        app.innerHTML = '<div class="boot" id="rf-fail"><img src="icons/icon.svg" alt="" width="72" height="72">'
+          + '<p><b>RelaFun belum bisa dibuka di sini.</b><br>Periksa sinyal internet, lalu ketuk Muat ulang. '
+          + 'Bila tetap gagal, ketuk Bersihkan &amp; muat ulang, atau buka dengan Chrome/Safari versi terbaru.</p>'
+          + '<div class="boot-actions"><button class="btn" type="button" onclick="location.reload()">Muat ulang</button>'
+          + '<button class="btn secondary" type="button" onclick="rfReset()">Bersihkan &amp; muat ulang</button></div>'
+          + (why ? '<p class="boot-why">Keterangan: ' + esc(why) + '</p>' : '') + '</div>';
+      };
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () { if (!window.__rfStarted) window.rfLoadFailed(lastError); }, 300);
+      });
+    })();
+  </script>
+  <script nomodule>window.rfLoadFailed("Peramban ini terlalu lama dan belum mendukung RelaFun.");</script>
+  <script type="module" src="js/app.js" onerror="rfLoadFailed('Berkas aplikasi gagal dimuat.')"></script>
+</body>
+</html>

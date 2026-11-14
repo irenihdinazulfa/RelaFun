@@ -1,0 +1,92 @@
+[
+  {
+    "id": "provider",
+    "title": "Memilih provider internet",
+    "source": "Lembar soal — Soal 1",
+    "process": "Reasoning",
+    "story": "Provider A menawarkan tarif internet Rp2.000 per GB tanpa biaya berlangganan. Provider B menawarkan biaya berlangganan bulanan Rp30.000 dengan tambahan Rp1.000 per GB. Raka biasanya menggunakan internet sebanyak 25 GB setiap bulannya. Dari provider mana Raka sebaiknya membeli paket internet agar pengeluarannya sesedikit mungkin?",
+    "x_choices": ["banyak kuota internet (GB)", "biaya per bulan (rupiah)", "banyak provider"],
+    "expected": {
+      "variable_meaning": "banyak kuota internet", "variable_unit": "GB", "output_unit": "rupiah",
+      "models": [{"name": "A", "label": "Provider A", "a": 2000, "b": 0}, {"name": "B", "label": "Provider B", "a": 1000, "b": 30000}],
+      "task": {"type": "compare", "x": 25, "op": null, "target": null, "integer_x": false}
+    },
+    "x_note": "Raka memakai 25 GB, jadi x = 25.",
+    "interpret": {"question": "Jadi, provider mana yang sebaiknya dipilih Raka?", "options": ["Provider A, karena biayanya Rp5.000 lebih murah", "Provider B, karena ada biaya berlangganan", "Sama saja"], "answer": 0}
+  },
+  {
+    "id": "taksi",
+    "title": "Ongkos taksi ke stasiun",
+    "source": "Lembar soal — Soal 2",
+    "process": "Formulate",
+    "story": "Sebuah perusahaan taksi menetapkan tarif buka pintu sebesar Rp8.000 dan tarif tambahan Rp4.500 untuk setiap kilometer perjalanan. Budi memiliki uang Rp50.000 dan ingin pergi ke stasiun yang jaraknya 10 km dari rumahnya. Apakah uang Budi cukup?",
+    "x_choices": ["jarak perjalanan (km)", "uang Budi (rupiah)", "tarif buka pintu (rupiah)"],
+    "expected": {
+      "variable_meaning": "jarak perjalanan", "variable_unit": "km", "output_unit": "rupiah",
+      "models": [{"name": "f", "label": "Ongkos taksi", "a": 4500, "b": 8000}],
+      "task": {"type": "evaluate", "x": 10, "op": "<=", "target": 50000, "integer_x": false}
+    },
+    "x_note": "Jaraknya 10 km, jadi x = 10. Ongkos harus ≤ Rp50.000 agar uang Budi cukup.",
+    "interpret": {"question": "Apakah uang Budi cukup?", "options": ["Cukup, masih sisa", "Tidak cukup, kurang Rp3.000", "Pas"], "answer": 1}
+  },
+  {
+    "id": "suhu",
+    "title": "Suhu udara di sore hari",
+    "source": "Lembar soal — Soal 3",
+    "process": "Employ",
+    "story": "Suhu udara di suatu kota dimodelkan dengan fungsi f(x) = −2x + 30, dengan x adalah waktu dalam jam setelah pukul 12.00 siang dan f(x) adalah suhu dalam derajat Celcius. Berapa suhu di kota tersebut pada pukul 15.30?",
+    "x_choices": ["waktu dalam jam setelah pukul 12.00", "suhu (°C)", "pukul berapa sekarang"],
+    "expected": {
+      "variable_meaning": "waktu setelah pukul 12.00", "variable_unit": "jam", "output_unit": "°C",
+      "models": [{"name": "f", "label": "Suhu", "a": -2, "b": 30}],
+      "task": {"type": "evaluate", "x": 3.5, "op": null, "target": null, "integer_x": false}
+    },
+    "x_note": "Dari 12.00 ke 15.30 = 3 jam 30 menit = 3,5 jam. Jadi x = 3,5 (bukan 3,30 atau 15,5).",
+    "interpret": {"question": "Berapa suhu pada pukul 15.30?", "options": ["23 °C", "24 °C", "−1 °C"], "answer": 0}
+  },
+  {
+    "id": "tas",
+    "title": "Keuntungan pedagang tas",
+    "source": "Lembar soal — Soal 4",
+    "process": "Interpret",
+    "story": "Keuntungan seorang pedagang tas dirumuskan dengan fungsi h(x) = 50.000x − 150.000, dengan x adalah banyak tas yang terjual dan h(x) adalah keuntungan dalam rupiah. Berapa minimal tas yang harus terjual agar pedagang mulai mendapatkan keuntungan (h(x) > 0)?",
+    "x_choices": ["banyak tas yang terjual", "keuntungan (rupiah)", "harga satu tas"],
+    "expected": {
+      "variable_meaning": "banyak tas yang terjual", "variable_unit": "tas", "output_unit": "rupiah",
+      "models": [{"name": "h", "label": "Keuntungan", "a": 50000, "b": -150000}],
+      "task": {"type": "threshold", "x": null, "op": ">", "target": 0, "integer_x": true}
+    },
+    "x_note": "Yang dicari x, dengan syarat h(x) > 0. Banyak tas harus bilangan bulat.",
+    "interpret": {"question": "Apa arti h(2) = −50.000 dan berapa tas minimal agar untung?", "options": ["Rumusnya salah; minimal 3 tas", "Rugi Rp50.000; minimal 4 tas", "Untung Rp50.000; minimal 2 tas"], "answer": 1}
+  },
+  {
+    "id": "ojek",
+    "title": "Tarif ojek daring",
+    "source": "Latihan tambahan",
+    "process": "Formulate",
+    "story": "Tarif ojek daring adalah Rp5.000 saat mulai perjalanan, lalu Rp2.500 untuk setiap kilometer. Berapa ongkos perjalanan sejauh 6 km?",
+    "x_choices": ["jarak perjalanan (km)", "ongkos (rupiah)", "banyak penumpang"],
+    "expected": {
+      "variable_meaning": "jarak perjalanan", "variable_unit": "km", "output_unit": "rupiah",
+      "models": [{"name": "f", "label": "Ongkos ojek", "a": 2500, "b": 5000}],
+      "task": {"type": "evaluate", "x": 6, "op": null, "target": null, "integer_x": false}
+    },
+    "x_note": "Jaraknya 6 km, jadi x = 6.",
+    "interpret": {"question": "Berapa ongkosnya?", "options": ["Rp20.000", "Rp15.000", "Rp7.500"], "answer": 0}
+  },
+  {
+    "id": "lilin",
+    "title": "Lilin yang memendek",
+    "source": "Latihan tambahan",
+    "process": "Employ",
+    "story": "Sebuah lilin tingginya 20 cm. Setelah dinyalakan, lilin memendek 2 cm setiap jam. Setelah berapa jam lilin itu habis (tingginya 0 cm)?",
+    "x_choices": ["lama lilin menyala (jam)", "tinggi lilin (cm)", "banyak lilin"],
+    "expected": {
+      "variable_meaning": "lama lilin menyala", "variable_unit": "jam", "output_unit": "cm",
+      "models": [{"name": "t", "label": "Tinggi lilin", "a": -2, "b": 20}],
+      "task": {"type": "solve_for_x", "x": null, "op": null, "target": 0, "integer_x": false}
+    },
+    "x_note": "Yang dicari x saat tinggi lilin t(x) = 0.",
+    "interpret": {"question": "Setelah berapa jam lilin habis?", "options": ["10 jam", "20 jam", "18 jam"], "answer": 0}
+  }
+]

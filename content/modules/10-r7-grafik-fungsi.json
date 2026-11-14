@@ -1,0 +1,25 @@
+{
+  "id": "r7-grafik-fungsi",
+  "order": 10,
+  "group": "inti",
+  "title": "Tabel dan Grafik Fungsi",
+  "subtitle": "Menggambar dan membaca grafik garis lurus",
+  "icon": "chart",
+  "minutes": 12,
+  "interview_codes": ["GL02", "K02", "DS02"],
+  "objectives": ["Membuat tabel dan grafik fungsi f(x) = ax + b", "Membaca nilai fungsi dari grafik"],
+  "steps": [
+    {"type": "text", "title": "Dari tabel ke grafik", "body": "Untuk menggambar grafik f(x) = ax + b:\n1. Buat tabel beberapa nilai x.\n2. Hitung f(x).\n3. Gambar titik (x, f(x)), lalu hubungkan."},
+    {"type": "table", "title": "Tabel f(x) = x + 1", "headers": ["x", "0", "1", "2", "3"], "rows": [["f(x)", "1", "2", "3", "4"]]},
+    {"type": "graph", "title": "Grafiknya garis lurus", "body": "Titik-titik dari fungsi f(x) = ax + b selalu membentuk **garis lurus**.", "points": [[0, 1], [1, 2], [2, 3], [3, 4]], "lines": [{"a": 1, "b": 1, "label": "f(x) = x + 1"}]},
+    {"type": "text", "title": "Membaca grafik", "body": "Untuk mencari f(2) dari grafik: mulai dari x = 2 di sumbu mendatar, naik sampai menyentuh garis, lalu lihat angkanya di sumbu tegak."},
+    {"type": "graph", "title": "Grafik turun", "body": "Jika a negatif, grafiknya **turun** dari kiri ke kanan. Contoh: f(x) = −2x + 6.", "points": [[0, 6], [1, 4], [2, 2], [3, 0]], "lines": [{"a": -2, "b": 6, "label": "f(x) = −2x + 6"}]}
+  ],
+  "items": [
+    {"id": "r7-1", "type": "numeric", "prompt": "Perhatikan grafik f(x) = 2x + 1. Berapa nilai f(2)?", "graph": {"lines": [{"a": 2, "b": 1, "label": "f(x) = 2x + 1"}], "points": [[2, 5]], "x_min": 0, "x_max": 4}, "answer": "5", "linear": {"a": 2, "b": 1, "x": "2"}, "hint": "Dari x = 2, naik sampai menyentuh garis.", "explain": ["f(2) = 2 × 2 + 1 = 5", "Di grafik, titik (2, 5) ada pada garis."]},
+    {"id": "r7-2", "type": "mcq", "prompt": "Grafik f(x) = −x + 4 berbentuk …", "options": ["Garis lurus naik", "Garis lurus turun", "Lengkungan", "Titik-titik acak"], "answer": 1, "option_feedback": {"0": "Nilai a = −1 (negatif), jadi grafiknya turun.", "2": "Fungsi bentuk ax + b selalu berupa garis lurus."}, "hint": "Lihat tanda a.", "explain": ["a = −1 negatif, jadi grafiknya garis lurus yang turun."]},
+    {"id": "r7-3", "type": "mcq", "prompt": "Rumus fungsi yang sesuai dengan grafik ini adalah …", "graph": {"points": [[0, 2], [1, 4], [2, 6]], "lines": [{"a": 2, "b": 2}], "x_min": 0, "x_max": 3}, "options": ["f(x) = x + 2", "f(x) = 2x + 2", "f(x) = 2x", "f(x) = 4x + 2"], "answer": 1, "option_feedback": {"0": "Coba cek titik (1, 4): 1 + 2 = 3, bukan 4.", "2": "Coba cek titik (0, 2): 2 × 0 = 0, bukan 2.", "3": "Coba cek titik (1, 4): 4 × 1 + 2 = 6, bukan 4."}, "error_type": "rumus_salah", "hint": "Cek setiap pilihan dengan titik (0, 2) dan (1, 4).", "explain": ["Saat x = 0, nilainya 2 → b = 2", "Setiap x naik 1, nilai naik 2 → a = 2", "f(x) = 2x + 2"]},
+    {"id": "r7-4", "type": "numeric", "prompt": "Grafik f(x) = 3x − 3 memotong sumbu mendatar (saat f(x) = 0) pada x = …", "answer": "1", "common_errors": [{"value": "-3", "type": "konsep", "message": "−3 adalah nilai f(0). Yang dicari: kapan 3x − 3 = 0?"}], "hint": "Selesaikan 3x − 3 = 0.", "explain": ["3x − 3 = 0", "3x = 3", "x = 1"]},
+    {"id": "r7-5", "type": "multi", "prompt": "Titik mana saja yang terletak pada grafik f(x) = 2x − 1?", "options": ["(0, −1)", "(1, 1)", "(2, 4)", "(3, 5)"], "answer": [0, 1, 3], "hint": "Masukkan x setiap titik ke rumus, lalu bandingkan.", "explain": ["f(0) = −1 ✓", "f(1) = 1 ✓", "f(2) = 3, bukan 4 ✗", "f(3) = 5 ✓"]}
+  ]
+}

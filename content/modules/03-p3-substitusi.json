@@ -1,0 +1,25 @@
+{
+  "id": "p3-substitusi",
+  "order": 3,
+  "group": "prasyarat",
+  "title": "Substitusi pada Bentuk Aljabar",
+  "subtitle": "Mengganti huruf dengan angka",
+  "icon": "swap",
+  "minutes": 10,
+  "interview_codes": ["IL02", "IL03", "GL03"],
+  "objectives": ["Mensubstitusi nilai ke bentuk aljabar", "Menghindari salah tanda dan salah tempel angka"],
+  "steps": [
+    {"type": "text", "title": "Substitusi itu apa?", "body": "Substitusi artinya **mengganti huruf dengan angka**. Pada 3x + 2, jika x = 4, huruf x kita ganti dengan 4."},
+    {"type": "tip", "body": "3x artinya **3 × x**, bukan angka 3 ditempel dengan x. Jika x = 4, maka 3x = 12, bukan 34."},
+    {"type": "example", "title": "Contoh 1", "problem": "Hitung nilai 3x + 2 jika x = 4.", "steps": ["Ganti x dengan (4): 3 × (4) + 2", "Kalikan dulu: 12 + 2", "Jumlahkan: 14"], "answer": "Nilainya 14."},
+    {"type": "example", "title": "Contoh 2 (x negatif)", "problem": "Hitung nilai 5 − 2x jika x = −3.", "steps": ["Ganti x dengan (−3): 5 − 2 × (−3)", "Kalikan: 2 × (−3) = −6, jadi 5 − (−6)", "Mengurangi bilangan negatif sama dengan menambah: 5 + 6 = 11"], "answer": "Nilainya 11."},
+    {"type": "calculator", "title": "Coba sendiri", "body": "Ganti rumus atau nilai x, lalu tekan **Hitung** untuk melihat langkahnya.", "expr": "3x + 2", "x": "4"}
+  ],
+  "items": [
+    {"id": "p3-1", "type": "numeric", "prompt": "Berapa nilai 2x + 5 jika x = 3?", "answer": "11", "linear": {"a": 2, "b": 5, "x": "3"}, "hint": "Tulis 2 × (3) + 5.", "explain": ["2 × (3) + 5", "= 6 + 5", "= 11"]},
+    {"id": "p3-2", "type": "numeric", "prompt": "Berapa nilai 4x − 7 jika x = 2?", "answer": "1", "linear": {"a": 4, "b": -7, "x": "2"}, "hint": "Tulis 4 × (2) − 7.", "explain": ["4 × (2) − 7", "= 8 − 7", "= 1"]},
+    {"id": "p3-3", "type": "numeric", "prompt": "Berapa nilai −3x + 10 jika x = 4?", "answer": "-2", "linear": {"a": -3, "b": 10, "x": "4"}, "hint": "−3 × 4 hasilnya negatif.", "explain": ["−3 × (4) + 10", "= −12 + 10", "= −2"]},
+    {"id": "p3-4", "type": "numeric", "prompt": "Berapa nilai 5x + 1 jika x = −2?", "answer": "-9", "linear": {"a": 5, "b": 1, "x": "-2"}, "hint": "Pakai kurung: 5 × (−2).", "explain": ["5 × (−2) + 1", "= −10 + 1", "= −9"]},
+    {"id": "p3-5", "type": "mcq", "prompt": "Jika x = 5, maka 2x bernilai …", "options": ["25", "7", "10", "2,5"], "answer": 2, "option_feedback": {"0": "2x artinya 2 × 5, bukan angka 2 ditempel dengan angka 5.", "1": "2x artinya 2 dikali x, bukan 2 ditambah x.", "3": "2x artinya 2 dikali x, bukan x dibagi 2."}, "error_type": "angka_ditempel", "hint": "2x = 2 × x", "explain": ["2x = 2 × 5 = 10"]}
+  ]
+}
