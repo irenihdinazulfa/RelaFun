@@ -12,7 +12,7 @@ export function loginView(root) {
 
   const page = h("div", { class: "auth-wrap" },
     h("section", { class: "auth-side" }, stickerSheet(),
-      h("h1", { style: { color: "#4a1d33" } }, "RelaFun"),
+      h("h1", { style: { color: "#1f2a3d" } }, "RelaFun"),
       h("p", null, "Relasi & Fungsi jadi seru! Belajar bersama Wen dan teman-teman: satu panah, satu pasangan, pelan-pelan sampai paham."),
       installButton({ label: "Unduh Aplikasi RelaFun", cls: "btn install-hero" })),
     h("main", { class: "auth-main" }, card, appFooter("auth-footer")),

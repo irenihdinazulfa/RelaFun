@@ -20,16 +20,22 @@ Beranda siswa:
 
 ## 2. Identitas visual
 
-Warna dasar **pink pastel** dengan aksen **biru muda, kuning mentega, dan peach** (versi 2.0). Hero dan halaman masuk memakai gradasi pastel (#ffd3e2 → #fff0d6 → #dcefff) dengan teks gelap (#4a1d33). Tombol berwarna pastel dengan **tulisan gelap** supaya tetap terbaca; pink tua hanya dipakai untuk teks tautan dan ikon.
+**Palet "pastel belajar" (versi 2.5).** Warna utama adalah **biru langit pastel** karena tenang dan membantu fokus. Aksennya **kuning mentega** dan **peach** supaya tetap ceria. **Pink hanya aksen kecil**: hoodie Wen, ikon modul literasi, dan hati.
+
+- Latar halaman biru-putih yang sangat lembut, dengan kartu putih.
+- Hero dan halaman masuk memakai gradasi pastel biru → kuning → pink muda (#dcecff → #fff5d9 → #ffe8ee) dengan teks biru tua (#1f2a3d).
+- Halaman game memakai gradasi kuning → peach → biru.
+- Tombol berwarna pastel dengan **tulisan gelap** agar tetap terbaca. Biru yang lebih tua hanya dipakai untuk teks tautan, menu aktif, dan ikon.
 
 | Token | Terang | Gelap | Pemakaian |
 |---|---|---|---|
-| `--bg` | #fff7fa (pink sangat muda) | #1a1216 | latar halaman |
-| `--fill` / `--on-fill` | #ffa8c8 / #4a1d33 (kontras ±7:1) | #ff9ec1 / #1a1216 | tombol utama, avatar, langkah aktif |
-| `--fill-strong` | #e85d93 | #ff8fb5 | bilah kemajuan, titik langkah, sakelar, pengatur waktu game |
-| `--primary` | #d6336c (kontras 4,6:1 di latar putih) | #ff8fb5 | teks tautan, menu aktif, ikon |
-| `--primary-soft` | #ffe3ee | #4a2534 | latar menu aktif, chip |
-| `--sky` / `--butter` / `--peach` | #ddefff / #fff3c4 / #ffe4d4 | versi gelap redup | aksen pastel: ikon menu, kotak statistik, modul prasyarat |
+| `--bg` | #f6f9fd (biru-putih lembut) | #111826 | latar halaman |
+| `--fill` / `--on-fill` | #a8d1fb / #17304d (kontras ±8:1) | #8cc0ff / #0d1522 | tombol utama, avatar, langkah aktif |
+| `--fill-strong` | #4f90db (kontras ±3,3:1) | #6aa9f2 | bilah kemajuan, titik langkah, sakelar, pengatur waktu game |
+| `--primary` | #2d6cb5 (kontras ±5,3:1 di latar putih) | #8cc0ff | teks tautan, menu aktif, ikon |
+| `--primary-soft` | #e2eefc | #1d3150 | latar menu aktif, chip |
+| `--sky` / `--butter` / `--peach` | #ddeeff / #fff3c4 / #ffe4d4 | versi gelap redup | aksen pastel: ikon menu, kotak statistik, kartu materi, modul prasyarat, kartu game |
+| `--pink` / `--on-pink` | #ffe6ef / #b0306a | #3a2230 / #ffb3cf | aksen kecil: ikon modul literasi |
 | `--accent` | #f59e0b | #fbbf24 | panah baru, sasaran harian, tips |
 | `--good` | #0a7d0a | #4cc94c | benar (selalu dengan ikon ✓ + teks) |
 | `--bad` | #c62f2f | #f07272 | salah (selalu dengan ikon + teks) |

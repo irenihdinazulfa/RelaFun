@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–14 November 2026 (tiga puluh tiga permintaan) |
+| Tanggal | 12–14 November 2026 (tiga puluh empat permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -725,3 +725,32 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - 5.400 soal game acak benar semua;
   - uji pasang, luring, mode AI, soal r5-8, dan uji gagal-muat lolos;
   - uji khusus di HP dan desktop: layar pembuka berisi 6 karakter, hilang saat diketuk maupun otomatis, dan tidak muncul lagi saat dimuat ulang; kolase, footer, stiker teman, galeri, dan ekspresi tetap benar; tanpa galat konsol.
+
+---
+
+## Permintaan 34 — Warna lebih pastel, tidak didominasi pink, cocok untuk aplikasi belajar
+
+### 👤 Pengguna
+
+> coba ubah lagi based warna nya lebih pastel masi terlalu dominan pink dan sesuaikan dengan app pembelajaran
+
+### 🤖 Asisten
+
+- **Palet baru "pastel belajar" (versi 2.5):**
+  - **Warna utama biru langit pastel** karena tenang dan membantu fokus: tombol, menu aktif, bilah kemajuan, dan tautan.
+  - **Aksen kuning mentega dan peach** supaya tetap ceria: modul prasyarat, kartu game, kotak statistik, dan kartu materi.
+  - **Pink hanya aksen kecil**: hoodie Wen, ikon modul literasi (tetap pink-putih sesuai permintaan sebelumnya), dan hati.
+  - Latar halaman biru-putih lembut dengan teks biru tua yang mudah dibaca. Gradasi hero, halaman masuk, dan layar pembuka menjadi biru → kuning → pink muda.
+  - Mode gelap diganti dari cokelat-pink ke biru tua.
+- **Ikon aplikasi** ikut diganti ke gradasi biru (ikon di layar HP, ikon 192/512 px, dan ikon maskable), begitu juga warna bilah atas HP (theme color).
+- Kontras tetap diperiksa:
+  - teks tombol ±8:1;
+  - tautan ±5,3:1;
+  - bilah kemajuan ±3,3:1.
+- Versi **2.5**. Dokumen 06 (tabel warna), panduan, dan README diperbarui.
+- **Pemeriksaan:**
+  - 266 tes pytest lolos;
+  - uji peramban 25 langkah lolos;
+  - 5.400 soal game acak benar semua;
+  - uji pasang, luring, mode AI, soal r5-8, gagal-muat, dan uji khusus Wen & teman-teman lolos;
+  - tangkapan layar mode terang dan gelap diperiksa: beranda, materi, latihan, game, dan halaman masuk.
