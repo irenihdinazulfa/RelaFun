@@ -25,7 +25,7 @@ export function renderStep(step) {
       parts.push(h("div", { class: "body" }, md(step.body)));
       break;
     case "tip":
-      parts.push(h("div", { class: "tip" }, mascot("calm"), h("div", { class: "body" }, h("b", null, "Tips dari Wen"), md(step.body))));
+      parts.push(h("div", { class: "tip" }, mascot("idea"), h("div", { class: "body" }, h("b", null, "Tips dari Wen"), md(step.body))));
       break;
     case "example":
       parts.push(h("div", { class: "example-problem" }, step.problem));

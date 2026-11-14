@@ -29,6 +29,7 @@ Bahasa antarmuka & konten: **Bahasa Indonesia** sederhana untuk siswa usia 13–
 - `apps/api/app/core/checker.py`: 7 jenis soal (mcq, multi, numeric, is_function, dnd, arrows, expression)
 - `apps/api/app/core/modeler.py`: f(x) = ax + b (evaluate/compare/threshold/solve_for_x) + verifikasi
 - `apps/web/js/components/arrowDiagram.js`: diagram panah (static/animate/check/sets/edit)
+- `apps/web/js/mascot.js`: maskot Wen (SVG, 18 ekspresi di `MOOD_INFO` + `SPEC`; `tapMascot()` = Wen yang bisa diketuk)
 - `apps/web/js/views/*.js`: halaman; `apps/web/sw.js`: cache PWA (perbarui `VERSION` dan daftar `SHELL` bila menambah file)
 
 ## Penyederhanaan yang disengaja (versi 1)

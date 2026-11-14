@@ -1,5 +1,6 @@
 import { h, clear } from "../dom.js";
 import { loadGlossary } from "../components/terms.js";
+import { mascot } from "../mascot.js";
 
 export async function glossaryView(main) {
   const items = await loadGlossary();
@@ -12,7 +13,7 @@ export async function glossaryView(main) {
     const q = search.value.trim().toLowerCase();
     clear(grid);
     const list = items.filter((g) => !q || `${g.term} ${g.aka} ${g.simple}`.toLowerCase().includes(q));
-    if (!list.length) grid.append(h("p", { class: "muted" }, "Istilah tidak ditemukan."));
+    if (!list.length) grid.append(h("div", { class: "empty-state" }, mascot("confused"), h("p", { class: "muted" }, "Istilah tidak ditemukan. Coba kata lain, ya.")));
     for (const g of list) {
       grid.append(h("article", { class: "card gloss-card" },
         h("h3", null, g.term), g.aka ? h("div", { class: "muted small", style: { marginBottom: "8px" } }, `disebut juga: ${g.aka}`) : null,

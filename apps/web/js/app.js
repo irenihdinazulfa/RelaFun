@@ -17,9 +17,10 @@ import { settingsView } from "./views/settings.js";
 import { teacherView } from "./views/teacher.js";
 import { menuView } from "./views/menu.js";
 import { gameView } from "./views/game.js";
+import { wenView } from "./views/wen.js";
 import { startInstallBanner, installButton } from "./components/installBanner.js";
 
-export const APP_VERSION = "2.1";
+export const APP_VERSION = "2.2";
 
 settings.apply();
 
@@ -37,6 +38,7 @@ const ROUTES = [
   { re: /^\/pengaturan$/, view: settingsView, nav: "pengaturan" },
   { re: /^\/guru$/, view: teacherView, nav: "home" },
   { re: /^\/menu$/, view: menuView, nav: "menu" },
+  { re: /^\/wen$/, view: wenView, nav: "pengaturan" },
 ];
 
 function navItems(user) {

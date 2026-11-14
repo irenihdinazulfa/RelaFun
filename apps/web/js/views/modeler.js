@@ -301,7 +301,7 @@ export async function modelerView(main, _p, ctx) {
 
     go.onclick = async () => {
       go.disabled = true;
-      clear(out).append(h("p", { class: "muted" }, "AI sedang membaca soal…"));
+      clear(out).append(h("div", { class: "wen-wait" }, mascot("think"), h("p", { class: "muted" }, "AI sedang membaca soal…")));
       try {
         const r = await api.post("/api/tools/modeler/ai", { text: ta.value });
         clear(out);

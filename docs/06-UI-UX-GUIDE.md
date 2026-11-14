@@ -43,20 +43,41 @@ Warna dasar **pink pastel** dengan aksen **biru muda, kuning mentega, dan peach*
 
 ## 3. Maskot
 
-**Wen** (orisinal), kelinci **putih** bergaya chibi yang memakai **tudung (hoodie) pink pastel bertelinga kelinci panjang**, dengan lencana **bintang kuning** di dahi, **pita biru muda** di sisi kepala, pipi merona, dan ekor bulat. Desainnya buatan sendiri, bukan tiruan karakter mana pun.
+**Wen** (orisinal, versi 2.2) adalah kelinci **putih** bergaya chibi. Ciri-cirinya:
+- kepala bulat besar seperti mochi, dengan jumbai bulu di pipi dan jambul kecil;
+- mata besar berkilau, pipi merona, dan mulut “ω”;
+- **telinga panjang berbentuk daun**; ujung telinga kanan sedikit menekuk;
+- **hoodie pink pastel** berlencana **bintang kuning**, **pita biru muda** di pangkal telinga, kaki berbantalan pink, dan ekor bulat.
 
-| Ekspresi | Tampilan | Dipakai di |
+Desainnya buatan sendiri, bukan tiruan karakter mana pun. Gambar dibuat langsung sebagai SVG di `apps/web/js/mascot.js` (tanpa berkas gambar), jadi tetap tajam di semua ukuran dan bisa berganti ekspresi.
+
+| Ekspresi | Ciri | Muncul di |
 |---|---|---|
-| `happy` | mata melengkung, mulut “ω” | beranda, akhir game 1 bintang |
-| `cheer` | tangan terangkat, mulut terbuka, kilau | menjawab benar di game, 2 bintang, selesai materi/pemodel |
-| `calm` | mata bulat berkilau | kotak “Tips dari Wen” |
-| `think` | mata melirik, gelembung pikiran | cadangan (petunjuk) |
-| `wink` | kedip nakal + lidah | halaman masuk, combo ≥ 3, hasil latihan |
-| `surprised` | mata bulat besar + tanda seru | waktu habis di Mode Kilat |
-| `sad` | mata sayu, satu telinga terkulai, tetes air | jawaban salah di game, nyawa habis |
-| `love` | mata hati, tangan terangkat | combo ≥ 3 benar, 3 bintang, latihan sempurna |
+| Senang (`happy`) | mata melengkung, mulut ω | beranda |
+| Tenang (`calm`) | mata bulat berkilau | ekspresi dasar |
+| Bersorak (`cheer`) | melompat, kedua tangan terangkat | jawaban benar di game, 2 bintang, sasaran harian tercapai, selesai materi/pemodel, latihan ≥ 80% |
+| Menyapa (`wave`) | melambai | halaman masuk, galeri |
+| Kedip (`wink`) | kedip + lidah | combo ≥ 3 di game |
+| Sayang (`love`) | mata hati | combo 3–4 benar, latihan sempurna |
+| Kagum (`starry`) | mata bintang | combo ≥ 5, 3 bintang, streak ≥ 3 hari (beranda) |
+| Tertawa (`laugh`) | mata > <, air mata bahagia | saat diketuk |
+| Malu-malu (`shy`) | kedua tangan di pipi, rona bergaris | diketuk 5× berturut-turut |
+| Berpikir (`think`) | melirik ke atas, tangan di dagu, gelembung pikiran | menunggu jawaban Mode AI |
+| Punya ide (`idea`) | telunjuk ke atas, bola lampu | kotak “Tips dari Wen” |
+| Bingung (`confused`) | mata titik, mulut bergelombang, tanda tanya | istilah glosarium tidak ditemukan |
+| Kaget (`surprised`) | mata bulat besar, tanda seru | waktu habis di Mode Kilat |
+| Sedih (`sad`) | telinga terkulai, mata berkaca-kaca | jawaban salah di game, nyawa habis |
+| Mengantuk (`sleepy`) | mata terpejam, “Zzz”, gelembung hidung | beranda pukul 21.00–04.00, dengan pesan “jangan lupa istirahat” |
+| Semangat (`determined`) | ikat kepala berbintang, tangan mengepal | soal berikutnya setelah salah di game, latihan < 80% |
+| Makan wortel (`carrot`) | memegang wortel, “nyam” | lobi game, akhir game 1 bintang |
+| Keren (`cool`) | kacamata hati | rekor baru di game |
 
-Maskot hanya muncul di hero, tips, game, dan layar hasil, bukan di setiap layar (menghindari beban ekstrinsik). Ekspresi sedih selalu disertai kalimat penyemangat, bukan menyalahkan.
+**Interaksi dan gerak**
+- Wen di halaman masuk, beranda, lobi game, dan galeri bisa **diketuk**. Wen menampilkan ekspresi acak selama ±2 detik, lalu kembali. Kalau diketuk 5× berturut-turut, Wen jadi malu-malu.
+- Gerak halus: berkedip, telinga bergoyang, dan badan naik-turun pelan. Semua gerak berhenti bila **Kurangi animasi** aktif atau perangkat meminta gerak dikurangi.
+- Halaman **Kenalan dengan Wen** (`#/wen`, dibuka dari *Lainnya* atau *Pengaturan*) menampilkan ke-18 ekspresi.
+
+Maskot hanya muncul di hero, tips, game, layar hasil, dan keadaan kosong, tidak di setiap layar soal, untuk menghindari beban ekstrinsik. Ekspresi sedih selalu disertai kalimat penyemangat, bukan menyalahkan.
 
 ## 4. Komponen kunci
 

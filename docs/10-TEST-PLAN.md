@@ -66,6 +66,14 @@ Tambahan untuk versi online: syarat instal PWA Chrome terpenuhi (tanpa galat), d
 
 5.400 soal acak diverifikasi mandiri (0 gagal) dan alur bermain lolos di versi online maupun server. Rincian: `16-GAME-LOMPAT-WEN.md` bagian 4.
 
+## 2c. Maskot Wen & ketahanan memuat (versi 2.2)
+
+- Galeri menampilkan 18 ekspresi.
+- Wen yang diketuk berganti ekspresi; diketuk 5× → malu-malu, lalu kembali ke ekspresi awal.
+- Ekspresi di halaman masuk, tips, glosarium, dan game (benar, salah, soal sesudah salah) sesuai tabel di `06-UI-UX-GUIDE.md`.
+- Tidak ada galat konsol, baik di HP maupun desktop.
+- Bila salah satu berkas aplikasi gagal dimuat (diuji dengan memblokir satu berkas), muncul pesan dan tombol **Muat ulang**, bukan layar kosong. Setelah dimuat ulang, aplikasi terbuka normal.
+
 ## 3. Belum diuji
 
 - Panggilan **Claude API sungguhan** (diuji dengan respons tiruan; butuh kunci API).

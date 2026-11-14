@@ -13,6 +13,7 @@ Game latihan berbasis soal: siswa membantu **Wen** (maskot kelinci) melompati **
 | Level | 1 Padang Wortel (mudah) → 2 Hutan Panah (sedang) → 3 Gunung Fungsi (sulit); level berikutnya terbuka dengan ≥ 1 ★ |
 | Mode Kilat | Opsional, 15 detik per soal; waktu habis = salah |
 | Suara | Bunyi pendek benar/salah/menang (Web Audio), bisa dimatikan |
+| Ekspresi Wen | Benar → bersorak; combo 3–4 → sayang; combo ≥ 5 → kagum; salah → sedih, lalu semangat di soal berikutnya; waktu habis → kaget. Hasil: 3★ kagum, rekor baru keren, 2★ bersorak, 1★ makan wortel, nyawa habis sedih |
 | Penyimpanan | Rekor, bintang, dan total wortel per akun di perangkat (`localStorage`) |
 
 ## 2. Jenis soal (dibuat acak, `apps/web/js/game/generators.js`)

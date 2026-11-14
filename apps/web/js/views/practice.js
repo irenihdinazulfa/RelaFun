@@ -206,7 +206,7 @@ export async function practiceView(main, [id]) {
     const ok = Object.values(firstTry).filter(Boolean).length;
     const great = ok / total >= 0.8;
     wrap.append(header(), h("section", { class: "card result-hero" },
-      mascot(ok === total ? "love" : great ? "cheer" : "wink"),
+      mascot(ok === total ? "love" : great ? "cheer" : "determined"),
       h("h2", null, great ? "Luar biasa!" : "Kerja bagus, terus berlatih!"),
       h("p", { class: "muted" }, "Benar pada percobaan pertama"),
       h("div", { class: "big-num" }, `${ok}/${total}`),

@@ -38,6 +38,14 @@
   <div id="toast" role="status" aria-live="polite"></div>
   <noscript>RelaFun membutuhkan JavaScript. Aktifkan JavaScript di peramban Anda.</noscript>
   <script src="config.js"></script>
-  <script type="module" src="js/app.js"></script>
+  <script>
+    // Bila berkas aplikasi gagal dimuat (mis. sinyal putus saat pertama dibuka), tampilkan tombol muat ulang, bukan layar kosong.
+    function rfLoadFailed() {
+      document.getElementById("app").innerHTML = '<div class="boot"><img src="icons/icon.svg" alt="" width="72" height="72">'
+        + '<p><b>RelaFun belum termuat sempurna.</b><br>Periksa sinyal internet, lalu coba lagi.</p>'
+        + '<button class="btn" type="button" onclick="location.reload()">Muat ulang</button></div>';
+    }
+  </script>
+  <script type="module" src="js/app.js" onerror="rfLoadFailed()"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–14 November 2026 (tiga puluh permintaan) |
+| Tanggal | 12–14 November 2026 (tiga puluh satu permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -628,3 +628,42 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - 5.400 soal game acak benar semua;
   - uji luring lolos;
   - soal r5-8 dicoba langsung di peramban (umpan balik salah dan benar tampil).
+
+---
+
+## Permintaan 31 — Wen lebih lucu dengan berbagai ekspresi
+
+### 👤 Pengguna
+
+> buat karakter wen si kelinci lebih lucu dan menggemaskan dengan berbagai ekspresi
+
+### 🤖 Asisten
+
+- **Menggambar ulang Wen** (tetap orisinal) dengan proporsi chibi:
+  - kepala bulat besar seperti mochi dengan jumbai bulu di pipi dan jambul kecil;
+  - mata besar berkilau, pipi merona, dan mulut "ω";
+  - **telinga kelinci asli berbentuk daun** (ujung kanan sedikit menekuk), menggantikan tudung bertelinga;
+  - tetap memakai hoodie pink pastel berlencana bintang dan pita biru muda; ditambah kaki berbantalan pink dan ekor bulat.
+- **18 ekspresi:** senang, tenang, bersorak, menyapa, kedip, sayang, kagum (mata bintang), tertawa, malu-malu, berpikir, punya ide, bingung, kaget, sedih (telinga terkulai), mengantuk, semangat (ikat kepala), makan wortel, dan keren (kacamata hati). Pratinjau semua ekspresi dirender dan diperiksa satu per satu. Beberapa bagian diperbaiki setelah dilihat:
+  - ujung telinga yang tampak seperti gumpalan;
+  - telinga sedih yang mencuat seperti sayap;
+  - wajah "semangat" yang terlihat galak;
+  - wortel yang terlalu kecil.
+- **Ekspresi dipasang sesuai situasi:**
+  - halaman masuk: menyapa;
+  - beranda: senang; sasaran tercapai: bersorak; streak ≥ 3 hari: kagum; pukul 21.00–04.00: mengantuk dengan pesan "jangan lupa istirahat";
+  - tips: punya ide;
+  - glosarium kosong: bingung;
+  - Mode AI: berpikir;
+  - game: benar → bersorak/sayang/kagum, salah → sedih lalu semangat, waktu habis → kaget, rekor baru → keren, lobi → makan wortel.
+- **Wen bisa diketuk** (ekspresi acak; 5× berturut-turut → malu-malu) dan bergerak halus (berkedip, telinga bergoyang). Gerak berhenti bila "Kurangi animasi" aktif.
+- **Halaman baru "Kenalan dengan Wen"** berisi 18 ekspresi, bisa dibuka dari menu *Lainnya* dan *Pengaturan*.
+- **Temuan saat pengujian:** sesekali halaman masuk tidak muncul. Penyebabnya server uji lokal yang menolak koneksi; GitHub Pages tidak bermasalah. Namun temuan ini menunjukkan bahwa bila sinyal putus saat aplikasi pertama dibuka, siswa hanya melihat layar kosong. Asisten menambahkan pesan "RelaFun belum termuat sempurna" dengan tombol **Muat ulang**, lalu mengujinya dengan memblokir satu berkas.
+- Versi **2.2**. Dokumen 06 (tabel 18 ekspresi), 10, 16, README, CLAUDE.md, dan panduan diperbarui.
+- **Pemeriksaan:**
+  - 266 tes pytest lolos;
+  - uji peramban 25 langkah lolos;
+  - 5.400 soal game acak benar semua;
+  - uji pasang (6 skenario), luring, mode AI, dan soal r5-8 lolos;
+  - uji khusus Wen lolos di HP dan desktop: galeri 18 ekspresi, ketuk, ekspresi di tiap halaman, tanpa galat konsol;
+  - tampilan mode terang dan gelap diperiksa dari tangkapan layar.

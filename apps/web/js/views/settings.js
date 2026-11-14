@@ -3,6 +3,7 @@ import { api, STATIC } from "../api.js";
 import { icon } from "../icons.js";
 import { session, settings } from "../store.js";
 import { installButton } from "../components/installBanner.js";
+import { mascot } from "../mascot.js";
 
 function toggle(checked, onChange, label) {
   const input = h("input", { type: "checkbox", role: "switch", "aria-label": label });
@@ -117,7 +118,9 @@ export function settingsView(main, _p, ctx) {
         h("div", { class: "switch" }, h("div", null, h("b", null, "Teks besar"), h("div", { class: "muted small" }, "Perbesar semua tulisan.")),
           toggle(s.bigText, (v) => settings.set({ bigText: v }), "Teks besar")),
         h("div", { class: "switch" }, h("div", null, h("b", null, "Kurangi animasi"), h("div", { class: "muted small" }, "Matikan gerakan yang tidak perlu.")),
-          toggle(s.reduceMotion, (v) => settings.set({ reduceMotion: v }), "Kurangi animasi"))),
+          toggle(s.reduceMotion, (v) => settings.set({ reduceMotion: v }), "Kurangi animasi")),
+        h("a", { class: "wen-link", href: "#/wen" }, mascot("wave", "mini-wen"),
+          h("div", null, h("b", null, "Kenalan dengan Wen"), h("div", { class: "muted small" }, "Lihat 18 ekspresi maskot RelaFun.")), icon("arrowRight"))),
       h("div", { class: "stack" },
         h("section", { class: "card" }, h("h2", null, "Akun"),
           h("p", null, h("b", null, user.nickname), h("br"), h("span", { class: "muted" }, `@${user.username} · ${user.role === "teacher" ? "Guru" : "Siswa"}`)),
@@ -125,6 +128,6 @@ export function settingsView(main, _p, ctx) {
           h("button", { class: "btn secondary", type: "button", style: { marginTop: "12px" }, onclick: () => { session.clear(); location.hash = "#/masuk"; } }, icon("logout"), "Keluar")),
         h("section", { class: "card" }, h("h2", null, "Unduh aplikasi"),
           h("p", { class: "muted small" }, "RelaFun bisa diunduh tanpa Play Store/App Store dan dibuka seperti aplikasi biasa."), installSlot,
-          h("p", { class: "muted small", style: { marginTop: "12px", marginBottom: 0 } }, "RelaFun versi 2.1")),
+          h("p", { class: "muted small", style: { marginTop: "12px", marginBottom: 0 } }, "RelaFun versi 2.2")),
         h("section", { class: "card", id: "fitur-ai" }, h("h2", null, "Fitur AI (opsional)"), aiBox))));
 }

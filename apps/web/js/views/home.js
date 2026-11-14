@@ -4,7 +4,7 @@
 import { h, fmt } from "../dom.js";
 import { api } from "../api.js";
 import { icon } from "../icons.js";
-import { mascot } from "../mascot.js";
+import { tapMascot } from "../mascot.js";
 
 export const GROUP_LABEL = { prasyarat: "Prasyarat", inti: "Relasi & Fungsi", literasi: "Literasi" };
 
@@ -29,15 +29,18 @@ export async function homeView(main, _p, ctx) {
   const hour = new Date().getHours();
   const greet = hour < 11 ? "Selamat pagi" : hour < 15 ? "Selamat siang" : hour < 19 ? "Selamat sore" : "Selamat malam";
   const c = s.continue;
+  const night = hour >= 21 || hour < 4;
+  const goalDone = s.daily.correct >= s.daily.goal;
+  const heroMood = night ? "sleepy" : goalDone ? "cheer" : s.streak >= 3 ? "starry" : "happy";
 
   const hero = h("section", { class: "hero" },
     h("div", null,
       h("h1", null, `${greet}, ${s.nickname}!`),
-      h("p", null, s.daily.correct >= s.daily.goal
-        ? "Sasaran hari ini sudah tercapai. Hebat! Mau mengulang materi yang masih sulit?"
-        : "Belajar sedikit-sedikit tapi rutin itu lebih mudah. Yuk, lanjutkan langkahmu hari ini."),
+      h("p", null, goalDone
+        ? (night ? "Sasaran hari ini sudah tercapai. Hebat! Sekarang waktunya istirahat, ya." : "Sasaran hari ini sudah tercapai. Hebat! Mau mengulang materi yang masih sulit?")
+        : (night ? "Sudah malam. Belajar sebentar saja, lalu jangan lupa istirahat, ya." : "Belajar sedikit-sedikit tapi rutin itu lebih mudah. Yuk, lanjutkan langkahmu hari ini.")),
       c ? h("a", { class: "btn", href: `#/materi/${c.id}` }, icon("play"), "Lanjut belajar") : null),
-    mascot(s.daily.correct >= s.daily.goal ? "cheer" : "happy"));
+    tapMascot(heroMood));
 
   const cont = c ? h("div", { class: "card continue-card" },
     moduleIcon(c),

@@ -1,7 +1,7 @@
 import { h, clear } from "../dom.js";
 import { api } from "../api.js";
 import { session } from "../store.js";
-import { mascot } from "../mascot.js";
+import { tapMascot } from "../mascot.js";
 import { icon } from "../icons.js";
 import { installButton } from "../components/installBanner.js";
 
@@ -10,7 +10,7 @@ export function loginView(root) {
   const card = h("div", { class: "card auth-card" });
 
   const page = h("div", { class: "auth-wrap" },
-    h("section", { class: "auth-side" }, mascot("wink"),
+    h("section", { class: "auth-side" }, tapMascot("wave"),
       h("h1", { style: { color: "#4a1d33" } }, "RelaFun"),
       h("p", null, "Relasi & Fungsi jadi seru! Belajar bersama Wen: satu panah, satu pasangan, pelan-pelan sampai paham."),
       installButton({ label: "Unduh Aplikasi RelaFun", cls: "btn install-hero" })),
@@ -112,7 +112,7 @@ export function loginView(root) {
         h("div", { class: "muted small" },
           "Atau ketik manual (semua huruf kecil): siswa → ", h("code", null, "siswa"), " / ", h("code", null, "siswa123"),
           " · guru → ", h("code", null, "guru"), " / ", h("code", null, "guru123"), " · kode kelas ", h("code", null, "RF8A26"))) : null,
-      h("p", { class: "muted small", style: { textAlign: "center", margin: "12px 0 0" } }, "RelaFun versi 2.1"));
+      h("p", { class: "muted small", style: { textAlign: "center", margin: "12px 0 0" } }, "RelaFun versi 2.2"));
   }
   render();
 }

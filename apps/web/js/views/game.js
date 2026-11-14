@@ -3,7 +3,7 @@
 
 import { h, clear } from "../dom.js";
 import { icon } from "../icons.js";
-import { mascot } from "../mascot.js";
+import { mascot, tapMascot } from "../mascot.js";
 import { arrowDiagram } from "../components/arrowDiagram.js";
 import { valueTable } from "./lesson.js";
 import { LEVELS, makeRound } from "../game/generators.js";
@@ -68,7 +68,7 @@ export function gameView(main, _p, ctx) {
           h("h1", null, "Lompat Wen 🥕"),
           h("p", null, "Bantu Wen melompati 10 batu! Setiap batu berisi satu soal. Jawab benar untuk dapat wortel, hati-hati, nyawamu cuma 3."),
           h("div", { class: "row" }, h("span", { class: "chip primary" }, `🥕 ${save.carrots} wortel terkumpul`))),
-        mascot("cheer")),
+        tapMascot("carrot")),
       h("div", { class: "game-levels" }, LEVELS.map((lv) => {
         const rec = save.levels[lv.id] || {};
         const open = unlocked(lv);
@@ -97,7 +97,7 @@ export function gameView(main, _p, ctx) {
 
   function start(levelId) {
     st = { level: levelId, qs: makeRound(levelId, STEPS), i: 0, hearts: HEARTS, score: 0, combo: 0, correct: 0,
-      results: [], locked: false, kilat: !!save.kilat };
+      results: [], locked: false, kilat: !!save.kilat, lastWrong: false };
     window.__rfGame.state = st;
     renderPlay();
   }
@@ -125,7 +125,7 @@ export function gameView(main, _p, ctx) {
       path.append(h("div", { class: `stone${k === st.i ? " now" : ""}${r === true ? " ok" : r === false ? " miss" : ""}` },
         r === true ? "🥕" : r === false ? "💧" : k === STEPS - 1 ? "🏁" : ""));
     }
-    const wen = h("div", { class: "game-wen" }, mascot(st.combo >= 3 ? "wink" : "happy", "mascot"));
+    const wen = h("div", { class: "game-wen" }, mascot(st.lastWrong ? "determined" : st.combo >= 3 ? "wink" : "happy", "mascot"));
     const setMood = (m) => wen.replaceChildren(mascot(m, "mascot"));
     wen.style.left = `calc(${(st.i + 0.5) * (100 / STEPS)}% - 22px)`;
     const track = h("div", { class: "game-track" }, wen, path);
@@ -185,7 +185,8 @@ export function gameView(main, _p, ctx) {
         st.score += gain;
         play("right");
         clear(fb).append(h("div", { class: "game-pop" }, `Benar! +${gain} 🥕`, st.combo >= 3 ? `  Combo ×${st.combo}!` : ""));
-        setMood(st.combo >= 3 ? "love" : "cheer");
+        st.lastWrong = false;
+        setMood(st.combo >= 5 ? "starry" : st.combo >= 3 ? "love" : "cheer");
         wen.classList.add("hop");
         if (st.i < STEPS - 1) wen.style.left = `calc(${(st.i + 1.5) * (100 / STEPS)}% - 22px)`;
         setTimeout(next, reduceMotion() ? 500 : 950);
@@ -195,6 +196,7 @@ export function gameView(main, _p, ctx) {
         play("wrong");
         navigator.vibrate?.(40);
         card.classList.add("shake");
+        st.lastWrong = true;
         setMood(k < 0 ? "surprised" : "sad");
         clear(fb).append(h("div", { class: "alert bad feedback" }, icon("alert"),
           h("div", null, h("div", { class: "alert-title" }, k < 0 ? "Waktu habis!" : "Belum tepat"), h("p", null, q.explain))),
@@ -230,7 +232,7 @@ export function gameView(main, _p, ctx) {
     if (nStars >= 2) { play("win"); if (!reduceMotion()) confetti(); }
 
     clear(root).append(h("section", { class: "card game-result" },
-      mascot(!done ? "sad" : nStars === 3 ? "love" : nStars === 2 ? "cheer" : "happy"),
+      mascot(!done ? "sad" : nStars === 3 ? "starry" : newBest && st.score > 0 ? "cool" : nStars === 2 ? "cheer" : "carrot"),
       h("h2", null, !done ? "Yah, nyawa Wen habis!" : nStars === 3 ? "Luar biasa! 🎉" : nStars === 2 ? "Hebat! 🎉" : "Berhasil sampai finis!"),
       h("div", { class: "game-stars big", "aria-label": `${nStars} dari 3 bintang` }, stars(nStars)),
       h("p", null, `Benar ${st.correct} dari ${st.results.length} soal · Skor `, h("b", null, `${st.score} 🥕`)),

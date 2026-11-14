@@ -6,7 +6,7 @@ Aplikasi belajar matematika untuk siswa SMP kelas 8 materi **Relasi dan Fungsi**
 |---|---|
 | Pengembang | Iren Ihdina Zulfa (NIM 2225250019), kelas 3E |
 | Teknologi | Python (FastAPI, SymPy, SQLAlchemy) + JavaScript (PWA, tanpa build) |
-| Status | Versi 2.1 — 266 tes otomatis, 1.209 kasus uji silang Python–JavaScript, 25 skenario uji peramban lolos |
+| Status | Versi 2.2 — 266 tes otomatis, 1.209 kasus uji silang Python–JavaScript, 25 skenario uji peramban lolos |
 
 ## 📱 Coba langsung (tanpa instal apa pun)
 
@@ -48,6 +48,7 @@ Panduan lengkap (HP, guru, AI, deploy): [docs/15-PANDUAN-PENGGUNAAN.md](docs/15-
 | 3 modul literasi dari 4 soal lembar PISA | Literasi matematika |
 | Dashboard guru: kesalahan terbanyak, akurasi per materi, peta penguasaan, CSV | Pemantauan kelas |
 | 🎮 **Game “Lompat Wen”**: 10 soal acak per ronde, 3 nyawa, combo, bintang, 3 level, Mode Kilat opsional | Latihan yang seru (DS01) |
+| 🐰 **Maskot Wen** dengan 18 ekspresi yang ikut bereaksi saat menjawab; ketuk Wen untuk ekspresi acak; galeri *Kenalan dengan Wen* | Motivasi |
 | Poin, streak, sasaran harian, papan peringkat per kelas (bisa dimatikan) | Motivasi |
 | Mode gelap, teks besar, kurangi animasi | Aksesibilitas |
 
