@@ -6,7 +6,7 @@ Aplikasi belajar matematika untuk siswa SMP kelas 8 materi **Relasi dan Fungsi**
 |---|---|
 | Pengembang | Iren Ihdina Zulfa (NIM 2225250019), kelas 3E |
 | Teknologi | Python (FastAPI, SymPy, SQLAlchemy) + JavaScript (PWA, tanpa build) |
-| Status | Versi 2.0 — 264 tes otomatis, 1.209 kasus uji silang Python–JavaScript, 25 skenario uji peramban lolos |
+| Status | Versi 2.1 — 266 tes otomatis, 1.209 kasus uji silang Python–JavaScript, 25 skenario uji peramban lolos |
 
 ## 📱 Coba langsung (tanpa instal apa pun)
 
@@ -82,7 +82,7 @@ RIWAYAT_BANTUAN.md        riwayat bantuan AI
 | 11 | [Roadmap ADDIE](docs/11-ROADMAP.md) |
 | 12 | [Literasi matematika](docs/12-MATH-LITERACY.md) |
 | 13 | [Pemodel soal cerita](docs/13-WORD-PROBLEM-MODELER.md) |
-| 14 | [Templat analisis jawaban siswa](docs/14-ANALISIS-JAWABAN-SISWA.md) |
+| 14 | [Analisis jawaban narasumber S01](docs/14-ANALISIS-JAWABAN-SISWA.md) |
 | 15 | [Panduan penggunaan](docs/15-PANDUAN-PENGGUNAAN.md) |
 | 16 | [Game “Lompat Wen”](docs/16-GAME-LOMPAT-WEN.md) |
 | 17 | [Instrumen penelitian (validasi ahli & uji coba)](docs/17-INSTRUMEN-PENELITIAN.md) — file siap cetak di [`instrumen/`](instrumen/) |

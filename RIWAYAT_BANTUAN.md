@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–13 November 2026 (dua puluh sembilan permintaan) |
+| Tanggal | 12–14 November 2026 (tiga puluh permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -596,3 +596,35 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - uji pasang aplikasi, luring, dan mode AI lolos;
   - tangkapan layar HP dan laptop (mode terang dan gelap) diperiksa.
 - Diterbitkan ulang ke https://irenihdinazulfa.github.io/RelaFun/
+
+---
+
+## Permintaan 30 — Jawaban asli narasumber diterima (14 November 2026)
+
+### 👤 Pengguna
+
+> (menempelkan jawaban narasumber untuk soal 1–4) INI JAWABAN DARI NARASUMBER
+
+### 🤖 Asisten
+
+- **Menganalisis jawaban S01** dengan membandingkannya ke kunci acuan dan rubrik 0–4, lalu mengisi `docs/14-ANALISIS-JAWABAN-SISWA.md`. Semua hitungan S01 diperiksa ulang.
+  - Skor: soal 1 = 3, soal 2 = 4, soal 3 = 4, soal 4 = 4. Total **15/16 (93,75%)**.
+  - Tidak ada satu pun kesalahan yang diantisipasi: a/b tertukar, x tidak dikalikan, lupa konstanta, salah konversi waktu, salah tanda, negatif dianggap rumus salah, atau menjawab 3 tas.
+  - **Temuan baru:** pada soal 1, S01 menulis *f(x) = 2.000 × 25*, padahal seharusnya *f(25)*, dan tidak menuliskan rumus umum sebelum menghitung. Pada soal 2 dan 3 notasinya sudah tepat, jadi penulisannya belum konsisten.
+  - **Triangulasi dengan wawancara:**
+    - kesulitan menghitung (IL02) tidak terlihat pada soal ini;
+    - kesulitan soal cerita (EL01) hanya terlihat sebagian;
+    - diagram panah dan domain–kodomain–range belum dapat dikonfirmasi karena tidak diukur lembar soal.
+  - Rubrik dilengkapi satu kalimat agar skor 3 juga mencakup hasil benar dengan notasi kurang tepat.
+- **Tindak lanjut di aplikasi (versi 2.1):**
+  - langkah tips baru di modul r5 ("tulis f(4), bukan f(x)");
+  - soal baru **r5-8** tentang penulisan A(25), dengan umpan balik untuk tiap pilihan yang salah;
+  - label kesalahan baru "Penulisan notasi f(…) kurang tepat" di dashboard guru, diterapkan di mesin Python dan JavaScript.
+- Jawaban asli disalin apa adanya di lampiran dokumen 14 (tanpa identitas narasumber). Salinan teks juga disimpan di `referensi/`, yang tidak diunggah ke GitHub.
+- Dokumen 01, 05, 10, 11, kunci acuan, panduan, dan README diperbarui.
+- **Pemeriksaan:**
+  - 266 tes pytest lolos;
+  - uji peramban 25 langkah lolos;
+  - 5.400 soal game acak benar semua;
+  - uji luring lolos;
+  - soal r5-8 dicoba langsung di peramban (umpan balik salah dan benar tampil).

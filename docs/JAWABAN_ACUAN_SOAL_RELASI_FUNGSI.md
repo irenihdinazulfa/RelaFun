@@ -7,7 +7,7 @@
 | Tanggal | 12 November 2026 |
 | Sumber soal | `Lembar_Soal_Siswa_Relasi_Fungsi.pdf` |
 
-> **Penting:** Ini adalah **kunci jawaban/acuan buatan AI**, **bukan jawaban narasumber**. Jangan dipakai atau dilaporkan sebagai jawaban siswa. Setelah narasumber mengirimkan jawabannya, gunakan file ini untuk membandingkan dan menilai jawaban tersebut.
+> **Penting:** Ini adalah **kunci jawaban/acuan buatan AI**, **bukan jawaban narasumber**. Jangan dipakai atau dilaporkan sebagai jawaban siswa. Jawaban narasumber sudah diterima (14 November 2026) dan dibandingkan dengan acuan ini di `14-ANALISIS-JAWABAN-SISWA.md`.
 
 ---
 

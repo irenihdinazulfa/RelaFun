@@ -15,7 +15,7 @@ cd apps\api
 | `test_content.py` | aturan CLT, keterlacakan 14 kode, **setiap kunci jawaban dinilai benar**, setiap `common_errors` dinilai salah dengan pesan yang tepat, kunci tidak bocor | ± 180 |
 | `test_api.py` | web & SPA, login/daftar, poin sekali per soal, format salah tidak dihitung, ringkasan, progres, papan peringkat, dashboard guru, CSV, isolasi guru, alat, AI (tanpa kunci, dengan respons tiruan, kuota) | ± 20 |
 
-**Hasil terakhir (12 November 2026): 264 lolos, 0 gagal.**
+**Hasil terakhir (14 November 2026): 266 lolos, 0 gagal.**
 
 ## 1b. Uji silang Python ↔ JavaScript (versi online)
 

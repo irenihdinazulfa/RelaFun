@@ -75,13 +75,13 @@ Kolom opsional tampilan: `diagram`, `graph`, `table`, `unit`.
 | r2 Tiga cara menyatakan | 5 | 4 | mcq, arrows, multi |
 | r3 Fungsi/bukan | 5 | 6 | is_function, dnd, mcq |
 | r4 Domain–kodomain–range | 5 | 6 | dnd, multi, mcq, numeric |
-| r5 Nilai fungsi | 6 | 7 | numeric (diagnosis) |
+| r5 Nilai fungsi | 7 | 8 | numeric (diagnosis), mcq (notasi) |
 | r6 Rumus fungsi | 5 | 6 | expression, mcq |
 | r7 Grafik | 5 | 5 | numeric, mcq, multi |
 | l1 Memodelkan | 4 | 6 | mcq, expression, numeric |
 | l2 Membandingkan | 4 | 5 | numeric, mcq |
 | l3 Menafsirkan | 4 | 5 | numeric, mcq, multi |
-| **Total** | **62** | **68** | 7 jenis |
+| **Total** | **63** | **69** | 7 jenis |
 
 ## 4. Format angka
 

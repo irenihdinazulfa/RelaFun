@@ -76,7 +76,7 @@ Setiap kode wawancara terhubung ke minimal satu kebutuhan fungsional di `02-PRD.
 - *preset* di Pemodel Soal Cerita,
 - tes otomatis mesin hitung (`tests/test_modeler.py`).
 
-Kunci jawaban acuan: `docs/JAWABAN_ACUAN_SOAL_RELASI_FUNGSI.md`. Jawaban asli narasumber belum diterima; analisisnya disiapkan di `14-ANALISIS-JAWABAN-SISWA.md`.
+Kunci jawaban acuan: `docs/JAWABAN_ACUAN_SOAL_RELASI_FUNGSI.md`. Jawaban asli narasumber diterima 14 November 2026 dan sudah dianalisis di `14-ANALISIS-JAWABAN-SISWA.md`: skor 15/16; satu temuan baru (notasi f(x) dipakai untuk nilai) ditindaklanjuti di modul r5.
 
 ## 6. Keterbatasan
 

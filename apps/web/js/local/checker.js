@@ -20,6 +20,7 @@ export const ERROR_LABELS = {
   pasangan_salah: "Pasangan panah salah",
   rumus_salah: "Rumus fungsi salah",
   a_b_tertukar: "Nilai a dan b tertukar",
+  notasi: "Penulisan notasi f(…) kurang tepat",
   konsep: "Konsep belum tepat",
   format: "Format jawaban",
 };
