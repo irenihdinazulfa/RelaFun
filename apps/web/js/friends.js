@@ -132,7 +132,7 @@ export function friendButton(id, cls = "friend") {
   btn.title = `${info.name} si ${info.kind}`;
   btn.setAttribute("aria-label", `${info.name} si ${info.kind}`);
   btn.append(friend(id, cls));
-  btn.addEventListener("click", () => btn.replaceChildren(friend(id, `${cls} wen-hop`)));
+  btn.addEventListener("click", () => { btn.textContent = ""; btn.append(friend(id, `${cls} wen-hop`)); });
   return btn;
 }
 

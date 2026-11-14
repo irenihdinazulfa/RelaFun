@@ -23,7 +23,7 @@ function saveSave(ctx, s) { try { localStorage.setItem(storeKey(ctx), JSON.strin
 // ---------- suara kecil (Web Audio) ----------
 let audio = null;
 function tone(freq, start, dur, type = "sine", vol = 0.08) {
-  audio ||= new (window.AudioContext || window.webkitAudioContext)();
+  if (!audio) audio = new (window.AudioContext || window.webkitAudioContext)();
   const o = audio.createOscillator();
   const g = audio.createGain();
   o.type = type;
@@ -126,7 +126,7 @@ export function gameView(main, _p, ctx) {
         r === true ? "🥕" : r === false ? "💧" : k === STEPS - 1 ? "🏁" : ""));
     }
     const wen = h("div", { class: "game-wen" }, mascot(st.lastWrong ? "determined" : st.combo >= 3 ? "wink" : "happy", "mascot"));
-    const setMood = (m) => wen.replaceChildren(mascot(m, "mascot"));
+    const setMood = (m) => { wen.textContent = ""; wen.append(mascot(m, "mascot")); };
     wen.style.left = `calc(${(st.i + 0.5) * (100 / STEPS)}% - 22px)`;
     const track = h("div", { class: "game-track" }, wen, path);
 
@@ -246,7 +246,7 @@ export function gameView(main, _p, ctx) {
 
   function confetti() {
     const box = h("div", { class: "confetti", "aria-hidden": "true" });
-    const colors = ["#a8d1fb", "#ffe27a", "#ffd1b8", "#ffb3cf", "#c9e7ff"];
+    const colors = ["#ffc4dc", "#ffe27a", "#ffd1b8", "#bfe0ff", "#ffb3cf"];
     for (let k = 0; k < 36; k++) {
       const p = h("i");
       p.style.left = `${Math.random() * 100}%`;

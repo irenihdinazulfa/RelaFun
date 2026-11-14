@@ -1,12 +1,12 @@
 # RelaFun — Belajar Relasi dan Fungsi Kelas 8
 
-Aplikasi belajar matematika untuk siswa SMP kelas 8 materi **Relasi dan Fungsi**. Rancangannya berdasarkan wawancara tentang **beban kognitif** (Cognitive Load Theory, model ADDIE). Aplikasi dapat dibuka di peramban dan **dipasang tanpa Play Store/App Store** (PWA) di Android, iOS, Windows, dan macOS.
+Aplikasi belajar matematika untuk siswa SMP kelas 8 materi **Relasi dan Fungsi**. Rancangannya berdasarkan wawancara tentang **beban kognitif** (Cognitive Load Theory, model ADDIE). Aplikasi dapat dibuka di peramban dan **dipasang tanpa Play Store/App Store** (PWA) di Android, iOS, Windows, dan macOS. Sudah diuji di Chrome, Safari (iPhone/iPad/Mac), dan Firefox.
 
 | | |
 |---|---|
 | Pengembang | Iren Ihdina Zulfa (NIM 2225250019), kelas 3E |
 | Teknologi | Python (FastAPI, SymPy, SQLAlchemy) + JavaScript (PWA, tanpa build) |
-| Status | Versi 2.5 — 266 tes otomatis, 1.209 kasus uji silang Python–JavaScript, 25 skenario uji peramban lolos |
+| Status | Versi 2.6 — 266 tes otomatis, 1.209 kasus uji silang Python–JavaScript, 25 skenario uji peramban lolos |
 
 ## 📱 Coba langsung (tanpa instal apa pun)
 

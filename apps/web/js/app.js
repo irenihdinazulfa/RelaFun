@@ -25,6 +25,9 @@ import { APP_VERSION } from "./version.js";
 
 export { APP_VERSION };
 
+// Penanda untuk penjaga pemuatan di index.html: semua modul berhasil dimuat.
+window.__rfStarted = true;
+
 settings.apply();
 
 const ROUTES = [

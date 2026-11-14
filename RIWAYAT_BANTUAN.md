@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–14 November 2026 (tiga puluh empat permintaan) |
+| Tanggal | 12–14 November 2026 (tiga puluh lima permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -754,3 +754,37 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - 5.400 soal game acak benar semua;
   - uji pasang, luring, mode AI, soal r5-8, gagal-muat, dan uji khusus Wen & teman-teman lolos;
   - tangkapan layar mode terang dan gelap diperiksa: beranda, materi, latihan, game, dan halaman masuk.
+
+---
+
+## Permintaan 35 — Tidak bisa dibuka di HP; perpaduan gradasi pastel
+
+### 👤 Pengguna
+
+> kok gabisa dibuka di hp tolong yang bisa d buka di all device dan warnanya perpaduan pastel kaya gradasi jangan dominan biru
+
+### 🤖 Asisten
+
+- **Mencari penyebab.** Asisten memasang mesin uji Safari (WebKit) dan Firefox, lalu membuka versi online di 5 perangkat tiruan: Chrome Android, Safari iPhone, Safari iPad, Firefox, dan Safari Mac.
+  - **Penyebab utama ketemu:** di HP dan iPad, jendela "Unduh aplikasi RelaFun?" muncul menutupi hampir setengah layar, termasuk tombol Masuk, kolom jawaban, dan tombol Periksa. Aplikasi jadi terasa "tidak bisa dibuka".
+  - Asisten mengakui bahwa uji otomatis sebelumnya selalu menyingkirkan jendela itu, sehingga masalah ini tidak tertangkap.
+- **Perbaikan tawaran pasang:** jendela besar diganti bilah kecil "Pasang RelaFun di HP?" di paling atas halaman.
+  - Bilah ini ikut alur halaman, jadi tidak menutupi apa pun.
+  - Petunjuk memasang hanya muncul bila tombol **Pasang** diketuk.
+  - Tombol ✕ menyembunyikan tawaran selama 3 hari.
+- **Agar bisa dibuka di semua perangkat:**
+  - kode JavaScript yang terlalu baru untuk HP lama diganti (`||=` dan `replaceChildren`);
+  - CSS `inset` dan `aspect-ratio` diganti cara lama;
+  - `color-mix` diberi warna cadangan.
+- **Penjaga pemuatan:** bila aplikasi gagal mulai (sinyal putus, peramban terlalu lama, atau cache lama), muncul pesan berisi keterangan galat dan tombol **Muat ulang** / **Bersihkan & muat ulang**. Tombol kedua menghapus cache lama tanpa menghapus data belajar. Penjaga ini sengaja ditulis dengan JavaScript lama agar jalan di semua peramban.
+- **Warna perpaduan gradasi pastel:** pink → peach → kuning → biru dipadukan, tanpa satu warna yang dominan, dengan teks abu gelap netral.
+  - Gradasi dipakai di latar halaman, hero, halaman masuk, layar pembuka, tombol, avatar, bilah kemajuan, sakelar, menu aktif, dan chip.
+  - Mode gelap memakai abu tua netral dengan aksen gradasi pastel.
+  - Ikon aplikasi diganti ke gradasi pastel bergaya doodle.
+- Versi **2.6**. Dokumen 06, 10, 15, dan README diperbarui.
+- **Pemeriksaan:**
+  - 5 perangkat tiruan: semua **bisa dibuka** dan bisa dipakai (masuk, menjawab soal, game, galeri);
+  - uji peramban 25 langkah lolos di Chrome, **WebKit (Safari)**, dan **Firefox**;
+  - uji tawaran pasang 6 skenario lolos, termasuk memastikan bilah tidak menutupi tombol;
+  - uji penjaga pemuatan dan gagal-muat lolos;
+  - 266 tes pytest lolos; 5.400 soal game benar semua; uji luring, mode AI, soal r5-8, dan uji Wen & teman-teman lolos.

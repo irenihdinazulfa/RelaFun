@@ -20,20 +20,21 @@ Beranda siswa:
 
 ## 2. Identitas visual
 
-**Palet "pastel belajar" (versi 2.5).** Warna utama adalah **biru langit pastel** karena tenang dan membantu fokus. Aksennya **kuning mentega** dan **peach** supaya tetap ceria. **Pink hanya aksen kecil**: hoodie Wen, ikon modul literasi, dan hati.
+**Palet perpaduan gradasi pastel (versi 2.6).** Tidak ada satu warna yang dominan. Empat pastel dipadukan sebagai gradasi: **pink → peach → kuning → biru**. Teks memakai abu gelap netral (#2b2733) agar mudah dibaca dan tidak "berwarna".
 
-- Latar halaman biru-putih yang sangat lembut, dengan kartu putih.
-- Hero dan halaman masuk memakai gradasi pastel biru → kuning → pink muda (#dcecff → #fff5d9 → #ffe8ee) dengan teks biru tua (#1f2a3d).
-- Halaman game memakai gradasi kuning → peach → biru.
-- Tombol berwarna pastel dengan **tulisan gelap** agar tetap terbaca. Biru yang lebih tua hanya dipakai untuk teks tautan, menu aktif, dan ikon.
+- Latar halaman: gradasi sangat lembut pink → krem → kuning muda → biru muda.
+- Hero, halaman masuk, dan layar pembuka: gradasi pastel yang sama dengan warna lebih kuat.
+- Tombol utama, avatar, dan langkah aktif: gradasi pastel dengan tulisan gelap (kontras ±10:1) dan bingkai putih di atas latar bergradasi.
+- Bilah kemajuan, titik langkah, sakelar, dan pengatur waktu game: gradasi pink → oranye → kuning → biru.
+- Menu aktif, chip, baris "kamu" di peringkat, dan kotak jawaban: gradasi pastel sangat lembut.
 
 | Token | Terang | Gelap | Pemakaian |
 |---|---|---|---|
-| `--bg` | #f6f9fd (biru-putih lembut) | #111826 | latar halaman |
-| `--fill` / `--on-fill` | #a8d1fb / #17304d (kontras ±8:1) | #8cc0ff / #0d1522 | tombol utama, avatar, langkah aktif |
-| `--fill-strong` | #4f90db (kontras ±3,3:1) | #6aa9f2 | bilah kemajuan, titik langkah, sakelar, pengatur waktu game |
-| `--primary` | #2d6cb5 (kontras ±5,3:1 di latar putih) | #8cc0ff | teks tautan, menu aktif, ikon |
-| `--primary-soft` | #e2eefc | #1d3150 | latar menu aktif, chip |
+| `--bg` + `--grad-page` | #fcf9fb + gradasi lembut | #16151b | latar halaman |
+| `--grad` / `--on-fill` | pink #ffcfe3 → peach #ffdfc6 → kuning #fff0b5 → biru #cfe6ff / #2b2733 | sama / #1d1b24 | tombol utama, avatar, langkah aktif |
+| `--grad-bar` | #ff9fc8 → #ffbd86 → #ffd75e → #86bdf5 | sama | bilah kemajuan, sakelar, pengatur waktu |
+| `--grad-soft` | gradasi pastel sangat lembut | gradasi gelap redup | menu aktif, chip, kotak jawaban, kartu game |
+| `--primary` | #3e3b48 (abu gelap netral, kontras ±11:1) | #f2eff7 | teks tautan, menu aktif, ikon |
 | `--sky` / `--butter` / `--peach` | #ddeeff / #fff3c4 / #ffe4d4 | versi gelap redup | aksen pastel: ikon menu, kotak statistik, kartu materi, modul prasyarat, kartu game |
 | `--pink` / `--on-pink` | #ffe6ef / #b0306a | #3a2230 / #ffb3cf | aksen kecil: ikon modul literasi |
 | `--accent` | #f59e0b | #fbbf24 | panah baru, sasaran harian, tips |

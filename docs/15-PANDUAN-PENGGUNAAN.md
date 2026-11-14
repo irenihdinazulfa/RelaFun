@@ -10,7 +10,9 @@
 | iPhone/iPad (Safari) | tombol **Bagikan** → **Tambahkan ke Layar Utama** |
 | Windows/Mac (Chrome/Edge) | ikon instal di ujung kanan bilah alamat |
 
-Di halaman masuk ada tombol besar **⬇ Unduh Aplikasi RelaFun** (dan tombol **Unduh** di bilah atas setelah masuk). Saat link dibuka di HP juga muncul jendela **“Unduh aplikasi RelaFun?”** dengan pilihan **Unduh sekarang** atau **Nanti saja**. Di iPhone dan bila link dibuka dari dalam WhatsApp, jendela itu berisi petunjuk langkah yang sesuai.
+Di halaman masuk ada tombol besar **⬇ Unduh Aplikasi RelaFun** (dan tombol **Unduh** di bilah atas setelah masuk). Saat link dibuka di HP, di paling atas halaman muncul bilah kecil **“Pasang RelaFun di HP?”** dengan tombol **Pasang** dan **✕**. Bilah ini tidak menutupi tombol apa pun. Tombol **Pasang** memanggil dialog instal Chrome; di iPhone, atau bila link dibuka dari dalam WhatsApp, tombol itu menampilkan petunjuk langkah yang sesuai. Tombol **✕** menyembunyikan tawaran selama 3 hari.
+
+Bisa dibuka di Android, iPhone, iPad, dan laptop (Chrome, Safari, Firefox, Edge, Samsung Internet). Bila aplikasi gagal dimuat (misalnya sinyal putus atau cache lama), muncul tombol **Muat ulang** dan **Bersihkan & muat ulang**. Tombol kedua menghapus cache lama tanpa menghapus data belajar.
 
 Di halaman masuk, klik **Masuk Akun Demo** / **Masuk sebagai Guru Demo**.
 
@@ -19,7 +21,7 @@ Catatan versi online (GitHub Pages):
 - Data akun & latihan tersimpan **di masing-masing perangkat**. Dashboard guru hanya menampilkan akun di perangkat yang sama.
 - **Mode AI**: buka *Pengaturan → Fitur AI*, tempel kunci API Claude (dari console.anthropic.com, berbayar ± Rp400/analisis), ketuk **Simpan & aktifkan**. Kunci hanya disimpan di perangkat itu. Setelah itu buka *Pemodel Soal Cerita → Mode AI*.
 
-Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 2.5**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
+Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 2.6**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
 
 ## A. Menjalankan versi server (komputer Windows)
 

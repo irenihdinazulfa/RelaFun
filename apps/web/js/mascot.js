@@ -329,10 +329,11 @@ export function tapMascot(mood = "happy", cls = "mascot") {
       do next = RANDOM[Math.floor(Math.random() * RANDOM.length)]; while (next === last || next === mood);
     }
     last = next;
-    btn.replaceChildren(mascot(next, `${cls} wen-hop`));
+    btn.textContent = "";
+    btn.append(mascot(next, `${cls} wen-hop`));
     btn.dataset.mood = next;
     clearTimeout(backTimer);
-    backTimer = setTimeout(() => { btn.replaceChildren(mascot(mood, cls)); btn.dataset.mood = mood; last = mood; }, 2200);
+    backTimer = setTimeout(() => { btn.textContent = ""; btn.append(mascot(mood, cls)); btn.dataset.mood = mood; last = mood; }, 2200);
   });
   btn.dataset.mood = mood;
   return btn;

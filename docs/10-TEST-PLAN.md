@@ -79,6 +79,31 @@ Tambahan untuk versi online: syarat instal PWA Chrome terpenuhi (tanpa galat), d
 - Tidak ada galat konsol, baik di HP maupun desktop.
 - Bila salah satu berkas aplikasi gagal dimuat (diuji dengan memblokir satu berkas), muncul pesan dan tombol **Muat ulang**, bukan layar kosong. Setelah dimuat ulang, aplikasi terbuka normal.
 
+## 2d. Kompatibilitas perangkat (versi 2.6)
+
+**Alur dasar di 5 perangkat tiruan** (Playwright), tanpa menyingkirkan elemen apa pun: buka → masuk → jawab soal → game → galeri.
+- Chrome Android (Pixel 7)
+- Safari iPhone 13
+- Safari iPad
+- Firefox desktop
+- Safari Mac
+
+Hasilnya: semua lolos.
+
+**Uji 25 langkah** dijalankan juga di mesin **WebKit (Safari)** dan **Firefox**: 25/25 lolos, 0 galat.
+
+**Tawaran pasang aplikasi:**
+- Bilahnya tidak menutupi kolom nama pengguna, tombol Masuk, Masuk Akun Demo, maupun tombol Periksa (posisi kotak diperiksa).
+- Tombol Pasang memanggil dialog Chrome atau menampilkan petunjuk untuk iPhone/WhatsApp.
+- Tombol ✕ menyembunyikan tawaran 3 hari.
+
+**Kode untuk peramban lama:**
+- Tidak memakai `||=` dan `replaceChildren`.
+- CSS `inset` dan `aspect-ratio` diganti cara lama.
+- `color-mix` diberi warna cadangan.
+
+**Penjaga pemuatan:** bila satu berkas rusak atau tidak didukung, muncul pesan, keterangan galat, dan tombol **Bersihkan & muat ulang**. Tombol itu memulihkan aplikasi.
+
 ## 3. Belum diuji
 
 - Panggilan **Claude API sungguhan** (diuji dengan respons tiruan; butuh kunci API).

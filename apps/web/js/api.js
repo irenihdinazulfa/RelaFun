@@ -7,7 +7,10 @@ export { ApiError };
 // sehingga semua permintaan /api/* dilayani oleh js/local/backend.js di peramban.
 export const STATIC = window.RELAFUN_STATIC === true;
 let localBackend = null;
-const local = async () => (localBackend ||= await import("./local/backend.js"));
+const local = async () => {
+  if (!localBackend) localBackend = await import("./local/backend.js");
+  return localBackend;
+};
 
 function onUnauthorized(token) {
   if (token) {

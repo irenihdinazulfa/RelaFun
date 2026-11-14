@@ -213,7 +213,7 @@ function overview(c, cls) {
     const key = `${a.user_id}|${a.item_id}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    (firstByItem[a.item_id] ||= []).push(a.correct);
+    (firstByItem[a.item_id] = firstByItem[a.item_id] || []).push(a.correct);
   }
   const titles = {};
   for (const m of c.modules) for (const it of m.items || []) titles[it.id] = [m.title, (it.prompt || "").slice(0, 90)];
