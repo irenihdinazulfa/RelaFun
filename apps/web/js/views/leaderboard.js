@@ -1,11 +1,12 @@
 import { h, fmt } from "../dom.js";
+import { friendButton } from "../friends.js";
 import { api } from "../api.js";
 import { icon } from "../icons.js";
 
 export async function leaderboardView(main) {
   const lb = await api.get("/api/leaderboard");
-  main.append(h("div", { class: "page-head" }, h("div", null, h("h1", null, "Peringkat Kelas"),
-    h("p", null, lb.enabled ? `Kelas ${lb.class_name} · hanya nama panggilan yang ditampilkan` : "Papan peringkat"))));
+  main.append(h("div", { class: "page-head" }, h("div", { class: "ph-title" }, friendButton("kopi", "friend ph-friend"), h("div", null, h("h1", null, "Peringkat Kelas"),
+    h("p", null, lb.enabled ? `Kelas ${lb.class_name} · hanya nama panggilan yang ditampilkan` : "Papan peringkat")))));
   if (!lb.enabled) {
     main.append(h("div", { class: "alert info" }, icon("info"), h("div", null, lb.reason)));
     return;

@@ -66,9 +66,13 @@ Tambahan untuk versi online: syarat instal PWA Chrome terpenuhi (tanpa galat), d
 
 5.400 soal acak diverifikasi mandiri (0 gagal) dan alur bermain lolos di versi online maupun server. Rincian: `16-GAME-LOMPAT-WEN.md` bagian 4.
 
-## 2c. Maskot Wen & ketahanan memuat (versi 2.2)
+## 2c. Maskot Wen, teman-teman & ketahanan memuat (versi 2.2–2.3)
 
-- Galeri menampilkan 18 ekspresi.
+- Halaman masuk menampilkan kolase 6 karakter (Wen + 5 teman) dan footer.
+- Galeri menampilkan kolase, 5 kartu teman, dan 18 ekspresi.
+- Stiker teman muncul di kepala halaman Materi, Kalkulator, Pemodel, Glosarium, dan Peringkat.
+- Footer tampil di setiap halaman, dan di HP tidak tertutup menu bawah.
+- Tidak ada halaman yang melebar di layar HP 390 px.
 - Wen yang diketuk berganti ekspresi; diketuk 5× → malu-malu, lalu kembali ke ekspresi awal.
 - Ekspresi di halaman masuk, tips, glosarium, dan game (benar, salah, soal sesudah salah) sesuai tabel di `06-UI-UX-GUIDE.md`.
 - Tidak ada galat konsol, baik di HP maupun desktop.

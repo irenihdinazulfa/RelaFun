@@ -1,4 +1,5 @@
 import { h } from "../dom.js";
+import { friendButton } from "../friends.js";
 import { api } from "../api.js";
 import { icon } from "../icons.js";
 import { GROUP_LABEL, moduleIcon } from "./home.js";
@@ -12,7 +13,7 @@ const GROUPS = [
 export async function modulesView(main) {
   const mods = await api.get("/api/modules");
   main.append(h("div", { class: "page-head" },
-    h("div", null, h("h1", null, "Materi"), h("p", null, "Kerjakan berurutan. Setiap materi berisi penjelasan singkat, contoh bertahap, lalu latihan."))));
+    h("div", { class: "ph-title" }, friendButton("lulu", "friend ph-friend"), h("div", null, h("h1", null, "Materi"), h("p", null, "Kerjakan berurutan. Setiap materi berisi penjelasan singkat, contoh bertahap, lalu latihan.")))));
 
   for (const [g, title, desc] of GROUPS) {
     const list = mods.filter((m) => m.group === g);

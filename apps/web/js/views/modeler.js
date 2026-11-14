@@ -6,6 +6,7 @@ import { h, clear, escapeHtml, shuffle, fmt } from "../dom.js";
 import { api } from "../api.js";
 import { icon } from "../icons.js";
 import { mascot } from "../mascot.js";
+import { friendButton } from "../friends.js";
 import { revealSteps } from "../components/reveal.js";
 import { functionGraph } from "../components/graph.js";
 
@@ -58,8 +59,8 @@ export async function modelerView(main, _p, ctx) {
 
   const tabs = h("div", { class: "tabs", role: "tablist" });
   const body = h("div");
-  main.append(h("div", { class: "page-head" }, h("div", null, h("h1", null, "Pemodel Soal Cerita"),
-    h("p", null, "Ubah cerita menjadi model fungsi f(x) = ax + b, lalu selesaikan."))), tabs, body);
+  main.append(h("div", { class: "page-head" }, h("div", { class: "ph-title" }, friendButton("ciko", "friend ph-friend"), h("div", null, h("h1", null, "Pemodel Soal Cerita"),
+    h("p", null, "Ubah cerita menjadi model fungsi f(x) = ax + b, lalu selesaikan.")))), tabs, body);
 
   function renderTabs() {
     clear(tabs);

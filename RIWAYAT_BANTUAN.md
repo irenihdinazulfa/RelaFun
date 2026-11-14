@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–14 November 2026 (tiga puluh satu permintaan) |
+| Tanggal | 12–14 November 2026 (tiga puluh dua permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -667,3 +667,35 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - uji pasang (6 skenario), luring, mode AI, dan soal r5-8 lolos;
   - uji khusus Wen lolos di HP dan desktop: galeri 18 ekspresi, ketuk, ekspresi di tiap halaman, tanpa galat konsol;
   - tampilan mode terang dan gelap diperiksa dari tangkapan layar.
+
+---
+
+## Permintaan 32 — Footer dan karakter bergaya stiker seperti karakter Sanrio
+
+### 👤 Pengguna
+
+> (melampirkan dua gambar: footer aplikasi lain bertuliskan "© 2026 LYZNART · v1.4.0 · Bisa dipakai langsung di browser, tanpa instal.", dan gambar Pinterest berisi kumpulan karakter Sanrio bergaya doodle) buat ada seperti ini nya, sesuaikan dengan punyakuu, gambarnya diganti jadi seperti itu aja ada bermacam macama karakter sanrio
+
+### 🤖 Asisten
+
+- **Footer dibuat dan disesuaikan dengan RelaFun.** Isinya: "© 2026 Iren Ihdina Zulfa · RelaFun v2.3 · Bisa dipakai langsung di browser atau dipasang di HP." Footer tampil di bawah setiap halaman dan di halaman masuk, dengan warna pastel RelaFun. Di HP, footer tidak tertutup menu bawah. Nomor versi kini diambil dari satu tempat (`js/version.js`), sehingga label versi ganda di halaman masuk dan Pengaturan dihapus.
+- **Tidak menyalin karakter Sanrio.** Asisten menjelaskan bahwa Hello Kitty, My Melody, Kuromi, Cinnamoroll, Pompompurin, dan Pochacco adalah karakter milik Sanrio yang dilindungi hak cipta dan merek dagang, sementara RelaFun dipublikasikan dan dipakai untuk tugas kuliah.
+- **Sebagai gantinya, gaya gambarnya yang ditiru, karakternya tidak:**
+  - **Wen digambar ulang dengan gaya doodle stiker:** garis tepi tebal gelap, warna pastel datar, dan mata oval kecil yang sederhana. Ke-18 ekspresinya tetap ada.
+  - **Lima teman baru yang orisinal:**
+    - Lulu (anak kucing oranye);
+    - Momo (beruang madu berpensil);
+    - Ciko (anak ayam berbunga);
+    - Pia (aksolotl pink);
+    - Kopi (anak anjing corgi).
+
+    Warna, bentuk, dan aksesorinya sengaja dibuat berbeda dari karakter Sanrio.
+  - **Kolase stiker** Wen dan teman-teman dengan hiasan bintang, kilau, pita, hati, dan bunga, seperti gambar contoh. Kolase tampil di halaman masuk dan halaman baru **"Wen & Teman-teman"**.
+  - **Stiker teman di halamannya masing-masing:** Lulu di Materi, Momo di Kalkulator, Ciko di Pemodel, Pia di Glosarium, dan Kopi di Peringkat. Semua stiker bisa diketuk.
+- Versi **2.3**. Dokumen 06 (tabel teman dan footer), 10, README, CLAUDE.md, dan panduan diperbarui.
+- **Pemeriksaan:**
+  - 266 tes pytest lolos;
+  - uji peramban 25 langkah lolos;
+  - 5.400 soal game acak benar semua;
+  - uji pasang, luring, mode AI, soal r5-8, dan uji gagal-muat lolos;
+  - uji khusus di HP dan desktop: kolase 6 karakter, footer, stiker teman di 5 halaman, galeri, ketuk, ekspresi di tiap halaman, tidak ada halaman yang melebar, tanpa galat konsol.

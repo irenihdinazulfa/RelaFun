@@ -41,15 +41,33 @@ Warna dasar **pink pastel** dengan aksen **biru muda, kuning mentega, dan peach*
 - Status benar/salah **tidak pernah hanya warna**: selalu ada ikon dan kalimat.
 - Fon sistem (Segoe UI/Roboto/SF), angka tabel memakai *tabular numbers*.
 
-## 3. Maskot
+## 3. Maskot: Wen & teman-teman
 
-**Wen** (orisinal, versi 2.2) adalah kelinci **putih** bergaya chibi. Ciri-cirinya:
-- kepala bulat besar seperti mochi, dengan jumbai bulu di pipi dan jambul kecil;
-- mata besar berkilau, pipi merona, dan mulut “ω”;
-- **telinga panjang berbentuk daun**; ujung telinga kanan sedikit menekuk;
+**Gaya gambar (versi 2.3): doodle stiker.**
+- Garis tepi tebal berwarna gelap (#3b2a33) dan warna pastel datar.
+- Wajah sederhana: mata oval kecil berkilau, pipi merona bergaris, mulut kecil.
+- Hiasan bintang, kilau, pita, hati, dan bunga.
+
+Semua karakter **orisinal**, digambar langsung sebagai SVG (`apps/web/js/mascot.js` dan `apps/web/js/friends.js`), dan **tidak meniru karakter berlisensi** seperti karakter Sanrio.
+
+**Wen** adalah kelinci putih chibi. Ciri-cirinya:
+- kepala bulat seperti mochi dengan jumbai bulu di pipi dan jambul kecil;
+- telinga panjang berbentuk daun; ujung telinga kanan sedikit menekuk;
 - **hoodie pink pastel** berlencana **bintang kuning**, **pita biru muda** di pangkal telinga, kaki berbantalan pink, dan ekor bulat.
 
-Desainnya buatan sendiri, bukan tiruan karakter mana pun. Gambar dibuat langsung sebagai SVG di `apps/web/js/mascot.js` (tanpa berkas gambar), jadi tetap tajam di semua ukuran dan bisa berganti ekspresi.
+**Teman-teman Wen** masing-masing punya "rumah" di satu halaman:
+
+| Teman | Karakter | Ciri | Muncul di |
+|---|---|---|---|
+| Lulu | anak kucing oranye | garis-garis di dahi & pipi, kalung biru berlonceng | kepala halaman Materi |
+| Momo | beruang madu | syal biru, memegang pensil | kepala halaman Kalkulator f(x) |
+| Ciko | anak ayam | jambul 3 helai, bunga pink di kepala, sayap terangkat | kepala halaman Pemodel Soal Cerita |
+| Pia | aksolotl pink | insang berumbai, gelembung air | kepala halaman Glosarium |
+| Kopi | anak anjing corgi | telinga tegak, belang putih, lidah menjulur, liontin hati | kepala halaman Peringkat Kelas |
+
+Wen dan kelima temannya tampil bersama sebagai **kolase stiker** di halaman masuk dan di halaman **Wen & Teman-teman** (`#/wen`). Semua stiker bisa diketuk: karakternya akan melompat.
+
+**Ekspresi Wen:**
 
 | Ekspresi | Ciri | Muncul di |
 |---|---|---|
@@ -75,9 +93,11 @@ Desainnya buatan sendiri, bukan tiruan karakter mana pun. Gambar dibuat langsung
 **Interaksi dan gerak**
 - Wen di halaman masuk, beranda, lobi game, dan galeri bisa **diketuk**. Wen menampilkan ekspresi acak selama ±2 detik, lalu kembali. Kalau diketuk 5× berturut-turut, Wen jadi malu-malu.
 - Gerak halus: berkedip, telinga bergoyang, dan badan naik-turun pelan. Semua gerak berhenti bila **Kurangi animasi** aktif atau perangkat meminta gerak dikurangi.
-- Halaman **Kenalan dengan Wen** (`#/wen`, dibuka dari *Lainnya* atau *Pengaturan*) menampilkan ke-18 ekspresi.
+- Halaman **Wen & Teman-teman** (`#/wen`, dibuka dari *Lainnya* atau *Pengaturan*) menampilkan kolase, kelima teman, dan ke-18 ekspresi.
 
-Maskot hanya muncul di hero, tips, game, layar hasil, dan keadaan kosong, tidak di setiap layar soal, untuk menghindari beban ekstrinsik. Ekspresi sedih selalu disertai kalimat penyemangat, bukan menyalahkan.
+Maskot hanya muncul di hero, tips, game, layar hasil, keadaan kosong, dan kepala halaman alat (satu stiker kecil), tidak di setiap layar soal, untuk menghindari beban ekstrinsik.
+
+**Footer** di bagian bawah setiap halaman berisi: `© 2026 Iren Ihdina Zulfa · RelaFun v… · Bisa dipakai langsung di browser atau dipasang di HP.` Nomor versi diambil dari `apps/web/js/version.js`. Ekspresi sedih selalu disertai kalimat penyemangat, bukan menyalahkan.
 
 ## 4. Komponen kunci
 

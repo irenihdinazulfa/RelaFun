@@ -10,7 +10,7 @@ export function menuView(main, _p, ctx) {
     link("#/kalkulator", "calc", "Kalkulator f(x)", "Cek hitungan langkah demi langkah", "sky"),
     link("#/glosarium", "glossary", "Glosarium", "Arti istilah dengan bahasa sederhana", "butter"),
     ctx.user.role === "student" ? link("#/peringkat", "trophy", "Peringkat Kelas", "Poin teman sekelas", "peach") : null,
-    link("#/wen", mascot("happy", "mini-wen"), "Kenalan dengan Wen", "18 ekspresi maskot Wen", "peach"),
+    link("#/wen", mascot("happy", "mini-wen"), "Wen & Teman-teman", "Maskot RelaFun dan 5 temannya", "peach"),
     link("#/pengaturan", "settings", "Pengaturan", "Tema, ukuran teks, kode kelas, pasang aplikasi"),
     h("button", { class: "btn secondary", type: "button", onclick: () => { session.clear(); location.hash = "#/masuk"; } }, icon("logout"), "Keluar")));
 }

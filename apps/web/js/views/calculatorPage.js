@@ -1,11 +1,12 @@
 import { h } from "../dom.js";
+import { friendButton } from "../friends.js";
 import { calculatorWidget } from "../components/calculator.js";
 import { icon } from "../icons.js";
 
 export function calculatorView(main) {
   main.append(
-    h("div", { class: "page-head" }, h("div", null, h("h1", null, "Kalkulator Fungsi Bertahap"),
-      h("p", null, "Masukkan rumus dan nilai x. Langkah penyelesaiannya muncul satu per satu."))),
+    h("div", { class: "page-head" }, h("div", { class: "ph-title" }, friendButton("momo", "friend ph-friend"), h("div", null, h("h1", null, "Kalkulator Fungsi Bertahap"),
+      h("p", null, "Masukkan rumus dan nilai x. Langkah penyelesaiannya muncul satu per satu.")))),
     h("div", { class: "grid", style: { gridTemplateColumns: "minmax(0, 2fr) minmax(0, 1fr)", alignItems: "start" } },
       h("section", { class: "card" }, calculatorWidget({ expr: "-2x + 30", x: "3,5" })),
       h("aside", { class: "card" },

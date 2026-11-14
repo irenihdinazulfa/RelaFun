@@ -19,8 +19,10 @@ import { menuView } from "./views/menu.js";
 import { gameView } from "./views/game.js";
 import { wenView } from "./views/wen.js";
 import { startInstallBanner, installButton } from "./components/installBanner.js";
+import { appFooter } from "./components/footer.js";
+import { APP_VERSION } from "./version.js";
 
-export const APP_VERSION = "2.2";
+export { APP_VERSION };
 
 settings.apply();
 
@@ -85,7 +87,7 @@ function layout(user, active) {
       installButton({ label: "Unduh", cls: "btn small", compact: true }),
       h("a", { class: "btn ghost icon-btn", href: "#/pengaturan", "aria-label": "Pengaturan" }, icon("settings"))));
   const main = h("main", { class: "main", id: "main", tabindex: "-1" });
-  const shell = h("div", { class: "layout" }, sidebar, h("div", { style: { minWidth: 0 } }, topbar, main), bottom);
+  const shell = h("div", { class: "layout" }, sidebar, h("div", { class: "content-col" }, topbar, main, appFooter()), bottom);
   return { shell, main };
 }
 
