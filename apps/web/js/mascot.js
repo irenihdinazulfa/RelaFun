@@ -1,5 +1,5 @@
 // Wen — maskot orisinal RelaFun (versi 2.3, gaya doodle stiker: garis tepi tebal, warna pastel datar).
-// Kelinci putih chibi: kepala "mochi", jambul kecil, telinga panjang berbentuk daun (ujung kanan menekuk),
+// Kelinci putih chibi: kepala bulat penuh, jambul kecil, telinga panjang berbentuk daun (ujung kanan menekuk),
 // hoodie pink pastel berlencana bintang, pita biru muda di telinga, kaki berbantalan pink.
 // mascot(mood) → <svg>;  tapMascot(mood) → tombol: ketuk Wen untuk ekspresi acak.
 // Alat gambar bersama (kit) juga dipakai teman-teman Wen di friends.js.
@@ -264,7 +264,7 @@ function effects(kind, g) {
   }
 }
 
-const HEAD = "M100 50C135 50 160 72 160 103C160 117 156 128 149 137L157 141L146 143C136 152 120 156 100 156C80 156 64 152 54 143L43 141L51 137C44 128 40 117 40 103C40 72 65 50 100 50Z";
+const HEAD = "M100 50C134 50 160 74 160 103C160 133 134 156 100 156C66 156 40 133 40 103C40 74 66 50 100 50Z";
 const BODY = "M66 189C62 169 71 148 100 146C129 148 138 169 134 189Z";
 let uid = 0;
 

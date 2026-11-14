@@ -20,6 +20,7 @@ import { gameView } from "./views/game.js";
 import { wenView } from "./views/wen.js";
 import { startInstallBanner, installButton } from "./components/installBanner.js";
 import { appFooter } from "./components/footer.js";
+import { showSplash } from "./components/splash.js";
 import { APP_VERSION } from "./version.js";
 
 export { APP_VERSION };
@@ -141,6 +142,7 @@ async function render() {
 
 window.addEventListener("hashchange", render);
 render();
+showSplash();
 
 // --- PWA: service worker & tombol pasang ---
 if ("serviceWorker" in navigator && location.protocol !== "file:") {

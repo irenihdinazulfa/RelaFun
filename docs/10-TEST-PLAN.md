@@ -68,6 +68,7 @@ Tambahan untuk versi online: syarat instal PWA Chrome terpenuhi (tanpa galat), d
 
 ## 2c. Maskot Wen, teman-teman & ketahanan memuat (versi 2.2–2.3)
 
+- Layar pembuka menampilkan 6 karakter, hilang sendiri atau saat diketuk, dan tidak muncul lagi saat halaman dimuat ulang pada pembukaan yang sama.
 - Halaman masuk menampilkan kolase 6 karakter (Wen + 5 teman) dan footer.
 - Galeri menampilkan kolase, 5 kartu teman, dan 18 ekspresi.
 - Stiker teman muncul di kepala halaman Materi, Kalkulator, Pemodel, Glosarium, dan Peringkat.

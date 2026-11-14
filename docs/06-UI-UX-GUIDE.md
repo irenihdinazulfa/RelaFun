@@ -51,7 +51,7 @@ Warna dasar **pink pastel** dengan aksen **biru muda, kuning mentega, dan peach*
 Semua karakter **orisinal**, digambar langsung sebagai SVG (`apps/web/js/mascot.js` dan `apps/web/js/friends.js`), dan **tidak meniru karakter berlisensi** seperti karakter Sanrio.
 
 **Wen** adalah kelinci putih chibi. Ciri-cirinya:
-- kepala bulat seperti mochi dengan jumbai bulu di pipi dan jambul kecil;
+- kepala bulat penuh dan jambul kecil;
 - telinga panjang berbentuk daun; ujung telinga kanan sedikit menekuk;
 - **hoodie pink pastel** berlencana **bintang kuning**, **pita biru muda** di pangkal telinga, kaki berbantalan pink, dan ekor bulat.
 
@@ -65,7 +65,12 @@ Semua karakter **orisinal**, digambar langsung sebagai SVG (`apps/web/js/mascot.
 | Pia | aksolotl pink | insang berumbai, gelembung air | kepala halaman Glosarium |
 | Kopi | anak anjing corgi | telinga tegak, belang putih, lidah menjulur, liontin hati | kepala halaman Peringkat Kelas |
 
-Wen dan kelima temannya tampil bersama sebagai **kolase stiker** di halaman masuk dan di halaman **Wen & Teman-teman** (`#/wen`). Semua stiker bisa diketuk: karakternya akan melompat.
+Wen dan kelima temannya tampil bersama sebagai **kolase stiker** di tiga tempat:
+- **layar pembuka** setiap kali aplikasi dibuka. Karakternya muncul satu per satu, lalu layar hilang sendiri setelah ±2,6 detik atau langsung saat diketuk;
+- halaman masuk;
+- halaman **Wen & Teman-teman** (`#/wen`).
+
+Semua stiker di halaman masuk dan galeri bisa diketuk: karakternya akan melompat.
 
 **Ekspresi Wen:**
 

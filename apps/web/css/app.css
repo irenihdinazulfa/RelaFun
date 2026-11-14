@@ -627,3 +627,19 @@ table.value-table tr td:first-child, table.value-table tr th:first-child { font-
 .friend-card .friend { width: 92px; height: 92px; }
 .friend-card p { margin: 4px 0 0; font-size: .88rem; }
 .wen-intro .sticker-sheet { width: min(400px, 100%); }
+
+/* ---------- Layar pembuka: Wen & teman-teman ---------- */
+.splash { position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; padding: 24px 16px; overflow: auto;
+  background: linear-gradient(160deg, #ffd3e2, #fff0d6 60%, #dcefff); color: #4a1d33; text-align: center; cursor: pointer; animation: splash-fade .25s ease both; }
+.splash.hide { opacity: 0; transition: opacity .3s ease; pointer-events: none; }
+.splash-inner { display: flex; flex-direction: column; align-items: center; gap: 6px; width: min(560px, 100%); }
+.splash .sticker-sheet { width: min(520px, 100%); }
+.splash .stk { animation: splash-pop .55s cubic-bezier(.3, 1.45, .5, 1) both; }
+.splash .sheet-deco { animation: splash-fade .6s ease .9s both; }
+.splash h1 { font-size: 2.3rem; margin: 6px 0 0; color: #4a1d33; }
+.splash p { margin: 0; color: #6b3a52; max-width: 34ch; }
+.splash .splash-go { margin-top: 12px; min-width: 170px; background: #ff8fb5; color: #4a1d33; }
+.splash-hint { font-size: .8rem; color: #8a5f74; margin-top: 2px; }
+@keyframes splash-pop { from { opacity: 0; transform: scale(.4) translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes splash-fade { from { opacity: 0; } to { opacity: 1; } }
+.splash .splash-go:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }

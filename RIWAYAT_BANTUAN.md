@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–14 November 2026 (tiga puluh dua permintaan) |
+| Tanggal | 12–14 November 2026 (tiga puluh tiga permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -699,3 +699,29 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - 5.400 soal game acak benar semua;
   - uji pasang, luring, mode AI, soal r5-8, dan uji gagal-muat lolos;
   - uji khusus di HP dan desktop: kolase 6 karakter, footer, stiker teman di 5 halaman, galeri, ketuk, ekspresi di tiap halaman, tidak ada halaman yang melebar, tanpa galat konsol.
+
+---
+
+## Permintaan 33 — Kepala Wen bulat penuh dan layar pembuka berisi Wen & teman-teman
+
+### 👤 Pengguna
+
+> bisa ga kalo muka wennya full bulat aja jangan ada lancip kanan kiri terus ketika pertama kali buka ada wen dan tementemennya di tanpilin semua
+
+### 🤖 Asisten
+
+- **Kepala Wen dibuat bulat penuh.** Jumbai bulu yang lancip di pipi kiri dan kanan dihapus dari ke-18 ekspresi. Jambul kecil di atas kepala tetap ada.
+- **Layar pembuka baru:**
+  - muncul setiap kali aplikasi dibuka, sekali per pembukaan, baik saat belum maupun sudah masuk akun;
+  - Wen muncul lebih dulu sambil melambai, lalu Lulu, Momo, Ciko, Pia, dan Kopi menyusul satu per satu bersama hiasan bintang, pita, dan hati;
+  - ada tulisan "RelaFun", kalimat "Belajar Relasi & Fungsi bareng Wen dan teman-teman!", dan tombol **Mulai**;
+  - layar hilang sendiri setelah ±2,6 detik, atau langsung saat diketuk atau tombol Enter/Spasi/Esc ditekan;
+  - tidak muncul lagi saat halaman dimuat ulang pada pembukaan yang sama;
+  - bila "Kurangi animasi" aktif, karakter tampil tanpa animasi.
+- Versi **2.4**. Dokumen 06, 10, 15, dan README diperbarui.
+- **Pemeriksaan:**
+  - 266 tes pytest lolos;
+  - uji peramban 25 langkah lolos;
+  - 5.400 soal game acak benar semua;
+  - uji pasang, luring, mode AI, soal r5-8, dan uji gagal-muat lolos;
+  - uji khusus di HP dan desktop: layar pembuka berisi 6 karakter, hilang saat diketuk maupun otomatis, dan tidak muncul lagi saat dimuat ulang; kolase, footer, stiker teman, galeri, dan ekspresi tetap benar; tanpa galat konsol.

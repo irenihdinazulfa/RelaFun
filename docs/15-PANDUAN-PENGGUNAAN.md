@@ -19,7 +19,7 @@ Catatan versi online (GitHub Pages):
 - Data akun & latihan tersimpan **di masing-masing perangkat**. Dashboard guru hanya menampilkan akun di perangkat yang sama.
 - **Mode AI**: buka *Pengaturan → Fitur AI*, tempel kunci API Claude (dari console.anthropic.com, berbayar ± Rp400/analisis), ketuk **Simpan & aktifkan**. Kunci hanya disimpan di perangkat itu. Setelah itu buka *Pemodel Soal Cerita → Mode AI*.
 
-Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 2.3**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
+Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 2.4**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
 
 ## A. Menjalankan versi server (komputer Windows)
 
