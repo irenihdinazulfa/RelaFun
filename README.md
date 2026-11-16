@@ -6,7 +6,7 @@ Aplikasi belajar matematika untuk siswa SMP kelas 8 materi **Relasi dan Fungsi**
 |---|---|
 | Pengembang | Iren Ihdina Zulfa (NIM 2225250019), kelas 3E |
 | Teknologi | Python (FastAPI, SymPy, SQLAlchemy) + JavaScript (PWA, tanpa build) |
-| Status | Versi 2.6 — 266 tes otomatis, 1.209 kasus uji silang Python–JavaScript, 25 skenario uji peramban lolos |
+| Status | Versi 2.7 — 266 tes otomatis, 1.209 kasus uji silang Python–JavaScript, 25 skenario uji peramban lolos |
 
 ## 📱 Coba langsung (tanpa instal apa pun)
 
@@ -17,7 +17,7 @@ Aplikasi belajar matematika untuk siswa SMP kelas 8 materi **Relasi dan Fungsi**
 - **Laptop:** buka di Chrome/Edge → ikon instal di bilah alamat.
 - Di halaman masuk, klik **Masuk Akun Demo** atau **Masuk sebagai Guru Demo**.
 
-Versi online ini berjalan sepenuhnya di peramban: setelah dibuka sekali, aplikasi tetap bisa dipakai tanpa internet, dan data latihan tersimpan di masing-masing perangkat. **Mode AI** aktif setelah kunci API Claude dimasukkan di *Pengaturan → Fitur AI* (kunci hanya disimpan di perangkat itu). Dashboard guru untuk satu kelas sungguhan tersedia di versi server.
+Versi online ini berjalan sepenuhnya di peramban: setelah dibuka sekali, aplikasi tetap bisa dipakai tanpa internet, dan data latihan tersimpan di masing-masing perangkat. **Mode AI**: tulis deskripsi soal → AI menyusun model matematika → mesin matematika memeriksa & menghitung. Aktif setelah kunci API Claude ditempel di *Mode AI* atau *Pengaturan → Fitur AI* (kunci hanya disimpan di perangkat itu). Dashboard guru untuk satu kelas sungguhan tersedia di versi server.
 
 ## Menjalankan versi server (Windows)
 
@@ -43,7 +43,7 @@ Panduan lengkap (HP, guru, AI, deploy): [docs/15-PANDUAN-PENGGUNAAN.md](docs/15-
 | **Kalkulator f(x) bertahap** + diagnosis salah tanda / tidak dikalikan / lupa konstanta | IL02, GL03 |
 | Materi **satu langkah per layar**, contoh bertahap, pembahasan setelah 2 kali mencoba | DS02, GL03 |
 | Istilah sulit dapat diketuk + **Glosarium** bahasa sederhana | EL03 |
-| **Pemodel soal cerita** (terpandu 6 langkah; AI opsional, diverifikasi SymPy) | EL01, literasi |
+| **Pemodel soal cerita** (terpandu 6 langkah; Mode AI: deskripsi soal → model matematika, diverifikasi & dihitung mesin) | EL01, literasi |
 | Modul prasyarat (himpunan, bilangan bulat, substitusi) | IL03 |
 | 3 modul literasi dari 4 soal lembar PISA | Literasi matematika |
 | Dashboard guru: kesalahan terbanyak, akurasi per materi, peta penguasaan, CSV | Pemantauan kelas |

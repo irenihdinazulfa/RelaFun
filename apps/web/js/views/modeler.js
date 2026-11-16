@@ -1,8 +1,9 @@
 // Pemodel soal cerita.
 // Mode A (terpandu): siswa sendiri yang memodelkan, langkah demi langkah (tanpa AI).
-// Mode B (AI): Claude menerjemahkan cerita -> model, diverifikasi & dihitung SymPy di server.
+// Mode B (AI): siswa menulis deskripsi soal; Claude menerjemahkannya menjadi model fungsi, lalu
+// model diverifikasi (V1–V6) & dihitung oleh mesin matematika (SymPy di server / mesin JS di versi online).
 
-import { h, clear, escapeHtml, shuffle, fmt } from "../dom.js";
+import { h, clear, escapeHtml, shuffle, fmt, toast } from "../dom.js";
 import { api } from "../api.js";
 import { icon } from "../icons.js";
 import { mascot } from "../mascot.js";
@@ -279,51 +280,149 @@ export async function modelerView(main, _p, ctx) {
     }
   }
 
-  // ---------------------------------------------------------------- Mode B (AI)
+  // ---------------------------------------------------------------- Mode B (AI): deskripsi soal → model matematika
   function aiMode() {
-    const card = h("section", { class: "card" });
+    const card = h("section", { class: "card ai-card" });
     body.append(card);
-    if (!status.available) {
-      const why = status.static
-        ? "Mode AI butuh kunci API Claude. Masukkan kuncinya sekali di Pengaturan → Fitur AI, lalu mode ini langsung aktif."
-        : !status.configured
-        ? "Fitur AI belum aktif di server ini (ANTHROPIC_API_KEY belum diisi). Gunakan mode terpandu."
-        : ctx.user.role === "teacher" ? "Aktifkan fitur AI untuk kelas di Dashboard Guru." : "Fitur AI belum diaktifkan oleh gurumu. Gunakan mode terpandu.";
-      card.append(h("div", { class: "alert info" }, icon("info"), h("div", null, h("div", { class: "alert-title" }, "Mode AI belum tersedia"), h("p", null, why),
-        status.static ? h("a", { class: "btn small", href: "#/pengaturan" }, icon("settings"), "Buka Pengaturan → Fitur AI") : null)));
-    }
-    const ta = h("textarea", { class: "input", maxlength: 1500, placeholder: "Tempel atau tulis soal cerita di sini…", "aria-label": "Soal cerita" }, preset.story);
+
+    const ta = h("textarea", { id: "ai-soal", class: "input ai-input", maxlength: 1500, rows: 6, "aria-label": "Deskripsi soal",
+      placeholder: "Contoh: Tarif taksi Rp8.000 saat mulai naik, lalu Rp4.500 setiap km. Budi punya uang Rp50.000 dan jarak ke stasiun 10 km. Apakah uangnya cukup?" });
+    const counter = h("span", { class: "muted small" }, "0/1.500 karakter");
+    ta.addEventListener("input", () => { counter.textContent = `${fmt(ta.value.length)}/1.500 karakter`; });
+    const go = h("button", { class: "btn", type: "button" }, icon("sparkle"), "Modelkan dengan AI");
+    const quota = h("span", { class: "muted small" });
+    const keySlot = h("div");
     const out = h("div", { "aria-live": "polite" });
-    const go = h("button", { class: "btn", type: "button", disabled: !status.available }, icon("sparkle"), "Analisis dengan AI");
-    card.append(h("h2", null, "Biarkan AI membantu memodelkan"),
-      h("p", { class: "muted" }, "AI hanya menerjemahkan cerita menjadi model. Semua hitungan dilakukan dan diperiksa oleh mesin matematika. Tetap coba mode terpandu dulu, ya!"),
-      h("div", { class: "field" }, h("label", null, "Ambil contoh dari lembar soal:"), presetPicker(() => { ta.value = preset.story; card.querySelectorAll(".preset").forEach((b) => b.classList.toggle("active", b.textContent.includes(preset.title))); })),
-      h("div", { class: "field" }, ta), h("div", { class: "row" }, go, status.available ? h("span", { class: "muted small" }, `Kuota: ${status.daily_quota} analisis per hari`) : null), out);
+
+    card.append(
+      h("h2", null, "Ubah deskripsi soal menjadi model matematika"),
+      h("p", { class: "muted" }, "Tulis soal ceritamu sendiri. AI menerjemahkannya menjadi model fungsi, lalu mesin matematika memeriksa dan menghitungnya."),
+      h("ol", { class: "ai-flow" }, h("li", null, "Tulis deskripsi soal"), h("li", null, "AI menyusun model"), h("li", null, "Mesin matematika memeriksa & menghitung")),
+      keySlot,
+      h("div", { class: "field" }, h("label", { for: "ai-soal" }, "Deskripsi soal"), ta, counter),
+      h("details", { class: "ai-examples" }, h("summary", null, "Pakai contoh dari lembar soal"),
+        presetPicker(() => {
+          ta.value = preset.story;
+          ta.dispatchEvent(new Event("input"));
+          card.querySelectorAll(".preset").forEach((b) => b.classList.toggle("active", b.textContent.includes(preset.title)));
+        })),
+      h("div", { class: "row" }, go, quota),
+      out);
+
+    // ---- kunci API: versi online bisa diaktifkan langsung di sini
+    function renderKey() {
+      clear(keySlot);
+      go.disabled = !status.available;
+      quota.textContent = status.available ? `Kuota: ${status.daily_quota} analisis per hari` : "";
+      if (status.available) return;
+      if (!status.static) {
+        const why = !status.configured
+          ? "Fitur AI belum aktif di server ini (ANTHROPIC_API_KEY belum diisi). Gunakan mode terpandu."
+          : ctx.user.role === "teacher" ? "Aktifkan fitur AI untuk kelas di Dashboard Guru." : "Fitur AI belum diaktifkan oleh gurumu. Gunakan mode terpandu.";
+        keySlot.append(h("div", { class: "alert info" }, icon("info"), h("div", null, h("div", { class: "alert-title" }, "Mode AI belum tersedia"), h("p", null, why))));
+        return;
+      }
+      const keyIn = h("input", { class: "input", type: "password", placeholder: "sk-ant-…", autocomplete: "off", spellcheck: "false", "aria-label": "Kunci API Claude" });
+      const msg = h("div", { "aria-live": "polite" });
+      const save = h("button", { class: "btn small", type: "button" }, icon("sparkle"), "Aktifkan AI");
+      save.onclick = async () => {
+        const k = keyIn.value.trim();
+        if (!k) { clear(msg).append(h("p", { class: "small", style: { color: "var(--bad)" } }, "Tempel kunci API terlebih dahulu.")); return; }
+        save.disabled = true;
+        clear(msg).append(h("p", { class: "muted small" }, "Memeriksa kunci…"));
+        try {
+          const ai = await import("../local/ai.js");
+          await ai.testKey(k);
+          ai.setKey(k);
+          status.available = true;
+          status.configured = true;
+          toast("Fitur AI aktif! ✓");
+          renderKey();
+          ta.focus();
+        } catch (e) {
+          clear(msg).append(h("p", { class: "small", style: { color: "var(--bad)" } }, e.message));
+        } finally { save.disabled = false; }
+      };
+      keySlot.append(h("div", { class: "alert info ai-key" }, icon("info"), h("div", { style: { minWidth: 0, flex: 1 } },
+        h("div", { class: "alert-title" }, "Mode AI belum tersedia di perangkat ini"),
+        h("p", { class: "small" }, "Mode AI memakai Claude dan butuh kunci API (berbayar, ± Rp400 per analisis). Buat kunci di ",
+          h("a", { href: "https://console.anthropic.com/settings/keys", target: "_blank", rel: "noopener" }, "console.anthropic.com"),
+          ", lalu tempel di sini. Kunci hanya disimpan di perangkat ini."),
+        h("div", { class: "ai-key-row" }, keyIn, save), msg,
+        h("p", { class: "muted small", style: { margin: "6px 0 0" } }, "Bisa juga diatur di ", h("a", { href: "#/pengaturan" }, "Pengaturan → Fitur AI"), "."))));
+    }
+    renderKey();
+
+    // ---- tampilan model matematika
+    const OP = { ">": ">", ">=": "≥", "<": "<", "<=": "≤" };
+    const MINUS = "−";
+    const num = (v) => { const n = Number(v); return n < 0 ? MINUS + fmt(-n) : fmt(n); };
+    function formula(m) {
+      const a = Number(m.a);
+      const b = Number(m.b);
+      let s = a === 0 ? "" : a === 1 ? "x" : a === -1 ? `${MINUS}x` : `${num(a)}x`;
+      if (!s) s = num(b);
+      else if (b !== 0) s += ` ${b < 0 ? MINUS : "+"} ${fmt(Math.abs(b))}`;
+      return `${m.name}(x) = ${s}`;
+    }
+    function question(s, fallback) {
+      const t = s.task;
+      const [m1, m2] = s.models;
+      const x = t.x === null || t.x === undefined ? "x" : num(t.x);
+      if (t.type === "compare" && m2) return `Bandingkan ${m1.name}(${x}) dengan ${m2.name}(${x})`;
+      if (t.type === "evaluate") {
+        return t.op && t.target !== null && t.target !== undefined
+          ? `Hitung ${m1.name}(${x}), lalu periksa: ${m1.name}(${x}) ${OP[t.op] || t.op} ${num(t.target)}?` : `Hitung ${m1.name}(${x})`;
+      }
+      if (t.type === "threshold") return `Cari x agar ${m1.name}(x) ${OP[t.op] || t.op} ${num(t.target)}${t.integer_x ? " (x bilangan bulat)" : ""}`;
+      if (t.type === "solve_for_x") return `Cari x agar ${m1.name}(x) = ${num(t.target)}`;
+      return fallback || "";
+    }
+    function modelCard(r) {
+      const s = r.spec;
+      const meaning = (name) => (r.explanations.models || []).find((m) => m.name === name) || {};
+      return h("section", { class: "model-card" },
+        h("h3", null, "Model matematika"),
+        h("dl", { class: "model-def" },
+          h("dt", null, "Variabel"),
+          h("dd", null, `x = ${s.variable_meaning}${s.variable_unit ? ` (${s.variable_unit})` : ""}`),
+          h("dt", null, "Fungsi"),
+          h("dd", null, s.models.map((m) => h("div", { class: "model-line" },
+            h("span", { class: "model-box" }, formula(m)),
+            h("span", { class: "muted small" }, [m.label, meaning(m.name).meaning_a ? `a = ${meaning(m.name).meaning_a}` : "",
+              meaning(m.name).meaning_b ? `b = ${meaning(m.name).meaning_b}` : ""].filter(Boolean).join(" · "))))),
+          s.output_unit ? [h("dt", null, "Satuan hasil"), h("dd", null, s.output_unit)] : null,
+          h("dt", null, "Pertanyaan"),
+          h("dd", null, h("b", null, question(s, r.explanations.question))),
+          r.explanations.x ? [h("dt", null, "Nilai x"), h("dd", null, r.explanations.x)] : null));
+    }
 
     go.onclick = async () => {
+      const text = ta.value.trim();
+      if (text.length < 20) {
+        clear(out).append(h("div", { class: "alert warn" }, icon("info"), h("div", null, "Tulis deskripsi soal minimal 20 karakter, lengkap dengan angka-angkanya.")));
+        ta.focus();
+        return;
+      }
       go.disabled = true;
       clear(out).append(h("div", { class: "wen-wait" }, mascot("think"), h("p", { class: "muted" }, "AI sedang membaca soal…")));
       try {
-        const r = await api.post("/api/tools/modeler/ai", { text: ta.value });
+        const r = await api.post("/api/tools/modeler/ai", { text });
         clear(out);
         if (!r.supported) {
           out.append(h("div", { class: "alert warn" }, icon("info"), h("div", null, h("div", { class: "alert-title" }, "Soal belum didukung"), h("p", null, r.reason))));
           return;
         }
-        const s = r.spec;
-        out.append(h("h3", { style: { marginTop: "16px" } }, "Cara AI memahami soal"),
-          h("ul", null,
-            h("li", null, `x = ${s.variable_meaning}${s.variable_unit ? ` (${s.variable_unit})` : ""}`),
-            r.explanations.models.map((m) => h("li", null, `${m.name}: a = ${m.meaning_a}; b = ${m.meaning_b}`)),
-            r.explanations.x ? h("li", null, `Nilai x: ${r.explanations.x}`) : null,
-            r.explanations.question ? h("li", null, `Pertanyaan: ${r.explanations.question}`) : null),
-          h("h3", null, "Pemeriksaan model"),
-          h("ul", { class: "check-list" }, r.verification.checks.map((c) => h("li", { class: c.level },
-            icon(c.level === "ok" ? "check" : c.level === "warning" ? "alert" : "x"), h("span", null, `${c.code}: ${c.message}`)))));
+        const v = r.verification;
+        out.append(modelCard(r),
+          h("details", { class: "ai-checks", open: !v.ok },
+            h("summary", null, v.ok ? "Pemeriksaan model: lolos ✓" : "Pemeriksaan model: ada yang perlu diperbaiki"),
+            h("ul", { class: "check-list" }, v.checks.map((c) => h("li", { class: c.level },
+              icon(c.level === "ok" ? "check" : c.level === "warning" ? "alert" : "x"), h("span", null, `${c.code}: ${c.message}`))))));
         if (r.solution) {
-          out.append(h("h3", { style: { marginTop: "12px" } }, "Penyelesaian (dihitung mesin matematika, bukan AI)"), solutionView(r.solution));
+          out.append(h("h3", { style: { marginTop: "14px" } }, "Penyelesaian (dihitung mesin matematika, bukan AI)"), solutionView(r.solution));
         } else {
-          out.append(h("div", { class: "alert bad" }, icon("alert"), h("div", null, "Model dari AI belum lolos pemeriksaan. Coba mode terpandu.")));
+          out.append(h("div", { class: "alert bad" }, icon("alert"), h("div", null, "Model dari AI belum lolos pemeriksaan. Perjelas soalnya (tulis semua angka dengan lengkap) atau coba mode terpandu.")));
         }
         out.append(h("p", { class: "muted small", style: { marginTop: "10px" } }, `Sisa kuota hari ini: ${r.remaining}`));
       } catch (e) {

@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–14 November 2026 (tiga puluh lima permintaan) |
+| Tanggal | 12–16 November 2026 (tiga puluh enam permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -788,3 +788,30 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - uji tawaran pasang 6 skenario lolos, termasuk memastikan bilah tidak menutupi tombol;
   - uji penjaga pemuatan dan gagal-muat lolos;
   - 266 tes pytest lolos; 5.400 soal game benar semua; uji luring, mode AI, soal r5-8, dan uji Wen & teman-teman lolos.
+
+---
+
+## Permintaan 36 — Input deskripsi soal, lalu dimodelkan AI menjadi model matematika (16 November 2026)
+
+### 👤 Pengguna
+
+> Saya ingin input soal untun pemodelan ai berupa deskripsi, kemudian dimodelkan ke dalam model matematika dengan ai
+
+### 🤖 Asisten
+
+- **Pemeriksaan awal:** Mode AI sudah ada di Pemodel Soal Cerita. Pemanggilan Claude API-nya dicek ulang terhadap panduan resmi: `claude-opus-5-5`, *structured output* `json_schema`, `effort: medium`, `fallbacks: "default"`, dan pengecekan `refusal`. Semuanya sudah sesuai, jadi kode pemanggilan tidak diubah.
+  - Kekurangan pertama: hasilnya belum menampilkan **model matematika** secara jelas.
+  - Kekurangan kedua: di versi online, tombolnya mati tanpa kunci API dan pengguna harus pindah dulu ke Pengaturan.
+- **Mode AI ditata ulang menjadi alur "deskripsi soal → model matematika":**
+  1. Kotak **Deskripsi soal** kosong untuk soal karangan sendiri. Ada penghitung karakter, dan contoh dari lembar soal tersedia di "Pakai contoh dari lembar soal".
+  2. Tombol **Modelkan dengan AI**. Deskripsi di bawah 20 karakter diminta dilengkapi dan tidak dikirim.
+  3. Kartu **Model matematika** berisi variabel (x = …), rumus fungsi (misalnya f(x) = 4.500x + 8.000) beserta arti a dan b, satuan hasil, dan **pertanyaan dalam bentuk matematika** (misalnya f(10) ≤ 50.000?, bandingkan A(25) dengan B(25), cari x agar h(x) > 0).
+  4. **Pemeriksaan model V1–V6** dirangkum "lolos ✓".
+  5. **Penyelesaian** dihitung mesin matematika, bukan AI.
+- **Kunci API bisa diaktifkan langsung di Mode AI** (tombol **Aktifkan AI**), tanpa pindah ke Pengaturan. Kunci tetap hanya disimpan di perangkat dan tidak pernah ditanam di kode.
+- Versi **2.7**. Dokumen 10, 13, 15, dan README diperbarui.
+- **Pemeriksaan:**
+  - uji Mode AI dengan layanan Anthropic tiruan (tanpa kunci asli dan tanpa biaya): 10 skenario lolos, yaitu taksi, provider, tas, soal kuadrat, kunci salah/benar, deskripsi pendek, Pengaturan, dan kuota;
+  - 266 tes pytest lolos; uji peramban 25 langkah lolos; 5 perangkat tiruan bisa membuka aplikasi;
+  - uji pasang, luring, game, soal r5-8, penjaga pemuatan, dan uji Wen lolos.
+- **Catatan:** pemanggilan ke Claude yang sesungguhnya belum diuji karena membutuhkan kunci API berbayar milik pengguna.

@@ -104,6 +104,21 @@ Hasilnya: semua lolos.
 
 **Penjaga pemuatan:** bila satu berkas rusak atau tidak didukung, muncul pesan, keterangan galat, dan tombol **Bersihkan & muat ulang**. Tombol itu memulihkan aplikasi.
 
+## 2e. Mode AI: deskripsi soal → model matematika (versi 2.7)
+
+Diuji dengan layanan Anthropic **tiruan**: tanpa kunci asli, tanpa biaya. 10 skenario lolos:
+- tanpa kunci: pesan jelas, kolom kunci di Mode AI, tombol nonaktif;
+- kunci salah ditolak, kunci benar langsung mengaktifkan AI;
+- deskripsi terlalu pendek tidak dikirim;
+- soal taksi: f(x) = 4.500x + 8.000, f(10) ≤ 50.000, hasil Rp53.000;
+- soal provider: A(x) = 2.000x vs B(x) = 1.000x + 30.000;
+- soal tas: h(x) = 50.000x − 150.000, h(x) > 0, x bilangan bulat;
+- soal kuadrat: dijelaskan belum didukung;
+- Pengaturan ikut aktif;
+- kuota 10 per hari.
+
+Permintaan memakai `claude-opus-5-5`, *structured output* `json_schema`, `effort: medium`, `fallbacks: "default"`, dan hanya teks soal yang dikirim.
+
 ## 3. Belum diuji
 
 - Panggilan **Claude API sungguhan** (diuji dengan respons tiruan; butuh kunci API).

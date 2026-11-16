@@ -6,7 +6,7 @@
 |---|---|---|
 | **Terpandu** | Siswa, langkah demi langkah, dicek tiap langkah | Tidak butuh AI |
 | **Soal sendiri** | Siswa mengisi model bebas, mesin menghitung | Tidak butuh AI |
-| **AI** | Claude menerjemahkan cerita → model; mesin memverifikasi & menghitung | Versi server: `ANTHROPIC_API_KEY` + izin guru. Versi online: kunci API dimasukkan di Pengaturan → Fitur AI (disimpan di perangkat) |
+| **AI** | Siswa menulis **deskripsi soal** sendiri; Claude menerjemahkannya menjadi **model matematika**; mesin memverifikasi & menghitung | Versi server: `ANTHROPIC_API_KEY` + izin guru. Versi online: kunci API ditempel langsung di Mode AI atau di Pengaturan → Fitur AI (disimpan di perangkat) |
 
 ## 2. Model yang didukung
 
@@ -37,10 +37,28 @@ Fungsi linear **f(x) = ax + b** (1 atau 2 fungsi) dengan tugas:
 4. Hanya teks soal yang dikirim (tanpa identitas); kuota 10/siswa/hari.
 5. Penolakan/galat → pesan ramah + saran mode terpandu.
 
+## 3a. Alur Mode AI: deskripsi soal → model matematika (versi 2.7)
+
+1. **Tulis deskripsi soal**: kotak isian kosong (maks. 1.500 karakter). Siswa menulis soal cerita sendiri, atau memilih contoh dari lembar soal. Deskripsi di bawah 20 karakter tidak dikirim.
+2. **AI menyusun model**: hanya teks soal yang dikirim ke Claude. AI mengisi spesifikasi model (variabel x, fungsi ax + b, jenis pertanyaan) dan tidak menghitung jawaban.
+3. **Kartu "Model matematika"** menampilkan:
+
+   | Bagian | Contoh |
+   |---|---|
+   | Variabel | x = jarak perjalanan (km) |
+   | Fungsi, beserta arti a dan b | f(x) = 4.500x + 8.000 (a = tarif per km, b = tarif saat mulai naik) |
+   | Satuan hasil | rupiah |
+   | Pertanyaan dalam bentuk matematika | Hitung f(10), lalu periksa: f(10) ≤ 50.000?; Bandingkan A(25) dengan B(25); Cari x agar h(x) > 0 (x bilangan bulat); Cari x agar f(x) = 20 |
+
+4. **Pemeriksaan model (V1–V6)**: dirangkum "lolos ✓" dan bisa dibuka. Bila ada masalah, daftar pemeriksaan langsung terbuka.
+5. **Penyelesaian**: dihitung mesin matematika (bukan AI), dengan langkah yang muncul satu per satu.
+
+Soal di luar fungsi linear (misalnya kuadrat) dijawab "Soal belum didukung" disertai alasan.
+
 ## 3b. Mode AI di versi online (GitHub Pages)
 
 - `apps/web/js/local/ai.js` memanggil Claude langsung dari peramban memakai SDK resmi `@anthropic-ai/sdk@1.8.0` (`dangerouslyAllowBrowser: true`), dengan model, prompt sistem, skema *structured output*, `effort: medium`, dan `fallbacks: "default"` yang sama dengan versi server.
-- Kunci dicek dulu lewat Models API (tanpa biaya token) sebelum disimpan di `localStorage` perangkat.
+- Kunci bisa ditempel langsung di Mode AI (tombol **Aktifkan AI**) atau di Pengaturan. Kunci dicek dulu lewat Models API (tanpa biaya token) sebelum disimpan di `localStorage` perangkat, dan tidak pernah ditanam di kode.
 - Hasil AI diverifikasi `verifySpec()` (V1–V6, identik dengan versi Python pada 19 kasus uji) lalu dihitung `solve()`.
 - Kuota 10 analisis/hari per akun di perangkat itu.
 

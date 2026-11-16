@@ -19,9 +19,13 @@ Di halaman masuk, klik **Masuk Akun Demo** / **Masuk sebagai Guru Demo**.
 Catatan versi online (GitHub Pages):
 - Berjalan sepenuhnya di peramban, sehingga tetap bisa dipakai tanpa internet setelah dibuka sekali.
 - Data akun & latihan tersimpan **di masing-masing perangkat**. Dashboard guru hanya menampilkan akun di perangkat yang sama.
-- **Mode AI**: buka *Pengaturan → Fitur AI*, tempel kunci API Claude (dari console.anthropic.com, berbayar ± Rp400/analisis), ketuk **Simpan & aktifkan**. Kunci hanya disimpan di perangkat itu. Setelah itu buka *Pemodel Soal Cerita → Mode AI*.
+- **Mode AI** (deskripsi soal → model matematika):
+  1. Buka *Pemodel Soal Cerita → Mode AI*.
+  2. Pertama kali saja: tempel kunci API Claude (dari console.anthropic.com, berbayar ± Rp400/analisis), lalu ketuk **Aktifkan AI**. Bisa juga lewat *Pengaturan → Fitur AI*. Kunci hanya disimpan di perangkat itu.
+  3. Tulis deskripsi soal di kotak **Deskripsi soal**, lalu ketuk **Modelkan dengan AI**.
+  4. Muncul kartu **Model matematika** (variabel, rumus fungsi, pertanyaan), pemeriksaan model, dan penyelesaian langkah demi langkah.
 
-Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 2.6**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
+Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 2.7**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
 
 ## A. Menjalankan versi server (komputer Windows)
 

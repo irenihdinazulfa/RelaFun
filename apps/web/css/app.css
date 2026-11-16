@@ -663,3 +663,21 @@ table.value-table tr td:first-child, table.value-table tr th:first-child { font-
 .boot p b { color: var(--text); }
 .boot-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
 .boot-why { font-size: .78rem; margin-top: 12px !important; word-break: break-word; }
+
+/* ---------- Mode AI: deskripsi soal → model matematika ---------- */
+.ai-input { min-height: 140px; resize: vertical; line-height: 1.5; }
+.ai-flow { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 4px 0 14px; list-style: none; counter-reset: ai; }
+.ai-flow li { counter-increment: ai; font-size: .82rem; padding: 4px 10px; border-radius: 999px; background: var(--grad-soft); box-shadow: inset 0 0 0 1px var(--border); }
+.ai-flow li::before { content: counter(ai) ". "; font-weight: 800; }
+.ai-key-row { display: flex; gap: 8px; margin-top: 6px; }
+.ai-key-row .input { flex: 1; min-width: 0; }
+.ai-examples { margin: 4px 0 12px; }
+.ai-examples summary { cursor: pointer; font-weight: 650; font-size: .92rem; padding: 4px 0; }
+.model-card { margin-top: 16px; padding: 14px 16px; border-radius: 14px; background: var(--grad-soft); box-shadow: inset 0 0 0 1px var(--border); }
+.model-card h3 { margin-bottom: 6px; }
+.model-def { margin: 0; }
+.model-def dt { font-weight: 750; font-size: .82rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin-top: 10px; }
+.model-def dd { margin: 3px 0 0; overflow-wrap: anywhere; }
+.model-line { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 4px 0; }
+.ai-checks { margin-top: 12px; }
+.ai-checks summary { cursor: pointer; font-weight: 650; }
