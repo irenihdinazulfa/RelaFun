@@ -24,7 +24,7 @@ Bahasa antarmuka & konten: **Bahasa Indonesia** sederhana untuk siswa usia 13–
 
 11. **Dua mesin harus identik**: setiap perubahan di `apps/api/app/core/{mathfn,checker,modeler,tutor}.py` wajib diterapkan juga di `apps/web/js/local/{mathfn,checker,modeler,tutor}.js` (versi GitHub Pages), lalu uji silang. Terbitkan ulang versi online dengan `python scripts/deploy_pages.py`.
 
-12. **Asisten Belajar RMT** (`app/core/tutor.py`, konten `content/tutor/tutor.json`): AI = **DeepSeek** (`deepseek-flash`, format OpenAI `/chat/completions`). Kunci `DEEPSEEK_API_KEY` HANYA dari `.env` server — tidak boleh di frontend, di kode, atau di GitHub (arahan dosen). Benar/salah tiap langkah diperiksa `check_step()`, bukan AI; kunci jawaban tidak dikirim ke AI; balasan AI yang membocorkan jawaban dibuang oleh `leaks()`. Asisten tidak boleh memberi jawaban akhir, satu langkah per giliran, ≤ 40 kata per perintah, ≤ 60 kata per petunjuk, 3 tingkat petunjuk.
+12. **Asisten Belajar RMT** (`app/core/tutor.py`, konten `content/tutor/tutor.json`): AI = **Gemini** (`gemini-3.5-flash-lite`) atau **DeepSeek** (`deepseek-flash`), keduanya format OpenAI `/chat/completions`, dipilih dengan `TUTOR_AI_PROVIDER`. Kunci `GEMINI_API_KEY`/`DEEPSEEK_API_KEY` HANYA dari `.env` server — tidak boleh di frontend, di kode, atau di GitHub (arahan dosen). Benar/salah tiap langkah diperiksa `check_step()`, bukan AI; kunci jawaban tidak dikirim ke AI; balasan AI yang membocorkan jawaban dibuang oleh `leaks()`. Asisten tidak boleh memberi jawaban akhir, satu langkah per giliran, ≤ 40 kata per perintah, ≤ 60 kata per petunjuk, 3 tingkat petunjuk. Gemini: satu pesan sistem dan percakapan wajib diakhiri pesan pengguna (`BUTTON_TRIGGERS`).
 
 ## Peta kode
 - `apps/api/app/core/mathfn.py`: baca angka/rumus, kalkulator bertahap, analisis relasi, diagnosis kesalahan
@@ -33,7 +33,7 @@ Bahasa antarmuka & konten: **Bahasa Indonesia** sederhana untuk siswa usia 13–
 - `apps/web/js/components/arrowDiagram.js`: diagram panah (static/animate/check/sets/edit)
 - `apps/web/js/mascot.js`: maskot Wen (SVG gaya doodle stiker, 18 ekspresi di `MOOD_INFO` + `SPEC`; `tapMascot()` = Wen yang bisa diketuk; `kit` = alat gambar bersama)
 - `apps/web/js/friends.js`: 5 teman Wen (Lulu, Momo, Ciko, Pia, Kopi) + `stickerSheet()` kolase stiker. Semua karakter harus orisinal: jangan meniru karakter berlisensi (mis. Sanrio)
-- `apps/api/app/core/tutor.py` + `apps/web/js/local/tutor.js`: Asisten Belajar RMT (6 tahap, petunjuk bertingkat, penjaga jawaban, DeepSeek); halaman `js/views/tutor.js`
+- `apps/api/app/core/tutor.py` + `apps/web/js/local/tutor.js`: Asisten Belajar RMT (6 tahap, petunjuk bertingkat, penjaga jawaban, Gemini/DeepSeek); halaman `js/views/tutor.js`
 - `apps/web/js/version.js`: nomor versi (dipakai footer `components/footer.js`)
 - `apps/web/js/views/*.js`: halaman; `apps/web/sw.js`: cache PWA (perbarui `VERSION` dan daftar `SHELL` bila menambah file)
 

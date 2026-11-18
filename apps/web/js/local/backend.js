@@ -385,13 +385,13 @@ export async function handle(method, rawPath, body = {}, token = null) {
     // --- Asisten Belajar RMT (tanpa AI di versi ini) ---
     if (method === "GET" && path === "/api/tutor/status") {
       currentUser(token);
-      return { ai: false, provider: "DeepSeek", model: null, daily_quota: 0, remaining: 0, free_mode: false, static: true };
+      return { ai: false, provider: null, model: null, daily_quota: 0, remaining: 0, free_mode: false, static: true };
     }
     if (method === "GET" && path === "/api/tutor/problems") { currentUser(token); return tutor.catalog(await loadTutor()); }
     if (method === "POST" && path === "/api/tutor/turn") {
       currentUser(token);
       if (body.problem_id === tutor.FREE_ID) {
-        throw new ApiError("Mode Soal Bebas memakai DeepSeek dan hanya aktif di versi server (kunci di file .env server).", 503);
+        throw new ApiError("Mode Soal Bebas memakai AI dan hanya aktif di versi server (kunci di file .env server).", 503);
       }
       try {
         const out = tutor.turn(await loadTutor(), body);

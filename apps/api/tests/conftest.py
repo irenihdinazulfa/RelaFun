@@ -8,6 +8,9 @@ _TMP = tempfile.mkdtemp(prefix="relafun_test_")
 os.environ["RELAFUN_DATA_DIR"] = _TMP
 os.environ["DATABASE_URL"] = f"sqlite:///{Path(_TMP, 'test.db').as_posix()}"
 os.environ["ANTHROPIC_API_KEY"] = ""
+# Tes tidak boleh memakai kunci AI asli dari .env (load_dotenv tidak menimpa variabel yang sudah ada).
+for _k in ("DEEPSEEK_API_KEY", "GEMINI_API_KEY", "TUTOR_AI_PROVIDER"):
+    os.environ[_k] = ""
 os.environ["SEED_DEMO"] = "1"
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))

@@ -25,7 +25,7 @@ Catatan versi online (GitHub Pages):
   3. Tulis deskripsi soal di kotak **Deskripsi soal**, lalu ketuk **Modelkan dengan AI**.
   4. Muncul kartu **Model matematika** (variabel, rumus fungsi, pertanyaan), pemeriksaan model, dan penyelesaian langkah demi langkah.
 
-Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 3.0**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
+Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 3.1**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
 
 ## A. Menjalankan versi server (komputer Windows)
 
@@ -72,7 +72,7 @@ macOS/Linux: `bash scripts/start.sh`
    2. Ikuti pertanyaan Wen satu per satu melalui 6 tahap (Orientasi → … → Bukti logis & refleksi). Penanda tahap ada di atas percakapan.
    3. Kalau bingung, ketuk **Aku bingung**: petunjuk naik bertahap, sampai contoh serupa dengan angka lain. Istilah di bawah langkah bisa diketuk.
    4. Setelah 3 kali mencoba, tombol **Lanjut** muncul. Di akhir, pilih seberapa berat usaha berpikirmu (1–5).
-   5. Versi server dengan DeepSeek juga punya **Soal bebas**: tulis soalmu sendiri.
+   5. Versi server dengan AI (Gemini atau DeepSeek) juga punya **Soal bebas**: tulis soalmu sendiri.
 7. **Pengaturan** → mode gelap, teks besar, gabung kelas, pasang aplikasi.
 
 ## D. Untuk guru
@@ -97,13 +97,18 @@ macOS/Linux: `bash scripts/start.sh`
 2. Buka file `.env` di folder proyek, isi `ANTHROPIC_API_KEY=...`, lalu jalankan ulang `start.bat`.
 3. Masuk sebagai guru → nyalakan **Pemodel AI** untuk kelas.
 
-**Asisten Belajar dengan DeepSeek (khusus versi server):**
+**Asisten Belajar dengan AI (khusus versi server):**
 
-1. Buat kunci di https://platform.deepseek.com/api_keys (isi saldo).
-2. Buka file `.env` di folder proyek, isi `DEEPSEEK_API_KEY=...`, lalu jalankan ulang `start.bat`.
-3. Buka **Asisten**: tanda di kanan atas berubah menjadi **AI DeepSeek aktif**.
+1. Buat kunci:
+   - **Gemini** (gratis): https://aistudio.google.com/apikey
+   - **DeepSeek** (berbayar): https://platform.deepseek.com/api_keys
+2. Buka file `.env` di folder proyek, lalu isi:
+   - untuk Gemini: `TUTOR_AI_PROVIDER=gemini` dan `GEMINI_API_KEY=...`
+   - untuk DeepSeek: `TUTOR_AI_PROVIDER=deepseek` dan `DEEPSEEK_API_KEY=...`
+3. Jalankan ulang `start.bat`.
+4. Buka **Asisten**: tanda di kanan atas berubah menjadi **AI Gemini aktif** atau **AI DeepSeek aktif**.
 
-Kunci DeepSeek **tidak boleh** ditulis di kode atau diunggah ke GitHub. File `.env` sudah dikecualikan dari GitHub. Rincian: [19-ASISTEN-BELAJAR.md](19-ASISTEN-BELAJAR.md).
+Kunci API **tidak boleh** ditulis di kode atau diunggah ke GitHub. Gemini gratis mensyaratkan pengguna berusia 18+ dan tidak untuk aplikasi yang dipakai anak di bawah 18 tahun, jadi gunakan untuk pengembangan dan demonstrasi (lihat dokumen 19, bagian 4). File `.env` sudah dikecualikan dari GitHub. Rincian: [19-ASISTEN-BELAJAR.md](19-ASISTEN-BELAJAR.md).
 
 ## F. Deploy ke internet (agar bisa dipasang di HP mana pun)
 

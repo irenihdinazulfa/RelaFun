@@ -31,7 +31,9 @@ def _usage(db: Session, user: User) -> TutorUsage:
 def status(user: User = Depends(get_current_user), db: Session = Depends(get_db)) -> dict:
     used = _usage(db, db.merge(user)).calls
     db.commit()
-    return {"ai": config.tutor_ai_configured(), "provider": "DeepSeek", "model": config.DEEPSEEK_MODEL,
+    provider = config.tutor_provider()
+    return {"ai": provider is not None, "provider": config.PROVIDER_NAMES.get(provider or ""),
+            "model": config.tutor_model(),
             "daily_quota": config.TUTOR_DAILY_QUOTA, "remaining": max(0, config.TUTOR_DAILY_QUOTA - used),
             "free_mode": config.tutor_ai_configured(), "static": False}
 
@@ -63,13 +65,14 @@ def turn(body: TurnIn, user: User = Depends(get_current_user), db: Session = Dep
     user = db.merge(user)
     usage = _usage(db, user)
     quota_left = config.TUTOR_DAILY_QUOTA - usage.calls
-    ai = tutor.deepseek_chat if (config.tutor_ai_configured() and quota_left > 0) else None
+    ai = tutor.ai_chat if (config.tutor_ai_configured() and quota_left > 0) else None
     req = body.model_dump()
     req["history"] = [h.model_dump() for h in body.history]
     try:
         if body.problem_id == tutor.FREE_ID:
             if not config.tutor_ai_configured():
-                raise HTTPException(503, "Mode Soal Bebas memakai DeepSeek. Isi DEEPSEEK_API_KEY di file .env server.")
+                raise HTTPException(503, "Mode Soal Bebas memakai AI. Isi GEMINI_API_KEY atau DEEPSEEK_API_KEY "
+                                         "di file .env server.")
             if ai is None:
                 raise HTTPException(429, "Kuota balasan AI hari ini sudah habis. Coba soal bawaan, ya.")
             out = tutor.turn_free(req, ai)

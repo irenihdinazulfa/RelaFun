@@ -1,6 +1,8 @@
-# 19 — Asisten Belajar (chatbot RMT + DeepSeek)
+# 19 — Asisten Belajar (chatbot RMT + Gemini/DeepSeek)
 
 Halaman `#/asisten` (menu bawah **Asisten**). Asisten ini adalah chatbot pedagogis yang membimbing soal Mathematical Literacy selangkah demi selangkah menurut model **Rigorous Mathematical Thinking** (lihat [18-RINGKASAN-RMT.md](18-RINGKASAN-RMT.md)). Pengelolaan beban kognitifnya dijelaskan di bagian 3.
+
+Balasan AI bisa memakai **Gemini** (Google, ada tingkat gratis) atau **DeepSeek**. Penyedianya dipilih dengan satu baris di file `.env` server (bagian 4). Cara kerja pedagogisnya sama untuk keduanya.
 
 ## 1. Arahan dosen dan cara memenuhinya
 
@@ -10,7 +12,7 @@ Halaman `#/asisten` (menu bawah **Asisten**). Asisten ini adalah chatbot pedagog
 | Mengelola beban intrinsik, ekstrinsik, dan germane | Lihat bagian 3 |
 | Petunjuk sesuai kesulitan, bukan jawaban akhir | Petunjuk 3 tingkat yang naik otomatis setiap kali salah atau saat siswa mengetuk **Aku bingung**. Ada 32 pola kesalahan khas siswa dengan umpan balik khusus. Penjaga jawaban membuang balasan AI yang membocorkan jawaban. |
 | Menerapkan tahapan RMT | Penanda 6 tahap, fungsi kognitif dan alat berpikir di setiap langkah, mediasi MLE, refleksi, dan transendensi |
-| Kunci API DeepSeek tidak boleh di frontend atau GitHub; gunakan `.env` di backend | Kunci hanya dibaca dari `.env` oleh server (`config.DEEPSEEK_API_KEY`). `.env` tercantum di `.gitignore`. Tes otomatis memastikan kunci tidak pernah muncul di respons API. |
+| Kunci API tidak boleh di frontend atau GitHub; gunakan `.env` di backend | Kunci hanya dibaca dari `.env` oleh server (`GEMINI_API_KEY` atau `DEEPSEEK_API_KEY`). `.env` tercantum di `.gitignore`. Tes otomatis memastikan kunci tidak pernah muncul di respons API. |
 | Tetap memakai repository lama, dengan commit jelas | Dikerjakan di repository `RelaFun` yang sama |
 
 ## 2. Alur satu giliran
@@ -19,9 +21,9 @@ Halaman `#/asisten` (menu bawah **Asisten**). Asisten ini adalah chatbot pedagog
 Siswa mengetik ─▶ server: check_step() ──▶ BENAR  → pujian + langkah berikutnya
                    (mesin, deterministik) └▶ BELUM  → tingkat bantuan naik (1→2→3)
                                                      + catatan kesalahan khas
-        ┌─────────────── bila DEEPSEEK_API_KEY terisi & kuota masih ada ───────────────┐
-        │ DeepSeek menulis kalimat mediasi berdasarkan KONTEKS: tahap RMT, langkah,    │
-        │ fungsi kognitif, hasil mesin, tingkat bantuan, dan bahan petunjuk.           │
+        ┌──────────── bila kunci AI terisi di .env & kuota masih ada ──────────────────┐
+        │ Gemini/DeepSeek menulis kalimat mediasi berdasarkan KONTEKS: tahap RMT,      │
+        │ langkah, fungsi kognitif, hasil mesin, tingkat bantuan, dan bahan petunjuk.  │
         │ Kunci jawaban TIDAK dikirim ke AI.                                           │
         │ leaks(): bila balasan memuat jawaban langkah sekarang/berikutnya → dibuang   │
         └──────────────────────────────────────────────────────────────────────────────┘
@@ -42,51 +44,99 @@ Siswa mengetik ─▶ server: check_step() ──▶ BENAR  → pujian + langkah
 | **Ekstrinsik** (cara penyajian) | Soal selalu tampil di atas percakapan sehingga tidak perlu bolak-balik. Kalimat pendek dengan satu pertanyaan, maksimal 40 kata per perintah dan 60 kata per petunjuk (diuji otomatis). Istilah bisa diketuk. | EL01, EL03 |
 | **Germane** (membangun skema) | Fungsi kognitif dan alat berpikir disebut di setiap langkah. Bukti logis diminta. Refleksi dan pertanyaan transfer di akhir. Pemeriksaan kewajaran h(3) dan h(4). | GL02, GL03; Soal 4 S01 yang tidak memeriksa kewajaran |
 
-## 4. Mengaktifkan DeepSeek (versi server)
+## 4. Mengaktifkan AI (versi server)
+
+Buka file **`.env`** di folder proyek (dibuat otomatis oleh `start.bat` dari `.env.example`), isi salah satu pilihan di bawah, lalu jalankan ulang `start.bat` dan buka http://localhost:8000 → **Asisten**. Tanda di kanan atas berubah menjadi **AI Gemini aktif** atau **AI DeepSeek aktif**.
+
+**Pilihan A — Gemini (gratis, dipakai saat ini):**
+
+1. Buat kunci di https://aistudio.google.com/apikey (masuk dengan akun Google).
+2. Isi di `.env`:
+   ```
+   TUTOR_AI_PROVIDER=gemini
+   GEMINI_API_KEY=...kunci-milikmu...
+   ```
+   Nilai bawaan lainnya: `GEMINI_MODEL=gemini-3.5-flash-lite` dan `GEMINI_REASONING=minimal`, supaya balasan cepat (sekitar 1 detik).
+
+**Pilihan B — DeepSeek (berbayar):**
 
 1. Buat kunci di https://platform.deepseek.com/api_keys dan isi saldo.
-2. Buka file **`.env`** di folder proyek (dibuat otomatis oleh `start.bat` dari `.env.example`), lalu isi:
+2. Isi di `.env`:
    ```
+   TUTOR_AI_PROVIDER=deepseek
    DEEPSEEK_API_KEY=sk-...kunci-milikmu...
    ```
-   Pengaturan lain sudah berisi nilai bawaan: `DEEPSEEK_MODEL=deepseek-flash`, `DEEPSEEK_THINKING=disabled` (balasan cepat), `TUTOR_DAILY_QUOTA=60` balasan AI per siswa per hari.
-3. Jalankan ulang `start.bat`, lalu buka http://localhost:8000 → **Asisten**. Tanda di kanan atas berubah menjadi **AI DeepSeek aktif**.
+   Nilai bawaannya `DEEPSEEK_MODEL=deepseek-flash` dan `DEEPSEEK_THINKING=disabled`.
 
-> ⚠️ Jangan pernah menempel kunci di kode, di `.env.example`, di chat, atau di GitHub. Hanya di `.env`.
+Jika `TUTOR_AI_PROVIDER` dikosongkan, server memakai DeepSeek bila kuncinya ada, lalu Gemini. `TUTOR_DAILY_QUOTA=60` membatasi balasan AI per siswa per hari. Setelah kuota habis, atau bila AI gagal dan menolak, asisten otomatis memakai petunjuk tertulis.
+
+> ⚠️ Jangan pernah menempel kunci di kode, di `.env.example`, atau di GitHub. Hanya di `.env`.
 
 Versi GitHub Pages tidak punya backend, jadi asisten di sana berjalan dalam **mode terpandu** dengan petunjuk tertulis yang sama, tanpa AI. Pemeriksaannya identik dengan versi server: 1.698 kasus uji silang Python = JavaScript.
 
-## 5. Format panggilan DeepSeek
+### Catatan aturan layanan Gemini
 
-`POST {DEEPSEEK_BASE_URL}/chat/completions` (format kompatibel OpenAI), header `Authorization: Bearer <kunci dari .env>`. Isinya:
+Ketentuan Gemini API (https://ai.google.dev/gemini-api/terms) menyebut:
+
+- pengguna API harus **berusia 18 tahun ke atas**;
+- API tidak boleh dipakai di aplikasi yang **ditujukan untuk, atau kemungkinan besar dipakai oleh, orang di bawah 18 tahun**;
+- pada layanan **gratis**, isi permintaan dan balasan dapat dipakai Google untuk mengembangkan produknya dan dibaca peninjau manusia.
+
+RelaFun ditujukan untuk siswa SMP. Karena itu, Gemini gratis sebaiknya hanya dipakai pengembang (dewasa) untuk pengembangan dan demonstrasi kepada dosen. Sebelum dipakai siswa sungguhan, pertimbangkan pilihan B atau mode terpandu tanpa AI, dan diskusikan dengan dosen.
+
+Aplikasi tidak pernah mengirim nama atau data pribadi siswa ke AI (bagian 5).
+
+## 5. Format panggilan AI
+
+Kedua penyedia dipanggil dengan format **kompatibel OpenAI**: `POST {base}/chat/completions`, header `Authorization: Bearer <kunci dari .env>`.
+
+| | Gemini | DeepSeek |
+|---|---|---|
+| Alamat dasar | `https://generativelanguage.googleapis.com/v1beta/openai` | `https://api.deepseek.com` |
+| Model bawaan | `gemini-3.5-flash-lite` | `deepseek-flash` |
+| Pengatur berpikir | `"reasoning_effort": "minimal"` | `"thinking": {"type": "disabled"}`, `temperature` 0,5 |
+| `max_tokens` | 1024 (token berpikir ikut dihitung) | 400 |
+| Pesan sistem | aturan mediator dan KONTEKS digabung menjadi **satu** pesan sistem | dua pesan sistem |
+
+Isinya:
 
 ```json
-{"model": "deepseek-flash", "stream": false, "max_tokens": 400, "temperature": 0.5,
- "thinking": {"type": "disabled"},
- "messages": [{"role": "system", "content": "<aturan mediator RMT>"},
-              {"role": "system", "content": "KONTEKS: tahap, langkah, hasil mesin, tingkat bantuan…"},
+{"model": "gemini-3.5-flash-lite", "stream": false, "max_tokens": 1024, "reasoning_effort": "minimal",
+ "messages": [{"role": "system", "content": "<aturan mediator RMT>\n\nKONTEKS: tahap, langkah, hasil mesin, tingkat bantuan…"},
               "…6 pesan terakhir…", {"role": "user", "content": "<jawaban siswa>"}]}
 ```
 
-Yang dikirim hanya teks soal dan percakapan, tanpa nama atau data pribadi siswa.
+- Percakapan **selalu diakhiri pesan siswa**. Bila siswa hanya menekan tombol (misalnya *Aku bingung* atau *Tahap berikutnya*), nama tombolnya dikirim sebagai pesan. Gemini menolak permintaan tanpa pesan pengguna atau yang diakhiri balasan asisten (kode 400); hal ini ditemukan saat uji dengan Gemini sungguhan.
+- Yang dikirim hanya teks soal dan percakapan, tanpa nama atau data pribadi siswa.
 
 ## 6. Berkas
 
 | Berkas | Isi |
 |---|---|
 | `content/tutor/tutor.json` | 6 tahap, istilah, 4 soal × langkah (perintah, fungsi kognitif, alat, kunci pemeriksaan, 3 petunjuk, pola kesalahan khas, penjaga jawaban) |
-| `apps/api/app/core/tutor.py` | Mesin asisten: pemeriksaan, petunjuk, penjaga jawaban, prompt RMT, panggilan DeepSeek |
+| `apps/api/app/core/tutor.py` | Mesin asisten: pemeriksaan, petunjuk, penjaga jawaban, prompt RMT, `gemini_chat()`, `deepseek_chat()`, `ai_chat()` (memilih penyedia) |
+| `apps/api/app/config.py` | `TUTOR_AI_PROVIDER`, `GEMINI_*`, `DEEPSEEK_*`, `tutor_provider()` |
 | `apps/api/app/routers/tutor.py` | `GET /api/tutor/status`, `GET /api/tutor/problems`, `POST /api/tutor/turn`, `POST /api/tutor/finish`, `GET /api/tutor/summary` (guru) |
 | `apps/web/js/local/tutor.js` | Mesin yang sama untuk versi GitHub Pages (tanpa AI) |
-| `apps/web/js/views/tutor.js` | Halaman Asisten Belajar |
-| `apps/api/tests/test_tutor.py` | 32 tes: konten (batas kata CLT, urutan tahap RMT), seluruh soal bisa diselesaikan, petunjuk tidak membocorkan jawaban, kesalahan khas, DeepSeek tiruan, kuota, API tidak membocorkan kunci |
+| `apps/web/js/views/tutor.js` | Halaman Asisten Belajar. Nama penyedia AI diambil dari server. |
+| `apps/api/tests/test_tutor.py` | 51 tes: konten (batas kata CLT, urutan tahap RMT), seluruh soal bisa diselesaikan, petunjuk tidak membocorkan jawaban, kesalahan khas, format Gemini dan DeepSeek, pemilihan penyedia, kode galat, kuota, API tidak membocorkan kunci |
 
 ## 7. Pengujian
 
-- **pytest**: 298 tes lolos, 32 di antaranya untuk asisten.
+- **pytest**: 317 tes lolos, 51 di antaranya untuk asisten.
 - **Uji peramban di Chrome, WebKit/Safari, dan Firefox**:
   - siswa menyelesaikan Soal 2, termasuk kesalahan khas, "Aku bingung", ketuk istilah, skala usaha, dan ringkasan;
   - di Soal 3, tombol lanjut muncul setelah 3 kali mencoba;
   - Dashboard Guru menampilkan usaha berpikir 3/5.
-- **Versi server dengan DeepSeek tiruan** (tanpa kunci asli dan tanpa biaya): 59 permintaan memakai format yang benar. Balasan berlabel "dibantu AI DeepSeek". Kunci API dan kunci jawaban tidak pernah sampai ke peramban, dan Soal Bebas berjalan.
-- **Belum diuji**: DeepSeek sungguhan, karena butuh kunci berbayar milik pengembang.
+- **Versi server dengan Gemini tiruan dan DeepSeek tiruan** (tanpa kunci asli), di ketiga peramban:
+  - balasan berlabel "dibantu AI Gemini" atau "dibantu AI DeepSeek";
+  - semua permintaan memakai format yang benar;
+  - kunci API dan kunci jawaban tidak pernah sampai ke peramban;
+  - Soal Bebas berjalan;
+  - setelah kuota harian habis, muncul pesan kuota dan asisten beralih ke petunjuk tertulis.
+- **Gemini sungguhan** (`gemini-3.5-flash-lite`, 18 November 2026):
+  - satu sesi Soal 2 lengkap, ditambah Soal Bebas;
+  - semua 15 panggilan AI berhasil, sekitar 1 detik per balasan;
+  - tidak ada jawaban yang bocor, termasuk saat "siswa" mengaku guru dan meminta jawabannya langsung;
+  - kunci tidak muncul di respons server.
+- **Belum diuji**: DeepSeek sungguhan, karena butuh kunci berbayar.

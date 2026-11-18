@@ -182,6 +182,99 @@ def test_deepseek_without_key_raises(monkeypatch):
         tutor.deepseek_chat([])
 
 
+def _fake_http(monkeypatch, status=200, body=None):
+    captured = {}
+
+    class Resp:
+        status_code = status
+
+        @staticmethod
+        def json():
+            return body if body is not None else {
+                "choices": [{"finish_reason": "stop", "message": {"role": "assistant", "content": "Halo dari Gemini"}}]}
+
+    def fake_post(url, json, timeout, headers):
+        captured.update(url=url, json=json, headers=headers)
+        return Resp()
+
+    monkeypatch.setattr(tutor.httpx, "post", fake_post)
+    return captured
+
+
+def test_gemini_request_format(monkeypatch):
+    captured = _fake_http(monkeypatch)
+    monkeypatch.setattr(config, "GEMINI_API_KEY", "AQ.uji-palsu")
+    msgs = tutor.build_messages("hint", "Soal uji", tutor.phases()[0], None, "aku bingung", [], None, 1, "Petunjuk")
+    assert [m["role"] for m in msgs[:2]] == ["system", "system"]
+    assert tutor.gemini_chat(msgs) == "Halo dari Gemini"
+    assert captured["url"] == "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
+    assert captured["headers"]["Authorization"] == "Bearer AQ.uji-palsu"
+    body = captured["json"]
+    assert body["model"] == "gemini-3.5-flash-lite" and body["reasoning_effort"] == "minimal"
+    assert "thinking" not in body and "temperature" not in body      # parameter khas DeepSeek tidak dikirim
+    roles = [m["role"] for m in body["messages"]]
+    assert roles.count("system") == 1 and roles[0] == "system"      # dua pesan system digabung
+    assert "Rigorous Mathematical Thinking" in body["messages"][0]["content"]
+    assert "KONTEKS" in body["messages"][0]["content"] and body["messages"][-1]["content"] == "aku bingung"
+
+
+@pytest.mark.parametrize("case,message,expected", [
+    ("hint", "", "Aku bingung"), ("free_start", "", "menulis soalnya"), ("free_phase", "", "Tahap berikutnya"),
+    ("answer_like", "x = 3", "x = 3"),
+])
+def test_messages_always_end_with_user_turn(case, message, expected):
+    # Gemini menolak permintaan tanpa pesan pengguna atau yang diakhiri balasan asisten (uji asli: kode 400)
+    if case == "answer_like":
+        case = "wrong"
+    history = [{"role": "user", "text": "halo"}, {"role": "assistant", "text": "Belum tepat."}]
+    msgs = tutor.build_messages(case, "Soal uji", tutor.phases()[0], None, message, history, None, 1, None)
+    assert msgs[-1]["role"] == "user" and expected in msgs[-1]["content"]
+    merged = tutor._merge_system([{"role": "system", "content": "a"}, {"role": "assistant", "content": "b"}])
+    assert merged[-1]["role"] == "user" and [m["role"] for m in merged].count("system") == 1
+
+
+@pytest.mark.parametrize("status,needle", [(400, "periksa kunci"), (403, "ditolak"), (404, "tidak ditemukan"),
+                                           (429, "Kuota gratis Gemini")])
+def test_gemini_errors_become_tutor_errors(monkeypatch, status, needle):
+    _fake_http(monkeypatch, status=status, body={"error": {"message": "x"}})
+    monkeypatch.setattr(config, "GEMINI_API_KEY", "AQ.uji-palsu")
+    with pytest.raises(tutor.TutorAIError, match=needle):
+        tutor.gemini_chat([{"role": "user", "content": "hai"}])
+
+
+def test_gemini_empty_reply_falls_back_to_script(monkeypatch):
+    _fake_http(monkeypatch, body={"choices": [{"finish_reason": "length", "message": {"role": "assistant", "content": ""}}]})
+    monkeypatch.setattr(config, "GEMINI_API_KEY", "AQ.uji-palsu")
+    monkeypatch.setattr(config, "TUTOR_AI_PROVIDER", "gemini")
+    r = tutor.turn({"problem_id": "ml-provider", "action": "hint", "step": 0}, ai=tutor.ai_chat)
+    assert r["source"] == "script" and r["reply"] and "length" in r["ai_error"]
+
+
+@pytest.mark.parametrize("choice,deepseek,gemini,expected", [
+    ("", "", "", None), ("", "sk-a", "", "deepseek"), ("", "", "AQ.b", "gemini"), ("", "sk-a", "AQ.b", "deepseek"),
+    ("gemini", "sk-a", "AQ.b", "gemini"), ("gemini", "sk-a", "", None), ("deepseek", "", "AQ.b", None),
+])
+def test_provider_selection(monkeypatch, choice, deepseek, gemini, expected):
+    monkeypatch.setattr(config, "TUTOR_AI_PROVIDER", choice)
+    monkeypatch.setattr(config, "DEEPSEEK_API_KEY", deepseek)
+    monkeypatch.setattr(config, "GEMINI_API_KEY", gemini)
+    assert config.tutor_provider() == expected and config.tutor_ai_configured() is (expected is not None)
+
+
+def test_ai_chat_dispatches_to_active_provider(monkeypatch):
+    monkeypatch.setattr(tutor, "gemini_chat", lambda m: "dari gemini")
+    monkeypatch.setattr(tutor, "deepseek_chat", lambda m: "dari deepseek")
+    monkeypatch.setattr(config, "DEEPSEEK_API_KEY", "sk-a")
+    monkeypatch.setattr(config, "GEMINI_API_KEY", "AQ.b")
+    monkeypatch.setattr(config, "TUTOR_AI_PROVIDER", "gemini")
+    assert tutor.ai_chat([]) == "dari gemini"
+    monkeypatch.setattr(config, "TUTOR_AI_PROVIDER", "deepseek")
+    assert tutor.ai_chat([]) == "dari deepseek"
+    monkeypatch.setattr(config, "DEEPSEEK_API_KEY", "")
+    with pytest.raises(tutor.TutorAIError):
+        tutor.ai_chat([])
+
+
 # ---------------------------------------------------------------------------
 # API
 # ---------------------------------------------------------------------------
@@ -198,6 +291,23 @@ def test_api_status_never_exposes_key(client, student, monkeypatch):
     monkeypatch.setattr(config, "DEEPSEEK_API_KEY", "sk-rahasia-123")
     r = client.get("/api/tutor/status", headers=student)
     assert r.json()["ai"] is True and "sk-rahasia" not in r.text
+    assert r.json()["provider"] == "DeepSeek" and r.json()["model"] == "deepseek-flash"
+    monkeypatch.setattr(config, "GEMINI_API_KEY", "AQ.rahasia-456")
+    monkeypatch.setattr(config, "TUTOR_AI_PROVIDER", "gemini")
+    r = client.get("/api/tutor/status", headers=student)
+    assert r.json()["provider"] == "Gemini" and r.json()["model"] == "gemini-3.5-flash-lite"
+    assert "AQ.rahasia" not in r.text and "sk-rahasia" not in r.text
+    assert "AQ.rahasia" not in client.get("/api/health").text
+
+
+def test_api_turn_with_fake_gemini(client, student, monkeypatch):
+    monkeypatch.setattr(config, "GEMINI_API_KEY", "AQ.uji")
+    monkeypatch.setattr(config, "TUTOR_AI_PROVIDER", "gemini")
+    monkeypatch.setattr(tutor, "gemini_chat", lambda msgs: "Coba lihat lagi: angka mana yang dibayar sekali saja?")
+    r = client.post("/api/tutor/turn", headers=student,
+                    json={"problem_id": "ml-taksi", "step": 4, "message": "f(x) = 8.000x + 4.500"})
+    assert r.status_code == 200 and r.json()["source"] == "ai" and r.json()["ok"] is False
+    assert "AQ.uji" not in r.text
 
 
 def test_api_turn_without_key_uses_guided_mode(client, student, monkeypatch):
@@ -214,7 +324,8 @@ def test_api_turn_without_key_uses_guided_mode(client, student, monkeypatch):
 
 def test_api_turn_with_fake_deepseek_counts_quota(client, student, monkeypatch):
     monkeypatch.setattr(config, "DEEPSEEK_API_KEY", "sk-uji")
-    monkeypatch.setattr(config, "TUTOR_DAILY_QUOTA", 2)
+    used = config.TUTOR_DAILY_QUOTA - client.get("/api/tutor/status", headers=student).json()["remaining"]
+    monkeypatch.setattr(config, "TUTOR_DAILY_QUOTA", used + 2)  # tes lain hari ini mungkin sudah memakai kuota
     monkeypatch.setattr(tutor, "deepseek_chat", lambda msgs: "Coba ingat lagi: berapa menit dalam satu jam?")
     before = client.get("/api/tutor/status", headers=student).json()["remaining"]
     r = client.post("/api/tutor/turn", headers=student, json={"problem_id": "ml-suhu", "action": "hint", "step": 3})

@@ -1,5 +1,5 @@
 // Asisten Belajar: chatbot pembimbing soal Mathematical Literacy dengan model RMT
-// (Rigorous Mathematical Thinking). Versi server memakai DeepSeek (kunci di .env backend);
+// (Rigorous Mathematical Thinking). Versi server memakai Gemini atau DeepSeek (kunci di .env backend);
 // versi GitHub Pages memakai mode terpandu tanpa AI. Penilaian tiap langkah selalu oleh mesin.
 //
 // Pengelolaan beban kognitif di halaman ini:
@@ -47,8 +47,8 @@ export async function tutorView(main, _params, ctx) {
       body.append(h("div", { class: "alert info" }, icon("info"), h("div", null,
         h("div", { class: "alert-title" }, status.static ? "Versi online: mode terpandu" : "AI belum aktif di server ini"),
         h("p", { class: "small", style: { margin: 0 } }, status.static
-          ? "Di versi ini Wen memakai petunjuk tertulis. Asisten berbasis DeepSeek aktif di versi server, karena kunci API wajib disimpan di file .env server."
-          : "Isi DEEPSEEK_API_KEY di file .env server untuk mengaktifkan balasan AI. Sementara itu Wen memakai petunjuk tertulis."))));
+          ? "Di versi ini Wen memakai petunjuk tertulis. Balasan AI (Gemini atau DeepSeek) aktif di versi server, karena kunci API wajib disimpan di file .env server."
+          : "Isi GEMINI_API_KEY atau DEEPSEEK_API_KEY di file .env server untuk mengaktifkan balasan AI. Sementara itu Wen memakai petunjuk tertulis."))));
     }
     body.append(h("h2", { class: "section-title" }, "Pilih soal"),
       h("div", { class: "tutor-grid" }, cat.problems.map((p) =>
@@ -72,8 +72,8 @@ export async function tutorView(main, _params, ctx) {
     return h("section", { class: "card" },
       h("h2", null, "Soal bebas"),
       h("p", { class: "muted small" }, status.free_mode
-        ? "Tulis soal matematikamu sendiri. Wen (DeepSeek) membimbing lewat 6 tahap RMT tanpa memberi jawabannya."
-        : "Mode ini memakai DeepSeek dan hanya aktif di versi server dengan kunci API di file .env."),
+        ? `Tulis soal matematikamu sendiri. Wen (AI ${status.provider}) membimbing lewat 6 tahap RMT tanpa memberi jawabannya.`
+        : "Mode ini memakai AI dan hanya aktif di versi server dengan kunci API di file .env."),
       h("label", { class: "sr-only", for: "tutor-free" }, "Soal bebas"), ta, h("div", { class: "row" }, go));
   }
 

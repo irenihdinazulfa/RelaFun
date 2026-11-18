@@ -135,6 +135,19 @@ Permintaan memakai `claude-opus-5-5`, *structured output* `json_schema`, `effort
 - **Uji peramban** (Chrome, WebKit/Safari, Firefox), versi online: Soal 2 dari awal sampai ringkasan; Soal 3 dengan lanjut setelah 3 kali mencoba; dashboard guru menampilkan usaha 3/5.
 - **Versi server dengan DeepSeek tiruan** (tanpa kunci asli): balasan berlabel "dibantu AI DeepSeek"; 59 permintaan memakai format benar; kunci dan kunci jawaban tidak sampai ke peramban; Soal Bebas berjalan.
 
+## 2g. Penyedia AI Gemini (versi 3.1)
+
+- **pytest**: 19 tes tambahan (total 51 tes asisten, 317 tes seluruhnya), meliputi:
+  - format permintaan Gemini: alamat, model, `reasoning_effort`, satu pesan sistem, tanpa parameter khas DeepSeek;
+  - kode galat 400/403/404/429 dan balasan kosong yang beralih ke petunjuk tertulis;
+  - pemilihan penyedia lewat `TUTOR_AI_PROVIDER` (7 kombinasi);
+  - percakapan selalu diakhiri pesan pengguna;
+  - status API menyebut penyedia tanpa membocorkan kunci.
+- **Uji peramban dengan Gemini tiruan** (Chrome, WebKit/Safari, Firefox): semua langkah lolos; label "AI Gemini aktif" dan "dibantu AI Gemini" tampil; kunci tidak sampai ke peramban. Pesan kuota habis juga tampil benar setelah 60 balasan.
+- **Gemini sungguhan** (`gemini-3.5-flash-lite`):
+  - uji pertama menemukan 2 balasan ditolak (kode 400) saat siswa hanya menekan tombol, karena Gemini mewajibkan pesan pengguna di akhir percakapan;
+  - masalah itu diperbaiki, lalu uji ulang: 15 dari 15 panggilan AI berhasil (sekitar 1 detik per balasan) dan tidak ada jawaban yang bocor.
+
 ## 3. Belum diuji
 
 - Panggilan **Claude API sungguhan** (diuji dengan respons tiruan; butuh kunci API).

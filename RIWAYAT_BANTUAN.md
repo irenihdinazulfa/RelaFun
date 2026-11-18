@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–18 November 2026 (empat puluh dua permintaan) |
+| Tanggal | 12–18 November 2026 (empat puluh enam permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -941,3 +941,56 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - versi server dengan DeepSeek tiruan: 59 permintaan berformat benar, kunci tidak sampai ke peramban;
   - semua uji lama lolos (25 langkah e2e di 3 mesin, game, pasang aplikasi, luring, Mode AI, Wen, 5 perangkat tiruan).
 - **Catatan:** DeepSeek sungguhan belum diuji karena butuh kunci berbayar milik pengguna. Kunci itu harus diisi sendiri di `.env`, tidak boleh dikirim ke asisten.
+
+---
+
+## Permintaan 43–44 — DeepSeek tanpa biaya? dan ruang penyimpanan laptop (18 November 2026)
+
+### 👤 Pengguna
+
+> kalo kamu yang buat deepseek tanpa berbayar bisa?
+
+> laptop ku udah kesedot berapa gb nih
+
+### 🤖 Asisten
+
+- Asisten tidak bisa membuat akun atau kunci DeepSeek atas nama pengguna. Tiga pilihan dijelaskan:
+  1. akun DeepSeek sendiri (saldo gratis untuk akun baru belum pasti; biayanya kurang dari Rp100 per sesi);
+  2. model DeepSeek kecil di laptop lewat Ollama (gratis, tetapi lambat tanpa kartu grafis dan perlu unduhan sekitar 5 GB);
+  3. mode terpandu tanpa AI.
+- OpenRouter diperiksa, dan saat itu tidak menyediakan model DeepSeek gratis.
+- Ruang yang terpakai oleh pengerjaan proyek sekitar **1,3 GB**:
+  - folder proyek 0,17 GB (sebagian besar lingkungan Python server);
+  - peramban uji Playwright 0,53 GB;
+  - folder sementara uji 0,47 GB;
+  - riwayat sesi 0,11 GB.
+- Sisa ruang drive C 325 GB. Sekitar 1 GB (peramban uji dan folder sementara) bisa dihapus setelah Tahap 2 selesai.
+
+---
+
+## Permintaan 45–46 — Memakai Gemini sebagai AI Asisten Belajar (18 November 2026)
+
+### 👤 Pengguna
+
+> aku jadinya pake gemini aja
+
+> [kunci API Gemini disensor dari riwayat ini] itu api key gemini ku tolong sambungin
+
+### 🤖 Asisten
+
+- **Kunci Gemini ditulis hanya ke file `.env`**, sesuai arahan dosen. File itu dikecualikan dari GitHub (diperiksa dengan `git check-ignore`). Kunci tidak ditulis di kode, di dokumen, maupun di riwayat ini.
+- Kunci diperiksa ke Google dan diterima. Dari model yang tersedia, dipilih `gemini-3.5-flash-lite` dengan berpikir minimal (balasan sekitar 1 detik). `gemini-4-hydrogen` juga dicoba, tetapi butuh 35 detik per balasan.
+- **Penyedia AI kini bisa dipilih** dengan `TUTOR_AI_PROVIDER=gemini` atau `deepseek` di `.env`:
+  - DeepSeek tetap didukung, sehingga arahan dosen soal DeepSeek tetap bisa dipenuhi;
+  - Gemini dipanggil lewat endpoint kompatibel OpenAI resmi Google;
+  - pesan sistem digabung menjadi satu;
+  - halaman Asisten menampilkan nama penyedia dari server ("AI Gemini aktif", "dibantu AI Gemini").
+- **Temuan dari uji Gemini sungguhan:** Gemini menolak permintaan tanpa pesan siswa (kode 400). Saat siswa hanya menekan tombol *Aku bingung* atau *Tahap berikutnya*, nama tombolnya kini dikirim sebagai pesan.
+- **Catatan aturan layanan:** ketentuan Gemini API mensyaratkan usia 18+ dan melarang pemakaian di aplikasi yang ditujukan untuk anak di bawah 18 tahun. Pada layanan gratis, data juga bisa dipakai Google dan dibaca peninjau manusia. Karena itu, Gemini gratis disarankan untuk pengembangan dan demonstrasi, bukan untuk siswa SMP sungguhan (dokumen 19, bagian 4).
+- Versi **3.1**. Dokumen yang diperbarui: 19, 10, 15, README, CLAUDE.md, dan `.env.example`.
+- **Pemeriksaan:**
+  - 317 tes pytest lolos (19 baru);
+  - uji peramban dengan Gemini tiruan di Chrome, WebKit, dan Firefox;
+  - uji regresi dengan DeepSeek tiruan dan versi online;
+  - sesi lengkap dengan Gemini sungguhan: 15 dari 15 panggilan AI berhasil, tanpa jawaban bocor, dan kunci tidak sampai ke peramban.
+
