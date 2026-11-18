@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–18 November 2026 (empat puluh enam permintaan) |
+| Tanggal | 12–18 November 2026 (lima puluh satu permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -993,4 +993,56 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - uji peramban dengan Gemini tiruan di Chrome, WebKit, dan Firefox;
   - uji regresi dengan DeepSeek tiruan dan versi online;
   - sesi lengkap dengan Gemini sungguhan: 15 dari 15 panggilan AI berhasil, tanpa jawaban bocor, dan kunci tidak sampai ke peramban.
+
+---
+
+## Permintaan 47–50 — Mengganti kunci Gemini dan memahami dua versi aplikasi (18 November 2026)
+
+### 👤 Pengguna
+
+> (tangkapan layar halaman API Keys di Google AI Studio) setelah ini apa
+
+> .env dimana
+
+> sudah
+
+> sudah saya jalankan semua tapi kok app nya bukan yang ini yahttps://irenihdinazulfa.github.io/RelaFun/
+
+### 🤖 Asisten
+
+- Kunci yang sempat terkirim di chat diganti dengan kunci baru:
+  - pengguna menempelkan sendiri kunci baru ke `.env` (file dibukakan di VS Code);
+  - asisten memeriksa kunci baru tanpa menampilkan isinya: satu baris, tanpa spasi atau kutip, dan Gemini membalas;
+  - kunci lama disarankan dihapus di AI Studio.
+- Dijelaskan bahwa http://localhost:8000 (server di laptop) dan link GitHub Pages adalah aplikasi yang sama (v3.1). Perbedaannya hanya AI:
+  - di laptop: "AI Gemini aktif";
+  - di GitHub Pages: "Mode terpandu", karena kunci API tidak boleh berada di GitHub.
+- Dibuktikan dengan tangkapan layar berdampingan.
+
+---
+
+## Permintaan 51 — Alamat http://relafun dan palet "pastel kalem" (18 November 2026)
+
+### 👤 Pengguna
+
+> okey sekarang tinggal nama app nya aja yang diubah agar lebih bagus jangan localhost dan based warnanya disesuaikan lagi agar tidak terlalu anak2 tapi tetep pastel sesuai untuk anak smp
+
+### 🤖 Asisten
+
+- **Alamat:** pengguna memilih **http://relafun** dari tiga pilihan, yaitu Render online, `http://relafun`, dan `relafun.localhost`.
+  - `start.ps1` menambahkan `127.0.0.1 relafun` ke file hosts Windows sekali, dengan izin Administrator.
+  - Server berjalan di port 80 (tanpa ":8000") dan peramban membuka http://relafun.
+  - Bila izin ditolak atau port 80 terpakai, aplikasi otomatis memakai http://localhost:8000.
+  - Konsekuensi yang disampaikan sebelum memilih: label "Tidak aman" dan fitur pasang aplikasi/luring tidak aktif di alamat itu (aturan browser).
+- **Palet "pastel kalem" (versi 3.2):**
+  - gradasi pelangi pink → peach → kuning → biru diganti mint-sage + biru langit, dengan aksen aprikot;
+  - teks slate gelap, tanpa ungu, pink hanya aksen kecil;
+  - mode gelap memakai slate netral;
+  - ikon aplikasi (SVG dan PNG) dibuat ulang dengan warna yang sama;
+  - kontras teks tetap ≥ 4,5:1.
+- **Pemeriksaan:**
+  - semua uji peramban lolos: e2e 25 langkah, Asisten, maskot/footer, pasang aplikasi, luring, 5 perangkat;
+  - aplikasi diuji di `http://relafun` port 80 dengan Gemini sungguhan;
+  - tangkapan layar desktop, HP, dan mode gelap diperiksa.
+- Dokumen yang diperbarui: 06 (palet), 10, 15, 19, README, dan CLAUDE.md.
 

@@ -1,6 +1,9 @@
 # Menjalankan RelaFun di Windows.
 # Pemakaian:  klik dua kali start.bat   ATAU   powershell -ExecutionPolicy Bypass -File scripts\start.ps1
-param([int]$Port = 8000, [switch]$NoBrowser)
+# Alamat: http://relafun (nama "relafun" ditambahkan ke file hosts Windows sekali, dengan izin Administrator).
+# Bila izin tidak diberikan atau port 80 terpakai, aplikasi tetap jalan di http://localhost:8000.
+#   -Port 8000   memakai port tertentu      -NoAlias   tidak membuat alamat http://relafun
+param([int]$Port = 0, [switch]$NoBrowser, [switch]$NoAlias)
 
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
@@ -45,18 +48,44 @@ if (-not (Test-Path $stamp) -or (Get-Content $stamp) -ne $hash) {
 $envFile = Join-Path $Root ".env"
 if (-not (Test-Path $envFile)) { Copy-Item (Join-Path $Root ".env.example") $envFile }
 
-# 4. Alamat untuk HP di jaringan Wi-Fi yang sama
+# 4. Alamat http://relafun: tambahkan "127.0.0.1 relafun" ke file hosts (sekali saja, perlu izin Administrator)
+$HostsFile = Join-Path $env:SystemRoot "System32\drivers\etc\hosts"
+function Test-RelafunAlias {
+  (Test-Path $HostsFile) -and (Select-String -LiteralPath $HostsFile -Pattern '^\s*127\.0\.0\.1\s+relafun(\s|$)' -Quiet)
+}
+$alias = Test-RelafunAlias
+if (-not $alias -and -not $NoAlias) {
+  Write-Host "Membuat alamat http://relafun (sekali saja). Klik 'Ya' pada jendela izin Windows." -ForegroundColor Yellow
+  $line = "127.0.0.1 relafun  # RelaFun (dibuat oleh scripts\start.ps1)"
+  $script = "Add-Content -LiteralPath '$HostsFile' -Value ([Environment]::NewLine + '$line') -Encoding ASCII; ipconfig /flushdns | Out-Null"
+  $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($script))
+  try {
+    Start-Process powershell -Verb RunAs -Wait -WindowStyle Hidden -ArgumentList "-NoProfile -EncodedCommand $encoded"
+  } catch {
+    Write-Host "Izin tidak diberikan ($($_.Exception.Message)). Aplikasi memakai alamat localhost." -ForegroundColor Yellow
+  }
+  $alias = Test-RelafunAlias
+}
+if ($Port -eq 0) {
+  $busy80 = Get-NetTCPConnection -LocalPort 80 -State Listen -ErrorAction SilentlyContinue
+  $Port = if ($alias -and -not $busy80) { 80 } else { 8000 }
+}
+$HostName = if ($alias) { "relafun" } else { "localhost" }
+$Suffix = if ($Port -eq 80) { "" } else { ":$Port" }
+$Url = "http://$HostName$Suffix/"
+
+# 5. Alamat untuk HP di jaringan Wi-Fi yang sama
 $ips = Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
   Where-Object { $_.IPAddress -notlike "127.*" -and $_.IPAddress -notlike "169.254.*" -and $_.PrefixOrigin -ne "WellKnown" } |
   Select-Object -ExpandProperty IPAddress
 Write-Host ""
-Write-Host "Buka di komputer ini : http://localhost:$Port" -ForegroundColor Green
-foreach ($ip in $ips) { Write-Host "Buka dari HP (Wi-Fi sama): http://${ip}:$Port" -ForegroundColor Green }
+Write-Host "Buka di komputer ini : $Url" -ForegroundColor Green
+foreach ($ip in $ips) { Write-Host "Buka dari HP (Wi-Fi sama): http://$ip$Suffix" -ForegroundColor Green }
 Write-Host "Akun demo  siswa / siswa123   |   guru / guru123   |   kode kelas RF8A26"
 Write-Host "Tekan Ctrl+C untuk berhenti."
 Write-Host ""
 
-if (-not $NoBrowser) { Start-Job -ScriptBlock { param($p) Start-Sleep 3; Start-Process "http://localhost:$p" } -ArgumentList $Port | Out-Null }
+if (-not $NoBrowser) { Start-Job -ScriptBlock { param($u) Start-Sleep 3; Start-Process $u } -ArgumentList $Url | Out-Null }
 
 Push-Location $Api
 try {

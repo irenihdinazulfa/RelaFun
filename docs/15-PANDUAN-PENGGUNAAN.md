@@ -25,7 +25,7 @@ Catatan versi online (GitHub Pages):
   3. Tulis deskripsi soal di kotak **Deskripsi soal**, lalu ketuk **Modelkan dengan AI**.
   4. Muncul kartu **Model matematika** (variabel, rumus fungsi, pertanyaan), pemeriksaan model, dan penyelesaian langkah demi langkah.
 
-Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 3.1**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
+Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 3.2**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
 
 ## A. Menjalankan versi server (komputer Windows)
 
@@ -33,7 +33,11 @@ Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. 
 2. Buka folder `iren_ihdina_zulfa`, lalu **klik dua kali `start.bat`**.
    - Pertama kali: skrip menyiapkan lingkungan Python dan memasang paket (butuh internet, ± 1–3 menit).
    - Berikutnya: langsung jalan.
-3. Peramban terbuka ke **http://localhost:8000**. Jendela hitam harus tetap terbuka selama aplikasi dipakai. Tekan **Ctrl+C** di jendela itu untuk berhenti.
+3. Saat pertama kali, muncul jendela izin Windows untuk membuat alamat `relafun`. Klik **Ya**; ini cukup sekali.
+4. Peramban terbuka ke **http://relafun**. Jendela hitam harus tetap terbuka selama aplikasi dipakai. Tekan **Ctrl+C** di jendela itu untuk berhenti.
+   - Mengetik sendiri di peramban: tulis `relafun/` (dengan garis miring) atau `http://relafun`. Tanpa garis miring, peramban mengira itu kata pencarian.
+   - Bila izin tidak diberikan atau port 80 sedang dipakai program lain, alamatnya tetap **http://localhost:8000**.
+   - Di alamat `http://relafun`, browser memberi label "Tidak aman" (karena bukan https) serta mematikan fitur pasang aplikasi dan luring. Semua fitur belajar dan AI tetap berjalan. Untuk memasang aplikasi di HP, gunakan versi online.
 
 Alternatif lewat PowerShell:
 ```powershell

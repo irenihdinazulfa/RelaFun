@@ -246,7 +246,7 @@ export function gameView(main, _p, ctx) {
 
   function confetti() {
     const box = h("div", { class: "confetti", "aria-hidden": "true" });
-    const colors = ["#ffc4dc", "#ffe27a", "#ffd1b8", "#bfe0ff", "#ffb3cf"];
+    const colors = ["#bfe3d8", "#cfe4f1", "#fbe8dc", "#faf1d2", "#8cc9b8"];
     for (let k = 0; k < 36; k++) {
       const p = h("i");
       p.style.left = `${Math.random() * 100}%`;

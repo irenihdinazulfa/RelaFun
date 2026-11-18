@@ -148,6 +148,16 @@ Permintaan memakai `claude-opus-5-5`, *structured output* `json_schema`, `effort
   - uji pertama menemukan 2 balasan ditolak (kode 400) saat siswa hanya menekan tombol, karena Gemini mewajibkan pesan pengguna di akhir percakapan;
   - masalah itu diperbaiki, lalu uji ulang: 15 dari 15 panggilan AI berhasil (sekitar 1 detik per balasan) dan tidak ada jawaban yang bocor.
 
+## 2h. Palet pastel kalem dan alamat http://relafun (versi 3.2)
+
+- Uji e2e 25 langkah, Asisten (termasuk uji silang 1.698 kasus), maskot dan footer v3.2, pasang aplikasi, luring, dan 5 perangkat tiruan: semua lolos dengan palet baru.
+- Tangkapan layar halaman masuk, beranda, Asisten (desktop, HP, mode gelap), materi, dan game diperiksa secara visual.
+- Server di port 80, dibuka sebagai `http://relafun` (nama dipetakan di Chrome):
+  - aplikasi berjalan tanpa galat dan footer v3.2;
+  - Asisten menampilkan "AI Gemini aktif" dan Gemini membalas;
+  - service worker memang tidak tersedia, karena bukan konteks aman, dan aplikasi tetap berjalan.
+- `start.ps1`: bila izin Administrator tidak diberikan, aplikasi otomatis memakai http://localhost:8000 (diuji).
+
 ## 3. Belum diuji
 
 - Panggilan **Claude API sungguhan** (diuji dengan respons tiruan; butuh kunci API).

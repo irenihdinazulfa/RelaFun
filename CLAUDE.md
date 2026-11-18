@@ -6,9 +6,9 @@ Backend Python FastAPI (`apps/api`), frontend JavaScript ES modules tanpa build 
 Bahasa antarmuka & konten: **Bahasa Indonesia** sederhana untuk siswa usia 13–14 tahun.
 
 ## Perintah
-- Jalankan: `start.bat` atau `powershell -ExecutionPolicy Bypass -File scripts\start.ps1` → http://localhost:8000
+- Jalankan: `start.bat` atau `powershell -ExecutionPolicy Bypass -File scripts\start.ps1` → http://relafun (port 80; nama `relafun` ditambahkan ke file hosts sekali dengan izin Administrator). Cadangan: http://localhost:8000 (`-Port 8000`, `-NoAlias`)
 - Tes: `cd apps\api && .venv\Scripts\python -m pytest -q` (harus 100% lolos sebelum selesai)
-- Dokumentasi API: http://localhost:8000/api/docs
+- Dokumentasi API: http://relafun/api/docs (atau http://localhost:8000/api/docs)
 
 ## Aturan wajib
 1. **Penilaian selalu deterministik** di `app/core/checker.py` / `mathfn.py` (SymPy). AI tidak boleh menentukan benar/salah.
@@ -21,6 +21,7 @@ Bahasa antarmuka & konten: **Bahasa Indonesia** sederhana untuk siswa usia 13–
 8. Umpan balik: bahasa sehari-hari, kalimat pendek, menyebut letak kesalahan, tidak menyalahkan.
 9. Format angka Indonesia: koma desimal, titik ribuan (`fmt()` di Python, `fmt()` di `dom.js`).
 10. Status benar/salah tidak boleh hanya warna, selalu disertai ikon + teks.
+    Palet "pastel kalem" (v3.2): mint-sage + biru langit, aksen aprikot, teks slate. Tanpa ungu, tanpa gradasi pelangi, pink hanya aksen kecil. Warna hanya lewat token di `:root` (`css/app.css`); rincian di docs/06.
 
 11. **Dua mesin harus identik**: setiap perubahan di `apps/api/app/core/{mathfn,checker,modeler,tutor}.py` wajib diterapkan juga di `apps/web/js/local/{mathfn,checker,modeler,tutor}.js` (versi GitHub Pages), lalu uji silang. Terbitkan ulang versi online dengan `python scripts/deploy_pages.py`.
 

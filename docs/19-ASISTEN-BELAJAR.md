@@ -46,7 +46,7 @@ Siswa mengetik ─▶ server: check_step() ──▶ BENAR  → pujian + langkah
 
 ## 4. Mengaktifkan AI (versi server)
 
-Buka file **`.env`** di folder proyek (dibuat otomatis oleh `start.bat` dari `.env.example`), isi salah satu pilihan di bawah, lalu jalankan ulang `start.bat` dan buka http://localhost:8000 → **Asisten**. Tanda di kanan atas berubah menjadi **AI Gemini aktif** atau **AI DeepSeek aktif**.
+Buka file **`.env`** di folder proyek (dibuat otomatis oleh `start.bat` dari `.env.example`), isi salah satu pilihan di bawah, lalu jalankan ulang `start.bat` dan buka http://relafun (atau http://localhost:8000) → **Asisten**. Tanda di kanan atas berubah menjadi **AI Gemini aktif** atau **AI DeepSeek aktif**.
 
 **Pilihan A — Gemini (gratis, dipakai saat ini):**
 

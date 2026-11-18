@@ -6,7 +6,7 @@ Aplikasi belajar matematika untuk siswa SMP kelas 8 materi **Relasi dan Fungsi**
 |---|---|
 | Pengembang | Iren Ihdina Zulfa (NIM 2225250019), kelas 3E |
 | Teknologi | Python (FastAPI, SymPy, SQLAlchemy) + JavaScript (PWA, tanpa build) |
-| Status | Versi 3.1 — 317 tes otomatis, 1.209 + 1.698 kasus uji silang Python–JavaScript, uji peramban Chrome/Safari/Firefox lolos |
+| Status | Versi 3.2 — 317 tes otomatis, 1.209 + 1.698 kasus uji silang Python–JavaScript, uji peramban Chrome/Safari/Firefox lolos |
 
 ## 📱 Coba langsung (tanpa instal apa pun)
 
@@ -21,7 +21,9 @@ Versi online ini berjalan sepenuhnya di peramban: setelah dibuka sekali, aplikas
 
 ## Menjalankan versi server (Windows)
 
-**Klik dua kali `start.bat`**, lalu buka http://localhost:8000.
+**Klik dua kali `start.bat`**. Peramban terbuka ke **http://relafun**.
+
+Saat pertama dijalankan, Windows meminta izin Administrator sekali untuk membuat alamat `relafun`; klik **Ya**. Bila izin tidak diberikan atau port 80 sedang dipakai, aplikasi tetap jalan di http://localhost:8000. Fitur pasang aplikasi dan luring hanya tersedia di localhost atau https (aturan browser); untuk itu gunakan versi online.
 
 Cara lain:
 ```powershell
