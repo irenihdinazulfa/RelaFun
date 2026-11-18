@@ -70,10 +70,10 @@ Semua karakter **orisinal**, digambar langsung sebagai SVG (`apps/web/js/mascot.
 
 | Teman | Karakter | Ciri | Muncul di |
 |---|---|---|---|
-| Lulu | anak kucing oranye | garis-garis di dahi & pipi, kalung biru berlonceng | kepala halaman Materi |
+| Oya | anak kucing oranye | garis-garis di dahi & pipi, kalung biru berlonceng | kepala halaman Materi |
 | Momo | beruang madu | syal biru, memegang pensil | kepala halaman Kalkulator f(x) |
 | Ciko | anak ayam | jambul 3 helai, bunga pink di kepala, sayap terangkat | kepala halaman Pemodel Soal Cerita |
-| Pia | aksolotl pink | insang berumbai, gelembung air | kepala halaman Glosarium |
+| Puyo | aksolotl pink bergaya chibi | insang bulat seperti kelopak (tidak runcing), mata besar berkilau, rambut ikal di ubun-ubun, memeluk buku kecil, gelembung air | kepala halaman Glosarium |
 | Kopi | anak anjing corgi | telinga tegak, belang putih, lidah menjulur, liontin hati | kepala halaman Peringkat Kelas |
 
 Wen dan kelima temannya tampil bersama sebagai **kolase stiker** di tiga tempat:

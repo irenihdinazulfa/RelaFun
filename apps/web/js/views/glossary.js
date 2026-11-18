@@ -8,7 +8,7 @@ export async function glossaryView(main) {
   const search = h("input", { class: "input", type: "search", placeholder: "Cari istilah, mis. range", "aria-label": "Cari istilah", style: { maxWidth: "360px" } });
   const grid = h("div", { class: "gloss-grid" });
   main.append(h("div", { class: "page-head" },
-    h("div", { class: "ph-title" }, friendButton("pia", "friend ph-friend"), h("div", null, h("h1", null, "Glosarium"), h("p", null, "Istilah matematika dengan bahasa yang lebih sederhana."))), search), grid);
+    h("div", { class: "ph-title" }, friendButton("puyo", "friend ph-friend"), h("div", null, h("h1", null, "Glosarium"), h("p", null, "Istilah matematika dengan bahasa yang lebih sederhana."))), search), grid);
 
   function render() {
     const q = search.value.trim().toLowerCase();

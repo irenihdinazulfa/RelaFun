@@ -6,16 +6,16 @@ import { kit, mascot, tapMascot } from "./mascot.js";
 const { INK, C, O, line, starPath, sparkle, heart, eyeDot, blush, paw, band } = kit;
 
 export const FRIEND_INFO = {
-  lulu: { name: "Lulu", kind: "anak kucing oranye", desc: "Teliti mengecek: setiap anggota domain punya tepat satu pasangan.", page: "Materi" },
+  oya: { name: "Oya", kind: "anak kucing oranye", desc: "Teliti mengecek: setiap anggota domain punya tepat satu pasangan.", page: "Materi" },
   momo: { name: "Momo", kind: "beruang madu", desc: "Suka berhitung pelan-pelan, langkah demi langkah.", page: "Kalkulator f(x)" },
   ciko: { name: "Ciko", kind: "anak ayam", desc: "Senang membaca soal cerita dan menandai angka penting.", page: "Pemodel Soal Cerita" },
-  pia: { name: "Pia", kind: "aksolotl", desc: "Suka bertanya arti istilah yang sulit.", page: "Glosarium" },
+  puyo: { name: "Puyo", kind: "aksolotl", desc: "Suka bertanya arti istilah yang sulit, selalu membawa buku kecilnya.", page: "Glosarium" },
   kopi: { name: "Kopi", kind: "anak anjing corgi", desc: "Paling semangat menyoraki teman-temannya.", page: "Peringkat Kelas" },
 };
 export const FRIENDS = Object.keys(FRIEND_INFO);
 
-// ------------------------------------------------------------------ Lulu: anak kucing oranye bergaris
-function lulu() {
+// ------------------------------------------------------------------ Oya: anak kucing oranye bergaris
+function oya() {
   const F = "#ffc890", S = "#f0a05a", W = "#fffaf3", P = "#ffb3c8";
   return line("M132 176C162 180 170 150 152 136", 15) + line("M132 176C162 180 170 150 152 136", 6.5, F)
     + line("M160 150l7 1M160 160l7 -2", 3, S)
@@ -77,21 +77,31 @@ function ciko() {
     + line("M88 152q4 4 8 0q4 4 8 0q4 4 8 0", 3, "#f2cf63");
 }
 
-// ------------------------------------------------------------------ Pia: aksolotl pink
-function pia() {
-  const P = "#ffc6dd", G = "#ff9cc4", BL = "#ffe6f0", BU = "#d6eeff";
-  const gills = [[46, 76, -30], [38, 100, 0], [46, 124, 30], [154, 76, 30], [162, 100, 0], [154, 124, -30]]
-    .map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="15" ry="7.5" transform="rotate(${r} ${x} ${y})" fill="${G}" ${O(4)}/>`).join("");
-  return gills + line("M130 170C160 176 172 156 166 138", 17) + line("M130 170C160 176 172 156 166 138", 8, P)
-    + `<ellipse cx="100" cy="162" rx="33" ry="25" fill="${P}" ${O(5)}/>
-    <ellipse cx="100" cy="167" rx="18" ry="13" fill="${BL}"/>
-    <ellipse cx="86" cy="184" rx="11" ry="6.5" fill="${P}" ${O(4)}/><ellipse cx="114" cy="184" rx="11" ry="6.5" fill="${P}" ${O(4)}/>
-    <ellipse cx="100" cy="102" rx="56" ry="46" fill="${P}" ${O(5.5)}/>
-    <circle cx="84" cy="72" r="3.2" fill="${G}"/><circle cx="100" cy="67" r="3.6" fill="${G}"/><circle cx="116" cy="72" r="3.2" fill="${G}"/>`
-    + eyeDot(72, 102) + eyeDot(128, 102) + line("M84 116Q100 127 116 116", 3.2) + blush(58, 116) + blush(142, 116)
-    + `<ellipse cx="74" cy="160" rx="7" ry="10" transform="rotate(25 74 160)" fill="${P}" ${O(4)}/>
-    <ellipse cx="126" cy="160" rx="7" ry="10" transform="rotate(-25 126 160)" fill="${P}" ${O(4)}/>
-    <circle cx="166" cy="54" r="7" fill="${BU}" ${O(2.6)}/><circle cx="163.6" cy="51.6" r="2" fill="#fff"/>
+// ------------------------------------------------------------------ Puyo: aksolotl mungil pembawa buku istilah
+// Gaya chibi: insang bulat seperti kelopak (bukan runcing), mata besar berkilau yang berdekatan,
+// senyum kecil terbuka, rambut ikal di ubun-ubun, memeluk buku kecil (Glosarium).
+function puyo() {
+  const P = "#ffd6e3", G = "#ffabc8", GL = "#ffd0e0", BL = "#fff2f6", BU = "#d6eeff", BK = "#cfe4f1", PG = "#ffffff";
+  const gill = (x, y, r) => `<g transform="rotate(${r} ${x} ${y})"><ellipse cx="${x}" cy="${y}" rx="14" ry="9.5" fill="${G}" ${O(4)}/>`
+    + `<ellipse cx="${x}" cy="${y - 1.5}" rx="7" ry="3.8" fill="${GL}"/></g>`;
+  const gills = gill(45, 80, 35) + gill(38, 103, 5) + gill(45, 126, -25) + gill(155, 80, -35) + gill(162, 103, -5) + gill(155, 126, 25);
+  const bigEye = (x, y) => eyeDot(x, y, { rx: 6.6, ry: 8.2 }) + `<circle cx="${x + 2.6}" cy="${y + 3.4}" r="1.5" fill="#fff"/>`;
+  return line("M126 172C150 180 170 166 166 144", 17) + line("M126 172C150 180 170 166 166 144", 8, P)
+    + gills
+    + `<ellipse cx="100" cy="164" rx="34" ry="24" fill="${P}" ${O(5)}/>
+    <ellipse cx="100" cy="171" rx="19" ry="12" fill="${BL}"/>
+    <ellipse cx="84" cy="186" rx="11" ry="7" fill="${P}" ${O(4.5)}/><ellipse cx="116" cy="186" rx="11" ry="7" fill="${P}" ${O(4.5)}/>
+    <ellipse cx="100" cy="104" rx="60" ry="50" fill="${P}" ${O(5.5)}/>`
+    + line("M100 55C93 46 96 36 105 38C111 40 109 48 103 47", 4.2)
+    + bigEye(79, 104) + bigEye(121, 104)
+    + `<path d="M92 118Q100 129 108 118Z" fill="${C.mouth}" ${O(3)}/>
+    <path d="M95.5 122.6Q100 127 104.5 122.6Q100 120.4 95.5 122.6Z" fill="${C.tongue}"/>`
+    + blush(62, 120) + blush(138, 120)
+    + `<rect x="79" y="146" width="42" height="27" rx="5" fill="${BK}" ${O(3.6)}/>
+    <rect x="83" y="149.5" width="15.5" height="20" rx="2.5" fill="${PG}"/><rect x="101.5" y="149.5" width="15.5" height="20" rx="2.5" fill="${PG}"/>`
+    + line("M100 148.5v22", 2.6) + line("M86.5 155h9M86.5 160.5h7M104.5 155h9M104.5 160.5h7", 2, "#8cbfe0")
+    + paw(80, 160, { fill: P, r: 7.5 }) + paw(120, 160, { fill: P, r: 7.5 })
+    + `<circle cx="166" cy="54" r="7" fill="${BU}" ${O(2.6)}/><circle cx="163.6" cy="51.6" r="2" fill="#fff"/>
     <circle cx="179" cy="35" r="4.6" fill="${BU}" ${O(2.4)}/><circle cx="157" cy="33" r="3.2" fill="${BU}" ${O(2.2)}/>`;
 }
 
@@ -112,7 +122,7 @@ function kopi() {
     + band("M64 146Q100 160 136 146", "#ff9cc4", 12) + heart(100, 158, 6, C.star, 2.4);
 }
 
-const DRAW = { lulu, momo, ciko, pia, kopi };
+const DRAW = { oya, momo, ciko, puyo, kopi };
 
 export function friend(id, cls = "friend") {
   const info = FRIEND_INFO[id];
@@ -138,7 +148,7 @@ export function friendButton(id, cls = "friend") {
 
 // ------------------------------------------------------------------ kolase stiker
 // Posisi dalam bidang 440 × 300: [id, kiri, atas, lebar]
-const SHEET = [["ciko", 8, 22, 96], ["lulu", 334, 14, 100], ["momo", 2, 168, 108], ["pia", 330, 172, 104], ["kopi", 120, 206, 92]];
+const SHEET = [["ciko", 8, 22, 96], ["oya", 334, 14, 100], ["momo", 2, 168, 108], ["puyo", 330, 172, 104], ["kopi", 120, 206, 92]];
 const DECOR = sparkle(118, 32, 10, "#ffb3cf") + sparkle(316, 124, 9, C.star) + sparkle(24, 140, 7, C.bow) + sparkle(420, 140, 7, "#ffb3cf")
   + `<path d="${starPath(120, 150, 11, 5)}" fill="${C.star}" ${O(2.4)}/><path d="${starPath(306, 40, 10, 4.6)}" fill="#ffb3cf" ${O(2.4)}/>`
   + heart(236, 262, 8, "#ffb3cf") + heart(318, 268, 6, C.heart)

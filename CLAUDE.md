@@ -33,7 +33,7 @@ Bahasa antarmuka & konten: **Bahasa Indonesia** sederhana untuk siswa usia 13–
 - `apps/api/app/core/modeler.py`: f(x) = ax + b (evaluate/compare/threshold/solve_for_x) + verifikasi
 - `apps/web/js/components/arrowDiagram.js`: diagram panah (static/animate/check/sets/edit)
 - `apps/web/js/mascot.js`: maskot Wen (SVG gaya doodle stiker, 18 ekspresi di `MOOD_INFO` + `SPEC`; `tapMascot()` = Wen yang bisa diketuk; `kit` = alat gambar bersama)
-- `apps/web/js/friends.js`: 5 teman Wen (Lulu, Momo, Ciko, Pia, Kopi) + `stickerSheet()` kolase stiker. Semua karakter harus orisinal: jangan meniru karakter berlisensi (mis. Sanrio)
+- `apps/web/js/friends.js`: 5 teman Wen (Oya, Momo, Ciko, Puyo, Kopi) + `stickerSheet()` kolase stiker. Semua karakter harus orisinal: jangan meniru karakter berlisensi (mis. Sanrio)
 - `apps/api/app/core/tutor.py` + `apps/web/js/local/tutor.js`: Asisten Belajar RMT (6 tahap, petunjuk bertingkat, penjaga jawaban, Gemini/DeepSeek); halaman `js/views/tutor.js`
 - `apps/web/js/version.js`: nomor versi (dipakai footer `components/footer.js`)
 - `apps/web/js/views/*.js`: halaman; `apps/web/sw.js`: cache PWA (perbarui `VERSION` dan daftar `SHELL` bila menambah file)

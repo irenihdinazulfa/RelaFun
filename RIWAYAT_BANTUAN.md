@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–18 November 2026 (lima puluh satu permintaan) |
+| Tanggal | 12–18 November 2026 (lima puluh dua permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -1045,4 +1045,27 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - aplikasi diuji di `http://relafun` port 80 dengan Gemini sungguhan;
   - tangkapan layar desktop, HP, dan mode gelap diperiksa.
 - Dokumen yang diperbarui: 06 (palet), 10, 15, 19, README, dan CLAUDE.md.
+
+---
+
+## Permintaan 52 — Pia menjadi Puyo yang lebih lucu, Lulu menjadi Oya (18 November 2026)
+
+### 👤 Pengguna
+
+> (tangkapan layar galeri Teman-teman Wen) ubah pia namanya jadi puyo dan ubah karakternya jadi lebih lucu, menurut saya terlalu serem karakter yang sekarang dan yg namanya lulu tolong ubah jadi oya
+
+### 🤖 Asisten
+
+- **Puyo** (sebelumnya Pia) digambar ulang dengan gaya chibi. Penyebab kesan seram pada gambar lama:
+  - 6 insang tipis panjang yang mencuat seperti duri;
+  - mata kecil yang berjauhan;
+  - 3 titik di dahi yang terlihat seperti mata tambahan.
+- Gambar baru:
+  - insang bulat seperti kelopak;
+  - mata besar berkilau yang lebih berdekatan;
+  - senyum kecil terbuka dan rambut ikal di ubun-ubun;
+  - memeluk buku kecil, sesuai tempatnya di halaman Glosarium.
+- **Oya** (sebelumnya Lulu): hanya namanya yang diganti, gambarnya tetap.
+- Nama baru muncul di galeri *Wen & Teman-teman*, kepala halaman Materi (Oya) dan Glosarium (Puyo), serta kolase stiker halaman masuk.
+- Versi **3.3**. Dokumen 06 dan CLAUDE.md diperbarui.
 

@@ -6,7 +6,7 @@ Aplikasi belajar matematika untuk siswa SMP kelas 8 materi **Relasi dan Fungsi**
 |---|---|
 | Pengembang | Iren Ihdina Zulfa (NIM 2225250019), kelas 3E |
 | Teknologi | Python (FastAPI, SymPy, SQLAlchemy) + JavaScript (PWA, tanpa build) |
-| Status | Versi 3.2 — 317 tes otomatis, 1.209 + 1.698 kasus uji silang Python–JavaScript, uji peramban Chrome/Safari/Firefox lolos |
+| Status | Versi 3.3 — 317 tes otomatis, 1.209 + 1.698 kasus uji silang Python–JavaScript, uji peramban Chrome/Safari/Firefox lolos |
 
 ## 📱 Coba langsung (tanpa instal apa pun)
 
