@@ -6,7 +6,7 @@ Aplikasi belajar matematika untuk siswa SMP kelas 8 materi **Relasi dan Fungsi**
 |---|---|
 | Pengembang | Iren Ihdina Zulfa (NIM 2225250019), kelas 3E |
 | Teknologi | Python (FastAPI, SymPy, SQLAlchemy) + JavaScript (PWA, tanpa build) |
-| Status | Versi 2.7 — 266 tes otomatis, 1.209 kasus uji silang Python–JavaScript, 25 skenario uji peramban lolos |
+| Status | Versi 3.0 — 298 tes otomatis, 1.209 + 1.698 kasus uji silang Python–JavaScript, uji peramban Chrome/Safari/Firefox lolos |
 
 ## 📱 Coba langsung (tanpa instal apa pun)
 
@@ -17,7 +17,7 @@ Aplikasi belajar matematika untuk siswa SMP kelas 8 materi **Relasi dan Fungsi**
 - **Laptop:** buka di Chrome/Edge → ikon instal di bilah alamat.
 - Di halaman masuk, klik **Masuk Akun Demo** atau **Masuk sebagai Guru Demo**.
 
-Versi online ini berjalan sepenuhnya di peramban: setelah dibuka sekali, aplikasi tetap bisa dipakai tanpa internet, dan data latihan tersimpan di masing-masing perangkat. **Mode AI**: tulis deskripsi soal → AI menyusun model matematika → mesin matematika memeriksa & menghitung. Aktif setelah kunci API Claude ditempel di *Mode AI* atau *Pengaturan → Fitur AI* (kunci hanya disimpan di perangkat itu). Dashboard guru untuk satu kelas sungguhan tersedia di versi server.
+Versi online ini berjalan sepenuhnya di peramban: setelah dibuka sekali, aplikasi tetap bisa dipakai tanpa internet, dan data latihan tersimpan di masing-masing perangkat. **Mode AI**: tulis deskripsi soal → AI menyusun model matematika → mesin matematika memeriksa & menghitung. Aktif setelah kunci API Claude ditempel di *Mode AI* atau *Pengaturan → Fitur AI* (kunci hanya disimpan di perangkat itu). **Asisten Belajar** (menu *Asisten*) membimbing 4 soal Mathematical Literacy lewat 6 tahap RMT. Di versi online asisten memakai petunjuk tertulis; balasan **AI DeepSeek** aktif di versi server karena kuncinya wajib disimpan di file `.env` backend. Dashboard guru untuk satu kelas sungguhan tersedia di versi server.
 
 ## Menjalankan versi server (Windows)
 
@@ -43,6 +43,7 @@ Panduan lengkap (HP, guru, AI, deploy): [docs/15-PANDUAN-PENGGUNAAN.md](docs/15-
 | **Kalkulator f(x) bertahap** + diagnosis salah tanda / tidak dikalikan / lupa konstanta | IL02, GL03 |
 | Materi **satu langkah per layar**, contoh bertahap, pembahasan setelah 2 kali mencoba | DS02, GL03 |
 | Istilah sulit dapat diketuk + **Glosarium** bahasa sederhana | EL03 |
+| 💬 **Asisten Belajar** (chatbot): 6 tahap *Rigorous Mathematical Thinking*, satu langkah per giliran, petunjuk 3 tingkat, 32 pola kesalahan khas, tanpa membocorkan jawaban; AI **DeepSeek** (kunci di `.env` server); skala usaha berpikir 1–5 untuk guru | Arahan dosen Tahap 2; IL/EL/GL; temuan jawaban S01 |
 | **Pemodel soal cerita** (terpandu 6 langkah; Mode AI: deskripsi soal → model matematika, diverifikasi & dihitung mesin) | EL01, literasi |
 | Modul prasyarat (himpunan, bilangan bulat, substitusi) | IL03 |
 | 3 modul literasi dari 4 soal lembar PISA | Literasi matematika |
@@ -87,6 +88,8 @@ RIWAYAT_BANTUAN.md        riwayat bantuan AI
 | 15 | [Panduan penggunaan](docs/15-PANDUAN-PENGGUNAAN.md) |
 | 16 | [Game “Lompat Wen”](docs/16-GAME-LOMPAT-WEN.md) |
 | 17 | [Instrumen penelitian (validasi ahli & uji coba)](docs/17-INSTRUMEN-PENELITIAN.md) — file siap cetak di [`instrumen/`](instrumen/) |
+| 18 | [Ringkasan Rigorous Mathematical Thinking (RMT)](docs/18-RINGKASAN-RMT.md) |
+| 19 | [Asisten Belajar: chatbot RMT + DeepSeek](docs/19-ASISTEN-BELAJAR.md) |
 | — | [Kunci jawaban acuan lembar soal](docs/JAWABAN_ACUAN_SOAL_RELASI_FUNGSI.md) |
 
 ## Pengujian

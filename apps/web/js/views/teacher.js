@@ -109,6 +109,21 @@ export async function teacherView(main, _p, ctx) {
         h("tbody", null, ov.hardest_items.map((it) => h("tr", null, h("td", null, it.module), h("td", null, it.prompt),
           h("td", { class: "num" }, it.students), h("td", { class: "num" }, `${it.first_try_accuracy}%`))))))
         : h("p", { class: "muted" }, "Belum ada data.")));
+
+    // Asisten Belajar RMT: beban kognitif yang dilaporkan siswa (skala usaha 1–5) dan bantuan yang dipakai
+    let tutorRows = [];
+    try { tutorRows = await api.get("/api/tutor/summary"); } catch { /* data asisten belum tersedia */ }
+    const used = tutorRows.filter((r) => r.sessions > 0);
+    body.append(h("section", { class: "card", style: { marginTop: "16px" } },
+      h("h3", null, "Asisten Belajar: usaha berpikir siswa"),
+      h("p", { class: "muted small" }, "Usaha berpikir 1–5 diisi siswa di akhir sesi (1 = sangat ringan, 5 = sangat berat). Nilai tinggi dengan banyak petunjuk menandakan beban intrinsik yang perlu dipecah lagi."),
+      used.length ? h("div", { class: "table-wrap" }, h("table", { class: "table" },
+        h("thead", null, h("tr", null, h("th", null, "Soal"), h("th", { class: "num" }, "Sesi"), h("th", { class: "num" }, "Rata-rata petunjuk"),
+          h("th", { class: "num" }, "Langkah dilewati"), h("th", { class: "num" }, "Usaha berpikir"))),
+        h("tbody", null, used.map((r) => h("tr", null, h("td", null, r.title), h("td", { class: "num" }, r.sessions),
+          h("td", { class: "num" }, r.avg_hints === null ? "–" : fmt(r.avg_hints)), h("td", { class: "num" }, r.skipped),
+          h("td", { class: "num" }, r.avg_effort === null ? "–" : `${fmt(r.avg_effort)}/5`))))))
+        : h("p", { class: "muted" }, "Belum ada siswa yang menyelesaikan sesi Asisten Belajar.")));
   }
   await load();
 }

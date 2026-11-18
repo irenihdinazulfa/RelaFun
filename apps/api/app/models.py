@@ -84,3 +84,32 @@ class DailyStat(Base):
     correct_count: Mapped[int] = mapped_column(Integer, default=0)
     points: Mapped[int] = mapped_column(Integer, default=0)
     ai_calls: Mapped[int] = mapped_column(Integer, default=0)
+
+
+class TutorUsage(Base):
+    """Banyak balasan AI (DeepSeek) Asisten Belajar per siswa per hari."""
+    __tablename__ = "tutor_usage"
+    __table_args__ = (UniqueConstraint("user_id", "date"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    date: Mapped[str] = mapped_column(String(10))
+    calls: Mapped[int] = mapped_column(Integer, default=0)
+
+
+class TutorLog(Base):
+    """Ringkasan satu sesi Asisten Belajar (untuk evaluasi beban kognitif)."""
+    __tablename__ = "tutor_logs"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    problem_id: Mapped[str] = mapped_column(String(40))
+    steps_done: Mapped[int] = mapped_column(Integer, default=0)
+    steps_total: Mapped[int] = mapped_column(Integer, default=0)
+    hints_used: Mapped[int] = mapped_column(Integer, default=0)
+    skipped: Mapped[int] = mapped_column(Integer, default=0)
+    attempts: Mapped[int] = mapped_column(Integer, default=0)
+    effort: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    seconds: Mapped[int] = mapped_column(Integer, default=0)
+    ai_used: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)

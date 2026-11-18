@@ -119,6 +119,22 @@ Diuji dengan layanan Anthropic **tiruan**: tanpa kunci asli, tanpa biaya. 10 ske
 
 Permintaan memakai `claude-opus-5-5`, *structured output* `json_schema`, `effort: medium`, `fallbacks: "default"`, dan hanya teks soal yang dikirim.
 
+## 2f. Asisten Belajar RMT + DeepSeek (versi 3.0)
+
+- **pytest** `tests/test_tutor.py` (32 tes):
+  - konten memenuhi batas CLT (≤ 40 kata per perintah, ≤ 60 kata per petunjuk, 3 petunjuk per langkah, keenam tahap RMT berurutan);
+  - semua soal bisa diselesaikan;
+  - petunjuk tidak memuat jawaban;
+  - 10 kesalahan khas dikenali, termasuk dua temuan jawaban S01;
+  - petunjuk naik 1→2→3 dan tombol lanjut muncul setelah 3 kali mencoba;
+  - balasan AI yang membocorkan jawaban diganti petunjuk tertulis;
+  - format permintaan DeepSeek benar;
+  - API tidak mengirim kunci jawaban maupun kunci API;
+  - kuota harian dan ringkasan guru berjalan.
+- **Uji silang** Python = JavaScript: 1.698 kasus pemeriksaan langkah, ekstraksi angka, dan penjaga jawaban.
+- **Uji peramban** (Chrome, WebKit/Safari, Firefox), versi online: Soal 2 dari awal sampai ringkasan; Soal 3 dengan lanjut setelah 3 kali mencoba; dashboard guru menampilkan usaha 3/5.
+- **Versi server dengan DeepSeek tiruan** (tanpa kunci asli): balasan berlabel "dibantu AI DeepSeek"; 59 permintaan memakai format benar; kunci dan kunci jawaban tidak sampai ke peramban; Soal Bebas berjalan.
+
 ## 3. Belum diuji
 
 - Panggilan **Claude API sungguhan** (diuji dengan respons tiruan; butuh kunci API).

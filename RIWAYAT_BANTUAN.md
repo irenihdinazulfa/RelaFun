@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–18 November 2026 (empat puluh permintaan) |
+| Tanggal | 12–18 November 2026 (empat puluh dua permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -903,3 +903,41 @@ Memberikan kedua link yang sudah diperiksa aktif:
 - Dokumen tersedia dalam format PDF dan Word, dan seluruh folder juga dikemas dalam satu file ZIP.
 - Pengguna diingatkan agar tidak ikut mengumpulkan dokumen penilaian lama (rubrik 6 per soal, 24/24) supaya tidak terjadi dua nilai yang bertentangan.
 - Pengguna mendapat langkah mengunggah ke Google Drive dan contoh pesan pengumpulan untuk dosen.
+
+---
+
+## Permintaan 41–42 — Tahap 2: Asisten Belajar dengan DeepSeek dan model RMT (18 November 2026)
+
+### 👤 Pengguna
+
+> (mengirim PDF buku *Rigorous Mathematical Thinking*, Kinard & Kozulin, 2008)
+>
+> udah ga limit tolong lanjut
+
+### 🤖 Asisten
+
+- **Membaca buku RMT** dan menuliskan ringkasannya di `docs/18-RINGKASAN-RMT.md`. Isinya ringkasan bab 1–6, fungsi kognitif tiga tingkat, alat psikologis, kriteria MLE, dan pemetaan ke fitur aplikasi. Berkas buku tidak diunggah karena dilindungi hak cipta.
+- **Asisten Belajar** (`#/asisten`, menu bawah *Asisten*) dibuat sesuai arahan dosen:
+  - 4 soal Mathematical Literacy dipecah menjadi 32 langkah dalam **6 tahap RMT**: orientasi → mendefinisikan masalah → merencanakan & memilih alat → membangun model → mengolah & memeriksa → bukti logis & refleksi;
+  - setiap langkah menyebut fungsi kognitif dan alat berpikirnya;
+  - benar/salah diperiksa **mesin matematika**, bukan AI;
+  - petunjuk 3 tingkat (strategi → alat berpikir → contoh serupa dengan angka berbeda);
+  - 32 pola kesalahan khas, termasuk "A(x) = 50.000" (temuan Soal 1 S01) dan "minimal 3 tas" (Soal 4 S01 tidak memeriksa kewajaran);
+  - tombol **Aku bingung**, istilah yang bisa diketuk, dan tombol lanjut setelah 3 kali mencoba;
+  - skala usaha berpikir 1–5 dan ringkasan di akhir sesi;
+  - kartu baru di Dashboard Guru.
+- **DeepSeek** (`deepseek-flash`, format OpenAI, sesuai dokumentasi resmi api-docs.deepseek.com):
+  - kunci **hanya** dari `.env` server (`DEEPSEEK_API_KEY`), sesuai arahan dosen;
+  - AI hanya menulis kalimat mediasi; kunci jawaban tidak dikirim ke AI;
+  - balasan AI yang membocorkan jawaban otomatis dibuang;
+  - kuota harian per siswa;
+  - versi server juga punya mode **Soal bebas**.
+- Versi GitHub Pages memakai mode terpandu tanpa AI dengan pemeriksaan yang identik (`js/local/tutor.js`).
+- Versi **3.0**. Dokumen yang diperbarui: `docs/19-ASISTEN-BELAJAR.md`, 10, 15, README, CLAUDE.md (aturan 11–12).
+- **Pemeriksaan:**
+  - 298 tes pytest lolos (32 baru);
+  - uji silang Python = JavaScript 1.698 kasus;
+  - uji peramban Asisten di Chrome, WebKit, dan Firefox;
+  - versi server dengan DeepSeek tiruan: 59 permintaan berformat benar, kunci tidak sampai ke peramban;
+  - semua uji lama lolos (25 langkah e2e di 3 mesin, game, pasang aplikasi, luring, Mode AI, Wen, 5 perangkat tiruan).
+- **Catatan:** DeepSeek sungguhan belum diuji karena butuh kunci berbayar milik pengguna. Kunci itu harus diisi sendiri di `.env`, tidak boleh dikirim ke asisten.

@@ -7,6 +7,8 @@ export function menuView(main, _p, ctx) {
   const link = (href, ic, label, desc, tone = "") => h("a", { class: "card topic-card", href },
     h("div", { class: `module-icon ${tone}` }, typeof ic === "string" ? icon(ic) : ic), h("div", null, h("b", null, label), h("div", { class: "muted small" }, desc)));
   main.append(h("h1", null, "Lainnya"), h("div", { class: "stack" },
+    link("#/asisten", "chat", "Asisten Belajar", "Wen membimbing soal cerita lewat 6 tahap berpikir (RMT)", "literasi"),
+    link("#/pemodel", "model", "Pemodel Soal Cerita", "Ubah cerita jadi rumus fungsi", "peach"),
     link("#/kalkulator", "calc", "Kalkulator f(x)", "Cek hitungan langkah demi langkah", "sky"),
     link("#/glosarium", "glossary", "Glosarium", "Arti istilah dengan bahasa sederhana", "butter"),
     ctx.user.role === "student" ? link("#/peringkat", "trophy", "Peringkat Kelas", "Poin teman sekelas", "peach") : null,

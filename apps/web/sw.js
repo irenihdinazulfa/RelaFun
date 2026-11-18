@@ -1,7 +1,7 @@
 // Service worker RelaFun: tampilan aplikasi tersimpan agar cepat dibuka & tetap
 // tampil saat sinyal lemah. Data API selalu diambil dari jaringan (network-first).
 
-const VERSION = "relafun-v18";
+const VERSION = "relafun-v19";
 const SHELL = [
   "./", "index.html", "config.js", "manifest.webmanifest", "css/app.css",
   "icons/icon.svg", "icons/icon-192.png", "icons/icon-512.png",
@@ -10,8 +10,8 @@ const SHELL = [
   "js/components/graph.js", "js/components/reveal.js", "js/components/terms.js", "js/components/installBanner.js", "js/components/footer.js", "js/components/splash.js",
   "js/views/calculatorPage.js", "js/views/glossary.js", "js/views/home.js", "js/views/leaderboard.js",
   "js/views/lesson.js", "js/views/login.js", "js/views/menu.js", "js/views/modeler.js",
-  "js/views/modules.js", "js/views/practice.js", "js/views/settings.js", "js/views/teacher.js", "js/views/game.js", "js/views/wen.js", "js/game/generators.js",
-  "js/local/backend.js", "js/local/ai.js", "js/local/checker.js", "js/local/mathfn.js", "js/local/modeler.js", "js/local/rational.js",
+  "js/views/modules.js", "js/views/practice.js", "js/views/settings.js", "js/views/teacher.js", "js/views/game.js", "js/views/wen.js", "js/views/tutor.js", "js/game/generators.js",
+  "js/local/backend.js", "js/local/ai.js", "js/local/tutor.js", "js/local/checker.js", "js/local/mathfn.js", "js/local/modeler.js", "js/local/rational.js",
 ];
 
 self.addEventListener("install", (e) => {
@@ -31,7 +31,7 @@ self.addEventListener("fetch", (e) => {
 
   if (url.pathname.includes("/api/")) {
     // Materi & glosarium disimpan cadangannya agar bisa dibaca ulang saat luring.
-    const cacheable = /\/api\/(modules|glossary|tools\/modeler\/presets)/.test(url.pathname);
+    const cacheable = /\/api\/(modules|glossary|tools\/modeler\/presets|tutor\/problems)/.test(url.pathname);
     e.respondWith(
       fetch(e.request).then((res) => {
         if (cacheable && res.ok) {

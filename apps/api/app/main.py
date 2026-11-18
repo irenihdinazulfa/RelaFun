@@ -16,7 +16,7 @@ from fastapi.responses import FileResponse, JSONResponse
 
 from . import config
 from .db import Base, SessionLocal, engine
-from .routers import auth, learn, teacher, tools
+from .routers import auth, learn, teacher, tools, tutor
 from .seed import seed_demo
 
 
@@ -36,11 +36,13 @@ app.include_router(auth.router)
 app.include_router(learn.router)
 app.include_router(tools.router)
 app.include_router(teacher.router)
+app.include_router(tutor.router)
 
 
 @app.get("/api/health")
 def health() -> dict:
-    return {"ok": True, "ai_configured": config.ai_configured(), "demo": config.SEED_DEMO}
+    return {"ok": True, "ai_configured": config.ai_configured(),
+            "tutor_ai_configured": config.tutor_ai_configured(), "demo": config.SEED_DEMO}
 
 
 @app.exception_handler(HTTPException)

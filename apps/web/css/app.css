@@ -681,3 +681,52 @@ table.value-table tr td:first-child, table.value-table tr th:first-child { font-
 .model-line { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 4px 0; }
 .ai-checks { margin-top: 12px; }
 .ai-checks summary { cursor: pointer; font-weight: 650; }
+
+/* ---------- Asisten Belajar (chatbot RMT) ---------- */
+.hidden { display: none !important; }
+.tutor-wen { flex: none; width: 64px; height: 64px; }
+.tutor-wen svg { width: 64px; height: 64px; display: block; }
+.tutor-mode { display: inline-flex; align-items: center; gap: 6px; }
+.tutor-mode .ic { width: 16px; height: 16px; }
+.rmt-phases { list-style: none; padding: 0; margin: 6px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.rmt-phases li { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: var(--radius-sm); background: var(--grad-soft); box-shadow: inset 0 0 0 1px var(--border); font-size: .88rem; }
+.rmt-phases b { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+.tutor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.tutor-pick { text-align: left; display: flex; flex-direction: column; gap: 6px; cursor: pointer; font: inherit; color: inherit; border: 1px solid var(--border); }
+.tutor-pick:hover { background: var(--grad-soft); }
+.tutor-pick:focus-visible { outline: 3px solid var(--fill-strong); outline-offset: 2px; }
+.tutor-story-preview { margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.tutor-problem summary { cursor: pointer; font-weight: 700; }
+.tutor-problem p { margin: 8px 0 0; line-height: 1.6; }
+.rmt-stepper { list-style: none; padding: 0; margin: 0; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: thin; }
+.rmt-stepper li { flex: 1 0 auto; min-width: 0; display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; font-size: .8rem; background: var(--surface-2); color: var(--muted); }
+.rmt-stepper .dot { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+.rmt-stepper li.current { background: var(--grad); color: var(--on-fill); font-weight: 700; }
+.rmt-stepper li.done { color: var(--good); background: var(--good-soft); }
+.rmt-stepper li.todo .nm { display: none; }
+@media (min-width: 900px) { .rmt-stepper li.todo .nm { display: inline; } }
+.tutor-meta { display: grid; gap: 4px; }
+.term-row { gap: 6px; }
+.term-chip { cursor: pointer; font: inherit; font-size: .8rem; }
+.chat-card { display: flex; flex-direction: column; gap: 12px; }
+.chat-log { display: flex; flex-direction: column; gap: 10px; max-height: min(58vh, 520px); min-height: 180px; overflow-y: auto; padding: 4px 2px; }
+.bubble { max-width: min(560px, 88%); padding: 10px 14px; border-radius: 16px; line-height: 1.55; overflow-wrap: anywhere; }
+.bubble.wen { align-self: flex-start; background: var(--grad-soft); box-shadow: inset 0 0 0 1px var(--border); border-bottom-left-radius: 4px; }
+.bubble.me { align-self: flex-end; background: var(--primary); color: var(--on-primary); border-bottom-right-radius: 4px; }
+.bubble.error { background: var(--bad-soft); color: var(--bad); }
+.bubble.typing { color: var(--muted); font-style: italic; }
+.bubble-src { margin-top: 6px; font-size: .72rem; color: var(--muted); }
+.chat-composer { display: grid; gap: 8px; }
+.chat-input { min-height: 56px; resize: vertical; }
+.help-meter { margin-left: auto; letter-spacing: 2px; }
+.effort-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.effort-btn { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 4px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-size: .78rem; cursor: pointer; text-align: center; }
+.effort-btn:hover, .effort-btn:focus-visible { background: var(--grad-soft); outline: none; box-shadow: 0 0 0 3px var(--fill-strong); }
+.effort-btn .emo { font-size: 1.5rem; line-height: 1; }
+.summary-list { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 0 0 10px; }
+.summary-list dt { color: var(--muted); }
+.summary-list dd { margin: 0; font-weight: 700; }
+@media (max-width: 520px) {
+  .effort-btn span:last-child { font-size: .68rem; }
+  .bubble { max-width: 94%; }
+}

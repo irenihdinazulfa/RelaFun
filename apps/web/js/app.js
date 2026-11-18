@@ -18,6 +18,7 @@ import { teacherView } from "./views/teacher.js";
 import { menuView } from "./views/menu.js";
 import { gameView } from "./views/game.js";
 import { wenView } from "./views/wen.js";
+import { tutorView } from "./views/tutor.js";
 import { startInstallBanner, installButton } from "./components/installBanner.js";
 import { appFooter } from "./components/footer.js";
 import { showSplash } from "./components/splash.js";
@@ -45,6 +46,7 @@ const ROUTES = [
   { re: /^\/guru$/, view: teacherView, nav: "home" },
   { re: /^\/menu$/, view: menuView, nav: "menu" },
   { re: /^\/wen$/, view: wenView, nav: "pengaturan" },
+  { re: /^\/asisten$/, view: tutorView, nav: "asisten" },
 ];
 
 function navItems(user) {
@@ -54,6 +56,7 @@ function navItems(user) {
   return [
     home,
     { key: "materi", href: "#/materi", label: "Materi", ic: "book" },
+    { key: "asisten", href: "#/asisten", label: "Asisten Belajar", ic: "chat" },
     { key: "game", href: "#/game", label: "Game Lompat Wen", ic: "game" },
     { key: "kalkulator", href: "#/kalkulator", label: "Kalkulator f(x)", ic: "calc" },
     { key: "pemodel", href: "#/pemodel", label: "Pemodel Soal Cerita", ic: "model" },
@@ -82,9 +85,10 @@ function layout(user, active) {
         h("div", { class: "muted small" }, user.role === "teacher" ? "Guru" : (user.class?.name || "Belum ada kelas"))),
       h("button", { class: "btn ghost icon-btn", type: "button", title: "Keluar", "aria-label": "Keluar", onclick: logout }, icon("logout"))),
   );
-  const mobileItems = [items[0], items[1], items[2], items[4], { key: "menu", href: "#/menu", label: "Lainnya", ic: "menu" }];
+  const pick = (k) => items.find((it) => it.key === k);
+  const mobileItems = [pick("home"), pick("materi"), { ...pick("asisten"), label: "Asisten" }, pick("game"), { key: "menu", href: "#/menu", label: "Lainnya", ic: "menu" }];
   const bottom = h("nav", { class: "bottom-nav", "aria-label": "Menu bawah" },
-    mobileItems.map((it) => h("a", { href: it.href, class: it.key === active || (it.key === "menu" && ["glosarium", "peringkat", "pengaturan", "kalkulator"].includes(active)) ? "active" : "" },
+    mobileItems.map((it) => h("a", { href: it.href, class: it.key === active || (it.key === "menu" && ["glosarium", "peringkat", "pengaturan", "kalkulator", "pemodel"].includes(active)) ? "active" : "" },
       icon(it.ic), it.key === "game" ? "Game" : it.key === "pemodel" ? "Pemodel" : it.key === "home" && user.role === "teacher" ? "Guru" : it.label)));
   const topbar = h("header", { class: "topbar" }, brand(),
     h("div", { class: "row", style: { gap: "4px", flexWrap: "nowrap" } },

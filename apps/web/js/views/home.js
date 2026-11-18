@@ -63,6 +63,8 @@ export async function homeView(main, _p, ctx) {
     s.modules.filter((m) => m.group === "literasi").map((m) =>
       h("a", { class: "card topic-card", href: `#/materi/${m.id}` }, moduleIcon(m),
         h("div", null, h("b", null, m.title), h("div", { class: "muted small" }, m.subtitle)))),
+    h("a", { class: "card topic-card", href: "#/asisten" }, h("div", { class: "module-icon literasi" }, icon("chat")),
+      h("div", null, h("b", null, "Asisten Belajar"), h("div", { class: "muted small" }, "Dibimbing Wen lewat 6 tahap berpikir"))),
     h("a", { class: "card topic-card", href: "#/pemodel" }, h("div", { class: "module-icon literasi" }, icon("model")),
       h("div", null, h("b", null, "Pemodel Soal Cerita"), h("div", { class: "muted small" }, "Ubah cerita jadi rumus fungsi"))),
     h("a", { class: "card topic-card", href: "#/kalkulator" }, h("div", { class: "module-icon sky" }, icon("calc")),

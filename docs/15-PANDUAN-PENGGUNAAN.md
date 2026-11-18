@@ -25,7 +25,7 @@ Catatan versi online (GitHub Pages):
   3. Tulis deskripsi soal di kotak **Deskripsi soal**, lalu ketuk **Modelkan dengan AI**.
   4. Muncul kartu **Model matematika** (variabel, rumus fungsi, pertanyaan), pemeriksaan model, dan penyelesaian langkah demi langkah.
 
-Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 2.7**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
+Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 3.0**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
 
 ## A. Menjalankan versi server (komputer Windows)
 
@@ -67,7 +67,13 @@ macOS/Linux: `bash scripts/start.sh`
    - Setelah 2 kali mencoba, **pembahasan bertahap** muncul.
    - Kata bergaris titik-titik bisa diketuk untuk melihat artinya.
 5. **Game Lompat Wen** (menu *Game*): jawab 10 soal acak untuk membantu Wen melompat dan mengumpulkan wortel. **Kalkulator f(x)** (menu *Lainnya*) untuk mengecek hitungan. **Pemodel Soal Cerita** untuk berlatih soal cerita langkah demi langkah.
-6. **Pengaturan** → mode gelap, teks besar, gabung kelas, pasang aplikasi.
+6. **Asisten Belajar** (menu bawah *Asisten*):
+   1. Pilih salah satu dari 4 soal Mathematical Literacy.
+   2. Ikuti pertanyaan Wen satu per satu melalui 6 tahap (Orientasi → … → Bukti logis & refleksi). Penanda tahap ada di atas percakapan.
+   3. Kalau bingung, ketuk **Aku bingung**: petunjuk naik bertahap, sampai contoh serupa dengan angka lain. Istilah di bawah langkah bisa diketuk.
+   4. Setelah 3 kali mencoba, tombol **Lanjut** muncul. Di akhir, pilih seberapa berat usaha berpikirmu (1–5).
+   5. Versi server dengan DeepSeek juga punya **Soal bebas**: tulis soalmu sendiri.
+7. **Pengaturan** → mode gelap, teks besar, gabung kelas, pasang aplikasi.
 
 ## D. Untuk guru
 
@@ -79,6 +85,7 @@ macOS/Linux: `bash scripts/start.sh`
    - akurasi per materi, peta penguasaan tiap siswa, soal tersulit;
    - tombol **Unduh CSV** untuk Excel.
 4. Sakelar **Papan peringkat** dan **Pemodel AI** per kelas.
+5. Kartu **Asisten Belajar: usaha berpikir siswa**: banyak sesi, rata-rata petunjuk, langkah dilewati, dan rata-rata usaha berpikir (1–5) per soal.
 
 ## E. Mengaktifkan fitur AI (opsional, berbayar)
 
@@ -89,6 +96,14 @@ macOS/Linux: `bash scripts/start.sh`
 1. Buat kunci API di https://console.anthropic.com.
 2. Buka file `.env` di folder proyek, isi `ANTHROPIC_API_KEY=...`, lalu jalankan ulang `start.bat`.
 3. Masuk sebagai guru → nyalakan **Pemodel AI** untuk kelas.
+
+**Asisten Belajar dengan DeepSeek (khusus versi server):**
+
+1. Buat kunci di https://platform.deepseek.com/api_keys (isi saldo).
+2. Buka file `.env` di folder proyek, isi `DEEPSEEK_API_KEY=...`, lalu jalankan ulang `start.bat`.
+3. Buka **Asisten**: tanda di kanan atas berubah menjadi **AI DeepSeek aktif**.
+
+Kunci DeepSeek **tidak boleh** ditulis di kode atau diunggah ke GitHub. File `.env` sudah dikecualikan dari GitHub. Rincian: [19-ASISTEN-BELAJAR.md](19-ASISTEN-BELAJAR.md).
 
 ## F. Deploy ke internet (agar bisa dipasang di HP mana pun)
 

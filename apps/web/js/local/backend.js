@@ -6,6 +6,7 @@ import { check, correctAnswerText, ERROR_LABELS } from "./checker.js";
 import { MathInputError, analyzeRelation, evaluateSteps } from "./mathfn.js";
 import { normalizeSpec, solve, SpecError, verifySpec } from "./modeler.js";
 import { AIUnavailable, extractModel, getKey, toSpec } from "./ai.js";
+import * as tutor from "./tutor.js";
 
 const DB_KEY = "rf_db_v1";
 const POINTS_FIRST_TRY = 10;
@@ -34,6 +35,17 @@ function loadContent() {
     })().catch((e) => { contentPromise = null; throw e; });
   }
   return contentPromise;
+}
+
+let tutorPromise = null;
+function loadTutor() {
+  if (!tutorPromise) {
+    tutorPromise = fetch("content/tutor/tutor.json").then((res) => {
+      if (!res.ok) throw new ApiError("Data Asisten Belajar gagal dimuat. Periksa koneksi internet.", 503);
+      return res.json();
+    }).catch((e) => { tutorPromise = null; throw e; });
+  }
+  return tutorPromise;
 }
 
 const publicItem = (it) => Object.fromEntries(Object.entries(it).filter(([k]) => !SECRET_FIELDS.has(k)));
@@ -370,6 +382,53 @@ export async function handle(method, rawPath, body = {}, token = null) {
       currentUser(token);
       return analyzeRelation(body.domain || [], body.codomain || [], body.pairs || []);
     }
+    // --- Asisten Belajar RMT (tanpa AI di versi ini) ---
+    if (method === "GET" && path === "/api/tutor/status") {
+      currentUser(token);
+      return { ai: false, provider: "DeepSeek", model: null, daily_quota: 0, remaining: 0, free_mode: false, static: true };
+    }
+    if (method === "GET" && path === "/api/tutor/problems") { currentUser(token); return tutor.catalog(await loadTutor()); }
+    if (method === "POST" && path === "/api/tutor/turn") {
+      currentUser(token);
+      if (body.problem_id === tutor.FREE_ID) {
+        throw new ApiError("Mode Soal Bebas memakai DeepSeek dan hanya aktif di versi server (kunci di file .env server).", 503);
+      }
+      try {
+        const out = tutor.turn(await loadTutor(), body);
+        return { ...out, quota_left: 0, ai_available: false };
+      } catch (e) {
+        if (e instanceof tutor.TutorInputError) throw new ApiError(e.message, e.message === "Soal tidak ditemukan." ? 404 : 422);
+        throw e;
+      }
+    }
+    if (method === "GET" && path === "/api/tutor/summary") {
+      const t = requireTeacher(token);
+      const classIds = new Set(db.classes.filter((c) => c.teacher_id === t.id).map((c) => c.id));
+      const studentIds = new Set(db.users.filter((u) => u.role === "student" && classIds.has(u.class_id)).map((u) => u.id));
+      const logs = (db.tutor_logs || []).filter((l) => studentIds.has(l.user_id));
+      const titles = tutor.catalog(await loadTutor()).problems.map((p) => [p.id, p.title]).concat([[tutor.FREE_ID, "Soal bebas"]]);
+      const r1 = (v) => Math.round(v * 10) / 10;
+      return titles.map(([pid, title]) => {
+        const ls = logs.filter((l) => l.problem_id === pid);
+        const eff = ls.map((l) => l.effort).filter(Boolean);
+        return { problem_id: pid, title, sessions: ls.length,
+          avg_hints: ls.length ? r1(ls.reduce((a, l) => a + l.hints_used, 0) / ls.length) : null,
+          skipped: ls.reduce((a, l) => a + l.skipped, 0), avg_effort: eff.length ? r1(eff.reduce((a, v) => a + v, 0) / eff.length) : null };
+      });
+    }
+    if (method === "POST" && path === "/api/tutor/finish") {
+      const u = currentUser(token);
+      if (!db.tutor_logs) db.tutor_logs = [];
+      const num = (v, max) => Math.max(0, Math.min(parseInt(v || 0, 10) || 0, max));
+      db.tutor_logs.push({ user_id: u.id, problem_id: String(body.problem_id || "").slice(0, 40),
+        steps_done: num(body.steps_done, 50), steps_total: num(body.steps_total, 50), hints_used: num(body.hints_used, 500),
+        skipped: num(body.skipped, 50), attempts: num(body.attempts, 999),
+        effort: body.effort >= 1 && body.effort <= 5 ? Number(body.effort) : null,
+        seconds: num(body.seconds, 36000), ai_used: false, created_at: new Date().toISOString() });
+      saveDb();
+      return { saved: true };
+    }
+
     if (method === "GET" && path === "/api/tools/modeler/presets") { currentUser(token); return (await loadContent()).presets; }
     if (method === "POST" && path === "/api/tools/modeler/solve") { currentUser(token); return solve(body); }
     if (method === "GET" && path === "/api/tools/modeler/ai-status") {

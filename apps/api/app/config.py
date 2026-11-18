@@ -46,6 +46,20 @@ def ai_configured() -> bool:
     return bool(ANTHROPIC_API_KEY)
 
 
+# --- Asisten Belajar (chatbot RMT) dengan DeepSeek ---
+# Kunci HANYA dari .env di server; tidak pernah dikirim ke peramban atau ditulis di kode.
+DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY", "").strip()
+DEEPSEEK_MODEL = os.getenv("DEEPSEEK_MODEL", "deepseek-flash").strip() or "deepseek-flash"
+DEEPSEEK_BASE_URL = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com").strip() or "https://api.deepseek.com"
+DEEPSEEK_THINKING = os.getenv("DEEPSEEK_THINKING", "disabled").strip().lower()
+DEEPSEEK_TIMEOUT = float(os.getenv("DEEPSEEK_TIMEOUT", "30"))
+TUTOR_DAILY_QUOTA = int(os.getenv("TUTOR_DAILY_QUOTA", "60"))
+
+
+def tutor_ai_configured() -> bool:
+    return bool(DEEPSEEK_API_KEY)
+
+
 # --- Gamifikasi ---
 DAILY_GOAL = int(os.getenv("DAILY_GOAL", "5"))      # jawaban benar per hari
 POINTS_FIRST_TRY = 10
