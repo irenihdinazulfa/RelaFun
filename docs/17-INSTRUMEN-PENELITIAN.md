@@ -12,6 +12,9 @@ Instrumen untuk tahap **Implementation** dan **Evaluation** (ADDIE). Semua file 
 | 06 | `06_Kisi_Kunci_Rubrik_Pretest_Posttest.docx` | Peneliti/guru | Kisi-kisi (indikator, level kognitif, kode wawancara), kunci & pembahasan PG, kunci & rubrik uraian 0–4 |
 | 07 | `07_Protokol_Uji_Coba_dan_Persetujuan.docx` | Peneliti | Tahapan uji coba, persiapan, jadwal 2 × 80 menit, lembar observasi uji perorangan (think-aloud), surat persetujuan orang tua/wali |
 | 08 | `08_Analisis_Hasil_Uji_Coba.xlsx` | Peneliti | Lembar isian dengan rumus otomatis: persentase kelayakan, rata-rata IL/EL/GL, skor SUS, nilai tes, N-gain |
+| 09 | `09_Soal_Mathematical_Literacy.docx` | Siswa | **Instrumen Mathematical Literacy (revisi sesuai evaluasi dosen)**: 4 soal uraian (Reasoning, Formulate, Employ, Interpret), teks soal sama dengan lembar soal asli, kotak jawaban per soal, 40 menit |
+| 10 | `10_Kisi_Kunci_Penskoran_Mathematical_Literacy.docx` | Peneliti/dosen | Hasil evaluasi dosen + tindak lanjut; kisi-kisi (indikator kompetensi, indikator soal, level kognitif); kunci jawaban dengan **langkah penyelesaian, alasan/kesimpulan, dan penskoran bertahap** (10 per soal, total 40) |
+| 11 | `11_Hasil_Uji_Coba_Skoring_S01.docx` | Peneliti | Hasil uji coba pada siswa yang sama dengan narasumber wawancara (S01): jawaban asli, skor per langkah (37/40, nilai 92,5), analisis kesulitan, beban kognitif, cara menyelesaikan, bantuan AI yang diperlukan, tempat foto/scan |
 
 ## Alur pemakaian
 

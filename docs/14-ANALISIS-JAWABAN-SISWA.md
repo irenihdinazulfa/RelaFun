@@ -2,6 +2,11 @@
 
 > **Status: sudah dianalisis (14 November 2026).** Jawaban asli S01 disalin apa adanya di [Lampiran](#lampiran--jawaban-s01-disalin-apa-adanya).
 > Kunci jawaban acuan (dibuat AI, **bukan** jawaban siswa) ada di `JAWABAN_ACUAN_SOAL_RELASI_FUNGSI.md`.
+>
+> **Pembaruan 18 November 2026:** setelah evaluasi dosen, skoring resmi memakai **pedoman penskoran bertahap**
+> (`instrumen/10_Kisi_Kunci_Penskoran_Mathematical_Literacy.docx`): skor S01 = **37/40, nilai 92,5 (sangat baik)**
+> (Soal 1 = 8, Soal 2 = 10, Soal 3 = 10, Soal 4 = 9). Rinciannya ada di `instrumen/11_Hasil_Uji_Coba_Skoring_S01.docx`.
+> Skala 0–4 di bawah ini adalah analisis awal dan hasilnya sejalan (15/16).
 
 | Atribut | Isi |
 |---|---|

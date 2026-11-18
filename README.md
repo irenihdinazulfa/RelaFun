@@ -61,7 +61,7 @@ apps/api/                 backend Python + tes (pytest)
 apps/web/                 aplikasi web PWA (JavaScript)
 content/                  13 modul, glosarium, soal cerita (JSON)
 docs/                     dokumen perencanaan 01–17 + kunci jawaban
-instrumen/                lembar validasi, angket, soal pretest–posttest (.docx) + analisis (.xlsx)
+instrumen/                lembar validasi, angket, soal pretest–posttest, soal Mathematical Literacy + kisi-kisi & penskoran + hasil uji coba S01 (.docx), analisis (.xlsx)
 referensi/                transkrip wawancara & lembar soal (.docx) — tidak diunggah ke GitHub (data pribadi narasumber)
 RIWAYAT_BANTUAN.md        riwayat bantuan AI
 ```

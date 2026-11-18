@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–16 November 2026 (tiga puluh enam permintaan) |
+| Tanggal | 12–18 November 2026 (tiga puluh tujuh permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -815,3 +815,37 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - 266 tes pytest lolos; uji peramban 25 langkah lolos; 5 perangkat tiruan bisa membuka aplikasi;
   - uji pasang, luring, game, soal r5-8, penjaga pemuatan, dan uji Wen lolos.
 - **Catatan:** pemanggilan ke Claude yang sesungguhnya belum diuji karena membutuhkan kunci API berbayar milik pengguna.
+
+---
+
+## Permintaan 37 — Perbaikan instrumen Mathematical Literacy sesuai evaluasi dosen (18 November 2026)
+
+### 👤 Pengguna
+
+> (melampirkan gambar "Hasil Evaluasi" dosen untuk Soal 1–4, daftar tugas dari dosen, dan tanya-jawab dengan dosen tentang Tahap 1 dan Tahap 2) tolong perbaiki ini, karena dosen meminta saya memperbaikinya
+
+### 🤖 Asisten
+
+- **Membaca evaluasi dosen.**
+  - Keempat soal dinyatakan **sudah sesuai indikator dan sesuai koreksi jawaban**.
+  - Kisi-kisi diminta memuat **langkah penyelesaian, alasan/kesimpulan, dan penskoran bertahap** yang relevan.
+  - Karena itu, teks soal **tidak diubah**, supaya tetap sama dengan yang sudah dikerjakan S01. Perbaikan difokuskan pada kisi-kisi dan pedoman penskoran.
+- **Tiga dokumen Word baru di `instrumen/` (Tahap 1):**
+  - `09_Soal_Mathematical_Literacy.docx`: lembar soal siswa. Berisi identitas, petunjuk (diketahui → model → hitung → kesimpulan), 4 soal asli, dan kotak jawaban.
+  - `10_Kisi_Kunci_Penskoran_Mathematical_Literacy.docx`:
+    - hasil evaluasi dosen beserta tindak lanjutnya;
+    - kisi-kisi (indikator kompetensi, indikator soal, level kognitif);
+    - kunci jawaban dengan **penskoran bertahap** per langkah (10 per soal, total 40, nilai = skor ÷ 40 × 100);
+    - petunjuk penskoran (cara lain yang benar diterima, skor berantai).
+  - `11_Hasil_Uji_Coba_Skoring_S01.docx`: hasil uji coba pada siswa yang sama dengan narasumber wawancara (sesuai arahan dosen).
+    - Isinya jawaban asli S01 (diterima 14 November 2026), skor per langkah beserta buktinya, dan analisis 4 hal yang diminta dosen: kesulitan matematis, bagian soal yang meningkatkan beban kognitif, cara siswa menyelesaikan, dan bentuk bantuan AI yang diperlukan.
+    - Ada juga tempat untuk menempel foto/scan lembar jawaban.
+- **Skor S01 dengan pedoman baru:** Soal 1 = 8, Soal 2 = 10, Soal 3 = 10, Soal 4 = 9. Total **37/40, nilai 92,5 (sangat baik)**. Hasil ini sejalan dengan analisis awal (15/16).
+- Tampilan ketiga dokumen diperiksa sebagai PDF hasil ekspor Microsoft Word. Tiga perbaikan tata letak dilakukan: kolom Level dilebarkan, kotak jawaban tidak terpisah dari soalnya, dan lampiran foto dipindah ke halaman baru.
+- Dokumen 14, 17, dan README diperbarui.
+- **Yang tetap harus dikerjakan pengguna:**
+  - mengisi tanggal dan lama pengerjaan;
+  - menempel foto/scan lembar jawaban asli S01;
+  - memeriksa ulang skor;
+  - mengunggah ke Google Drive.
+- **Tahap 2 (DeepSeek + RMT):** asisten meminta ringkasan RMT dari dosen. Sesuai arahan dosen, kunci API DeepSeek nantinya hanya disimpan di `.env` pada backend, tidak di kode frontend maupun GitHub.
