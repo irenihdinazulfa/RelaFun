@@ -170,7 +170,15 @@ Permintaan memakai `claude-opus-5-5`, *structured output* `json_schema`, `effort
   - tanpa CA, koneksi ditolak;
   - http://relafun → 308 → https; http://127.0.0.1 → 200.
 - **Uji Chrome** (sertifikat dipercaya lewat flag uji, tanpa mengubah Windows): http://relafun berpindah ke https://relafun, konteks aman, service worker aktif, syarat pasang aplikasi terpenuhi, manifest terbaca, Asisten "AI Gemini aktif", tanpa galat.
-- Pemasangan sertifikat ke Windows dilakukan pengguna sendiri lewat `start.bat` (jendela peringatan sertifikat Windows).
+- Pemasangan sertifikat ke Windows dilakukan pengguna sendiri lewat `start.ps1 -Https` (jendela peringatan sertifikat Windows).
+
+## 2j. Alamat bawaan http://relafun.localhost
+
+- **pytest**: http://relafun dialihkan (308) ke http://relafun.localhost (termasuk port dan query); relafun.localhost dilayani langsung; lifespan diteruskan.
+- **start.bat** dijalankan saat server lama masih menyala: server lama dihentikan, server baru jalan di port 80.
+- **Chrome dan Edge**:
+  - http://relafun berpindah ke http://relafun.localhost;
+  - konteks aman, syarat pasang aplikasi terpenuhi, Asisten "AI Gemini aktif", tanpa galat.
 
 ## 3. Belum diuji
 

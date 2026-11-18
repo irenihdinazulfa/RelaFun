@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–18 November 2026 (lima puluh tujuh permintaan) |
+| Tanggal | 12–18 November 2026 (lima puluh sembilan permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -1143,4 +1143,28 @@ Memberikan kedua link yang sudah diperiksa aktif:
 - Server http di port 80 masih menyala. Chrome mencoba versi https lebih dulu, dan port 443 belum aktif karena `start.bat` belum dijalankan pengguna.
 - Dibuat shortcut **RelaFun** di Desktop (ikon aplikasi, `scripts/relafun.ico`) yang menjalankan `start.bat`.
 - Saran: sementara ketik `http://relafun` lengkap; untuk https, klik dua kali shortcut RelaFun lalu klik **Yes** pada peringatan sertifikat.
+
+---
+
+## Permintaan 58–59 — Memakai alamat relafun.localhost
+
+### 👤 Pengguna
+
+> (tangkapan layar Edge: https://relafun — ERR_CONNECTION_REFUSED)
+
+> (pilihan "Other" tanpa keterangan), lalu: yg localhost aja
+
+### 🤖 Asisten
+
+- Shortcut RelaFun belum diklik sehingga https belum aktif. Asisten menguji **http://relafun.localhost** di Chrome dan Edge: dianggap aman, service worker aktif, dan aplikasi bisa dipasang, tanpa izin atau sertifikat. Alamat ini ditawarkan sebagai pilihan dan dipilih pengguna.
+- `start.ps1` kini secara bawaan:
+  - menjalankan `python -m app.serve --mode localhost` di port 80 dan membuka http://relafun.localhost;
+  - mengalihkan http://relafun ke alamat baru;
+  - menghentikan server lama otomatis.
+- Jalur https://relafun (sertifikat lokal) tetap tersedia sebagai pilihan `-Https`.
+- **Pemeriksaan:**
+  - 324 tes pytest lolos (2 baru);
+  - `start.bat` menyalakan ulang server dengan benar;
+  - di Chrome dan Edge: pengalihan, konteks aman, bisa dipasang, AI Gemini aktif, tanpa galat.
+- Dokumen 10, 15, README, dan CLAUDE.md diperbarui.
 

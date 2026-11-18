@@ -33,19 +33,18 @@ Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. 
 2. Buka folder `iren_ihdina_zulfa`, lalu **klik dua kali `start.bat`**.
    - Pertama kali: skrip menyiapkan lingkungan Python dan memasang paket (butuh internet, ± 1–3 menit).
    - Berikutnya: langsung jalan.
-3. Saat pertama kali, Windows meminta dua izin. Klik **Ya** pada keduanya; ini cukup sekali:
-   - **Kontrol Akun Pengguna** (Windows PowerShell): membuat nama `relafun`;
-   - **Security Warning / Peringatan Keamanan**: memasang sertifikat *RelaFun Local CA (khusus laptop ini)*, supaya alamatnya menjadi https.
-4. Peramban terbuka ke **https://relafun** dengan gembok aman. Jendela hitam harus tetap terbuka selama aplikasi dipakai. Tekan **Ctrl+C** di jendela itu untuk berhenti.
+   Bisa juga lewat shortcut **RelaFun** di Desktop.
+3. Peramban terbuka ke **http://relafun.localhost**. Tidak ada izin atau sertifikat yang diminta.
+4. **Jendela hitam harus tetap terbuka** selama aplikasi dipakai (boleh di-minimize). Bila ditutup, aplikasinya ikut mati. Tekan **Ctrl+C** di jendela itu untuk berhenti.
+   - Browser menganggap alamat `*.localhost` aman: tidak ada label "Not secure", dan aplikasi bisa dipasang serta dipakai luring.
    - **Memasang sebagai aplikasi:**
      - di Edge: ikon *Aplikasi tersedia* di kolom alamat, atau menu ⋯ → *Aplikasi* → *Pasang RelaFun*;
      - di Chrome: ikon pasang di kolom alamat;
      - bisa juga dari tombol **Unduh Aplikasi RelaFun** di halaman masuk.
-   - Mengetik sendiri di peramban: tulis `relafun/` (dengan garis miring) atau `https://relafun`. Alamat `http://relafun` otomatis dipindahkan ke https.
-   - Bila salah satu izin tidak diberikan, aplikasi tetap jalan di **http://relafun** (label "Tidak aman", tanpa fitur pasang aplikasi) atau **http://localhost:8000**.
-   - HP di Wi-Fi yang sama tetap membuka lewat alamat IP yang ditampilkan di jendela hitam (http).
-   - Sertifikatnya hanya berlaku untuk nama `relafun`, dan kunci induknya dibuang setelah dibuat, sehingga tidak bisa dipakai untuk situs lain.
-   - Untuk menghapusnya, buka `certmgr.msc` → *Trusted Root Certification Authorities* → *Certificates* → hapus *RelaFun Local CA (khusus laptop ini)*.
+   - Mengetik sendiri di peramban: `relafun.localhost`. Alamat lama `http://relafun` otomatis dipindahkan.
+   - Klik `start.bat` lagi saat server masih jalan sama dengan menyalakan ulang: server lama otomatis dihentikan.
+   - HP di Wi-Fi yang sama membuka lewat alamat IP yang ditampilkan di jendela hitam (http).
+   - Pilihan lanjutan: `scripts\start.ps1 -Https` untuk https://relafun dengan sertifikat lokal. Windows akan meminta izin Administrator dan peringatan sertifikat. Sertifikatnya bisa dihapus lewat `certmgr.msc` → *Trusted Root Certification Authorities* → *RelaFun Local CA*.
 
 Alternatif lewat PowerShell:
 ```powershell

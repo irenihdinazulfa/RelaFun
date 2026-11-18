@@ -84,6 +84,28 @@ def test_http_relafun_redirects_to_https():
     assert dict(sent[0]["headers"])[b"location"] == b"https://relafun/"
 
 
+def test_old_name_redirects_to_relafun_localhost():
+    from app.serve import redirect_old_name
+    sent, seen = _call(redirect_old_name, "relafun", "/", b"")
+    assert sent[0]["status"] == 308 and not seen
+    assert dict(sent[0]["headers"])[b"location"] == b"http://relafun.localhost/"
+    sent, seen = _call(redirect_old_name, "relafun.localhost", "/api/health")
+    assert sent[0]["status"] == 200 and seen == ["/api/health"]       # alamat baru dilayani langsung
+    sent, seen = _call(lambda inner: redirect_old_name(inner, 8000), "relafun", "/x", b"q=1")
+    assert dict(sent[0]["headers"])[b"location"] == b"http://relafun.localhost:8000/x?q=1"
+
+
+def test_lifespan_passes_through_wrapper():
+    from app.serve import redirect_old_name
+    seen = []
+
+    async def inner(scope, receive, send):
+        seen.append(scope["type"])
+
+    asyncio.run(redirect_old_name(inner)({"type": "lifespan"}, None, None))
+    assert seen == ["lifespan"]
+
+
 def test_other_hosts_are_served_over_http():
     # HP di Wi-Fi yang sama membuka lewat IP laptop → tidak dialihkan
     sent, seen = _call(redirect_host_to_https, "192.168.1.33", "/api/health")

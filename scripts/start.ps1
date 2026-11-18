@@ -1,13 +1,14 @@
 # Menjalankan RelaFun di Windows.
-# Pemakaian:  klik dua kali start.bat   ATAU   powershell -ExecutionPolicy Bypass -File scripts\start.ps1
-# Alamat: https://relafun
-#   - nama "relafun" ditambahkan ke file hosts Windows sekali (izin Administrator);
-#   - sertifikat HTTPS khusus laptop ini dipasang sekali (jendela peringatan sertifikat Windows),
-#     sehingga ada gembok aman dan aplikasi bisa dipasang/dipakai luring.
-# Bila salah satu izin tidak diberikan atau port 80/443 terpakai, aplikasi tetap jalan
-# di http://relafun atau http://localhost:8000.
-#   -Port 8000  memakai port tertentu (tanpa https)   -NoAlias  tanpa nama relafun   -NoHttps  tanpa https
-param([int]$Port = 0, [switch]$NoBrowser, [switch]$NoAlias, [switch]$NoHttps)
+# Pemakaian:  klik dua kali start.bat (atau shortcut RelaFun di Desktop)
+#        ATAU powershell -ExecutionPolicy Bypass -File scripts\start.ps1
+# Alamat: http://relafun.localhost
+#   Browser (Chrome, Edge, Firefox) menganggap *.localhost sebagai alamat aman: tanpa label
+#   "Not secure", aplikasi bisa dipasang dan dipakai luring. Tidak perlu izin Administrator
+#   atau sertifikat. Alamat lama http://relafun otomatis dialihkan ke alamat ini.
+#   -Port 8000  memakai port tertentu
+#   -Https      (pilihan) https://relafun: nama di file hosts (izin Administrator) dan
+#               sertifikat lokal (peringatan sertifikat Windows), lihat app/tls.py
+param([int]$Port = 0, [switch]$NoBrowser, [switch]$Https)
 
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
@@ -52,26 +53,8 @@ if (-not (Test-Path $stamp) -or (Get-Content $stamp) -ne $hash) {
 $envFile = Join-Path $Root ".env"
 if (-not (Test-Path $envFile)) { Copy-Item (Join-Path $Root ".env.example") $envFile }
 
-# 4. Alamat http://relafun: tambahkan "127.0.0.1 relafun" ke file hosts (sekali saja, perlu izin Administrator)
-$HostsFile = Join-Path $env:SystemRoot "System32\drivers\etc\hosts"
-function Test-RelafunAlias {
-  (Test-Path $HostsFile) -and (Select-String -LiteralPath $HostsFile -Pattern '^\s*127\.0\.0\.1\s+relafun(\s|$)' -Quiet)
-}
-$alias = Test-RelafunAlias
-if (-not $alias -and -not $NoAlias) {
-  Write-Host "Membuat alamat http://relafun (sekali saja). Klik 'Ya' pada jendela izin Windows." -ForegroundColor Yellow
-  $line = "127.0.0.1 relafun  # RelaFun (dibuat oleh scripts\start.ps1)"
-  $script = "Add-Content -LiteralPath '$HostsFile' -Value ([Environment]::NewLine + '$line') -Encoding ASCII; ipconfig /flushdns | Out-Null"
-  $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($script))
-  try {
-    Start-Process powershell -Verb RunAs -Wait -WindowStyle Hidden -ArgumentList "-NoProfile -EncodedCommand $encoded"
-  } catch {
-    Write-Host "Izin tidak diberikan ($($_.Exception.Message)). Aplikasi memakai alamat localhost." -ForegroundColor Yellow
-  }
-  $alias = Test-RelafunAlias
-}
-# Server RelaFun lama yang masih jalan (jendela lain / percobaan sebelumnya) dihentikan dulu,
-# supaya klik start.bat selalu berarti "nyalakan ulang" dan port 80/443 bisa dipakai.
+# 4. Server RelaFun lama yang masih jalan (jendela lain / percobaan sebelumnya) dihentikan dulu,
+#    supaya klik start.bat selalu berarti "nyalakan ulang".
 foreach ($p in 80, 443, 8000) {
   foreach ($c in @(Get-NetTCPConnection -LocalPort $p -State Listen -ErrorAction SilentlyContinue)) {
     if (-not $c) { continue }
@@ -87,39 +70,48 @@ foreach ($p in 80, 443, 8000) {
   }
 }
 Start-Sleep -Milliseconds 600
-
-# 5. HTTPS: sertifikat lokal untuk https://relafun (kunci induknya dibuang; hanya berlaku untuk nama relafun)
 $busy80 = Get-NetTCPConnection -LocalPort 80 -State Listen -ErrorAction SilentlyContinue
 $busy443 = Get-NetTCPConnection -LocalPort 443 -State Listen -ErrorAction SilentlyContinue
-$Https = $false
-if ($alias -and $Port -eq 0 -and -not $NoHttps -and -not $busy80 -and -not $busy443) {
-  Push-Location $Api
-  try { $tls = (& $Py -m app.tls) | ConvertFrom-Json } finally { Pop-Location }
-  $trusted = Get-ChildItem Cert:\CurrentUser\Root | Where-Object { $_.Thumbprint -eq $tls.ca_thumbprint }
-  if (-not $trusted) {
-    Write-Host "Memasang sertifikat keamanan khusus laptop ini (sekali saja)." -ForegroundColor Yellow
-    Write-Host "Pada jendela 'Security Warning / Peringatan Keamanan', klik 'Yes / Ya'." -ForegroundColor Yellow
-    try {
-      Import-Certificate -FilePath $tls.ca -CertStoreLocation Cert:\CurrentUser\Root | Out-Null
-    } catch {
-      Write-Host "Sertifikat tidak dipasang ($($_.Exception.Message)). Aplikasi memakai http." -ForegroundColor Yellow
-    }
-    $trusted = Get-ChildItem Cert:\CurrentUser\Root | Where-Object { $_.Thumbprint -eq $tls.ca_thumbprint }
+
+# 5. (Pilihan -Https) https://relafun dengan nama di file hosts + sertifikat lokal
+$UseHttps = $false
+if ($Https -and -not $busy80 -and -not $busy443) {
+  $HostsFile = Join-Path $env:SystemRoot "System32\drivers\etc\hosts"
+  $hasAlias = { (Test-Path $HostsFile) -and (Select-String -LiteralPath $HostsFile -Pattern '^\s*127\.0\.0\.1\s+relafun(\s|$)' -Quiet) }
+  if (-not (& $hasAlias)) {
+    Write-Host "Membuat nama 'relafun' (sekali saja). Klik 'Ya' pada jendela izin Windows." -ForegroundColor Yellow
+    $line = "127.0.0.1 relafun  # RelaFun (dibuat oleh scripts\start.ps1)"
+    $script = "Add-Content -LiteralPath '$HostsFile' -Value ([Environment]::NewLine + '$line') -Encoding ASCII; ipconfig /flushdns | Out-Null"
+    $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($script))
+    try { Start-Process powershell -Verb RunAs -Wait -WindowStyle Hidden -ArgumentList "-NoProfile -EncodedCommand $encoded" }
+    catch { Write-Host "Izin tidak diberikan ($($_.Exception.Message))." -ForegroundColor Yellow }
   }
-  $Https = [bool]$trusted
+  if (& $hasAlias) {
+    Push-Location $Api
+    try { $tls = (& $Py -m app.tls) | ConvertFrom-Json } finally { Pop-Location }
+    $trusted = Get-ChildItem Cert:\CurrentUser\Root | Where-Object { $_.Thumbprint -eq $tls.ca_thumbprint }
+    if (-not $trusted) {
+      Write-Host "Memasang sertifikat khusus laptop ini (sekali saja). Klik 'Yes / Ya' pada 'Security Warning'." -ForegroundColor Yellow
+      try { Import-Certificate -FilePath $tls.ca -CertStoreLocation Cert:\CurrentUser\Root | Out-Null }
+      catch { Write-Host "Sertifikat tidak dipasang ($($_.Exception.Message))." -ForegroundColor Yellow }
+      $trusted = Get-ChildItem Cert:\CurrentUser\Root | Where-Object { $_.Thumbprint -eq $tls.ca_thumbprint }
+    }
+    $UseHttps = [bool]$trusted
+  }
+  if (-not $UseHttps) { Write-Host "https tidak aktif; memakai http://relafun.localhost." -ForegroundColor Yellow }
 }
-if ($Https) {
-  $Port = 443
+
+# 6. Alamat
+if ($UseHttps) {
   $Url = "https://relafun/"
   $Suffix = ""
 } else {
-  if ($Port -eq 0) { $Port = if ($alias -and -not $busy80) { 80 } else { 8000 } }
-  $HostName = if ($alias) { "relafun" } else { "localhost" }
+  if ($Port -eq 0) { $Port = if (-not $busy80) { 80 } else { 8000 } }
   $Suffix = if ($Port -eq 80) { "" } else { ":$Port" }
-  $Url = "http://$HostName$Suffix/"
+  $Url = "http://relafun.localhost$Suffix/"
 }
 
-# 6. Alamat untuk HP di jaringan Wi-Fi yang sama (lewat http; port 80 bila https aktif)
+# 7. Alamat untuk HP di jaringan Wi-Fi yang sama
 $ips = Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
   Where-Object { $_.IPAddress -notlike "127.*" -and $_.IPAddress -notlike "169.254.*" -and $_.PrefixOrigin -ne "WellKnown" } |
   Select-Object -ExpandProperty IPAddress
@@ -127,17 +119,17 @@ Write-Host ""
 Write-Host "Buka di komputer ini : $Url" -ForegroundColor Green
 foreach ($ip in $ips) { Write-Host "Buka dari HP (Wi-Fi sama): http://$ip$Suffix" -ForegroundColor Green }
 Write-Host "Akun demo  siswa / siswa123   |   guru / guru123   |   kode kelas RF8A26"
-Write-Host "Tekan Ctrl+C untuk berhenti."
+Write-Host "Jangan tutup jendela ini selama aplikasi dipakai. Tekan Ctrl+C untuk berhenti."
 Write-Host ""
 
 if (-not $NoBrowser) { Start-Job -ScriptBlock { param($u) Start-Sleep 3; Start-Process $u } -ArgumentList $Url | Out-Null }
 
 Push-Location $Api
 try {
-  if ($Https) {
-    & $Py -m app.serve --https-port 443 --http-port 80
+  if ($UseHttps) {
+    & $Py -m app.serve --mode https
   } else {
-    & $Py -m uvicorn app.main:app --host 0.0.0.0 --port $Port
+    & $Py -m app.serve --mode localhost --port $Port
   }
 } finally {
   Pop-Location
