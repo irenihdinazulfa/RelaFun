@@ -1,0 +1,26 @@
+{
+  "id": "l1-memodelkan",
+  "order": 11,
+  "group": "literasi",
+  "title": "Memodelkan Situasi Sehari-hari",
+  "subtitle": "Literasi: Formulate (merumuskan)",
+  "icon": "taxi",
+  "minutes": 15,
+  "interview_codes": ["EL01", "GL01", "K02"],
+  "pisa_process": "Formulate",
+  "objectives": ["Mengubah soal cerita menjadi model f(x) = ax + b", "Memakai model untuk mengambil keputusan"],
+  "steps": [
+    {"type": "text", "title": "Dari cerita ke rumus", "body": "Untuk memodelkan cerita menjadi fungsi, cari tiga hal:\n1. **x** = apa yang berubah-ubah\n2. **b** = nilai tetap di awal\n3. **a** = tambahan untuk setiap 1 satuan x"},
+    {"type": "tip", "body": "Kata kunci: “tarif awal”, “buka pintu”, “berlangganan”, “biaya tetap” → **b**. Kata “per” atau “setiap” → **a**."},
+    {"type": "example", "title": "Contoh bertahap", "problem": "Tarif ojek: Rp5.000 saat mulai, lalu Rp2.500 per km. Berapa ongkos untuk 6 km?", "steps": ["x = jarak (km)", "b = 5.000 (dibayar sekali di awal)", "a = 2.500 (untuk setiap 1 km)", "Model: f(x) = 2.500x + 5.000", "f(6) = 2.500 × 6 + 5.000 = 15.000 + 5.000 = 20.000"], "answer": "Ongkosnya Rp20.000."},
+    {"type": "text", "title": "Latihan lanjutan", "body": "Buka menu **Pemodel Soal Cerita** untuk berlatih langkah-langkah ini dengan soal lain, termasuk soal taksi dari lembar soal."}
+  ],
+  "items": [
+    {"id": "l1-1", "type": "mcq", "prompt": "Sebuah taksi menetapkan tarif buka pintu Rp8.000 dan tarif tambahan Rp4.500 untuk setiap kilometer. Manakah yang merupakan nilai tetap (b)?", "options": ["Rp4.500", "Rp8.000", "Rp50.000", "10 km"], "answer": 1, "option_feedback": {"0": "Rp4.500 dibayar setiap km, jadi itu nilai a.", "2": "Rp50.000 adalah uang Budi, bukan bagian dari tarif.", "3": "10 km adalah nilai x yang ditanyakan."}, "error_type": "a_b_tertukar", "hint": "Nilai tetap dibayar satu kali saja, berapa pun jaraknya.", "explain": ["Tarif buka pintu dibayar sekali → b = 8.000"]},
+    {"id": "l1-2", "type": "expression", "name": "f", "prompt": "Tulis model ongkos taksi f(x) untuk perjalanan x km (buka pintu Rp8.000, tambahan Rp4.500 per km).", "answer": "4500x + 8000", "check_points": [0, 1, 10], "hint": "f(x) = a·x + b. Angka boleh ditulis 4500 atau 4.500.", "explain": ["a = 4.500 (per km)", "b = 8.000 (buka pintu)", "f(x) = 4.500x + 8.000"]},
+    {"id": "l1-3", "type": "numeric", "prompt": "Dengan f(x) = 4.500x + 8.000, berapa rupiah ongkos taksi untuk 10 km?", "unit": "rupiah", "answer": "53000", "linear": {"a": 4500, "b": 8000, "x": "10"}, "common_errors": [{"value": "12500", "type": "tidak_dikalikan", "message": "Rp4.500 dibayar untuk setiap km, jadi harus dikali 10."}], "hint": "f(10) = 4.500 × (10) + 8.000", "explain": ["f(10) = 4.500 × (10) + 8.000", "= 45.000 + 8.000", "= 53.000"]},
+    {"id": "l1-4", "type": "mcq", "prompt": "Budi punya Rp50.000. Ongkos taksi ke stasiun (10 km) adalah Rp53.000. Kesimpulan yang tepat adalah …", "options": ["Uang Budi cukup, sisa Rp3.000", "Uang Budi tidak cukup, kurang Rp3.000", "Uang Budi pas", "Tidak bisa ditentukan"], "answer": 1, "error_type": "salah_tafsir", "hint": "Bandingkan Rp53.000 dengan Rp50.000.", "explain": ["53.000 > 50.000", "Uang Budi kurang 53.000 − 50.000 = 3.000"]},
+    {"id": "l1-5", "type": "numeric", "prompt": "Dengan uang Rp50.000, berapa km paling jauh (bilangan bulat) yang bisa ditempuh Budi dengan taksi itu?", "unit": "km", "answer": "9", "common_errors": [{"value": "10", "type": "salah_tafsir", "message": "Ongkos 10 km adalah Rp53.000, lebih dari Rp50.000."}, {"value": "9,33", "type": "salah_tafsir", "tolerance": 0.01, "message": "Hasil hitunganmu sudah benar, tetapi jaraknya diminta bilangan bulat dan tidak boleh melebihi uang Budi."}], "hint": "Selesaikan 4.500x + 8.000 ≤ 50.000.", "explain": ["4.500x + 8.000 ≤ 50.000", "4.500x ≤ 42.000", "x ≤ 9,33", "Bilangan bulat terbesar: 9 km (ongkos Rp48.500)"]},
+    {"id": "l1-6", "type": "expression", "name": "B", "prompt": "Paket data: biaya langganan Rp20.000 per bulan ditambah Rp3.000 untuk setiap GB. Tulis biaya B(x) untuk x GB.", "answer": "3000x + 20000", "check_points": [0, 1, 5], "hint": "Biaya langganan = b, biaya per GB = a.", "explain": ["a = 3.000 (per GB)", "b = 20.000 (langganan)", "B(x) = 3.000x + 20.000"]}
+  ]
+}

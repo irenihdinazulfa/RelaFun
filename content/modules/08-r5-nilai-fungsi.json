@@ -1,0 +1,30 @@
+{
+  "id": "r5-nilai-fungsi",
+  "order": 8,
+  "group": "inti",
+  "title": "Notasi dan Nilai Fungsi",
+  "subtitle": "Menghitung f(x) langkah demi langkah",
+  "icon": "fx",
+  "minutes": 15,
+  "interview_codes": ["IL02", "GL03", "DS02", "EL03"],
+  "objectives": ["Membaca notasi f(x) dan f : x → …", "Menghitung nilai fungsi dengan substitusi bertahap"],
+  "steps": [
+    {"type": "text", "title": "Notasi fungsi", "body": "Fungsi bisa ditulis dengan rumus, misalnya **f(x) = 2x + 3**.\nf(x) dibaca “f dari x”, artinya nilai fungsi f untuk suatu x."},
+    {"type": "text", "title": "Bentuk lain", "body": "Fungsi juga ditulis **f : x → 2x + 3**, dibaca “f memetakan x ke 2x + 3”. Artinya sama dengan f(x) = 2x + 3."},
+    {"type": "example", "title": "Contoh 1", "problem": "f(x) = 2x + 3. Tentukan f(4).", "steps": ["Tulis rumusnya: f(x) = 2x + 3", "Ganti x dengan (4): f(4) = 2 × (4) + 3", "Kalikan dulu: f(4) = 8 + 3", "Jumlahkan: f(4) = 11"], "answer": "f(4) = 11"},
+    {"type": "example", "title": "Contoh 2 (x negatif)", "problem": "g(x) = −3x + 5. Tentukan g(−2).", "steps": ["Ganti x dengan (−2): g(−2) = −3 × (−2) + 5", "Negatif × negatif = positif: g(−2) = 6 + 5", "Jumlahkan: g(−2) = 11"], "answer": "g(−2) = 11"},
+    {"type": "tip", "body": "Setelah x diganti angka, ganti juga x di **sebelah kiri**. Tulis **f(4) = 2 × (4) + 3**, bukan f(x) = 2 × (4) + 3. f(x) adalah rumus umum, sedangkan f(4) adalah nilai fungsi saat x = 4."},
+    {"type": "tip", "body": "Selalu tulis nilai x di dalam **kurung**, apalagi jika x negatif atau desimal. Ini mencegah salah tanda."},
+    {"type": "calculator", "title": "Kalkulator fungsi bertahap", "body": "Pakai kalkulator ini untuk mengecek hitunganmu. Coba ganti rumus atau nilai x.", "expr": "2x + 3", "x": "4"}
+  ],
+  "items": [
+    {"id": "r5-1", "type": "numeric", "prompt": "f(x) = 3x + 1. Berapa f(2)?", "answer": "7", "linear": {"a": 3, "b": 1, "x": "2"}, "hint": "f(2) = 3 × (2) + 1", "explain": ["f(2) = 3 × (2) + 1", "= 6 + 1", "= 7"]},
+    {"id": "r5-2", "type": "numeric", "prompt": "f(x) = 5x − 4. Berapa f(3)?", "answer": "11", "linear": {"a": 5, "b": -4, "x": "3"}, "hint": "f(3) = 5 × (3) − 4", "explain": ["f(3) = 5 × (3) − 4", "= 15 − 4", "= 11"]},
+    {"id": "r5-3", "type": "numeric", "prompt": "g(x) = −2x + 7. Berapa g(4)?", "answer": "-1", "linear": {"a": -2, "b": 7, "x": "4"}, "hint": "−2 × 4 hasilnya negatif.", "explain": ["g(4) = −2 × (4) + 7", "= −8 + 7", "= −1"]},
+    {"id": "r5-4", "type": "numeric", "prompt": "h(x) = 4x + 6. Berapa h(−3)?", "answer": "-6", "linear": {"a": 4, "b": 6, "x": "-3"}, "hint": "Tulis 4 × (−3) dengan kurung.", "explain": ["h(−3) = 4 × (−3) + 6", "= −12 + 6", "= −6"]},
+    {"id": "r5-5", "type": "numeric", "prompt": "f : x → 10 − 3x. Berapa bayangan dari 2?", "answer": "4", "linear": {"a": -3, "b": 10, "x": "2"}, "hint": "Bayangan dari 2 = f(2).", "explain": ["f(2) = 10 − 3 × (2)", "= 10 − 6", "= 4"]},
+    {"id": "r5-6", "type": "numeric", "prompt": "f(x) = 6x − 5. Berapa f(0,5)?", "answer": "-2", "linear": {"a": 6, "b": -5, "x": "0.5"}, "hint": "6 × 0,5 = 3", "explain": ["f(0,5) = 6 × (0,5) − 5", "= 3 − 5", "= −2"]},
+    {"id": "r5-7", "type": "numeric", "prompt": "f(x) = 2x + 1. Jika f(a) = 9, berapa nilai a?", "answer": "4", "common_errors": [{"value": "19", "type": "konsep", "message": "19 adalah f(9). Di soal ini yang dicari x-nya: 2a + 1 = 9."}], "hint": "Tulis persamaan 2a + 1 = 9, lalu cari a.", "explain": ["2a + 1 = 9", "2a = 8", "a = 4"]},
+    {"id": "r5-8", "type": "mcq", "prompt": "A(x) = 2.000x adalah biaya internet untuk x GB. Raka memakai 25 GB. Penulisan mana yang tepat?", "options": ["A(x) = 2.000 × 25 = 50.000", "A(25) = 2.000 × 25 = 50.000", "A = 2.000x × 25 = 50.000", "25(x) = 2.000 × 25 = 50.000"], "answer": 1, "error_type": "notasi", "option_feedback": {"0": "Hitungannya benar, tetapi x sudah diganti 25. Jadi tulis A(25), bukan A(x).", "2": "Huruf x tidak perlu ditulis lagi. Ganti x dengan 25, lalu tulis A(25) di kiri.", "3": "Angka 25 masuk ke dalam kurung: A(25)."}, "hint": "x diganti 25. Huruf di dalam kurung juga ikut diganti.", "explain": ["A(x) = 2.000x adalah rumus umum", "Untuk x = 25, tulis A(25)", "A(25) = 2.000 × 25 = 50.000"]}
+  ]
+}
