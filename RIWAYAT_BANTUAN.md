@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–18 November 2026 (lima puluh empat permintaan) |
+| Tanggal | 12–18 November 2026 (lima puluh enam permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -1108,4 +1108,25 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - server HTTPS lolos verifikasi penuh;
   - di Chrome: konteks aman, service worker aktif, syarat pasang aplikasi terpenuhi, dan AI Gemini aktif.
 - Dokumen yang diperbarui: 10, 15, README, dan CLAUDE.md. Pustaka `cryptography` ditambahkan ke `requirements.txt`.
+
+---
+
+## Permintaan 55–56 — "gabisa dibuka" (ERR_CONNECTION_REFUSED di https://relafun)
+
+### 👤 Pengguna
+
+> gabisa dibuka
+
+> (tangkapan layar Edge: https://relafun — "relafun refused to connect", ERR_CONNECTION_REFUSED)
+
+### 🤖 Asisten
+
+- Diagnosis: `start.bat` belum dijalankan. Log Windows PowerShell tidak mencatat start.bat setelah perubahan HTTPS, sehingga tidak ada server di port 443 dan sertifikat belum terpasang.
+- Diperiksa juga:
+  - asosiasi file .bat normal;
+  - McAfee tidak memblokir;
+  - `start.bat` berhasil menyalakan server saat diuji.
+- Folder proyek dibukakan di File Explorer dengan `start.bat` tersorot.
+- Perbaikan `start.ps1`: server RelaFun lama yang masih jalan otomatis dihentikan, sehingga klik `start.bat` selalu berarti "nyalakan ulang" dan port 80/443 bebas untuk https (diuji).
+- Sementara pengguna belum menjalankan `start.bat`, server versi http dinyalakan agar http://relafun bisa dipakai.
 

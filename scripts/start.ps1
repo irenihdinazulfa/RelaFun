@@ -70,6 +70,24 @@ if (-not $alias -and -not $NoAlias) {
   }
   $alias = Test-RelafunAlias
 }
+# Server RelaFun lama yang masih jalan (jendela lain / percobaan sebelumnya) dihentikan dulu,
+# supaya klik start.bat selalu berarti "nyalakan ulang" dan port 80/443 bisa dipakai.
+foreach ($p in 80, 443, 8000) {
+  foreach ($c in @(Get-NetTCPConnection -LocalPort $p -State Listen -ErrorAction SilentlyContinue)) {
+    if (-not $c) { continue }
+    $proc = Get-CimInstance Win32_Process -Filter "ProcessId=$($c.OwningProcess)" -ErrorAction SilentlyContinue
+    if ($proc -and $proc.CommandLine -match 'uvicorn app\.main:app|-m app\.serve') {
+      Write-Host "Menghentikan RelaFun lama di port $p..."
+      $parent = Get-CimInstance Win32_Process -Filter "ProcessId=$($proc.ParentProcessId)" -ErrorAction SilentlyContinue
+      Stop-Process -Id $proc.ProcessId -Force -ErrorAction SilentlyContinue
+      if ($parent -and $parent.CommandLine -match 'uvicorn app\.main:app|-m app\.serve') {
+        Stop-Process -Id $parent.ProcessId -Force -ErrorAction SilentlyContinue
+      }
+    }
+  }
+}
+Start-Sleep -Milliseconds 600
+
 # 5. HTTPS: sertifikat lokal untuk https://relafun (kunci induknya dibuang; hanya berlaku untuk nama relafun)
 $busy80 = Get-NetTCPConnection -LocalPort 80 -State Listen -ErrorAction SilentlyContinue
 $busy443 = Get-NetTCPConnection -LocalPort 443 -State Listen -ErrorAction SilentlyContinue
