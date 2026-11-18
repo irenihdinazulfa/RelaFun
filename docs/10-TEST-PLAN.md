@@ -180,6 +180,23 @@ Permintaan memakai `claude-opus-5-5`, *structured output* `json_schema`, `effort
   - http://relafun berpindah ke http://relafun.localhost;
   - konteks aman, syarat pasang aplikasi terpenuhi, Asisten "AI Gemini aktif", tanpa galat.
 
+## 2k. AI di versi online tanpa kunci (v3.4)
+
+- **pytest** `tests/test_public_tutor.py` (8 tes):
+  - nonaktif secara bawaan (404);
+  - tanpa kunci tetap terpandu dan soal bebas 503;
+  - balasan AI tanpa akun dan tanpa membocorkan kunci maupun kunci jawaban;
+  - batas per IP (60) dan total (1.500), dengan soal bebas 429 saat kuota habis;
+  - IP diambil dari ujung X-Forwarded-For;
+  - CORS hanya untuk origin yang diizinkan;
+  - soal tidak dikenal 404 dan masukan salah 422.
+- **Uji peramban** (Chrome, server lokal dengan Gemini sungguhan sebagai pengganti Render):
+  - server menyala: "AI Gemini aktif", "dibantu AI Gemini", Soal Bebas aktif;
+  - server dimatikan di tengah sesi: lanjut dengan petunjuk tertulis;
+  - server mati saat halaman dibuka: "AI sedang disiapkan…", lalu AI dipakai pada percobaan ke-3 setelah server menyala;
+  - kunci API tidak ada di permintaan peramban, dan tidak ada galat halaman.
+- **Regresi versi online tanpa alamat AI:** uji Asisten statis (Chrome, WebKit) dan uji silang 1.698 kasus, e2e 25 langkah, maskot/footer v3.4, luring. Semua lolos.
+
 ## 3. Belum diuji
 
 - Panggilan **Claude API sungguhan** (diuji dengan respons tiruan; butuh kunci API).

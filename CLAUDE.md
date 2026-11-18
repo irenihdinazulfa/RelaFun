@@ -25,6 +25,8 @@ Bahasa antarmuka & konten: **Bahasa Indonesia** sederhana untuk siswa usia 13–
 
 11. **Dua mesin harus identik**: setiap perubahan di `apps/api/app/core/{mathfn,checker,modeler,tutor}.py` wajib diterapkan juga di `apps/web/js/local/{mathfn,checker,modeler,tutor}.js` (versi GitHub Pages), lalu uji silang. Terbitkan ulang versi online dengan `python scripts/deploy_pages.py`.
 
+11b. **Asisten publik** (`app/routers/public_tutor.py`, aktif bila `PUBLIC_TUTOR=1`): versi GitHub Pages memanggil `/api/public/tutor/*` di server Render (`window.RELAFUN_AI_URL` dari `scripts/ai_url.txt` saat build). Tanpa akun, batas per IP/total, CORS hanya `PUBLIC_TUTOR_ORIGINS`. Peramban selalu punya cadangan mesin `js/local/tutor.js` (server tidur/gagal). Kunci hanya di env Render (`render.yaml`: `sync: false`).
+
 12. **Asisten Belajar RMT** (`app/core/tutor.py`, konten `content/tutor/tutor.json`): AI = **Gemini** (`gemini-3.5-flash-lite`) atau **DeepSeek** (`deepseek-flash`), keduanya format OpenAI `/chat/completions`, dipilih dengan `TUTOR_AI_PROVIDER`. Kunci `GEMINI_API_KEY`/`DEEPSEEK_API_KEY` HANYA dari `.env` server — tidak boleh di frontend, di kode, atau di GitHub (arahan dosen). Benar/salah tiap langkah diperiksa `check_step()`, bukan AI; kunci jawaban tidak dikirim ke AI; balasan AI yang membocorkan jawaban dibuang oleh `leaks()`. Asisten tidak boleh memberi jawaban akhir, satu langkah per giliran, ≤ 40 kata per perintah, ≤ 60 kata per petunjuk, 3 tingkat petunjuk. Gemini: satu pesan sistem dan percakapan wajib diakhiri pesan pengguna (`BUTTON_TRIGGERS`).
 
 ## Peta kode

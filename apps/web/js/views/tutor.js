@@ -21,9 +21,24 @@ export async function tutorView(main, _params, ctx) {
   const [status, cat] = await Promise.all([api.get("/api/tutor/status"), api.get("/api/tutor/problems")]);
   const wenSlot = h("div", { class: "tutor-wen" }, mascot("wave", "wen-sticker"));
   const setMood = (mood) => { wenSlot.textContent = ""; wenSlot.append(mascot(mood, "wen-sticker")); };
-  const modeChip = status.ai
-    ? h("span", { class: "chip primary tutor-mode" }, icon("sparkle"), `AI ${status.provider} aktif`)
-    : h("span", { class: "chip tutor-mode" }, icon("info"), "Mode terpandu (tanpa AI)");
+  const modeChip = h("span", { class: "chip tutor-mode" });
+  const showMode = () => {
+    clear(modeChip);
+    modeChip.className = status.ai ? "chip primary tutor-mode" : "chip tutor-mode";
+    if (status.ai) modeChip.append(icon("sparkle"), `AI ${status.provider} aktif`);
+    else if (status.waking) modeChip.append(icon("info"), "AI sedang disiapkan…");
+    else modeChip.append(icon("info"), "Mode terpandu (tanpa AI)");
+  };
+  showMode();
+  // Versi online: server AI bisa baru bangun di tengah sesi → tanda di atas ikut diperbarui.
+  const noteSource = (res) => {
+    if (res.source === "ai" && !status.ai) {
+      status.ai = true;
+      status.provider = res.provider || status.provider || "AI";
+      status.waking = false;
+      showMode();
+    }
+  };
   main.append(h("div", { class: "page-head" },
     h("div", { class: "ph-title" }, wenSlot,
       h("div", null, h("h1", null, "Asisten Belajar"),
@@ -45,10 +60,13 @@ export async function tutorView(main, _params, ctx) {
       phases));
     if (!status.ai) {
       body.append(h("div", { class: "alert info" }, icon("info"), h("div", null,
-        h("div", { class: "alert-title" }, status.static ? "Versi online: mode terpandu" : "AI belum aktif di server ini"),
-        h("p", { class: "small", style: { margin: 0 } }, status.static
-          ? "Di versi ini Wen memakai petunjuk tertulis. Balasan AI (Gemini atau DeepSeek) aktif di versi server, karena kunci API wajib disimpan di file .env server."
-          : "Isi GEMINI_API_KEY atau DEEPSEEK_API_KEY di file .env server untuk mengaktifkan balasan AI. Sementara itu Wen memakai petunjuk tertulis."))));
+        h("div", { class: "alert-title" }, status.waking ? "AI sedang disiapkan"
+          : status.static ? "Versi online: mode terpandu" : "AI belum aktif di server ini"),
+        h("p", { class: "small", style: { margin: 0 } }, status.waking
+          ? "Server AI sedang dinyalakan (sekitar 1 menit). Kamu bisa langsung mulai: Wen memakai petunjuk tertulis dulu, lalu otomatis memakai AI begitu server siap."
+          : status.static
+            ? "Saat ini Wen memakai petunjuk tertulis. Pemeriksaan jawaban dan petunjuk bertahap tetap berjalan."
+            : "Isi GEMINI_API_KEY atau DEEPSEEK_API_KEY di file .env server untuk mengaktifkan balasan AI. Sementara itu Wen memakai petunjuk tertulis."))));
     }
     body.append(h("h2", { class: "section-title" }, "Pilih soal"),
       h("div", { class: "tutor-grid" }, cat.problems.map((p) =>
@@ -73,7 +91,8 @@ export async function tutorView(main, _params, ctx) {
       h("h2", null, "Soal bebas"),
       h("p", { class: "muted small" }, status.free_mode
         ? `Tulis soal matematikamu sendiri. Wen (AI ${status.provider}) membimbing lewat 6 tahap RMT tanpa memberi jawabannya.`
-        : "Mode ini memakai AI dan hanya aktif di versi server dengan kunci API di file .env."),
+        : status.waking ? "Mode ini memakai AI. Server AI sedang disiapkan; buka lagi halaman ini sebentar lagi."
+          : "Mode ini memakai AI dan aktif bila server AI tersedia."),
       h("label", { class: "sr-only", for: "tutor-free" }, "Soal bebas"), ta, h("div", { class: "row" }, go));
   }
 
@@ -189,6 +208,7 @@ export async function tutorView(main, _params, ctx) {
     if (res.hint > prevHint) s.hintsUsed += res.hint - prevHint;
     if (res.skipped) s.skipped += 1;
     if (res.source === "ai") s.aiUsed = true;
+    noteSource(res);
     Object.assign(s, { step: res.step, attempts: res.attempts, hint: res.hint, done: res.done });
     bubble(ui, "wen", res.reply, res.source);
     remember("assistant", res.reply);
@@ -237,6 +257,7 @@ export async function tutorView(main, _params, ctx) {
     busy(ui, false);
     s.phase = res.phase;
     if (res.source === "ai") s.aiUsed = true;
+    noteSource(res);
     bubble(ui, "wen", res.reply, res.source);
     remember("assistant", res.reply);
     setMood(action === "next" ? "cheer" : "happy");

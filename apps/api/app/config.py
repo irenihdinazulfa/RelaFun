@@ -65,6 +65,15 @@ TUTOR_DAILY_QUOTA = int(os.getenv("TUTOR_DAILY_QUOTA", "60"))
 
 PROVIDER_NAMES = {"deepseek": "DeepSeek", "gemini": "Gemini"}
 
+# --- Asisten publik untuk versi GitHub Pages (tanpa akun) ---
+# Bila aktif, halaman Asisten di GitHub Pages memakai AI dari server ini lewat /api/public/tutor/*.
+# Kunci API tetap hanya di variabel lingkungan server. Batas harian per IP dan total menjaga kuota gratis.
+PUBLIC_TUTOR = os.getenv("PUBLIC_TUTOR", "0").strip().lower() in ("1", "true", "ya", "yes")
+PUBLIC_TUTOR_ORIGINS = [o.strip().rstrip("/") for o in os.getenv(
+    "PUBLIC_TUTOR_ORIGINS", "https://irenihdinazulfa.github.io").split(",") if o.strip()]
+PUBLIC_TUTOR_PER_IP = int(os.getenv("PUBLIC_TUTOR_PER_IP", "60"))
+PUBLIC_TUTOR_DAILY_TOTAL = int(os.getenv("PUBLIC_TUTOR_DAILY_TOTAL", "1500"))
+
 
 def tutor_provider() -> str | None:
     """Penyedia AI asisten yang aktif ("deepseek"/"gemini"), atau None bila kuncinya belum diisi."""

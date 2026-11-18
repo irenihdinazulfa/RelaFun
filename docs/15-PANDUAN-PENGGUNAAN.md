@@ -25,7 +25,7 @@ Catatan versi online (GitHub Pages):
   3. Tulis deskripsi soal di kotak **Deskripsi soal**, lalu ketuk **Modelkan dengan AI**.
   4. Muncul kartu **Model matematika** (variabel, rumus fungsi, pertanyaan), pemeriksaan model, dan penyelesaian langkah demi langkah.
 
-Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 3.3**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
+Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. Nomor versi tampil di footer setiap halaman (saat ini **versi 3.4**). HP yang masih menyimpan versi lama akan memakai versi baru paling lambat saat aplikasi dibuka berikutnya.
 
 ## A. Menjalankan versi server (komputer Windows)
 
@@ -121,13 +121,22 @@ macOS/Linux: `bash scripts/start.sh`
 
 Kunci API **tidak boleh** ditulis di kode atau diunggah ke GitHub. Gemini gratis mensyaratkan pengguna berusia 18+ dan tidak untuk aplikasi yang dipakai anak di bawah 18 tahun, jadi gunakan untuk pengembangan dan demonstrasi (lihat dokumen 19, bagian 4). File `.env` sudah dikecualikan dari GitHub. Rincian: [19-ASISTEN-BELAJAR.md](19-ASISTEN-BELAJAR.md).
 
-## F. Deploy ke internet (agar bisa dipasang di HP mana pun)
+## F. Server online di Render: AI untuk semua pengguna tanpa kunci
 
-Unggah folder proyek ke layanan hosting Python yang menyediakan HTTPS (mis. Render, Railway, atau server sekolah) dengan perintah jalan:
-```
-cd apps/api && pip install -r requirements.txt && uvicorn app.main:app --host 0.0.0.0 --port $PORT
-```
-Atur variabel `SECRET_KEY` (acak), `SEED_DEMO=0`, dan bila perlu `ANTHROPIC_API_KEY`. Setelah itu buka alamat HTTPS di HP, lalu pilih **Instal aplikasi** (Android) atau **Bagikan → Tambahkan ke Layar Utama** (iPhone).
+Supaya Asisten di link GitHub Pages memakai AI Gemini tanpa siswa menempel kunci apa pun, servernya dipasang di Render (gratis). Kunci Gemini disimpan di pengaturan Render, tidak di GitHub.
+
+1. Buka https://dashboard.render.com, lalu masuk dengan **GitHub** (akun pemilik repo RelaFun).
+2. Klik **New +** → **Blueprint** → pilih repo **RelaFun**. Render membaca `render.yaml` dan menampilkan layanan **relafun** (paket *Free*).
+3. Render meminta nilai **GEMINI_API_KEY**. Tempel kunci dari https://aistudio.google.com/apikey di kolom itu (bukan di GitHub, bukan di chat).
+4. Klik **Deploy Blueprint / Apply** dan tunggu sekitar 5 menit sampai statusnya *Live*. Alamatnya tampil di bagian atas, misalnya `https://relafun.onrender.com`.
+5. Tulis alamat itu di `scripts/ai_url.txt`, lalu jalankan `python scripts/deploy_pages.py`. Asisten di versi GitHub Pages sekarang memakai AI dari server tersebut.
+
+Catatan paket gratis Render:
+- Server tidur setelah 15 menit tanpa kunjungan dan butuh sekitar 1 menit untuk bangun. Selama itu Asisten menampilkan "AI sedang disiapkan…" dan tetap bisa dipakai dengan petunjuk tertulis.
+- Data akun di server Render kembali ke data demo setiap kali server dinyalakan ulang. Versi GitHub Pages menyimpan data di perangkat masing-masing, jadi tidak terpengaruh.
+- Kuota: 60 balasan AI per perangkat (IP) per hari, 1.500 per hari untuk semua pengguna.
+
+Server Render juga bisa dibuka langsung (https), dan aplikasinya bisa dipasang di HP: **Instal aplikasi** (Android) atau **Bagikan → Tambahkan ke Layar Utama** (iPhone).
 
 ## G. Mengatasi masalah
 

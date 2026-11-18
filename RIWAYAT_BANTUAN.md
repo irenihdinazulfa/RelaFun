@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–18 November 2026 (lima puluh sembilan permintaan) |
+| Tanggal | 12–18 November 2026 (enam puluh delapan permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -1167,4 +1167,61 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - `start.bat` menyalakan ulang server dengan benar;
   - di Chrome dan Edge: pengalihan, konteks aman, bisa dipasang, AI Gemini aktif, tanpa galat.
 - Dokumen 10, 15, README, dan CLAUDE.md diperbarui.
+
+---
+
+## Permintaan 60–65 — Membuka dari HP dan berkas Tahap 2 yang dikumpulkan
+
+### 👤 Pengguna
+
+> gabisa d buka di hp
+
+> okay udah bisa, sekarang apa lagi yang harus saya kumpulkan ke dosen
+
+> model rmt sama pengelolaan cognitive load nya gabisa dibuka
+
+> ooh udah ada di githubnya ya, jadi saya hanya perlu ngumpulin link yang sama kan?
+
+> okay terimakasih, nanti saya akan jelaskan ke dosen kalo saya pake gemini
+
+> (tangkapan layar HP: halaman Asisten versi online, Soal bebas nonaktif) kok masi belum bisa
+
+### 🤖 Asisten
+
+- **HP:** `relafun.localhost` hanya berlaku di laptop. Di HP harus memakai alamat IP laptop, dan HP harus berada di Wi-Fi yang sama. Log server menunjukkan HP belum pernah tersambung. Tangkapan layar HP memakai data seluler (LTE) dan membuka versi online.
+- **Pengumpulan Tahap 2** sesuai jawaban dosen (aplikasi + API, RMT, pengelolaan Cognitive Load, repo GitHub yang sama):
+  - link repo yang sama dan link aplikasi online;
+  - bukti tangkapan layar AI;
+  - penjelasan pemakaian Gemini, karena dosen menulis DeepSeek.
+- Dokumen RMT (18) dan Asisten/CLT (19) dibukakan lewat GitHub. Sebelumnya hanya ditulis sebagai teks path, sehingga tidak bisa diklik.
+
+---
+
+## Permintaan 66–68 — AI Gemini di versi online tanpa pengguna menempel kunci (18 November 2026)
+
+### 👤 Pengguna
+
+> Saya ingin aplikasi ini ditambahkan kecerdasan buatan dari Gemini dengan model 3.5 atau 3.8 yang langsung dapat digunakan tanpa perlu pengguna menempel kuncinya masing masing
+
+> silahkan lanjutkan karena udah ga limit
+
+### 🤖 Asisten
+
+- **Uji model dengan kunci gratis pengguna:**
+  - `gemini-3.5-flash-lite` sekitar 1 detik;
+  - `gemini-3.8-flash` 503 (sedang sangat sibuk);
+  - `gemini-3.5-flash` dan `gemini-3.6-flash` lebih dari 40 detik.
+
+  Yang dipakai `gemini-3.5-flash-lite`; model bisa diganti lewat `GEMINI_MODEL`.
+- **Rancangan:** kunci tetap hanya di server, sesuai arahan dosen.
+  - Server RelaFun dipasang di Render gratis (`render.yaml`, kunci diisi di dasbor Render, `sync: false`).
+  - Versi GitHub Pages memanggil endpoint publik `/api/public/tutor/*`: tanpa akun, CORS hanya untuk origin GitHub Pages, batas 60 balasan per IP per hari dan 1.500 total.
+  - Bila server tidur, gagal, atau kuota habis, peramban melanjutkan dengan mesin `tutor.js` yang identik.
+  - Halaman menampilkan "AI sedang disiapkan…" lalu berubah menjadi "AI Gemini aktif" saat server siap.
+- **Pemeriksaan:**
+  - 332 tes pytest lolos (8 baru);
+  - tiga skenario peramban dengan Gemini sungguhan lolos (menyala, mati di tengah sesi, bangun dari tidur), tanpa kunci di permintaan peramban;
+  - regresi versi online lolos.
+- Versi **3.4**. Dokumen 10, 15 (bagian F), 19 (bagian 4a), README, dan CLAUDE.md diperbarui.
+- **Langkah pengguna:** masuk ke Render dengan GitHub → New Blueprint → repo RelaFun → tempel kunci Gemini di kolom GEMINI_API_KEY → Deploy. Setelah itu asisten menyambungkan alamat server ke versi GitHub Pages.
 

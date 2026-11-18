@@ -86,6 +86,42 @@ RelaFun ditujukan untuk siswa SMP. Karena itu, Gemini gratis sebaiknya hanya dip
 
 Aplikasi tidak pernah mengirim nama atau data pribadi siswa ke AI (bagian 5).
 
+## 4a. AI di versi online tanpa kunci (GitHub Pages + server Render)
+
+Siswa yang membuka https://irenihdinazulfa.github.io/RelaFun/ langsung mendapat balasan AI, tanpa menempel kunci apa pun:
+
+```
+Peramban (GitHub Pages) ──POST /api/public/tutor/turn──▶ Server RelaFun di Render ──▶ Gemini
+  mesin tutor.js (cadangan)       (CORS: hanya origin GitHub Pages)   kunci GEMINI_API_KEY di env server
+```
+
+- **Kunci hanya di server Render** (variabel lingkungan yang diisi di dasbor Render), tidak di GitHub dan tidak di peramban. Ini sesuai arahan dosen.
+- Endpoint publik `GET /api/public/tutor/status` dan `POST /api/public/tutor/turn` (`app/routers/public_tutor.py`):
+  - tanpa akun, dan tidak menyimpan data siswa;
+  - pemeriksaan jawaban tetap oleh mesin;
+  - aktif hanya bila `PUBLIC_TUTOR=1`.
+- **Batas kuota:** 60 balasan AI per alamat IP per hari, dan 1.500 per hari untuk semua pengguna (`PUBLIC_TUTOR_PER_IP`, `PUBLIC_TUTOR_DAILY_TOTAL`). Setelah habis, Wen memakai petunjuk tertulis.
+- **Server tidur** (paket gratis Render tidur setelah 15 menit tanpa kunjungan):
+  - halaman menampilkan "AI sedang disiapkan…" dan siswa tetap bisa mulai dengan petunjuk tertulis;
+  - peramban membangunkan server dan memeriksa lagi paling cepat tiap 10 detik;
+  - begitu server siap, balasan berikutnya memakai AI dan tanda berubah menjadi "AI Gemini aktif".
+- **Server gagal di tengah sesi:** mesin JavaScript di peramban melanjutkan langkah yang sama. Hasilnya identik karena mesin Python dan JavaScript diuji silang pada 1.698 kasus.
+- **Model:** `gemini-3.5-flash-lite`, sekitar 1 detik per balasan. Hasil uji model lain pada 18 November 2026 dengan kunci gratis:
+  - `gemini-3.8-flash` menolak dengan 503 (sedang sangat sibuk);
+  - `gemini-3.5-flash` dan `gemini-3.6-flash` lebih dari 40 detik.
+
+  Model bisa diganti lewat `GEMINI_MODEL` di Render.
+
+**Langkah memasang server di Render** (sekali saja):
+
+1. Buka https://dashboard.render.com, lalu masuk dengan **GitHub** (akun pemilik repo RelaFun).
+2. Klik **New +** → **Blueprint** → pilih repo **RelaFun**. Render membaca `render.yaml` dan menampilkan layanan **relafun** (paket *Free*).
+3. Render meminta nilai **GEMINI_API_KEY**. Tempel kunci dari https://aistudio.google.com/apikey di kolom itu (bukan di GitHub, bukan di chat).
+4. Klik **Deploy Blueprint / Apply** dan tunggu sekitar 5 menit sampai statusnya *Live*. Alamatnya tampil di bagian atas, misalnya `https://relafun.onrender.com`.
+5. Tulis alamat itu di `scripts/ai_url.txt`, lalu jalankan `python scripts/deploy_pages.py`. Asisten di versi GitHub Pages sekarang memakai AI dari server tersebut.
+
+Server di Render juga bisa dibuka langsung sebagai versi server lengkap (akun, dashboard guru, AI). Isi databasenya kembali ke data demo setiap kali server dinyalakan ulang (paket gratis).
+
 ## 5. Format panggilan AI
 
 Kedua penyedia dipanggil dengan format **kompatibel OpenAI**: `POST {base}/chat/completions`, header `Authorization: Bearer <kunci dari .env>`.
@@ -117,13 +153,26 @@ Isinya:
 | `apps/api/app/core/tutor.py` | Mesin asisten: pemeriksaan, petunjuk, penjaga jawaban, prompt RMT, `gemini_chat()`, `deepseek_chat()`, `ai_chat()` (memilih penyedia) |
 | `apps/api/app/config.py` | `TUTOR_AI_PROVIDER`, `GEMINI_*`, `DEEPSEEK_*`, `tutor_provider()` |
 | `apps/api/app/routers/tutor.py` | `GET /api/tutor/status`, `GET /api/tutor/problems`, `POST /api/tutor/turn`, `POST /api/tutor/finish`, `GET /api/tutor/summary` (guru) |
-| `apps/web/js/local/tutor.js` | Mesin yang sama untuk versi GitHub Pages (tanpa AI) |
+| `apps/api/app/routers/public_tutor.py` | Asisten publik untuk GitHub Pages: `GET /api/public/tutor/status`, `POST /api/public/tutor/turn` (tanpa akun, batas per IP & total, CORS) |
+| `render.yaml` | Blueprint Render: server online + `PUBLIC_TUTOR=1`; kunci `GEMINI_API_KEY` diisi di dasbor Render |
+| `scripts/ai_url.txt` | Alamat server AI publik untuk build GitHub Pages (`window.RELAFUN_AI_URL`) |
+| `apps/web/js/local/tutor.js` | Mesin yang sama untuk versi GitHub Pages (cadangan bila server AI tidur/gagal) |
 | `apps/web/js/views/tutor.js` | Halaman Asisten Belajar. Nama penyedia AI diambil dari server. |
 | `apps/api/tests/test_tutor.py` | 51 tes: konten (batas kata CLT, urutan tahap RMT), seluruh soal bisa diselesaikan, petunjuk tidak membocorkan jawaban, kesalahan khas, format Gemini dan DeepSeek, pemilihan penyedia, kode galat, kuota, API tidak membocorkan kunci |
 
 ## 7. Pengujian
 
-- **pytest**: 317 tes lolos, 51 di antaranya untuk asisten.
+- **pytest**: 332 tes lolos, 51 di antaranya untuk asisten dan 8 untuk Asisten publik:
+  - nonaktif secara bawaan;
+  - tanpa kunci tetap terpandu;
+  - balasan AI tanpa akun dan tanpa membocorkan kunci maupun kunci jawaban;
+  - batas per IP dan total;
+  - IP dari ujung X-Forwarded-For;
+  - CORS hanya untuk origin yang diizinkan.
+- **Versi online + server AI (Gemini sungguhan)** dalam tiga skenario, tanpa galat dan tanpa kunci di permintaan peramban:
+  - server menyala: "AI Gemini aktif", balasan "dibantu AI Gemini", Soal Bebas aktif;
+  - server dimatikan di tengah sesi: Wen lanjut dengan petunjuk tertulis;
+  - server mati saat halaman dibuka: "AI sedang disiapkan…", lalu AI dipakai setelah server menyala.
 - **Uji peramban di Chrome, WebKit/Safari, dan Firefox**:
   - siswa menyelesaikan Soal 2, termasuk kesalahan khas, "Aku bingung", ketuk istilah, skala usaha, dan ringkasan;
   - di Soal 3, tombol lanjut muncul setelah 3 kali mencoba;

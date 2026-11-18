@@ -13,6 +13,53 @@ const POINTS_FIRST_TRY = 10;
 const POINTS_RETRY = 5;
 const DAILY_GOAL = 5;
 const AI_DAILY_QUOTA = 10;
+// --- Asisten: AI dari server online (kunci API hanya di server; lihat apps/api/app/routers/public_tutor.py) ---
+// config.js versi GitHub Pages menyetel window.RELAFUN_AI_URL. Bila server tidur (Render tidur setelah
+// 15 menit), gagal, atau kuota habis, Asisten tetap jalan dengan mesin di peramban (hasil pemeriksaan sama).
+const AI_URL = String(window.RELAFUN_AI_URL || "").replace(/\/+$/, "");
+const remote = { state: AI_URL ? "unknown" : "off", status: null, waking: null, lastTry: 0 };
+const REMOTE_RETRY_MS = 10000; // bila AI belum aktif, coba hubungi server lagi paling cepat tiap 10 detik
+
+async function remoteFetch(path, opts = {}, ms = 8000) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), ms);
+  try {
+    const res = await fetch(AI_URL + path, { ...opts, mode: "cors", credentials: "omit", signal: ctl.signal,
+      headers: { "Content-Type": "application/json" } });
+    if (!(res.headers.get("content-type") || "").includes("application/json")) throw Object.assign(new Error("bukan JSON"), { status: 503 });
+    const data = await res.json();
+    if (!res.ok) throw Object.assign(new Error(data.detail || "Server AI menolak permintaan."), { status: res.status });
+    return data;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function wakeRemote() {
+  // Bangunkan server tanpa menunggu; giliran berikutnya memakai AI begitu server siap.
+  if (!AI_URL || remote.waking) return;
+  remote.state = "waking";
+  remote.lastTry = Date.now();
+  remote.waking = remoteFetch("/api/public/tutor/status", {}, 120000)
+    .then((s) => { remote.status = s; remote.state = s.ai ? "on" : "off"; })
+    .catch(() => { remote.state = "off"; })
+    .finally(() => { remote.waking = null; });
+}
+
+async function remoteStatus() {
+  if (!AI_URL) return null;
+  remote.lastTry = Date.now();
+  try {
+    const s = await remoteFetch("/api/public/tutor/status", {}, 6000);
+    remote.status = s;
+    remote.state = s.ai ? "on" : "off";
+    return s;
+  } catch {
+    wakeRemote();
+    return null;
+  }
+}
+
 const SECRET_FIELDS = new Set(["answer", "answer_pairs", "common_errors", "linear", "explain", "option_feedback", "tolerance"]);
 
 // ---------------------------------------------------------------------------
@@ -382,16 +429,37 @@ export async function handle(method, rawPath, body = {}, token = null) {
       currentUser(token);
       return analyzeRelation(body.domain || [], body.codomain || [], body.pairs || []);
     }
-    // --- Asisten Belajar RMT (tanpa AI di versi ini) ---
+    // --- Asisten Belajar RMT (AI dari server online bila tersedia; selain itu mesin di peramban) ---
     if (method === "GET" && path === "/api/tutor/status") {
       currentUser(token);
-      return { ai: false, provider: null, model: null, daily_quota: 0, remaining: 0, free_mode: false, static: true };
+      const s = await remoteStatus();
+      if (s && s.ai) {
+        return { ai: true, provider: s.provider, model: s.model, daily_quota: 0, remaining: s.remaining,
+          free_mode: s.free_mode, static: true, remote: true };
+      }
+      return { ai: false, provider: null, model: null, daily_quota: 0, remaining: 0, free_mode: false, static: true,
+        waking: remote.state === "waking", remote_configured: Boolean(AI_URL) };
     }
     if (method === "GET" && path === "/api/tutor/problems") { currentUser(token); return tutor.catalog(await loadTutor()); }
     if (method === "POST" && path === "/api/tutor/turn") {
       currentUser(token);
-      if (body.problem_id === tutor.FREE_ID) {
-        throw new ApiError("Mode Soal Bebas memakai AI dan hanya aktif di versi server (kunci di file .env server).", 503);
+      const free = body.problem_id === tutor.FREE_ID;
+      if (remote.state === "on") {
+        try {
+          return await remoteFetch("/api/public/tutor/turn", { method: "POST", body: JSON.stringify(body) }, free ? 30000 : 15000);
+        } catch (e) {
+          if (e.status === 422 || e.status === 404) throw new ApiError(e.message, e.status);
+          if (free) {
+            throw new ApiError(e.status === 429 ? "Kuota balasan AI hari ini sudah habis. Coba soal bawaan, ya."
+              : "AI sedang tidak bisa dihubungi. Coba lagi sebentar, atau kerjakan soal bawaan.", e.status || 503);
+          }
+          if (e.status !== 429) wakeRemote(); // soal bawaan: lanjut dengan mesin di peramban
+        }
+      } else if (AI_URL && !remote.waking && Date.now() - remote.lastTry > REMOTE_RETRY_MS) {
+        wakeRemote(); // server mungkin baru bangun: giliran berikutnya memakai AI bila sudah siap
+      }
+      if (free) {
+        throw new ApiError("Mode Soal Bebas memakai AI. Server AI belum siap; coba lagi sebentar.", 503);
       }
       try {
         const out = tutor.turn(await loadTutor(), body);

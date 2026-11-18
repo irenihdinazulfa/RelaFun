@@ -1,19 +1,43 @@
-# Konfigurasi deploy ke Render (https://render.com) — agar RelaFun punya link HTTPS publik.
-# Langkah: Render → New → Blueprint → pilih repo RelaFun → Apply.
+# Blueprint Render: server RelaFun online dengan Asisten AI (Gemini).
+#
+# - Kunci GEMINI_API_KEY TIDAK ada di berkas ini. Render memintanya saat Blueprint dibuat (sync: false),
+#   dan kunci disimpan sebagai variabel lingkungan server (sesuai arahan dosen: kunci hanya di backend).
+# - Versi GitHub Pages memanggil /api/public/tutor/* di server ini (PUBLIC_TUTOR=1, CORS hanya untuk
+#   origin GitHub Pages), sehingga siswa memakai AI tanpa menempel kunci.
+# - Paket gratis: server tidur setelah 15 menit tanpa kunjungan dan bangun sekitar 1 menit; isi database
+#   SQLite kembali ke data demo setiap server dinyalakan ulang.
 services:
   - type: web
     name: relafun
     runtime: python
     plan: free
-    rootDir: apps/api
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    buildCommand: pip install -r apps/api/requirements.txt
+    startCommand: cd apps/api && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/health
+    autoDeploy: true
     envVars:
       - key: PYTHON_VERSION
-        value: 3.12.7
+        value: "3.12.8"
       - key: SECRET_KEY
         generateValue: true
       - key: SEED_DEMO
         value: "1"
-# Fitur AI (opsional, berbayar): tambahkan ANTHROPIC_API_KEY di menu Environment setelah deploy.
+      - key: TUTOR_AI_PROVIDER
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.5-flash-lite
+      - key: GEMINI_REASONING
+        value: minimal
+      - key: TUTOR_DAILY_QUOTA
+        value: "60"
+      - key: PUBLIC_TUTOR
+        value: "1"
+      - key: PUBLIC_TUTOR_ORIGINS
+        value: https://irenihdinazulfa.github.io
+      - key: PUBLIC_TUTOR_PER_IP
+        value: "60"
+      - key: PUBLIC_TUTOR_DAILY_TOTAL
+        value: "1500"
+# Pemodel Soal Cerita AI (Claude, opsional, berbayar): tambahkan ANTHROPIC_API_KEY di menu Environment setelah deploy.

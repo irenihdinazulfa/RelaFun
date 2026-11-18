@@ -11,6 +11,9 @@ os.environ["ANTHROPIC_API_KEY"] = ""
 # Tes tidak boleh memakai kunci AI asli dari .env (load_dotenv tidak menimpa variabel yang sudah ada).
 for _k in ("DEEPSEEK_API_KEY", "GEMINI_API_KEY", "TUTOR_AI_PROVIDER"):
     os.environ[_k] = ""
+# Asisten publik (versi GitHub Pages) aktif dalam tes, dengan satu origin contoh untuk CORS.
+os.environ["PUBLIC_TUTOR"] = "1"
+os.environ["PUBLIC_TUTOR_ORIGINS"] = "https://contoh.github.io"
 os.environ["SEED_DEMO"] = "1"
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))

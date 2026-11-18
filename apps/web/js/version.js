@@ -1,2 +1,2 @@
 // Nomor versi aplikasi (tampil di footer setiap halaman).
-export const APP_VERSION = "3.3";
+export const APP_VERSION = "3.4";

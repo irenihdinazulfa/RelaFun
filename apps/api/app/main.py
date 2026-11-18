@@ -12,11 +12,12 @@ for _ext, _type in {".js": "text/javascript", ".mjs": "text/javascript", ".css":
     mimetypes.add_type(_type, _ext)
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 
 from . import config
 from .db import Base, SessionLocal, engine
-from .routers import auth, learn, teacher, tools, tutor
+from .routers import auth, learn, public_tutor, teacher, tools, tutor
 from .seed import seed_demo
 
 
@@ -37,12 +38,19 @@ app.include_router(learn.router)
 app.include_router(tools.router)
 app.include_router(teacher.router)
 app.include_router(tutor.router)
+app.include_router(public_tutor.router)
+
+# Versi GitHub Pages memanggil /api/public/tutor/* lintas origin (hanya origin yang diizinkan).
+if config.PUBLIC_TUTOR and config.PUBLIC_TUTOR_ORIGINS:
+    app.add_middleware(CORSMiddleware, allow_origins=config.PUBLIC_TUTOR_ORIGINS, allow_credentials=False,
+                       allow_methods=["GET", "POST"], allow_headers=["Content-Type"], max_age=600)
 
 
 @app.get("/api/health")
 def health() -> dict:
     return {"ok": True, "ai_configured": config.ai_configured(),
-            "tutor_ai_configured": config.tutor_ai_configured(), "demo": config.SEED_DEMO}
+            "tutor_ai_configured": config.tutor_ai_configured(), "public_tutor": config.PUBLIC_TUTOR,
+            "demo": config.SEED_DEMO}
 
 
 @app.exception_handler(HTTPException)
