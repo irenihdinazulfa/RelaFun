@@ -15,3 +15,6 @@ referensi/
 
 # Hasil build GitHub Pages
 dist/
+
+# Berkas pengumpulan ke Google Drive (memuat nama siswa) — hanya di laptop, tidak diunggah
+pengumpulan_tahap1/

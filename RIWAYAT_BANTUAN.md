@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–18 November 2026 (tiga puluh tujuh permintaan) |
+| Tanggal | 12–18 November 2026 (tiga puluh delapan permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -849,3 +849,24 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - memeriksa ulang skor;
   - mengunggah ke Google Drive.
 - **Tahap 2 (DeepSeek + RMT):** asisten meminta ringkasan RMT dari dosen. Sesuai arahan dosen, kunci API DeepSeek nantinya hanya disimpan di `.env` pada backend, tidak di kode frontend maupun GitHub.
+
+---
+
+## Permintaan 38 — Melengkapi identitas, tanggal, dan lama pengerjaan uji coba
+
+### 👤 Pengguna
+
+> (melampirkan PDF laporan wawancara dan PDF lembar jawaban & penilaian Mathematical Literacy buatan sendiri) itu kan jawaban dan nama siswa nya saya iren ihdina zulfa nim 2225250019 pengerjaan satu jam 13 november 2026
+
+### 🤖 Asisten
+
+- Mengisi file 11: **tanggal pengerjaan 13 November 2026** dan **lama pengerjaan 60 menit**.
+- **Mengoreksi kesalahan sendiri:** alokasi waktu "40 menit" di file 09 dan 10 sebelumnya ditambahkan asisten tanpa dasar dari lembar soal asli. Nilainya diganti menjadi **60 menit**, sesuai pelaksanaan uji coba.
+- **Menjaga data anak:**
+  - versi untuk Google Drive yang memuat nama dan sekolah siswa dibuat di folder lokal `pengumpulan_tahap1/` (Word + PDF);
+  - folder itu ditambahkan ke `.gitignore`, sehingga tidak ikut terunggah ke GitHub;
+  - versi di GitHub tetap memakai kode S01.
+- **Menemukan perbedaan rubrik:**
+  - dokumen penilaian pengguna memakai rubrik 6 poin per soal (total 24) dengan skor siswa 24/24;
+  - file 10/11 buatan asisten memakai rubrik 10 poin per soal (total 40) dengan skor 37/40.
+  - Asisten meminta pengguna memilih salah satu agar dokumen yang dikumpulkan tidak saling bertentangan.

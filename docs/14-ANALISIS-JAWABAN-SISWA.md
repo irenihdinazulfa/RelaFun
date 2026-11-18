@@ -12,7 +12,7 @@
 |---|---|
 | Narasumber | S01 (siswa kelas 8 yang juga diwawancarai, lihat `01-RESEARCH-INSIGHTS.md`) |
 | Jawaban diterima | 14 November 2026, berupa teks ketikan |
-| Tanggal & lama pengerjaan | Tidak dicatat |
+| Tanggal & lama pengerjaan | 13 November 2026, 60 menit (1 jam) |
 | Soal | 4 soal *mathematical literacy* (PISA) dari `Lembar_Soal_Siswa_Relasi_Fungsi` |
 
 ## 1. Rubrik penilaian per soal (skor 0–4)
