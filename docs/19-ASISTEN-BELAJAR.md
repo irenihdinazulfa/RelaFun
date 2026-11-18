@@ -86,41 +86,47 @@ RelaFun ditujukan untuk siswa SMP. Karena itu, Gemini gratis sebaiknya hanya dip
 
 Aplikasi tidak pernah mengirim nama atau data pribadi siswa ke AI (bagian 5).
 
-## 4a. AI di versi online tanpa kunci (GitHub Pages + server Render)
+## 4a. AI di versi online tanpa kunci (GitHub Pages + server Vercel)
 
 Siswa yang membuka https://irenihdinazulfa.github.io/RelaFun/ langsung mendapat balasan AI, tanpa menempel kunci apa pun:
 
 ```
-Peramban (GitHub Pages) ──POST /api/public/tutor/turn──▶ Server RelaFun di Render ──▶ Gemini
-  mesin tutor.js (cadangan)       (CORS: hanya origin GitHub Pages)   kunci GEMINI_API_KEY di env server
+Peramban (GitHub Pages) ──POST /api/public/tutor/turn──▶ Server ringan di Vercel ──▶ Gemini
+  mesin tutor.js (cadangan)       (CORS: hanya origin GitHub Pages)   kunci GEMINI_API_KEY di env Vercel
 ```
 
-- **Kunci hanya di server Render** (variabel lingkungan yang diisi di dasbor Render), tidak di GitHub dan tidak di peramban. Ini sesuai arahan dosen.
-- Endpoint publik `GET /api/public/tutor/status` dan `POST /api/public/tutor/turn` (`app/routers/public_tutor.py`):
-  - tanpa akun, dan tidak menyimpan data siswa;
-  - pemeriksaan jawaban tetap oleh mesin;
-  - aktif hanya bila `PUBLIC_TUTOR=1`.
-- **Batas kuota:** 60 balasan AI per alamat IP per hari, dan 1.500 per hari untuk semua pengguna (`PUBLIC_TUTOR_PER_IP`, `PUBLIC_TUTOR_DAILY_TOTAL`). Setelah habis, Wen memakai petunjuk tertulis.
-- **Server tidur** (paket gratis Render tidur setelah 15 menit tanpa kunjungan):
-  - halaman menampilkan "AI sedang disiapkan…" dan siswa tetap bisa mulai dengan petunjuk tertulis;
-  - peramban membangunkan server dan memeriksa lagi paling cepat tiap 10 detik;
-  - begitu server siap, balasan berikutnya memakai AI dan tanda berubah menjadi "AI Gemini aktif".
-- **Server gagal di tengah sesi:** mesin JavaScript di peramban melanjutkan langkah yang sama. Hasilnya identik karena mesin Python dan JavaScript diuji silang pada 1.698 kasus.
+- **Kunci hanya di server** (Environment Variables Vercel), tidak di GitHub dan tidak di peramban. Ini sesuai arahan dosen.
+- **Server ringan** `server.py` + `app/public_app.py`:
+  - isinya hanya Asisten publik: `GET /api/public/tutor/status`, `POST /api/public/tutor/turn` (`app/routers/public_tutor.py`), dan `/api/health`;
+  - tanpa database dan tanpa akun, sehingga cocok untuk layanan serverless gratis;
+  - pemeriksaan jawaban tetap oleh mesin.
+- **Batas kuota:**
+  - 60 balasan AI per alamat IP per hari, dan 1.500 per hari untuk semua pengguna (`PUBLIC_TUTOR_PER_IP`, `PUBLIC_TUTOR_DAILY_TOTAL`);
+  - penghitungnya disimpan di memori server, jadi di serverless angkanya perkiraan;
+  - setelah kuota habis, Wen memakai petunjuk tertulis.
+- **Server lambat bangun atau gagal:**
+  - halaman menampilkan "AI sedang disiapkan…", dan siswa tetap bisa mulai dengan petunjuk tertulis;
+  - peramban memeriksa lagi paling cepat tiap 10 detik;
+  - bila server gagal di tengah sesi, mesin JavaScript di peramban melanjutkan langkah yang sama. Hasilnya identik, karena mesin Python dan JavaScript diuji silang pada 1.698 kasus.
 - **Model:** `gemini-3.5-flash-lite`, sekitar 1 detik per balasan. Hasil uji model lain pada 18 November 2026 dengan kunci gratis:
-  - `gemini-3.8-flash` menolak dengan 503 (sedang sangat sibuk);
-  - `gemini-3.5-flash` dan `gemini-3.6-flash` lebih dari 40 detik.
+  - `gemini-3.8-flash` ditolak dengan kode 503 (sedang sangat sibuk);
+  - `gemini-3.5-flash` dan `gemini-3.6-flash` butuh lebih dari 40 detik.
 
-  Model bisa diganti lewat `GEMINI_MODEL` di Render.
+  Model bisa diganti lewat variabel `GEMINI_MODEL` di Vercel.
 
-**Langkah memasang server di Render** (sekali saja):
+**Langkah memasang server di Vercel** (sekali saja, gratis tanpa kartu):
 
-1. Buka https://dashboard.render.com, lalu masuk dengan **GitHub** (akun pemilik repo RelaFun).
-2. Klik **New +** → **Blueprint** → pilih repo **RelaFun**. Render membaca `render.yaml` dan menampilkan layanan **relafun** (paket *Free*).
-3. Render meminta nilai **GEMINI_API_KEY**. Tempel kunci dari https://aistudio.google.com/apikey di kolom itu (bukan di GitHub, bukan di chat).
-4. Klik **Deploy Blueprint / Apply** dan tunggu sekitar 5 menit sampai statusnya *Live*. Alamatnya tampil di bagian atas, misalnya `https://relafun.onrender.com`.
+1. Buka https://vercel.com/signup, pilih **Hobby** (gratis, tanpa kartu), lalu **Continue with GitHub** dengan akun pemilik repo RelaFun.
+2. Di dasbor Vercel, klik **Add New… → Project**. Pada daftar repo GitHub, klik **Import** di **RelaFun**. Bila repo tidak muncul, klik *Adjust GitHub App Permissions* dan beri akses ke repo RelaFun.
+3. Di halaman *Configure Project*:
+   - biarkan *Root Directory* `./`;
+   - buka **Environment Variables**;
+   - isi *Key* `GEMINI_API_KEY` dan *Value* dengan kunci dari https://aistudio.google.com/apikey (bukan di GitHub, bukan di chat);
+   - klik **Add**.
+4. Klik **Deploy** dan tunggu 1–2 menit. Alamat server tampil di halaman proyek (*Domains*), misalnya `https://relafun.vercel.app`.
 5. Tulis alamat itu di `scripts/ai_url.txt`, lalu jalankan `python scripts/deploy_pages.py`. Asisten di versi GitHub Pages sekarang memakai AI dari server tersebut.
 
-Server di Render juga bisa dibuka langsung sebagai versi server lengkap (akun, dashboard guru, AI). Isi databasenya kembali ke data demo setiap kali server dinyalakan ulang (paket gratis).
+**Pilihan lain: Render** (`render.yaml`). Render menjalankan server lengkap (akun, dashboard guru, AI), tetapi meminta kartu kredit untuk verifikasi identitas (otorisasi sementara $1) dan tidur setelah 15 menit tanpa kunjungan.
 
 ## 5. Format panggilan AI
 

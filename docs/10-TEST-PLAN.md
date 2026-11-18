@@ -195,6 +195,11 @@ Permintaan memakai `claude-opus-5-5`, *structured output* `json_schema`, `effort
   - server dimatikan di tengah sesi: lanjut dengan petunjuk tertulis;
   - server mati saat halaman dibuka: "AI sedang disiapkan…", lalu AI dipakai pada percobaan ke-3 setelah server menyala;
   - kunci API tidak ada di permintaan peramban, dan tidak ada galat halaman.
+- **Server ringan Vercel** (`tests/test_public_app.py`, 2 tes):
+  - `server.py` berjalan dengan `VERCEL=1` tanpa memuat SQLAlchemy/database, dengan folder data di folder sementara;
+  - health, status, CORS, dan giliran pertama berjalan, sedangkan rute berakun tidak ada (404);
+  - berkas deploy tidak memuat kunci, dan `.vercelignore` tidak mengecualikan berkas yang dibutuhkan.
+- **Uji peramban dengan `server.py`** (`VERCEL=1`, Gemini sungguhan): tiga skenario yang sama lolos.
 - **Regresi versi online tanpa alamat AI:** uji Asisten statis (Chrome, WebKit) dan uji silang 1.698 kasus, e2e 25 langkah, maskot/footer v3.4, luring. Semua lolos.
 
 ## 3. Belum diuji

@@ -121,22 +121,24 @@ macOS/Linux: `bash scripts/start.sh`
 
 Kunci API **tidak boleh** ditulis di kode atau diunggah ke GitHub. Gemini gratis mensyaratkan pengguna berusia 18+ dan tidak untuk aplikasi yang dipakai anak di bawah 18 tahun, jadi gunakan untuk pengembangan dan demonstrasi (lihat dokumen 19, bagian 4). File `.env` sudah dikecualikan dari GitHub. Rincian: [19-ASISTEN-BELAJAR.md](19-ASISTEN-BELAJAR.md).
 
-## F. Server online di Render: AI untuk semua pengguna tanpa kunci
+## F. Server AI online di Vercel: AI untuk semua pengguna tanpa kunci
 
-Supaya Asisten di link GitHub Pages memakai AI Gemini tanpa siswa menempel kunci apa pun, servernya dipasang di Render (gratis). Kunci Gemini disimpan di pengaturan Render, tidak di GitHub.
+Supaya Asisten di link GitHub Pages memakai AI Gemini tanpa siswa menempel kunci apa pun, server ringan Asisten publik dipasang di Vercel. Paket *Hobby* gratis dan tidak meminta kartu. Kunci Gemini disimpan di pengaturan Vercel, tidak di GitHub.
 
-1. Buka https://dashboard.render.com, lalu masuk dengan **GitHub** (akun pemilik repo RelaFun).
-2. Klik **New +** → **Blueprint** → pilih repo **RelaFun**. Render membaca `render.yaml` dan menampilkan layanan **relafun** (paket *Free*).
-3. Render meminta nilai **GEMINI_API_KEY**. Tempel kunci dari https://aistudio.google.com/apikey di kolom itu (bukan di GitHub, bukan di chat).
-4. Klik **Deploy Blueprint / Apply** dan tunggu sekitar 5 menit sampai statusnya *Live*. Alamatnya tampil di bagian atas, misalnya `https://relafun.onrender.com`.
+1. Buka https://vercel.com/signup, pilih **Hobby** (gratis, tanpa kartu), lalu **Continue with GitHub** dengan akun pemilik repo RelaFun.
+2. Di dasbor Vercel, klik **Add New… → Project**. Pada daftar repo GitHub, klik **Import** di **RelaFun**. Bila repo tidak muncul, klik *Adjust GitHub App Permissions* dan beri akses ke repo RelaFun.
+3. Di halaman *Configure Project*:
+   - biarkan *Root Directory* `./`;
+   - buka **Environment Variables**;
+   - isi *Key* `GEMINI_API_KEY` dan *Value* dengan kunci dari https://aistudio.google.com/apikey (bukan di GitHub, bukan di chat);
+   - klik **Add**.
+4. Klik **Deploy** dan tunggu 1–2 menit. Alamat server tampil di halaman proyek (*Domains*), misalnya `https://relafun.vercel.app`.
 5. Tulis alamat itu di `scripts/ai_url.txt`, lalu jalankan `python scripts/deploy_pages.py`. Asisten di versi GitHub Pages sekarang memakai AI dari server tersebut.
 
-Catatan paket gratis Render:
-- Server tidur setelah 15 menit tanpa kunjungan dan butuh sekitar 1 menit untuk bangun. Selama itu Asisten menampilkan "AI sedang disiapkan…" dan tetap bisa dipakai dengan petunjuk tertulis.
-- Data akun di server Render kembali ke data demo setiap kali server dinyalakan ulang. Versi GitHub Pages menyimpan data di perangkat masing-masing, jadi tidak terpengaruh.
-- Kuota: 60 balasan AI per perangkat (IP) per hari, 1.500 per hari untuk semua pengguna.
-
-Server Render juga bisa dibuka langsung (https), dan aplikasinya bisa dipasang di HP: **Instal aplikasi** (Android) atau **Bagikan → Tambahkan ke Layar Utama** (iPhone).
+Catatan:
+- Kuota: 60 balasan AI per perangkat (IP) per hari, dan 1.500 per hari untuk semua pengguna. Setelah habis, Asisten memakai petunjuk tertulis.
+- Bila server lambat atau gagal, Asisten menampilkan "AI sedang disiapkan…" dan tetap bisa dipakai dengan petunjuk tertulis.
+- Pilihan lain: Render (`render.yaml`), yang menjalankan server lengkap. Render meminta kartu kredit untuk verifikasi.
 
 ## G. Mengatasi masalah
 

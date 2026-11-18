@@ -1,0 +1,15 @@
+# Vercel hanya membutuhkan server.py, pyproject.toml, apps/api/app, dan content/tutor.
+docs/
+instrumen/
+scripts/
+apps/web/
+apps/api/tests/
+apps/api/data/
+apps/api/.venv/
+content/modules/
+content/*.json
+*.docx
+*.pdf
+*.png
+README.md
+RIWAYAT_BANTUAN.md

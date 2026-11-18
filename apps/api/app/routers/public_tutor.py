@@ -20,7 +20,7 @@ from fastapi import APIRouter, HTTPException, Request
 
 from .. import config
 from ..core import tutor
-from .tutor import TurnIn
+from ..tutor_schemas import TurnIn
 
 log = logging.getLogger("relafun.public_tutor")
 router = APIRouter(prefix="/api/public/tutor", tags=["tutor-publik"])

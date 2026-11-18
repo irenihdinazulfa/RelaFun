@@ -1,7 +1,5 @@
-"""Asisten Belajar (chatbot RMT). AI = DeepSeek; kunci hanya dari .env di server."""
+"""Asisten Belajar (chatbot RMT). AI = Gemini atau DeepSeek; kunci hanya dari .env di server."""
 from __future__ import annotations
-
-from typing import Literal
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
@@ -13,6 +11,7 @@ from ..core import progress, tutor
 from ..core.security import get_current_user, require_teacher
 from ..db import get_db
 from ..models import Classroom, TutorLog, TutorUsage, User
+from ..tutor_schemas import HistoryItem, TurnIn  # noqa: F401 (dipakai juga oleh router publik)
 
 router = APIRouter(prefix="/api/tutor", tags=["asisten"])
 
@@ -42,22 +41,6 @@ def status(user: User = Depends(get_current_user), db: Session = Depends(get_db)
 def problems(_: User = Depends(get_current_user)) -> dict:
     return tutor.catalog()
 
-
-class HistoryItem(BaseModel):
-    role: Literal["user", "assistant"]
-    text: str = Field("", max_length=1200)
-
-
-class TurnIn(BaseModel):
-    problem_id: str = Field(..., max_length=40)
-    action: Literal["start", "answer", "hint", "ask", "next"] = "answer"
-    message: str = Field("", max_length=600)
-    step: int = Field(0, ge=0, le=50)
-    attempts: int = Field(0, ge=0, le=99)
-    hint: int = Field(0, ge=0, le=3)
-    phase: int = Field(0, ge=0, le=5)
-    problem_text: str = Field("", max_length=1200)
-    history: list[HistoryItem] = Field(default_factory=list, max_length=12)
 
 
 @router.post("/turn")

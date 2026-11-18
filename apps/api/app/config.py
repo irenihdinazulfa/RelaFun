@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import os
 import secrets
+import tempfile
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -11,7 +12,9 @@ API_DIR = Path(__file__).resolve().parent.parent          # apps/api
 ROOT_DIR = API_DIR.parent.parent                           # akar proyek
 load_dotenv(ROOT_DIR / ".env")
 
-DATA_DIR = Path(os.getenv("RELAFUN_DATA_DIR", API_DIR / "data"))
+# Di Vercel (VERCEL=1) hanya folder sementara yang boleh ditulisi.
+_DEFAULT_DATA = Path(tempfile.gettempdir()) / "relafun" if os.getenv("VERCEL") else API_DIR / "data"
+DATA_DIR = Path(os.getenv("RELAFUN_DATA_DIR", _DEFAULT_DATA))
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{(DATA_DIR / 'relafun.db').as_posix()}")

@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–18 November 2026 (enam puluh delapan permintaan) |
+| Tanggal | 12–18 November 2026 (enam puluh sembilan permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -1224,4 +1224,28 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - regresi versi online lolos.
 - Versi **3.4**. Dokumen 10, 15 (bagian F), 19 (bagian 4a), README, dan CLAUDE.md diperbarui.
 - **Langkah pengguna:** masuk ke Render dengan GitHub → New Blueprint → repo RelaFun → tempel kunci Gemini di kolom GEMINI_API_KEY → Deploy. Setelah itu asisten menyambungkan alamat server ke versi GitHub Pages.
+
+---
+
+## Permintaan 69 — Render meminta kartu kredit
+
+### 👤 Pengguna
+
+> (tangkapan layar Render: "Add Card — Add credit card to verify your identity") kok setelah klik blueprint keluarnya itu
+
+### 🤖 Asisten
+
+- Render kini meminta kartu kredit untuk verifikasi (otorisasi sementara $1). Alternatif tanpa kartu diperiksa:
+  - Hugging Face Spaces: server Docker sekarang wajib paket berbayar;
+  - **Vercel Hobby**: gratis tanpa kartu dan mendukung FastAPI. Ini yang dipilih.
+- Dibuat **server ringan** khusus Asisten publik:
+  - `server.py` di akar repo dan `app/public_app.py`, tanpa database;
+  - `pyproject.toml` dengan `[tool.vercel] entrypoint = "server:app"`, dan `.vercelignore`;
+  - skema permintaan dipindah ke `app/tutor_schemas.py` agar tidak memuat database;
+  - `config.DATA_DIR` memakai folder sementara bila `VERCEL=1`.
+- **Pemeriksaan:**
+  - 334 tes lolos (2 baru untuk server ringan);
+  - uji peramban dengan `server.py` dan Gemini sungguhan lolos dalam tiga skenario.
+- `render.yaml` tetap ada sebagai pilihan bagi yang memiliki kartu.
+- **Langkah pengguna:** daftar Vercel (Hobby, lewat GitHub) → Add New → Project → Import RelaFun → isi Environment Variable `GEMINI_API_KEY` → Deploy, lalu kirim alamatnya ke asisten.
 
