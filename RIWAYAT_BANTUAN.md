@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–18 November 2026 (lima puluh enam permintaan) |
+| Tanggal | 12–18 November 2026 (lima puluh tujuh permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -1129,4 +1129,18 @@ Memberikan kedua link yang sudah diperiksa aktif:
 - Folder proyek dibukakan di File Explorer dengan `start.bat` tersorot.
 - Perbaikan `start.ps1`: server RelaFun lama yang masih jalan otomatis dihentikan, sehingga klik `start.bat` selalu berarti "nyalakan ulang" dan port 80/443 bebas untuk https (diuji).
 - Sementara pengguna belum menjalankan `start.bat`, server versi http dinyalakan agar http://relafun bisa dipakai.
+
+---
+
+## Permintaan 57 — "masih gabisa di buka" (Chrome, relafun/)
+
+### 👤 Pengguna
+
+> (tangkapan layar Chrome: relafun/ — ERR_CONNECTION_REFUSED) masih gabisa di buka
+
+### 🤖 Asisten
+
+- Server http di port 80 masih menyala. Chrome mencoba versi https lebih dulu, dan port 443 belum aktif karena `start.bat` belum dijalankan pengguna.
+- Dibuat shortcut **RelaFun** di Desktop (ikon aplikasi, `scripts/relafun.ico`) yang menjalankan `start.bat`.
+- Saran: sementara ketik `http://relafun` lengkap; untuk https, klik dua kali shortcut RelaFun lalu klik **Yes** pada peringatan sertifikat.
 
