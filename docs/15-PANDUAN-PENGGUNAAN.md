@@ -33,11 +33,19 @@ Memperbarui versi online setelah kode diubah: `python scripts/deploy_pages.py`. 
 2. Buka folder `iren_ihdina_zulfa`, lalu **klik dua kali `start.bat`**.
    - Pertama kali: skrip menyiapkan lingkungan Python dan memasang paket (butuh internet, ± 1–3 menit).
    - Berikutnya: langsung jalan.
-3. Saat pertama kali, muncul jendela izin Windows untuk membuat alamat `relafun`. Klik **Ya**; ini cukup sekali.
-4. Peramban terbuka ke **http://relafun**. Jendela hitam harus tetap terbuka selama aplikasi dipakai. Tekan **Ctrl+C** di jendela itu untuk berhenti.
-   - Mengetik sendiri di peramban: tulis `relafun/` (dengan garis miring) atau `http://relafun`. Tanpa garis miring, peramban mengira itu kata pencarian.
-   - Bila izin tidak diberikan atau port 80 sedang dipakai program lain, alamatnya tetap **http://localhost:8000**.
-   - Di alamat `http://relafun`, browser memberi label "Tidak aman" (karena bukan https) serta mematikan fitur pasang aplikasi dan luring. Semua fitur belajar dan AI tetap berjalan. Untuk memasang aplikasi di HP, gunakan versi online.
+3. Saat pertama kali, Windows meminta dua izin. Klik **Ya** pada keduanya; ini cukup sekali:
+   - **Kontrol Akun Pengguna** (Windows PowerShell): membuat nama `relafun`;
+   - **Security Warning / Peringatan Keamanan**: memasang sertifikat *RelaFun Local CA (khusus laptop ini)*, supaya alamatnya menjadi https.
+4. Peramban terbuka ke **https://relafun** dengan gembok aman. Jendela hitam harus tetap terbuka selama aplikasi dipakai. Tekan **Ctrl+C** di jendela itu untuk berhenti.
+   - **Memasang sebagai aplikasi:**
+     - di Edge: ikon *Aplikasi tersedia* di kolom alamat, atau menu ⋯ → *Aplikasi* → *Pasang RelaFun*;
+     - di Chrome: ikon pasang di kolom alamat;
+     - bisa juga dari tombol **Unduh Aplikasi RelaFun** di halaman masuk.
+   - Mengetik sendiri di peramban: tulis `relafun/` (dengan garis miring) atau `https://relafun`. Alamat `http://relafun` otomatis dipindahkan ke https.
+   - Bila salah satu izin tidak diberikan, aplikasi tetap jalan di **http://relafun** (label "Tidak aman", tanpa fitur pasang aplikasi) atau **http://localhost:8000**.
+   - HP di Wi-Fi yang sama tetap membuka lewat alamat IP yang ditampilkan di jendela hitam (http).
+   - Sertifikatnya hanya berlaku untuk nama `relafun`, dan kunci induknya dibuang setelah dibuat, sehingga tidak bisa dipakai untuk situs lain.
+   - Untuk menghapusnya, buka `certmgr.msc` → *Trusted Root Certification Authorities* → *Certificates* → hapus *RelaFun Local CA (khusus laptop ini)*.
 
 Alternatif lewat PowerShell:
 ```powershell

@@ -1,9 +1,13 @@
 # Menjalankan RelaFun di Windows.
 # Pemakaian:  klik dua kali start.bat   ATAU   powershell -ExecutionPolicy Bypass -File scripts\start.ps1
-# Alamat: http://relafun (nama "relafun" ditambahkan ke file hosts Windows sekali, dengan izin Administrator).
-# Bila izin tidak diberikan atau port 80 terpakai, aplikasi tetap jalan di http://localhost:8000.
-#   -Port 8000   memakai port tertentu      -NoAlias   tidak membuat alamat http://relafun
-param([int]$Port = 0, [switch]$NoBrowser, [switch]$NoAlias)
+# Alamat: https://relafun
+#   - nama "relafun" ditambahkan ke file hosts Windows sekali (izin Administrator);
+#   - sertifikat HTTPS khusus laptop ini dipasang sekali (jendela peringatan sertifikat Windows),
+#     sehingga ada gembok aman dan aplikasi bisa dipasang/dipakai luring.
+# Bila salah satu izin tidak diberikan atau port 80/443 terpakai, aplikasi tetap jalan
+# di http://relafun atau http://localhost:8000.
+#   -Port 8000  memakai port tertentu (tanpa https)   -NoAlias  tanpa nama relafun   -NoHttps  tanpa https
+param([int]$Port = 0, [switch]$NoBrowser, [switch]$NoAlias, [switch]$NoHttps)
 
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
@@ -66,15 +70,38 @@ if (-not $alias -and -not $NoAlias) {
   }
   $alias = Test-RelafunAlias
 }
-if ($Port -eq 0) {
-  $busy80 = Get-NetTCPConnection -LocalPort 80 -State Listen -ErrorAction SilentlyContinue
-  $Port = if ($alias -and -not $busy80) { 80 } else { 8000 }
+# 5. HTTPS: sertifikat lokal untuk https://relafun (kunci induknya dibuang; hanya berlaku untuk nama relafun)
+$busy80 = Get-NetTCPConnection -LocalPort 80 -State Listen -ErrorAction SilentlyContinue
+$busy443 = Get-NetTCPConnection -LocalPort 443 -State Listen -ErrorAction SilentlyContinue
+$Https = $false
+if ($alias -and $Port -eq 0 -and -not $NoHttps -and -not $busy80 -and -not $busy443) {
+  Push-Location $Api
+  try { $tls = (& $Py -m app.tls) | ConvertFrom-Json } finally { Pop-Location }
+  $trusted = Get-ChildItem Cert:\CurrentUser\Root | Where-Object { $_.Thumbprint -eq $tls.ca_thumbprint }
+  if (-not $trusted) {
+    Write-Host "Memasang sertifikat keamanan khusus laptop ini (sekali saja)." -ForegroundColor Yellow
+    Write-Host "Pada jendela 'Security Warning / Peringatan Keamanan', klik 'Yes / Ya'." -ForegroundColor Yellow
+    try {
+      Import-Certificate -FilePath $tls.ca -CertStoreLocation Cert:\CurrentUser\Root | Out-Null
+    } catch {
+      Write-Host "Sertifikat tidak dipasang ($($_.Exception.Message)). Aplikasi memakai http." -ForegroundColor Yellow
+    }
+    $trusted = Get-ChildItem Cert:\CurrentUser\Root | Where-Object { $_.Thumbprint -eq $tls.ca_thumbprint }
+  }
+  $Https = [bool]$trusted
 }
-$HostName = if ($alias) { "relafun" } else { "localhost" }
-$Suffix = if ($Port -eq 80) { "" } else { ":$Port" }
-$Url = "http://$HostName$Suffix/"
+if ($Https) {
+  $Port = 443
+  $Url = "https://relafun/"
+  $Suffix = ""
+} else {
+  if ($Port -eq 0) { $Port = if ($alias -and -not $busy80) { 80 } else { 8000 } }
+  $HostName = if ($alias) { "relafun" } else { "localhost" }
+  $Suffix = if ($Port -eq 80) { "" } else { ":$Port" }
+  $Url = "http://$HostName$Suffix/"
+}
 
-# 5. Alamat untuk HP di jaringan Wi-Fi yang sama
+# 6. Alamat untuk HP di jaringan Wi-Fi yang sama (lewat http; port 80 bila https aktif)
 $ips = Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
   Where-Object { $_.IPAddress -notlike "127.*" -and $_.IPAddress -notlike "169.254.*" -and $_.PrefixOrigin -ne "WellKnown" } |
   Select-Object -ExpandProperty IPAddress
@@ -89,7 +116,11 @@ if (-not $NoBrowser) { Start-Job -ScriptBlock { param($u) Start-Sleep 3; Start-P
 
 Push-Location $Api
 try {
-  & $Py -m uvicorn app.main:app --host 0.0.0.0 --port $Port
+  if ($Https) {
+    & $Py -m app.serve --https-port 443 --http-port 80
+  } else {
+    & $Py -m uvicorn app.main:app --host 0.0.0.0 --port $Port
+  }
 } finally {
   Pop-Location
 }

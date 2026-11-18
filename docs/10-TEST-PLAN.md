@@ -158,6 +158,20 @@ Permintaan memakai `claude-opus-5-5`, *structured output* `json_schema`, `effort
   - service worker memang tidak tersedia, karena bukan konteks aman, dan aplikasi tetap berjalan.
 - `start.ps1`: bila izin Administrator tidak diberikan, aplikasi otomatis memakai http://localhost:8000 (diuji).
 
+## 2i. HTTPS lokal https://relafun
+
+- **pytest** `tests/test_tls.py` (5 tes), meliputi:
+  - sertifikat untuk `relafun` ditandatangani CA lokal yang dibatasi (NameConstraints kritis; path length 0);
+  - kunci CA tidak pernah ditulis ke disk;
+  - sertifikat dipakai ulang bila masih berlaku dan dibuat baru menjelang habis;
+  - http://relafun dialihkan (308) ke https, sedangkan alamat IP (HP) tetap dilayani http.
+- **Uji server** `python -m app.serve`:
+  - https://relafun lolos verifikasi penuh dengan CA lokal;
+  - tanpa CA, koneksi ditolak;
+  - http://relafun → 308 → https; http://127.0.0.1 → 200.
+- **Uji Chrome** (sertifikat dipercaya lewat flag uji, tanpa mengubah Windows): http://relafun berpindah ke https://relafun, konteks aman, service worker aktif, syarat pasang aplikasi terpenuhi, manifest terbaca, Asisten "AI Gemini aktif", tanpa galat.
+- Pemasangan sertifikat ke Windows dilakukan pengguna sendiri lewat `start.bat` (jendela peringatan sertifikat Windows).
+
 ## 3. Belum diuji
 
 - Panggilan **Claude API sungguhan** (diuji dengan respons tiruan; butuh kunci API).

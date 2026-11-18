@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–18 November 2026 (lima puluh dua permintaan) |
+| Tanggal | 12–18 November 2026 (lima puluh empat permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -1068,4 +1068,44 @@ Memberikan kedua link yang sudah diperiksa aktif:
 - **Oya** (sebelumnya Lulu): hanya namanya yang diganti, gambarnya tetap.
 - Nama baru muncul di galeri *Wen & Teman-teman*, kepala halaman Materi (Oya) dan Glosarium (Puyo), serta kolase stiker halaman masuk.
 - Versi **3.3**. Dokumen 06 dan CLAUDE.md diperbarui.
+
+---
+
+## Permintaan 53 — "Masih gabisa di buka"
+
+### 👤 Pengguna
+
+> masi gabisa di buka
+
+### 🤖 Asisten
+
+- Penyebab: `start.bat` belum dijalankan setelah diubah, sehingga server mati dan nama `relafun` belum terdaftar di file hosts.
+- Asisten meminta izin Administrator dari sesi ini dan pengguna mengizinkannya. Nama `relafun` terdaftar, server dinyalakan, dan http://relafun terbuka tanpa galat.
+
+---
+
+## Permintaan 54 — "Not secure" dan tidak ada pilihan pasang aplikasi (18 November 2026)
+
+### 👤 Pengguna
+
+> (tangkapan layar http://relafun dengan label Not secure) kok not secure dan kok gak ada pilihannya mau di download atau tidak
+
+### 🤖 Asisten
+
+- Penyebabnya: browser hanya mengizinkan pasang aplikasi (PWA), service worker, dan mode luring di alamat aman (https atau localhost). Konsekuensi ini sudah disebut saat memilih alamat http://relafun.
+- Solusinya **https://relafun** dengan sertifikat lokal khusus laptop ini:
+  - `app/tls.py` membuat CA lokal dan sertifikat server untuk `relafun`;
+  - CA dibatasi NameConstraints hanya untuk relafun, localhost, dan 127.0.0.1;
+  - kunci CA dibuang setelah dipakai, sehingga tidak bisa menandatangani sertifikat situs lain;
+  - berkasnya disimpan di `apps/api/data/tls/` (tidak ke GitHub).
+- `app/serve.py` menjalankan dua bagian sekaligus:
+  - HTTPS di port 443;
+  - port 80 yang mengalihkan http://relafun ke https, sementara alamat IP untuk HP tetap http.
+- `start.ps1`: membuat sertifikat dan memasangnya ke Cert:\CurrentUser\Root dengan konfirmasi jendela peringatan sertifikat Windows, lalu membuka https://relafun. Bila ditolak, aplikasi tetap memakai http.
+- **Catatan:** pemasangan sertifikat dari sesi asisten ditolak oleh pengaman Claude Code. Karena itu pemasangan diserahkan kepada pengguna lewat `start.bat`, dengan penjelasan sertifikat apa yang dipasang dan cara menghapusnya.
+- **Pemeriksaan:**
+  - 322 tes pytest lolos (5 baru);
+  - server HTTPS lolos verifikasi penuh;
+  - di Chrome: konteks aman, service worker aktif, syarat pasang aplikasi terpenuhi, dan AI Gemini aktif.
+- Dokumen yang diperbarui: 10, 15, README, dan CLAUDE.md. Pustaka `cryptography` ditambahkan ke `requirements.txt`.
 

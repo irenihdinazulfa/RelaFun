@@ -6,9 +6,9 @@ Backend Python FastAPI (`apps/api`), frontend JavaScript ES modules tanpa build 
 Bahasa antarmuka & konten: **Bahasa Indonesia** sederhana untuk siswa usia 13–14 tahun.
 
 ## Perintah
-- Jalankan: `start.bat` atau `powershell -ExecutionPolicy Bypass -File scripts\start.ps1` → http://relafun (port 80; nama `relafun` ditambahkan ke file hosts sekali dengan izin Administrator). Cadangan: http://localhost:8000 (`-Port 8000`, `-NoAlias`)
+- Jalankan: `start.bat` atau `powershell -ExecutionPolicy Bypass -File scripts\start.ps1` → https://relafun (`app/serve.py`: HTTPS di port 443 dan port 80 yang mengalihkan http://relafun → https; IP untuk HP tetap http). Sekali saja: nama `relafun` di file hosts (izin Administrator) dan sertifikat lokal `app/tls.py` di Cert:\CurrentUser\Root (peringatan sertifikat Windows; CA dibatasi NameConstraints untuk relafun/localhost/127.0.0.1, kuncinya tidak pernah disimpan). Berkas sertifikat di `apps/api/data/tls/` (tidak ke GitHub). Cadangan: http://relafun atau http://localhost:8000 (`-Port 8000`, `-NoAlias`, `-NoHttps`)
 - Tes: `cd apps\api && .venv\Scripts\python -m pytest -q` (harus 100% lolos sebelum selesai)
-- Dokumentasi API: http://relafun/api/docs (atau http://localhost:8000/api/docs)
+- Dokumentasi API: https://relafun/api/docs (atau http://localhost:8000/api/docs)
 
 ## Aturan wajib
 1. **Penilaian selalu deterministik** di `app/core/checker.py` / `mathfn.py` (SymPy). AI tidak boleh menentukan benar/salah.
