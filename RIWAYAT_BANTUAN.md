@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–18 November 2026 (enam puluh sembilan permintaan) |
+| Tanggal | 12–18 November 2026 (tujuh puluh lima permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -1248,4 +1248,34 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - uji peramban dengan `server.py` dan Gemini sungguhan lolos dalam tiga skenario.
 - `render.yaml` tetap ada sebagai pilihan bagi yang memiliki kartu.
 - **Langkah pengguna:** daftar Vercel (Hobby, lewat GitHub) → Add New → Project → Import RelaFun → isi Environment Variable `GEMINI_API_KEY` → Deploy, lalu kirim alamatnya ke asisten.
+
+---
+
+## Permintaan 70–75 — Memasang server AI di Vercel
+
+### 👤 Pengguna
+
+> (tangkapan layar Vercel: New Project) setelah ini apa
+
+> (tangkapan layar GitHub: Installing Vercel, Only select repositories → irenihdinazulfa/RelaFun)
+
+> (tangkapan layar Vercel: "Multiple applications detected", Application Preset: Services)
+
+> (tangkapan layar: daftar aplikasi api /api dan relafun /, Environment Variables berisi GEMINI_API_KEY)
+
+> gimana klik add nya gak ada tulisan add adanya add more
+
+> (tangkapan layar: "Deployed to Production", lalu halaman proyek rela-fun dengan domain rela-fun-ivory.vercel.app)
+
+### 🤖 Asisten
+
+- Pengguna dipandu langkah demi langkah:
+  - menghubungkan GitHub dengan akses hanya ke repo RelaFun;
+  - memilih aplikasi **relafun** (`/`, server ringan), bukan **api** (`/api`, server lengkap dengan database);
+  - mengisi `GEMINI_API_KEY` di Environment Variables Vercel (kunci tidak lewat chat), lalu Deploy.
+- **Pemeriksaan server** https://rela-fun-ivory.vercel.app:
+  - `/api/health`: Gemini terkonfigurasi (`gemini-3.5-flash-lite`);
+  - CORS hanya untuk https://irenihdinazulfa.github.io;
+  - satu giliran AI sungguhan berhasil dalam 2,4 detik.
+- Alamat server ditulis di `scripts/ai_url.txt`, lalu versi GitHub Pages diterbitkan ulang. Asisten di link GitHub kini memakai AI Gemini tanpa siswa menempel kunci.
 

@@ -114,6 +114,8 @@ Peramban (GitHub Pages) ──POST /api/public/tutor/turn──▶ Server ringan
 
   Model bisa diganti lewat variabel `GEMINI_MODEL` di Vercel.
 
+**Server yang aktif:** https://rela-fun-ivory.vercel.app (proyek Vercel `rela-fun`, dipasang 18 November 2026; alamatnya tercatat di `scripts/ai_url.txt`).
+
 **Langkah memasang server di Vercel** (sekali saja, gratis tanpa kartu):
 
 1. Buka https://vercel.com/signup, pilih **Hobby** (gratis, tanpa kartu), lalu **Continue with GitHub** dengan akun pemilik repo RelaFun.

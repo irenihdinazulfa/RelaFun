@@ -48,7 +48,7 @@ Panduan lengkap (HP, guru, AI, deploy): [docs/15-PANDUAN-PENGGUNAAN.md](docs/15-
 | **Kalkulator f(x) bertahap** + diagnosis salah tanda / tidak dikalikan / lupa konstanta | IL02, GL03 |
 | Materi **satu langkah per layar**, contoh bertahap, pembahasan setelah 2 kali mencoba | DS02, GL03 |
 | Istilah sulit dapat diketuk + **Glosarium** bahasa sederhana | EL03 |
-| 💬 **Asisten Belajar** (chatbot): 6 tahap *Rigorous Mathematical Thinking*, satu langkah per giliran, petunjuk 3 tingkat, 32 pola kesalahan khas, tanpa membocorkan jawaban; AI **Gemini** (gratis) atau **DeepSeek**, kunci hanya di server (`.env` atau pengaturan Vercel); di versi online AI dari server ringan Vercel tanpa siswa menempel kunci; skala usaha berpikir 1–5 untuk guru | Arahan dosen Tahap 2; IL/EL/GL; temuan jawaban S01 |
+| 💬 **Asisten Belajar** (chatbot): 6 tahap *Rigorous Mathematical Thinking*, satu langkah per giliran, petunjuk 3 tingkat, 32 pola kesalahan khas, tanpa membocorkan jawaban; AI **Gemini** (gratis) atau **DeepSeek**, kunci hanya di server (`.env` atau pengaturan Vercel); di versi online AI dari server ringan Vercel (https://rela-fun-ivory.vercel.app) tanpa siswa menempel kunci; skala usaha berpikir 1–5 untuk guru | Arahan dosen Tahap 2; IL/EL/GL; temuan jawaban S01 |
 | **Pemodel soal cerita** (terpandu 6 langkah; Mode AI: deskripsi soal → model matematika, diverifikasi & dihitung mesin) | EL01, literasi |
 | Modul prasyarat (himpunan, bilangan bulat, substitusi) | IL03 |
 | 3 modul literasi dari 4 soal lembar PISA | Literasi matematika |
