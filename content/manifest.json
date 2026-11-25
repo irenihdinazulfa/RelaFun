@@ -1,0 +1,17 @@
+{
+  "modules": [
+    "01-p1-himpunan.json",
+    "02-p2-bilangan-bulat.json",
+    "03-p3-substitusi.json",
+    "04-r1-relasi.json",
+    "05-r2-menyatakan-relasi.json",
+    "06-r3-fungsi.json",
+    "07-r4-domain-kodomain-range.json",
+    "08-r5-nilai-fungsi.json",
+    "09-r6-rumus-fungsi.json",
+    "10-r7-grafik-fungsi.json",
+    "11-l1-memodelkan.json",
+    "12-l2-membandingkan.json",
+    "13-l3-menafsirkan.json"
+  ]
+}

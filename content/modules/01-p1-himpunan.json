@@ -1,0 +1,23 @@
+{
+  "id": "p1-himpunan",
+  "order": 1,
+  "group": "prasyarat",
+  "title": "Himpunan dan Anggotanya",
+  "subtitle": "Bekal sebelum belajar relasi",
+  "icon": "set",
+  "minutes": 8,
+  "interview_codes": ["IL03", "K01"],
+  "objectives": ["Mengenali himpunan", "Menentukan anggota dan banyak anggota himpunan"],
+  "steps": [
+    {"type": "text", "title": "Apa itu himpunan?", "body": "Himpunan adalah kumpulan benda yang **jelas anggotanya**. Contoh: himpunan nama hari dalam sepekan.\nHimpunan ditulis dengan kurung kurawal: A = {Senin, Selasa, Rabu, ...}."},
+    {"type": "example", "title": "Contoh bertahap", "problem": "P adalah himpunan bilangan ganjil di antara 1 dan 9. Tulis anggota P.", "steps": ["Bilangan di antara 1 dan 9: 2, 3, 4, 5, 6, 7, 8", "Pilih yang ganjil saja: 3, 5, 7", "Tulis dengan kurung kurawal: P = {3, 5, 7}"], "answer": "P = {3, 5, 7}, banyak anggotanya 3."},
+    {"type": "tip", "body": "Tanda **∈** dibaca “anggota dari”. 3 ∈ P artinya 3 adalah anggota P. Tanda **∉** artinya “bukan anggota dari”."},
+    {"type": "text", "title": "Kenapa ini penting?", "body": "Relasi dan fungsi selalu menghubungkan **dua himpunan**: himpunan asal (kiri) dan himpunan kawan (kanan). Jadi kita perlu terbiasa membaca himpunan dulu."}
+  ],
+  "items": [
+    {"id": "p1-1", "type": "mcq", "prompt": "Manakah yang merupakan himpunan?", "options": ["Kumpulan siswa yang pintar", "Kumpulan bilangan genap kurang dari 10", "Kumpulan makanan yang enak", "Kumpulan lagu yang bagus"], "answer": 1, "option_feedback": {"0": "“Pintar” bisa berbeda menurut setiap orang, jadi anggotanya tidak jelas.", "2": "“Enak” itu selera, jadi anggotanya tidak jelas.", "3": "“Bagus” itu pendapat, jadi anggotanya tidak jelas."}, "hint": "Himpunan harus punya anggota yang jelas, tidak tergantung pendapat orang.", "explain": ["Bilangan genap kurang dari 10 jelas anggotanya: {0, 2, 4, 6, 8} (atau {2, 4, 6, 8} bila dimulai dari bilangan asli).", "Pilihan lain bergantung pada pendapat, jadi bukan himpunan."]},
+    {"id": "p1-2", "type": "multi", "prompt": "A = {2, 4, 6, 8}. Pilih semua yang merupakan anggota A.", "options": ["2", "3", "6", "9", "8"], "answer": [0, 2, 4], "hint": "Cocokkan satu per satu dengan isi kurung kurawal.", "explain": ["Anggota A hanya 2, 4, 6, dan 8.", "Jadi yang dipilih: 2, 6, dan 8."]},
+    {"id": "p1-3", "type": "numeric", "prompt": "Berapa banyak anggota himpunan B = {bilangan prima kurang dari 10}?", "answer": "4", "common_errors": [{"value": "5", "type": "konsep", "message": "1 bukan bilangan prima. Bilangan prima punya tepat dua faktor: 1 dan dirinya sendiri."}, {"value": "3", "type": "konsep", "message": "2 juga bilangan prima, lho. Itu satu-satunya bilangan prima yang genap."}], "hint": "Tulis dulu anggotanya, lalu hitung.", "explain": ["Bilangan prima kurang dari 10: 2, 3, 5, 7.", "Banyak anggotanya 4."]},
+    {"id": "p1-4", "type": "mcq", "prompt": "K = {1, 2, 3}. Pernyataan yang benar adalah …", "options": ["4 ∈ K", "2 ∈ K", "2 ∉ K", "K punya 4 anggota"], "answer": 1, "option_feedback": {"0": "4 tidak ada di dalam K.", "2": "2 ada di dalam K, jadi 2 ∈ K.", "3": "Anggota K ada 3: 1, 2, dan 3."}, "hint": "∈ artinya “anggota dari”.", "explain": ["2 tertulis di dalam K, jadi 2 ∈ K benar."]}
+  ]
+}

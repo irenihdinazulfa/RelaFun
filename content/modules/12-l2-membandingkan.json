@@ -1,0 +1,25 @@
+{
+  "id": "l2-membandingkan",
+  "order": 12,
+  "group": "literasi",
+  "title": "Membandingkan Dua Pilihan",
+  "subtitle": "Literasi: Reasoning (bernalar)",
+  "icon": "scale",
+  "minutes": 15,
+  "interview_codes": ["EL01", "GL01", "GL02"],
+  "pisa_process": "Reasoning",
+  "objectives": ["Membuat dua fungsi untuk dua pilihan", "Menentukan pilihan terbaik dengan alasan matematis"],
+  "steps": [
+    {"type": "text", "title": "Dua pilihan, dua fungsi", "body": "Saat ada dua penawaran, buat **dua fungsi**, lalu hitung keduanya untuk nilai x yang sama. Pilih yang hasilnya lebih menguntungkan."},
+    {"type": "example", "title": "Contoh bertahap", "problem": "Provider A: Rp2.000 per GB tanpa biaya langganan. Provider B: Rp30.000 per bulan ditambah Rp1.000 per GB. Raka memakai 25 GB per bulan.", "steps": ["x = banyak kuota (GB)", "A(x) = 2.000x", "B(x) = 1.000x + 30.000", "A(25) = 2.000 × 25 = 50.000", "B(25) = 1.000 × 25 + 30.000 = 55.000", "50.000 < 55.000, jadi A lebih murah Rp5.000"], "answer": "Raka sebaiknya memilih Provider A."},
+    {"type": "graph", "title": "Lihat di grafik", "body": "Kedua garis berpotongan di x = 30. Sebelum 30 GB, A lebih murah. Setelah 30 GB, B lebih murah.", "lines": [{"a": 2000, "b": 0, "label": "A(x) = 2.000x"}, {"a": 1000, "b": 30000, "label": "B(x) = 1.000x + 30.000"}], "points": [[30, 60000]], "x_min": 0, "x_max": 50, "x_label": "GB", "y_label": "Rupiah"},
+    {"type": "tip", "body": "Jawaban “mana yang lebih baik” bisa **berubah** tergantung nilai x. Itulah gunanya fungsi: kita melihat polanya, bukan hanya satu angka."}
+  ],
+  "items": [
+    {"id": "l2-1", "type": "numeric", "prompt": "A(x) = 2.000x. Berapa rupiah biaya Provider A untuk 25 GB?", "unit": "rupiah", "answer": "50000", "linear": {"a": 2000, "b": 0, "x": "25"}, "hint": "A(25) = 2.000 × 25", "explain": ["A(25) = 2.000 × 25 = 50.000"]},
+    {"id": "l2-2", "type": "numeric", "prompt": "B(x) = 1.000x + 30.000. Berapa rupiah biaya Provider B untuk 25 GB?", "unit": "rupiah", "answer": "55000", "linear": {"a": 1000, "b": 30000, "x": "25"}, "hint": "B(25) = 1.000 × 25 + 30.000", "explain": ["B(25) = 1.000 × 25 + 30.000", "= 25.000 + 30.000", "= 55.000"]},
+    {"id": "l2-3", "type": "mcq", "prompt": "Untuk pemakaian 25 GB, provider mana yang lebih hemat?", "options": ["Provider A", "Provider B", "Sama saja"], "answer": 0, "error_type": "salah_tafsir", "hint": "Bandingkan Rp50.000 dan Rp55.000.", "explain": ["A: Rp50.000, B: Rp55.000", "A lebih hemat Rp5.000"]},
+    {"id": "l2-4", "type": "numeric", "prompt": "Pada pemakaian berapa GB biaya kedua provider sama besar?", "unit": "GB", "answer": "30", "hint": "Selesaikan 2.000x = 1.000x + 30.000.", "explain": ["2.000x = 1.000x + 30.000", "1.000x = 30.000", "x = 30 GB"]},
+    {"id": "l2-5", "type": "mcq", "prompt": "Bulan depan Raka akan memakai 40 GB. Provider mana yang lebih hemat?", "options": ["Provider A", "Provider B", "Sama saja"], "answer": 1, "error_type": "salah_tafsir", "hint": "Hitung A(40) dan B(40), atau ingat titik potongnya di 30 GB.", "explain": ["A(40) = 80.000", "B(40) = 70.000", "Untuk 40 GB, Provider B lebih hemat."]}
+  ]
+}
