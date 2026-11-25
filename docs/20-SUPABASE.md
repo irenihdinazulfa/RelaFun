@@ -97,6 +97,21 @@ Uji di peramban: `https://<ref>.supabase.co/functions/v1/api/health` harus menam
 
 Untuk kembali ke mode tanpa server, kosongkan atau hapus `scripts/supabase_url.txt`, lalu terbitkan ulang.
 
+## (Opsional) Frontend di Netlify
+
+Frontend yang sama juga bisa ditayangkan di Netlify. Netlify menjalankan `python3 scripts/build_static.py dist`
+(lihat `netlify.toml`) setiap kali ada push ke `main`, dan hasilnya otomatis memakai backend Supabase.
+
+1. Masuk ke https://app.netlify.com dengan akun GitHub.
+2. Pilih **Add new project → Import an existing project → GitHub**, lalu pilih repo **RelaFun**.
+   Pengaturan build terbaca dari `netlify.toml`, jadi tidak perlu diubah. Klik **Deploy**.
+3. (Opsional) Ganti nama situs di **Project configuration → Change project name**, misalnya `relafun`, sehingga
+   alamatnya menjadi `https://relafun.netlify.app`.
+4. **Izinkan alamat Netlify di backend.** Di dashboard Supabase, buka **Edge Functions → Secrets**, ubah
+   `ALLOWED_ORIGINS`, lalu tambahkan alamat Netlify di belakangnya (dipisah koma, tanpa `/` di akhir):
+   `https://irenihdinazulfa.github.io,http://relafun.localhost,http://localhost:8000,https://relafun.netlify.app`
+   Tanpa langkah ini, login di situs Netlify gagal dengan pesan *"Tidak dapat terhubung ke server"*.
+
 ## (Opsional) Server lokal memakai database yang sama
 
 `start.bat` bisa menyimpan data ke Supabase juga. Caranya:
