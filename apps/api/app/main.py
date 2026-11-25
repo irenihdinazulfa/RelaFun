@@ -16,7 +16,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 
 from . import config
-from .db import Base, SessionLocal, engine
+from .db import Base, SessionLocal, engine, lock_down_postgres
 from .routers import auth, learn, public_tutor, teacher, tools, tutor
 from .seed import seed_demo
 
@@ -24,6 +24,7 @@ from .seed import seed_demo
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     Base.metadata.create_all(bind=engine)
+    lock_down_postgres()
     if config.SEED_DEMO:
         with SessionLocal() as db:
             seed_demo(db)

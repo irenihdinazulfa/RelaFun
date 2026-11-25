@@ -95,6 +95,7 @@ RIWAYAT_BANTUAN.md        riwayat bantuan AI
 | 17 | [Instrumen penelitian (validasi ahli & uji coba)](docs/17-INSTRUMEN-PENELITIAN.md) — file siap cetak di [`instrumen/`](instrumen/) |
 | 18 | [Ringkasan Rigorous Mathematical Thinking (RMT)](docs/18-RINGKASAN-RMT.md) |
 | 19 | [Asisten Belajar: chatbot RMT + Gemini/DeepSeek](docs/19-ASISTEN-BELAJAR.md) |
+| 20 | [Backend & database di Supabase (Edge Function + PostgreSQL)](docs/20-SUPABASE.md) |
 | — | [Kunci jawaban acuan lembar soal](docs/JAWABAN_ACUAN_SOAL_RELASI_FUNGSI.md) |
 
 ## Pengujian

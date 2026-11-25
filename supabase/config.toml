@@ -1,0 +1,8 @@
+# Konfigurasi Supabase CLI untuk RelaFun. Lihat docs/20-SUPABASE.md.
+# project_id hanya nama lokal; proyek online dipilih dengan `supabase link --project-ref <ref>`.
+project_id = "relafun"
+
+[functions.api]
+# Login RelaFun memakai token sendiri (JWT HS256, sama dengan server Python), bukan Supabase Auth,
+# karena siswa tidak boleh diminta e-mail (aturan privasi anak). Pemeriksaan token ada di kode fungsi.
+verify_jwt = false

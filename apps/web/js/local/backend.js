@@ -462,7 +462,7 @@ export async function handle(method, rawPath, body = {}, token = null) {
         throw new ApiError("Mode Soal Bebas memakai AI. Server AI belum siap; coba lagi sebentar.", 503);
       }
       try {
-        const out = tutor.turn(await loadTutor(), body);
+        const { ai_calls: _unused, ...out } = await tutor.turn(await loadTutor(), body);
         return { ...out, quota_left: 0, ai_available: false };
       } catch (e) {
         if (e instanceof tutor.TutorInputError) throw new ApiError(e.message, e.message === "Soal tidak ditemukan." ? 404 : 422);

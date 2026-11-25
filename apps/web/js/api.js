@@ -5,7 +5,10 @@ export { ApiError };
 
 // Mode tanpa server (GitHub Pages): config.js menyetel window.RELAFUN_STATIC = true,
 // sehingga semua permintaan /api/* dilayani oleh js/local/backend.js di peramban.
-export const STATIC = window.RELAFUN_STATIC === true;
+// Mode Supabase: config.js menyetel window.RELAFUN_API_URL = "https://<ref>.supabase.co/functions/v1",
+// sehingga permintaan /api/* dikirim ke backend Supabase (data tersimpan di database Supabase).
+export const API_BASE = String(window.RELAFUN_API_URL || "").replace(/\/+$/, "");
+export const STATIC = window.RELAFUN_STATIC === true && !API_BASE;
 let localBackend = null;
 const local = async () => {
   if (!localBackend) localBackend = await import("./local/backend.js");
@@ -35,7 +38,7 @@ async function request(method, path, body) {
   if (body !== undefined) headers["Content-Type"] = "application/json";
   let res;
   try {
-    res = await fetch(path, { method, headers, body: body !== undefined ? JSON.stringify(body) : undefined });
+    res = await fetch(API_BASE + path, { method, headers, body: body !== undefined ? JSON.stringify(body) : undefined });
   } catch {
     throw new ApiError("Tidak dapat terhubung ke server. Periksa koneksi internet.", 0);
   }
@@ -70,7 +73,7 @@ export const api = {
       saveBlob(new Blob([text], { type: "text/csv;charset=utf-8" }), filename);
       return;
     }
-    const res = await fetch(path, { headers: { Authorization: `Bearer ${session.token}` } });
+    const res = await fetch(API_BASE + path, { headers: { Authorization: `Bearer ${session.token}` } });
     if (!res.ok) throw new ApiError("Gagal mengunduh berkas.", res.status);
     saveBlob(await res.blob(), filename);
   },

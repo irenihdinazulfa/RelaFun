@@ -5,7 +5,7 @@
 | Pengguna | Iren Ihdina Zulfa (NIM 2225250019) |
 | Kelas | 3E |
 | Asisten | Claude Code (model Claude Opus 5.5, Anthropic) |
-| Tanggal | 12–18 November 2026 (tujuh puluh lima permintaan) |
+| Tanggal | 12–25 November 2026 (sembilan puluh permintaan) |
 | Folder proyek | `iren_ihdina_zulfa/` |
 | Materi | Relasi dan Fungsi (kelas 8 SMP) |
 
@@ -1279,3 +1279,61 @@ Memberikan kedua link yang sudah diperiksa aktif:
   - satu giliran AI sungguhan berhasil dalam 2,4 detik.
 - Alamat server ditulis di `scripts/ai_url.txt`, lalu versi GitHub Pages diterbitkan ulang. Asisten di link GitHub kini memakai AI Gemini tanpa siswa menempel kunci.
 
+
+---
+
+## Permintaan 76–78 — Kunci Gemini di `.env` dan backend + database di Supabase
+
+### 👤 Pengguna
+
+> saya sudah  menambahkan api key saya dengan menggunakan google ai studio dengan model gemini
+
+> saya sudah tambahan api key gemini di file .env
+
+> saya ingin pakai supabase untuk deploy backend dan date based
+
+> (pilihan tempat server) saya ingin data bash disimpan di supabase dan backendnya juga pake supabase
+
+### 🤖 Asisten
+
+- **Kunci Gemini:** diperiksa tanpa menampilkan isinya. Uji pertama berhasil. Pada pesan kedua, kunci ternyata tertempel dua kali (106 karakter) sehingga ditolak Gemini. Kunci dirapikan menjadi satu salinan lalu diuji ulang dan berhasil.
+- **Supabase:** Supabase tidak bisa menjalankan Python, jadi backend ditulis ulang sebagai **Edge Function** TypeScript yang memakai ulang mesin JavaScript yang sudah ada:
+  - `supabase/migrations/`: tabel PostgreSQL sama dengan `app/models.py`, RLS aktif tanpa kebijakan (data siswa tertutup untuk kunci anon), dan akun demo;
+  - `supabase/functions/api/`: semua endpoint `/api/*` (login, materi, latihan, poin/streak, papan peringkat, alat, Asisten Gemini dengan penjaga jawaban dan kuota, dashboard guru, CSV), dengan hash kata sandi dan JWT yang sama dengan server Python;
+  - `scripts/sync_supabase.py`: menyalin `apps/web/js/local/*.js` dan `content/` ke fungsi (satu sumber mesin, aturan 11);
+  - `tutor.js` kini punya jalur AI yang sama dengan `tutor.py` (`buildMessages`, `cleanReply`, `turnFree`);
+  - frontend memakai Supabase bila `scripts/supabase_url.txt` diisi (`window.RELAFUN_API_URL`);
+  - server Python bisa memakai database Supabase lewat `DATABASE_URL` (driver psycopg).
+- **Pemeriksaan:** 340 tes Python lolos (tes baru `test_supabase.py`). Tes endpoint Deno (`app_test.ts`, PGlite) sudah ditulis tetapi belum dijalankan karena Deno belum terpasang.
+- Versi **3.5**. Panduan langkah demi langkah: `docs/20-SUPABASE.md`.
+- **Langkah pengguna:** buat proyek Supabase (Singapore) → pasang Supabase CLI → `supabase login`, `supabase link`, `supabase db push` → `supabase secrets set` (SECRET_KEY, GEMINI_API_KEY) → `supabase functions deploy api --use-api` → isi `scripts/supabase_url.txt` → `python scripts/deploy_pages.py`.
+
+---
+
+## Permintaan 79–90 — Memasang Supabase sampai online
+
+### 👤 Pengguna
+
+> pasangkan supabash cli otomatis
+
+> kok error / tapi tadi udah dijalanin di terminal dia error / tetep merahhh
+
+> (tangkapan layar: `supabase` tidak dikenali; kode verifikasi diisi kata sandi; dashboard proyek; halaman Generate token)
+
+> coba ulang dari awal
+
+> (token akses Supabase dikirim di chat)
+
+> oke jalankan
+
+### 🤖 Asisten
+
+- **Supabase CLI v3.4.0** dipasang dari rilis resmi GitHub (checksum dicocokkan) ke `%LOCALAPPDATA%\Programs\supabase` dan ditambahkan ke PATH pengguna.
+- **Kendala di terminal** dijelaskan satu per satu: VS Code belum membaca PATH baru, tanda backtick ikut tersalin di akhir `supabase login`, `<ref>` diketik apa adanya, dan kolom kode verifikasi diisi kata sandi (pengguna diingatkan untuk mengganti kata sandi itu). Akhirnya dipakai **access token** khusus proyek.
+- Asisten menjalankan sisanya:
+  - `supabase link` dan `supabase db push --remote`: tabel dan akun demo dibuat (tanpa kata sandi database);
+  - 7 Secrets diisi setelah pengguna setuju (kunci Gemini dari `.env`, SECRET_KEY acak baru; kunci Claude tidak dikirim);
+  - fungsi `api` dipasang di https://euzqxbcfthcjxhgtpmvv.supabase.co/functions/v1/api.
+- **Uji di server sungguhan:** login demo, 13 materi tanpa kunci jawaban, poin +10 dan streak, papan peringkat, kalkulator, Asisten **Gemini** (1,7 detik), dashboard guru, CSV, penolakan 403, dan CORS lolos. Kunci publik (anon) Supabase **ditolak** membaca tabel siswa (401).
+- `scripts/supabase_url.txt` diisi, lalu GitHub Pages diterbitkan ulang. https://irenihdinazulfa.github.io/RelaFun/ (v3.5) kini menyimpan akun dan kemajuan di Supabase.
+- **Pengingat:** token `sbp_…` sudah tertulis di chat, jadi harus dihapus di dashboard Supabase dan diganti token baru bila perlu memasang ulang.

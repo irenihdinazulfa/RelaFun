@@ -27,6 +27,8 @@ Bahasa antarmuka & konten: **Bahasa Indonesia** sederhana untuk siswa usia 13–
 
 11b. **Asisten publik** (`app/routers/public_tutor.py`, aktif bila `PUBLIC_TUTOR=1`): versi GitHub Pages memanggil `/api/public/tutor/*` di server ringan Vercel (`server.py` + `app/public_app.py`, tanpa database; `pyproject.toml` `[tool.vercel] entrypoint`; `window.RELAFUN_AI_URL` dari `scripts/ai_url.txt` saat build). Skema permintaan di `app/tutor_schemas.py` (tanpa impor database). Tanpa akun, batas per IP/total, CORS hanya `PUBLIC_TUTOR_ORIGINS`. Peramban selalu punya cadangan mesin `js/local/tutor.js` (server tidur/gagal). Kunci hanya di Environment Variables Vercel (atau Render: `render.yaml`, `sync: false`). `config.DATA_DIR` memakai folder sementara bila `VERCEL=1`.
 
+11c. **Backend Supabase** (`supabase/`, panduan `docs/20-SUPABASE.md`): database PostgreSQL (`supabase/migrations/*.sql`, harus sama dengan `app/models.py`, RLS aktif tanpa kebijakan) + Edge Function `api` (TypeScript/Deno, `supabase/functions/api/app.ts`, padanan semua router Python). Mesin di `supabase/functions/api/_gen/` adalah SALINAN `apps/web/js/local/*.js` + `content/`: jangan diubah langsung, jalankan `python scripts/sync_supabase.py` setelah mengubah mesin/konten (`tests/test_supabase.py` gagal bila usang). Hash kata sandi & JWT sama dengan `security.py`. Kunci hanya lewat `supabase secrets set`. Frontend memakai Supabase bila `window.RELAFUN_API_URL` diisi (`scripts/supabase_url.txt` saat build). Server Python bisa memakai database yang sama lewat `DATABASE_URL` (psycopg). Uji endpoint: `deno test -A supabase/functions/api/app_test.ts`.
+
 12. **Asisten Belajar RMT** (`app/core/tutor.py`, konten `content/tutor/tutor.json`): AI = **Gemini** (`gemini-3.5-flash-lite`) atau **DeepSeek** (`deepseek-flash`), keduanya format OpenAI `/chat/completions`, dipilih dengan `TUTOR_AI_PROVIDER`. Kunci `GEMINI_API_KEY`/`DEEPSEEK_API_KEY` HANYA dari `.env` server — tidak boleh di frontend, di kode, atau di GitHub (arahan dosen). Benar/salah tiap langkah diperiksa `check_step()`, bukan AI; kunci jawaban tidak dikirim ke AI; balasan AI yang membocorkan jawaban dibuang oleh `leaks()`. Asisten tidak boleh memberi jawaban akhir, satu langkah per giliran, ≤ 40 kata per perintah, ≤ 60 kata per petunjuk, 3 tingkat petunjuk. Gemini: satu pesan sistem dan percakapan wajib diakhiri pesan pengguna (`BUTTON_TRIGGERS`).
 
 ## Peta kode
@@ -42,5 +44,5 @@ Bahasa antarmuka & konten: **Bahasa Indonesia** sederhana untuk siswa usia 13–
 
 ## Penyederhanaan yang disengaja (versi 1)
 - Frontend tanpa React/Vite karena Node.js belum terpasang; bisa dimigrasikan nanti.
-- SQLite (ganti lewat `DATABASE_URL`). Token JWT di `localStorage`.
+- SQLite (ganti lewat `DATABASE_URL`, mis. PostgreSQL Supabase). Token JWT di `localStorage`.
 - Belum ada: tes diagnostik, sinkronisasi luring, soal buatan guru, APK.

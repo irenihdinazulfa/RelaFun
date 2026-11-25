@@ -18,3 +18,8 @@ dist/
 
 # Berkas pengumpulan ke Google Drive (memuat nama siswa) — hanya di laptop, tidak diunggah
 pengumpulan_tahap1/
+
+# Supabase CLI (berkas lokal/sementara; rahasia hanya lewat `supabase secrets set`)
+supabase/.temp/
+supabase/.branches/
+supabase/.env*
